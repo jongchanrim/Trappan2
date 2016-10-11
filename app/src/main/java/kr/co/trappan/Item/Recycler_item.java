@@ -1,4 +1,4 @@
-package com.example.jongchanrim.trappan;
+package kr.co.trappan.Item;
 
 /**
  * Created by thfad_000 on 2016-10-05.
@@ -7,14 +7,14 @@ public class Recycler_item {
     int image;
     String title;
 
-    int getImage(){
+    public  int getImage(){
         return this.image;
     }
-    String getTitle(){
+    public String getTitle(){
         return this.title;
     }
 
-    Recycler_item(int image, String title){
+    public Recycler_item(int image, String title){
         this.image=image;
         this.title=title;
     }

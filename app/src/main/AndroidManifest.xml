@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jongchanrim.trappan">
+    package="kr.co.trappan">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".LoginActivity"
+            android:name="kr.co.trappan.Activity.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,11 +20,11 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="kr.co.trappan.Activity.MainActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
 
-        <activity android:name=".SignupActivity"/>
+        <activity android:name="kr.co.trappan.Activity.SignupActivity"/>
 
     </application>
 

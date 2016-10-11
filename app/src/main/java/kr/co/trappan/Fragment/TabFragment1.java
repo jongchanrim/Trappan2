@@ -1,4 +1,4 @@
-package com.example.jongchanrim.trappan;
+package kr.co.trappan.Fragment;
 
 /**
  * Created by thfad_000 on 2016-10-04.
@@ -6,13 +6,14 @@ package com.example.jongchanrim.trappan;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.widget.ImageView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
+
+import kr.co.trappan.Adapter.RecyclerAdapter;
+import kr.co.trappan.Item.Recycler_item;
+import kr.co.trappan.R;
 
 import java.util.ArrayList;
 import java.util.List;
