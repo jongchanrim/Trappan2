@@ -6,12 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import kr.co.trappan.R;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import kr.co.trappan.R;
+import kr.co.trappan.Connector.HttpClient;
 /**
  * Created by thfad_000 on 2016-10-04.
  */
 public class LoginActivity extends AppCompatActivity {
+
+    RequestParams params = new RequestParams();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +31,27 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(
-                        LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지정
+                HttpClient.post("login", params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        super.onSuccess(statusCode, headers, response);
+                        JSONObject obj = response;
+                        try {
+                            String login = obj.getString("Test");
+                            if(login.equals("Test")){
+                                //암호화 들어가야됨
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지정
+                                startActivity(intent); // 다음 화면으로 넘어간다.
+                            }
+                            else if(login.equals("fail")){
 
-                startActivity(intent); // 다음 화면으로 넘어간다.
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                });
             }
         });
 
