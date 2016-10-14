@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 <!--
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/backView" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400px"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/profileView"/>
+        android:layout_marginTop="100px"
+        android:src ="@drawable/e"
+        android:id="@+id/backView" />
+
+    <com.meg7.widget.CircleImageView
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:id="@+id/profileView"
+        android:src="@drawable/g"
+        android:scaleType="centerCrop"
+        android:layout_alignBottom="@+id/backView"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="55px"
         android:textSize="50px"
         android:textAlignment="center"
+        android:layout_below="@+id/profileView"
+        android:text="Limsolmi"
         android:id = "@+id/nameText" />
 
     <TextView
@@ -27,11 +34,14 @@
         android:layout_height="70px"
         android:textSize="50px"
         android:textAlignment="center"
+        android:layout_below="@id/nameText"
+        android:text="Write your messages."
         android:id = "@+id/profileText" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_profile"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/profileText"/>
 -->
-</LinearLayout>
+</RelativeLayout>

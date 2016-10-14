@@ -14,11 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import kr.co.trappan.R;
+import java.util.ArrayList;
 import java.util.List;
 
+import kr.co.trappan.R;
+
 import kr.co.trappan.Item.Recycler_item;
+
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     Context context;
@@ -81,5 +83,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             title=(TextView)itemView.findViewById(R.id.title);
             cardview=(CardView)itemView.findViewById(R.id.cardview);
         }
+    }
+
+    public void clear() {
+        items.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items
+    public void addAll(List<Recycler_item> list) {
+        items.addAll(list);
+        notifyDataSetChanged();
     }
 }
