@@ -41,23 +41,14 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
-                        JSONObject obj = response;
-                        try {
-                            String login = obj.getString("Test");
-                            if(login.equals("Test")){
-                                //암호화 들어가야됨
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지정
-                                startActivity(intent); // 다음 화면으로 넘어간다.
-                            }
-                            else if(login.equals("fail")){
 
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+
                     }
 
                 });
+
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지정
+                startActivity(intent); // 다음 화면으로 넘어간다.
             }
         });
 
