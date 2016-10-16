@@ -30,6 +30,7 @@ import org.json.JSONArray;
 
 public class TabFragment1 extends Fragment {
 
+
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
     private LinearLayoutManager mLinearLayoutManager;
