@@ -1,21 +1,16 @@
 package kr.co.trappan.Activity;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
-
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import kr.co.trappan.Adapter.TabPagerAdapter;
 import kr.co.trappan.R;
@@ -31,20 +26,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main);
         // Adding Toolbar to the activity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Initializing the TabLayout
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("one"));
-        tabLayout.addTab(tabLayout.newTab().setText("two"));
-        tabLayout.addTab(tabLayout.newTab().setText("Three"));
-        tabLayout.addTab(tabLayout.newTab().setText("four"));
-        tabLayout.addTab(tabLayout.newTab().setText("five"));
+        tabLayout.addTab(tabLayout.newTab().setText("홈")); //setIcon
+        tabLayout.addTab(tabLayout.newTab().setText("검색"));
+        tabLayout.addTab(tabLayout.newTab().setText("추천"));
+        tabLayout.addTab(tabLayout.newTab().setText("알림"));
+        tabLayout.addTab(tabLayout.newTab().setText("마이"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
         // Initializing ViewPager
         viewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -72,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+      tabLayout.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Snackbar.make(v, v.toString(), Snackbar.LENGTH_LONG)
+                      .setAction("Action", null).show();
+          }
+      });
+
 
 
 
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automatically handle clicks on the Home/Up login_button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 

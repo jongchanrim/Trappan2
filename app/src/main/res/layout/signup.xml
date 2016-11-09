@@ -3,10 +3,133 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="회원가입 페이지"
-        android:textSize="100px"/>
+
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="E-MAIL"
+            android:id="@+id/m_email"
+            android:textSize="30px" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textColor="#ffffff"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/input_email"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id ="@+id/root">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="PASSWAORD"
+            android:id="@+id/m_password"
+            android:textSize="30px" />
+
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textColor="#ffffff"
+            android:inputType="textPassword"
+            android:id="@+id/input_passwd"
+
+            android:gravity="center" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:textColor="#ffffff"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="PW CHECK"
+            android:id="@+id/m_confpasswd"
+            android:textSize="15dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:inputType="textPassword"
+                android:textColor="#ffffff"
+                android:id="@+id/confirm_passwd"
+
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="#ffffff"
+                android:id="@+id/TextVIew_PwdProblem"
+                android:textStyle="bold"
+                android:gravity="center" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="NAME"
+            android:id="@+id/m_name"
+            android:textSize="30px" />
+
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:inputType="textPersonName"
+            android:textColor="#ffffff"
+            android:id="@+id/input_name"
+            android:gravity="center" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="CREATE"
+            android:id="@+id/new_member_button"
+            android:background="@drawable/login_button"
+            />
+    </LinearLayout>
 
 </RelativeLayout>
