@@ -30,14 +30,6 @@ import kr.co.trappan.R;
  */
 public class SignupActivity extends AppCompatActivity {
 
-    /**///////////////////////////////////////////////////////////////////////////
-    /**////////////////////////////////Progress Dialog////////////////////////////
-    /**//**/private SignupActivity.DialogTask task;                                        /**///
-    /**//**/private ProgressDialog pd;                                      /**///
-    /**//**/static final String TAG = SignupActivity.class.getSimpleName();   /**///
-    /**//**/static int flag = 1;                                           /**///
-    /**///////////////////////////////////////////////////////////////////////////
-    /**///////////////////////////////////////////////////////////////////////////
 
     private EditText email;
     private EditText passwd;
@@ -63,23 +55,11 @@ public class SignupActivity extends AppCompatActivity {
 
         passConfText.addTextChangedListener(passwordWatcher);
 
-        pd = new ProgressDialog(this);
-        pd.setTitle("");
-        pd.setMessage("Loading...");
-        pd.setCancelable(true);
-        pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                task.cancel(true);
-            }
-        });
-        task = new SignupActivity.DialogTask(pd);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                task.execute(1);
 
                 final String pass1 = passwd.getText().toString();
                 String enpw = Encrypter.encrypt(pass1.toString()); //비밀번호 암호화
@@ -92,7 +72,6 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         super.onFailure(statusCode, headers, throwable, errorResponse);
-                        flag = 0;
                         Intent intetn1;
                         intetn1 = new Intent(SignupActivity.this, LoginActivity.class);
                         startActivity(intetn1);
@@ -102,7 +81,6 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
-                        flag = 0;
                     }
                 });
             }
@@ -110,35 +88,7 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    static class DialogTask extends AsyncTask<Integer, Integer, String> {
-        private ProgressDialog pdt = null;
-        public DialogTask(ProgressDialog pd) {
-            this.pdt = pd;
-        }
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            flag=1;
-            pdt.show();
 
-        }
-        @Override
-        protected String doInBackground(Integer... params) {
-            String result = "";
-            while(flag ==1){
-                if (isCancelled())
-                    break;
-            }
-            return result;
-        }
-        @Override
-        protected void onPostExecute(String result) {
-            Log.d(TAG, "onPostExecute : " + result);
-            pdt.dismiss();
-
-
-        }
-    }
 
     private final TextWatcher passwordWatcher  =  new TextWatcher() {
         @Override
