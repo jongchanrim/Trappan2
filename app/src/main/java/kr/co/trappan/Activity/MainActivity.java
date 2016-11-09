@@ -28,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         // Adding Toolbar to the activity
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         // Initializing the TabLayout
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
