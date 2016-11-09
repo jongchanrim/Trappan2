@@ -70,12 +70,14 @@ public class LoginActivity extends AppCompatActivity {
                 params.put("email", email.getText().toString().trim());
                 params.put("passwd", enpw);
 
-                HttpClient.get("login", params, new JsonHttpResponseHandler() {
+                HttpClient.get("test", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
                         Log.d(TAG, "httpOK: " + response.toString());
                         flag = 0;
+                        task.cancel(true);
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지정
                         startActivity(intent); // 다음 화면으로 넘어간다.
                     }
@@ -84,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
                         super.onFailure(statusCode, headers, throwable, response);
                         Log.d(TAG, "httpFail: " + response.toString());
+                        task.cancel(true);
                         flag = 0;
                     }
                 });
@@ -121,13 +124,16 @@ public class LoginActivity extends AppCompatActivity {
         protected String doInBackground(Integer... params) {
             String result = "";
             while(flag ==1){
-
+                if (isCancelled())
+                    pdt.cancel();
+                    break;
             }
             return result;
         }
         @Override
         protected void onPostExecute(String result) {
             Log.d(TAG, "onPostExecute : " + result);
+            pdt.cancel();
             pdt.dismiss();
 
 
