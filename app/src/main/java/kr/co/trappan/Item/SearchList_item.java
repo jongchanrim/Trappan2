@@ -17,7 +17,7 @@ public class SearchList_item {
     public int getImage(){
         return this.image;
     }
-    public String getRegion(){ return this.region; }
+    public String getRegion() { return this.region; }
     public String getStar(){
         return this.star;
     }
