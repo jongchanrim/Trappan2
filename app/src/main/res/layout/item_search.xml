@@ -1,79 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="140dip"
     android:padding="1dip"
+
     >
-    <!--
+
     <ImageView
-        android:layout_width="70dip"
-        android:layout_height="70dip"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_weight="0.2"
-        android:layout_marginTop="5dip"
-        android:id="@+id/search_image"
-        android:src = "@drawable/gangwon"
-        />
--->
+        android:id="@+id/search_imageVIew"
+        android:src = "@drawable/seoul"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New"
+                android:id="@+id/search_region"
+                android:textSize="30dip"
+                android:textColor="#FFFFFF"
+                android:layout_weight="1"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dip"
+                />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New"
-            android:id="@+id/search_region"
-            android:textSize="30dip"
-            android:textColor="#000000"
-            android:layout_weight="1"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="15dip"
-            />
+            android:layout_alignParentRight="true"
+            android:text = "star"
+            android:textSize="15dip"
+            android:id = "@+id/search_star"
+            android:textColor = "#FFFFFF"
+            android:layout_marginRight= "10dip"/>
 
         <TextView
-            android:layout_width="101dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/search_space"
-            android:textSize="15dip"
-            android:textColor="#666666"
-            android:layout_weight="5.75"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/search_region"
-            android:layout_marginLeft="59dp"
-            android:layout_marginStart="59dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:text = "star"
+            android:textColor = "#FFFFFF"
+            android:textSize="15dip"
+            android:id = "@+id/search_like"
+            android:layout_marginRight= "45dip"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text = "star"
-        android:textSize="15dip"
-        android:id = "@+id/search_star"
-        android:textColor = "#666666"
-        android:layout_marginRight= "10dip"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text = "star"
+            android:textSize="15dip"
+            android:textColor = "#FFFFFF"
+            android:id = "@+id/search_stamp"
+            android:layout_marginRight= "100dip"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text = "star"
-        android:textColor = "#666666"
-        android:textSize="15dip"
-        android:id = "@+id/search_like"
-        android:layout_marginRight= "45dip"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text = "star"
-        android:textSize="15dip"
-        android:textColor = "#666666"
-        android:id = "@+id/search_stamp"
-        android:layout_marginRight= "100dip"/>
-
-
-</RelativeLayout>
+    </RelativeLayout>

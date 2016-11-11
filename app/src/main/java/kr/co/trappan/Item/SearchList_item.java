@@ -8,16 +8,16 @@ import android.graphics.drawable.Drawable;
 
 public class SearchList_item {
 
+    int image;
     String region;
-    String space;
     String star;
     String like;
     String stamp;
 
-    public String getRegion(){ return this.region; }
-    public String getSpace(){
-        return this.space;
+    public int getImage(){
+        return this.image;
     }
+    public String getRegion(){ return this.region; }
     public String getStar(){
         return this.star;
     }
@@ -28,10 +28,10 @@ public class SearchList_item {
         return this.stamp;
     }
 
-    public SearchList_item( String region, String space, String star, String like, String stamp){
+    public SearchList_item( int image, String region,String star, String like, String stamp){
 
+        this.image = image;
         this.region=region;
-        this.space = space;
         this.star = star;
         this.like = like;
         this.stamp = stamp;

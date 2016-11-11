@@ -45,8 +45,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
         final SearchList_item item=items.get(position);
 
+        holder.image.setImageResource(item.getImage());
         holder.region.setText(item.getRegion());
-        holder.space.setText(item.getSpace());
         holder.star.setText(item.getStar());
         holder.like.setText(item.getLike());
         holder.stamp.setText(item.getStamp());
@@ -60,8 +60,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        ImageView image;
         TextView region;
-        TextView space;
         TextView star;
         TextView like;
         TextView stamp;
@@ -70,8 +70,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         public ViewHolder(View itemView) {
             super(itemView);
 
+            image=(ImageView)itemView.findViewById(R.id.search_imageVIew);
             region=(TextView)itemView.findViewById(R.id.search_region);
-            space = (TextView)itemView.findViewById(R.id.search_space);
             star = (TextView)itemView.findViewById(R.id.search_star);
             like = (TextView)itemView.findViewById(R.id.search_like);
             stamp = (TextView)itemView.findViewById(R.id.search_stamp);
