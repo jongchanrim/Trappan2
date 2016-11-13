@@ -80,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
                     case 4: tab.setIcon(R.drawable.mypage_icon); break;
 
                 }
-
-
         }
 
             @Override

@@ -39,11 +39,11 @@ public class SearchActivity extends AppCompatActivity {
 
         ArrayList<SearchList_item> items = new ArrayList<>();
 
-        items.add(new SearchList_item("지역","이름","별점","좋아요","도장"));
-        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
-        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
-        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
-        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
+//        items.add(new SearchList_item("지역","이름","별점","좋아요","도장"));
+//        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
+//        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
+//        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
+//        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
 
 
         layoutManager = new LinearLayoutManager(this);
