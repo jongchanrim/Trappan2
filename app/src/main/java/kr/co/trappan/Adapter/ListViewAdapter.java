@@ -63,6 +63,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
         TextView desc;
 
         public ViewHolder(View itemView) {
+
             super(itemView);
             image=(ImageView)itemView.findViewById(R.id.notice_image);
             title=(TextView)itemView.findViewById(R.id.notice_title);

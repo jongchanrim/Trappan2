@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,14 +31,23 @@ public class MainActivity extends AppCompatActivity {
 
         // Initializing the TabLayout
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("홈")); //setIcon
-        tabLayout.addTab(tabLayout.newTab().setText("검색"));
-        tabLayout.addTab(tabLayout.newTab().setText("추천"));
-        tabLayout.addTab(tabLayout.newTab().setText("알림"));
-        tabLayout.addTab(tabLayout.newTab().setText("마이"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+//        tabLayout.addTab(tabLayout.newTab().setText("홈")); //setIcon
+//        tabLayout.addTab(tabLayout.newTab().setText("검색"));
+//        tabLayout.addTab(tabLayout.newTab().setText("추천"));
+//        tabLayout.addTab(tabLayout.newTab().setText("알림"));
+//        tabLayout.addTab(tabLayout.newTab().setText("마이"));
+
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.home_icon_selected)); //setIcon
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.search_icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.suggest_icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.alarm_icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.mypage_icon));
+
+
+
         // Initializing ViewPager
         viewPager = (ViewPager) findViewById(R.id.pager);
+
 
         // Creating TabPagerAdapter adapter
         TabPagerAdapter  pagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
@@ -52,12 +60,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                     viewPager.setCurrentItem(tab.getPosition());
+                switch(tab.getPosition()){
+                    case 0: tab.setIcon(R.drawable.home_icon_selected); break;
+                    case 1: tab.setIcon(R.drawable.search_icon_selected); break;
+                    case 2: tab.setIcon(R.drawable.suggest_icon_selected); break;
+                    case 3: tab.setIcon(R.drawable.alarm_icon_selected); break;
+                    case 4: tab.setIcon(R.drawable.mypage_icon_selected); break;
+
+                }
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                switch(tab.getPosition()){
+                    case 0: tab.setIcon(R.drawable.home_icon); break;
+                    case 1: tab.setIcon(R.drawable.search_icon); break;
+                    case 2: tab.setIcon(R.drawable.suggest_icon); break;
+                    case 3: tab.setIcon(R.drawable.alarm_icon); break;
+                    case 4: tab.setIcon(R.drawable.mypage_icon); break;
 
-            }
+                }
+        }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
@@ -73,19 +96,6 @@ public class MainActivity extends AppCompatActivity {
           }
       });
 
-
-
-
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
