@@ -19,7 +19,7 @@ import kr.co.trappan.R;
 public class TabFragment1 extends Fragment {
 
 
-   private ViewPager horizontal_viewpager;
+    private ViewPager horizontal_viewpager;
     private RelativeLayout item1,item2,item3;
 
     @Override
