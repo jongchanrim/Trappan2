@@ -23,24 +23,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/mybackimage"
-                android:src="@drawable/a"/>
+                android:src="@drawable/a"
+                android:background="#ffffff" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                android:src="@android:drawable/ic_menu_edit"
-                app:backgroundTint="?android:attr/textColorPrimaryInverseDisableOnly" />
+            <ImageButton android:id="@+id/mybackedit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/profileedit"
+                android:clickable="true"
+                android:layout_marginLeft="315dp"
+                android:layout_marginTop="245dp" />
 
-            <!--<com.mikhaellopez.circularimageview.CircularImageView-->
-                <!--android:layout_width="147dp"-->
-                <!--android:layout_height="138dp"-->
-                <!--android:src="@drawable/image"-->
-                <!--app:border_color="#EEEEEE"-->
-                <!--app:border_width="4dp"-->
-                <!--app:shadow="true" />-->
+            <com.pkmmte.view.CircularImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/gangwon"
+                app:border_color="#ffffff"
+                app:border_width="2dp"
+                android:id="@+id/CircularImageView"
+                android:baselineAlignBottom="false"
+                app:selector_stroke_width="2dp"
+                android:layout_marginLeft="130dp"
+                android:layout_marginTop="225dp"
+                app:border="true"
+                android:adjustViewBounds="false"
+                app:shadow="false"
+                app:selector="true" />
+
+            <ImageButton android:id="@+id/myprofileedit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/profileedit"
+                android:clickable="true"
+                android:layout_marginTop="285dp"
+                android:layout_marginLeft="215dp" />
 
         </FrameLayout>
 
