@@ -34,6 +34,8 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.9'
     //complie 'com.mostafagazar:customshapeimageview:1.0.4'
     compile 'com.github.chrisbanes.actionbarpulltorefresh:library:0.9.9'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    compile 'com.googlecode.android-query:android-query:0.25.9'
 }
 
 android.packagingOptions {

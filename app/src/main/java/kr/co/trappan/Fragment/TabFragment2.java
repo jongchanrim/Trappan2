@@ -182,8 +182,8 @@ public class TabFragment2 extends Fragment{
             Button b = (Button) v;
           //  b.setBackgroundColor();
             Intent intent = new Intent(v.getContext(), SearchActivity.class);
-            intent.putExtra("region_name",region_name.getText());
-            intent.putExtra("region_detail", b.getText());
+            intent.putExtra("areacode",region_name.getText());
+            intent.putExtra("sigungucode", b.getText());
             Toast.makeText(context,b.getText(), Toast.LENGTH_SHORT).show();
             v.getContext().startActivity(intent);
 

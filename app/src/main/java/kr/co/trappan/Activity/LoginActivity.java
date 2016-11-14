@@ -1,7 +1,6 @@
 package kr.co.trappan.Activity;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,21 +18,17 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
-import kr.co.trappan.Connector.Encrypter;
+import kr.co.trappan.Util.Encrypter;
 import kr.co.trappan.R;
-import kr.co.trappan.Connector.HttpClient;
+import kr.co.trappan.Util.HttpClient;
 /**
  * Created by thfad_000 on 2016-10-04.
  */
 public class LoginActivity extends AppCompatActivity {
-    /**///////////////////////////////////////////////////////////////////////////
-    /**////////////////////////////////Progress Dialog////////////////////////////
-    /**//**/private DialogTask task;                                        /**///
-    /**//**///private ProgressDialog pd;                                      /**///
-    /**//**/static final String TAG = MainActivity.class.getSimpleName();   /**///
-    /**//**/static int flag = 1;                                           /**///
-    /**///////////////////////////////////////////////////////////////////////////
-    /**///////////////////////////////////////////////////////////////////////////
+
+    static final String TAG = MainActivity.class.getSimpleName();
+    static int flag = 1;
+    ProgressDialog pd;
     EditText email;
     EditText password;
     Button loginButton;
@@ -42,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
+        pd = new ProgressDialog(LoginActivity.this);
         email = (EditText) findViewById(R.id.login_id_edittext);
         password = (EditText) findViewById(R.id.login_pw_edittext);
 
@@ -51,9 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                pd.show();
                 String enpw = Encrypter.encrypt(password.getText().toString()); //비밀번호 암호화
-
                 RequestParams params = new RequestParams();
                 params.put("email", email.getText().toString().trim());
                 params.put("passwd", enpw);
@@ -68,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
                         Log.d(TAG, "httpOK: " + response.toString());
+                        pd.dismiss();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지정
                         startActivity(intent); // 다음 화면으로 넘어간다.
                     }

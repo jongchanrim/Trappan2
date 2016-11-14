@@ -16,22 +16,42 @@
         android:scaleType="centerCrop"
         android:layout_alignParentTop="true" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dip"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New"
-                android:id="@+id/search_region"
+                android:id="@+id/search_sigungu"
+                android:textSize="30dip"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_weight="1"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_vertical"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New"
+                android:id="@+id/search_title"
                 android:textSize="30dip"
                 android:textColor="#FFFFFF"
                 android:layout_weight="1"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="15dip"
                 />
 
-
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
