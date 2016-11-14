@@ -39,25 +39,26 @@ public class SearchActivity extends AppCompatActivity {
 
         ArrayList<SearchList_item> items = new ArrayList<>();
 
-//        items.add(new SearchList_item("지역","이름","별점","좋아요","도장"));
-//        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
-//        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
-//        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
-//        items.add(new SearchList_item("지역","이름","별점","좋아요.","도장"));
-
+        items.add(new SearchList_item(R.drawable.seoul,"서울대학교 미술관","별점","좋아요","도장"));
+        items.add(new SearchList_item(R.drawable.seoul,"이름","별점","좋아요.","도장"));
+        items.add(new SearchList_item(R.drawable.seoul,"이름","별점","좋아요.","도장"));
+        items.add(new SearchList_item(R.drawable.seoul,"이름","별점","좋아요.","도장"));
+        items.add(new SearchList_item(R.drawable.seoul,"이름","별점","좋아요.","도장"));
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new SearchListAdapter(this,items ,R.layout.search);
         recyclerView.setAdapter(adapter);
 
-
-        //인텐트 값 가져오기
         Intent intent = getIntent();
-        String regionName = intent.getStringExtra("title");
+        String region_name = intent.getStringExtra("region_name");
+        String region_detail= intent.getStringExtra("region_detail");
 
         TextView region = (TextView)findViewById(R.id.search_name);
-        region.setText(regionName);
+        region.setText(region_name);
+
+        TextView regionDetail = (TextView)findViewById(R.id.search_name_detail);
+        regionDetail.setText(region_detail);
 
 
     }
