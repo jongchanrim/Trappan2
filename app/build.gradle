@@ -34,7 +34,7 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.9'
     //complie 'com.mostafagazar:customshapeimageview:1.0.4'
     compile 'com.github.chrisbanes.actionbarpulltorefresh:library:0.9.9'
-    //Circular Image View
+    //Circular Image View////////////////
     compile 'com.pkmmte.view:circularimageview:1.1'
 }
 
