@@ -2,6 +2,7 @@ package kr.co.trappan.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -12,9 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -29,17 +33,25 @@ public class LoginActivity extends AppCompatActivity {
     static final String TAG = MainActivity.class.getSimpleName();
     static int flag = 1;
     ProgressDialog pd;
-    EditText email;
+    EditText id;
     EditText password;
     Button loginButton;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    String enpw;
     RequestParams params = new RequestParams();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         pd = new ProgressDialog(LoginActivity.this);
-        email = (EditText) findViewById(R.id.login_id_edittext);
+        id = (EditText) findViewById(R.id.login_id_edittext);
         password = (EditText) findViewById(R.id.login_pw_edittext);
+
+        pref = getSharedPreferences("PreName", MODE_PRIVATE);
+        editor = pref.edit();
+
+
 
         // 로그인 버튼 클릭 시
         loginButton = (Button) findViewById(R.id.login_button);
@@ -47,24 +59,37 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 pd.show();
-                String enpw = Encrypter.encrypt(password.getText().toString()); //비밀번호 암호화
+                enpw = Encrypter.encrypt(password.getText().toString()); //비밀번호 암호화
                 RequestParams params = new RequestParams();
-                params.put("email", email.getText().toString().trim());
-                params.put("passwd", enpw);
+                params.put("id", id.getText().toString().trim());
+                params.put("pw", enpw);
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                HttpClient.get("test", params, new JsonHttpResponseHandler() {
+                HttpClient.post("test", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
                         Log.d(TAG, "httpOK: " + response.toString());
-                        pd.dismiss();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지정
-                        startActivity(intent); // 다음 화면으로 넘어간다.
+//                        try {
+//                            if(response.get("login").equals("success")) {
+                                //자동 로그인하기 위한 데이터 저장
+                                editor.putString("id", id.getText().toString());
+                                editor.putString("pw", enpw);
+                                editor.putBoolean("autologin", true);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지정
+                                pd.dismiss();
+                                startActivity(intent); // 다음 화면으로 넘어간다.
+//                            }
+//                            else{
+//                                //로그인 실패 다이얼로그
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
                     }
 
                     @Override
@@ -91,38 +116,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-    class DialogTask extends AsyncTask<Integer, Integer, String> {
-        private ProgressDialog pdt = new ProgressDialog(LoginActivity.this);
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pdt.setTitle("");
-            pdt.setMessage("Loading...");
-            flag=1;
-            pdt.show();
-
-        }
-        @Override
-        protected String doInBackground(Integer... params) {
-            String result = "";
-            while(flag ==1){
-                if (isCancelled())
-                    break;
-            }
-            return result;
-        }
-        @Override
-        protected void onPostExecute(String result) {
-            Log.d(TAG, "onPostExecute : " + result);
-            pdt.dismiss();
-            super.onPostExecute(result);
-
-
-        }
-    }
-
 
 
 }
