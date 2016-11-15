@@ -7,9 +7,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -25,19 +27,21 @@ import kr.co.trappan.R;
  */
 public class SignupActivity extends AppCompatActivity {
 
-
+    private EditText id;
     private EditText email;
     private EditText passwd;
     private EditText passConfText;
     private EditText name;
     private TextView textView;
-    private Button btn;
+    private Button signupbtn;
+    private CheckBox checkBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
 
         //email confirm
+        id = (EditText) findViewById(R.id.input_id);
         email = (EditText) findViewById(R.id.input_email);
         passwd = (EditText) findViewById(R.id.input_passwd);
         name = (EditText) findViewById(R.id.input_name);
@@ -45,39 +49,45 @@ public class SignupActivity extends AppCompatActivity {
         passConfText = (EditText) findViewById(R.id.confirm_passwd);
         textView = (TextView) findViewById(R.id.TextVIew_PwdProblem);
         textView.setVisibility(View.GONE);
-        btn = (Button) findViewById(R.id.new_member_button);
+        signupbtn = (Button) findViewById(R.id.new_member_button);
+        checkBox = (CheckBox) findViewById(R.id.checkBox);
         //intent
 
         passConfText.addTextChangedListener(passwordWatcher);
 
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        signupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkBox.isChecked()) {
+                    final String pass1 = passwd.getText().toString();
+                    String enpw = Encrypter.encrypt(pass1.toString()); //비밀번호 암호화
+                    RequestParams params = new RequestParams();
+                    params.put("id", id.getText().toString().trim());
+                    params.put("email", email.getText().toString().trim());
+                    params.put("passwd", passwd.getText().toString().trim());
+                    params.put("name", name.getText().toString().trim());
+                    HttpClient.post("signup", params, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                            if (responseBody.toString().equals("success")) {
+                                Intent intetn1;
+                                intetn1 = new Intent(SignupActivity.this, LoginActivity.class);
+                                startActivity(intetn1);
+                                finish();
+                            } else {
+                                //아이디 중복 다이얼로그
+                            }
+                        }
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
-
-                final String pass1 = passwd.getText().toString();
-                String enpw = Encrypter.encrypt(pass1.toString()); //비밀번호 암호화
-                RequestParams params = new RequestParams();
-                params.put("email", email.getText().toString().trim());
-                params.put("passwd", passwd.getText().toString().trim());
-                params.put("name", name.getText().toString().trim());
-
-                HttpClient.post("signup", params, new JsonHttpResponseHandler(){
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                        super.onFailure(statusCode, headers, throwable, errorResponse);
-                        Intent intetn1;
-                        intetn1 = new Intent(SignupActivity.this, LoginActivity.class);
-                        startActivity(intetn1);
-                        finish();
-                    }
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        super.onSuccess(statusCode, headers, response);
-                    }
-                });
+                        }
+                    });
+                }
+                else{
+                    //동의 체크 다이얼로그
+                }
             }
 
         });

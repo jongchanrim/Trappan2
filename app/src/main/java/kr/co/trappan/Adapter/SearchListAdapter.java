@@ -1,11 +1,14 @@
 package kr.co.trappan.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -26,6 +29,10 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     int item_layout;
     AQuery aq;
    //
+   private static int TYPE_HEADER = 0;
+    private static int TYPE_FOOTER = 3;
+
+
 
 
     public SearchListAdapter (Context context, List<ListBean> items, int item_layout) {
@@ -52,6 +59,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         final ListBean item=items.get(position);
 
         aq.id(holder.image).image(item.getFirstimage());
+        holder.image.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
         holder.title.setText(item.getTitle());
 //        holder.rate.setText(item.getRate());
 //        holder.like.setText(item.getLike());
@@ -71,8 +79,10 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         return this.items.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        LinearLayout Header;
         ImageView image;
         TextView title;
         TextView sigunguName;
@@ -85,7 +95,6 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
         public ViewHolder(View itemView) {
             super(itemView);
-
             image=(ImageView)itemView.findViewById(R.id.search_imageVIew);
             sigunguName=(TextView)itemView.findViewById(R.id.search_sigungu);
             title = (TextView)itemView.findViewById(R.id.search_title);
