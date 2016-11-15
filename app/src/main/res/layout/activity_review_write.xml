@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_review_write"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.co.trappan.Activity.ReviewWriteActivity"
+    android:orientation="vertical"
+    android:background="#f2f1f1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:weightSum="1">
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/back_button"
+            android:id="@+id/review_back"
+            android:layout_marginRight="140dp"
+            android:layout_marginTop="5dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/review_complete"
+            android:layout_gravity="end"
+            android:layout_marginLeft="120dp"
+            android:text="완료"
+            android:textColor="@android:color/black"
+            android:background="@null"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="경주시 안압지"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/review"
+        android:textColor="@android:color/holo_purple"
+        android:textSize="20sp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="10dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        app:srcCompat="@drawable/a"
+        android:id="@+id/review_image"
+        android:background="@android:color/black" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@android:color/white">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/review_img1"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:src="@android:drawable/ic_input_add" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_input_add"
+                android:id="@+id/review_img2"
+                android:layout_weight="1"
+                android:background="@android:color/white" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_input_add"
+                android:id="@+id/review_img3"
+                android:layout_weight="1"
+                android:background="@android:color/white" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_input_add"
+                android:id="@+id/review_img4"
+                android:layout_weight="1"
+                android:background="@android:color/white" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_input_add"
+                android:id="@+id/review_img5"
+                android:layout_weight="1"
+                android:background="@android:color/white" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_input_add"
+                android:id="@+id/review_img6"
+                android:layout_weight="1"
+                android:background="@android:color/white" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/review_title"
+        android:textColor="?android:attr/textColorTertiaryInverse"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/xml_border"
+        android:padding="5dp"
+        android:hint="제목을 입력하세요"
+        android:textColorHint="@color/cardview_dark_background"
+        android:textSize="14sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/review_contents"
+        android:textColor="?android:attr/textColorHintInverse"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/xml_border"
+        android:gravity="top|center_vertical"
+        android:padding="5dp"
+        android:hint="내용을 입력하세요"
+        android:textColorHint="@color/cardview_dark_background"
+        android:textSize="14sp" />
+
+</LinearLayout>
