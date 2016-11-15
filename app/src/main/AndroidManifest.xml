@@ -20,14 +20,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activity.MainActivity"
-            android:label="@string/title_activity_main_feed"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".Activity.SignupActivity" />
         <activity android:name=".Activity.SearchActivity" />
 
         <activity android:name=".Activity.DetailInformationActivity"></activity>
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".Activity.ReviewWriteActivity"></activity>
     </application>
 
 </manifest>

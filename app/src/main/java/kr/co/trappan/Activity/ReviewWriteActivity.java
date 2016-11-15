@@ -1,4 +1,4 @@
-package kr.co.trappan.Fragment;
+package kr.co.trappan.Activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,49 +7,28 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
-import android.support.design.widget.Snackbar;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.pkmmte.view.CircularImageView;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
 
-import kr.co.trappan.Adapter.ListViewAdapter;
-import kr.co.trappan.Item.List_item;
 import kr.co.trappan.R;
 
-import static android.app.Activity.RESULT_OK;
-
-
-/**
- * Created by thfad_000 on 2016-10-04.
- */
-public class TabFragment5 extends Fragment{
+public class ReviewWriteActivity extends AppCompatActivity {
 
     Context context;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView resizeList;
-
-    private ImageButton mybackedit;
-    private ImageButton myprofileedit;
 
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -60,16 +39,20 @@ public class TabFragment5 extends Fragment{
     private int id_view;
     private String absoultePath;
 
-    //private DB_Manger dbmanger;
+    private ImageButton review_img1;
+    private ImageButton review_img2;
+    private ImageButton review_img3;
+    private ImageButton review_img4;
+    private ImageButton review_img5;
+    private ImageButton review_img6;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tabfragment5, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_review_write);
 
-        resizeList = (RecyclerView) view.findViewById(R.id.mypage_scroll);
-
-        mybackedit = (ImageButton)view.findViewById(R.id.mybackedit);
-        mybackedit.setOnClickListener(new View.OnClickListener(){
+        review_img1 = (ImageButton)findViewById(R.id.review_img1);
+        review_img1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
@@ -93,7 +76,7 @@ public class TabFragment5 extends Fragment{
                     }
                 };
 
-                new AlertDialog.Builder(getActivity())
+                new AlertDialog.Builder(ReviewWriteActivity.this)
                         .setTitle("업로드 이미지 선택")
                         .setPositiveButton("카메라",cameraListener)
                         .setNeutralButton("갤러리",albumListener)
@@ -101,81 +84,6 @@ public class TabFragment5 extends Fragment{
                         .show();
             }
         });
-
-        myprofileedit = (ImageButton)view.findViewById(R.id.myprofileedit);
-        myprofileedit.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakePhotoAction();
-                    }
-                };
-
-                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakeAlbumAction();
-                    }
-                };
-
-                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener(){
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                };
-
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("업로드 이미지 선택")
-                        .setPositiveButton("카메라",cameraListener)
-                        .setNeutralButton("갤러리",albumListener)
-                        .setNegativeButton("취소",cancelListener)
-                        .show();
-            }
-        });
-
-        CircularImageView circularImageView = (CircularImageView)view.findViewById(R.id.CircularImageView);
-        circularImageView.setBorderWidth(10);
-        circularImageView.setSelectorStrokeWidth(10);
-        circularImageView.addShadow();
-
-
-        context = getContext();
-        recyclerView = (RecyclerView) view.findViewById(R.id.mypage_scroll);
-        recyclerView.setHasFixedSize(true);
-
-        ArrayList<List_item> items = new ArrayList<>();
-
-        items.add(new List_item(R.drawable.gangwon,"후기","1","테스트1"));
-        items.add(new List_item(R.drawable.gangwon,"후기","2","테스트2"));
-        items.add(new List_item(R.drawable.gangwon,"후기","3","테스트3"));
-        items.add(new List_item(R.drawable.gangwon,"후기","4","테스트4"));
-        items.add(new List_item(R.drawable.gangwon,"후기","5","테스트5"));
-        items.add(new List_item(R.drawable.gangwon,"후기","6","테스트6"));
-        items.add(new List_item(R.drawable.gangwon,"후기","7","테스트7"));
-        items.add(new List_item(R.drawable.gangwon,"후기","8","테스트8"));
-        items.add(new List_item(R.drawable.gangwon,"후기","9","테스트9"));
-        items.add(new List_item(R.drawable.gangwon,"후기","10","테스트10"));
-
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        Adapter = new ListViewAdapter(getActivity() ,items ,R.layout.tabfragment5);
-        recyclerView.setAdapter(Adapter);
-
-        resizeCommentList(items.size());
-
-        return view;
-    }
-
-    private void resizeCommentList(int item_size){
-        ViewGroup.LayoutParams params = resizeList.getLayoutParams();
-        params.height = 350 * item_size;
-        resizeList.setLayoutParams(params);
     }
 
     public void doTakePhotoAction(){

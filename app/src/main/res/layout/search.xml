@@ -5,16 +5,35 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_01">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "지역이름"
-        android:id = "@+id/search_name"
-        android:textSize = "20dip"
-        android:textColor= "#666666"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="23dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "도시"
+            android:id = "@+id/search_name"
+            android:textSize = "20dip"
+            android:textColor= "#666666"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "구"
+            android:id = "@+id/search_name_detail"
+            android:textSize = "20dip"
+            android:textColor= "#666666"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/search_name"
+            android:layout_toEndOf="@+id/search_name"
+            android:layout_marginLeft="20dip"
+            android:layout_marginStart="40dip" />
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="130px"
+        android:layout_marginTop="25dip"
         android:id="@+id/search_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
