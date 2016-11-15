@@ -16,8 +16,8 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
-import kr.co.trappan.Util.Encrypter;
-import kr.co.trappan.Util.HttpClient;
+import kr.co.trappan.Connector.Encrypter;
+import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.R;
 
 /**

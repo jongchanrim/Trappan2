@@ -9,16 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
-import com.loopj.android.http.FileAsyncHttpResponseHandler;
 
-import java.io.File;
 import java.util.List;
 
-import cz.msebera.android.httpclient.Header;
-import kr.co.trappan.Activity.SearchActivity;
 import kr.co.trappan.Bean.ListBean;
 import kr.co.trappan.R;
-import kr.co.trappan.Util.HttpClient;
 
 /**
  * Created by thfad_000 on 2016-11-11.
@@ -39,11 +34,15 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         this.item_layout=item_layout;
     }
 
+    public void setItems(List<ListBean> items) {
+        this.items = items;
+    }
+
     @Override
     public SearchListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search,parent,false);
         SearchListAdapter.ViewHolder holder = new SearchListAdapter.ViewHolder(v);
-        aq = new AQuery(parent);
+        aq = new AQuery(v);
         return holder;
     }
 
@@ -54,10 +53,16 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
         aq.id(holder.image).image(item.getFirstimage());
         holder.title.setText(item.getTitle());
-        holder.rate.setText(item.getRate());
-        holder.like.setText(item.getLike());
-        holder.stamp.setText(item.getStamp());
-        holder.sigunguName.setText(item.getSigunguName());
+//        holder.rate.setText(item.getRate());
+//        holder.like.setText(item.getLike());
+//        holder.stamp.setText(item.getStamp());
+       holder.sigunguName.setText(item.getSigunguName());
+
+       //holder.title.setText("0");
+        holder.rate.setText("0");
+        holder.like.setText("0");
+        holder.stamp.setText("0");
+       // holder.sigunguName.setText("0");
 
     }
 

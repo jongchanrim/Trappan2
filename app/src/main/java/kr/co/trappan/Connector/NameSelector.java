@@ -1,4 +1,4 @@
-package kr.co.trappan.Util;
+package kr.co.trappan.Connector;
 
 /**
  * Created by jongchanrim on 2016. 11. 14..

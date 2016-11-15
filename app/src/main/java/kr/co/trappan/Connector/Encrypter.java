@@ -1,4 +1,4 @@
-package kr.co.trappan.Util;
+package kr.co.trappan.Connector;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -1,12 +1,13 @@
 package kr.co.trappan.Bean;
 
-import kr.co.trappan.Util.NameSelector;
+import kr.co.trappan.Connector.NameSelector;
 
 /**
  * Created by jongchanrim on 2016. 11. 14..
  */
 
 public class ListBean {
+    private String contentId;
     private String title;
     private String areacode;
     private String sigungucode;
@@ -19,15 +20,32 @@ public class ListBean {
     public ListBean() {
     }
 
-    public ListBean(String title, String areacode, String sigungucode, String firstimage, int stamp, int rate, int like) {
+    public ListBean(int like, String contentId, String title, String areacode, String sigungucode, String firstimage, int stamp, int rate) {
+        this.like = like;
+        this.contentId = contentId;
         this.title = title;
         this.areacode = areacode;
         this.sigungucode = sigungucode;
         this.firstimage = firstimage;
         this.stamp = stamp;
         this.rate = rate;
-        this.like = like;
         setSigunguName();
+    }
+
+    public String getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(String contentId) {
+        this.contentId = contentId;
+    }
+
+    public String getAreacode() {
+        return areacode;
+    }
+
+    public void setAreacode(String areacode) {
+        this.areacode = areacode;
     }
 
     public String getSigunguName() {
@@ -61,6 +79,8 @@ public class ListBean {
     }
 
     public void setFirstimage(String firstimage) {
+
+        firstimage = firstimage.replaceAll("\\", "");
         this.firstimage = firstimage;
     }
 

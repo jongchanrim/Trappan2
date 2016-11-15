@@ -22,18 +22,15 @@
         </activity>
         <activity
             android:name=".Activity.MainActivity"
-            android:label="@string/title_activity_main_feed"
+            android:label="MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".Activity.SignupActivity" />
-        <activity android:name=".Activity.SearchActivity" />
-        <activity
-            android:name=".Activity.Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+        <activity android:name=".Activity.SearchActivity" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>
