@@ -47,8 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        pd = new CustomProgressDialog(LoginActivity.this);
-        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         id = (EditText) findViewById(R.id.login_id_edittext);
         password = (EditText) findViewById(R.id.login_pw_edittext);
@@ -63,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pd.show();
+
                 enpw = Encrypter.encrypt(password.getText().toString()); //비밀번호 암호화
                 RequestParams params = new RequestParams();
                 params.put("id", id.getText().toString().trim());
@@ -86,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("pw", enpw);
                                 editor.putBoolean("autologin", true);
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지정
-                                pd.dismiss();
+
                                 startActivity(intent); // 다음 화면으로 넘어간다.
 //                            }
 //                            else{

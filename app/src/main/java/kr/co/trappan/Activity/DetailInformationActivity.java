@@ -1,6 +1,13 @@
 package kr.co.trappan.Activity;
 
+import android.app.Dialog;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +17,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -40,11 +48,14 @@ public class DetailInformationActivity extends AppCompatActivity {
     private RecyclerView.Adapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private RatingDialog ratingDialog;
+    private Dialog ratingDialog;
+    private RatingBar ratingBar;
 
     private TextView content;
     private TextView btn_more;
     String test="서울대학교미술관은 여러 해 동안의 긴 준비끝에 서울대학교 박물관 현대미술부에서 독립하여 국내최초의 대학미술관으로 탄생하게 되었다.삼성그룹이 건립하여 그렇게되었다 블라블라 블라";
+
+    String star_rate="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,9 +135,40 @@ public class DetailInformationActivity extends AppCompatActivity {
         btn_image3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ratingDialog=new RatingDialog(DetailInformationActivity.this,checklistner,falselistner,"평가");
+                ratingDialog=new Dialog(DetailInformationActivity.this);
+                ratingDialog.setContentView(R.layout.rating_dialog);
+                ratingDialog.setCancelable(true);
+                ratingBar = (RatingBar)ratingDialog.findViewById(R.id.ratingBar);
+                ratingBar.setRating(0);
+
+                Drawable progress = ratingBar.getProgressDrawable();
+                DrawableCompat.setTint(progress, Color.LTGRAY);
+
+                LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
+                stars.getDrawable(2).setColorFilter(Color.parseColor("#f8b62b"), PorterDuff.Mode.SRC_ATOP);
+
+                TextView text = (TextView) ratingDialog.findViewById(R.id.rating_text);
+                text.setText("별점주기");
+
+                Button updateButton = (Button) ratingDialog.findViewById(R.id.btn_check);
+                updateButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.d("rate",star_rate);
+                        btn_image3.setBackgroundResource(R.drawable.detail_icon_03_02);
+                        ratingDialog.dismiss();
+                    }
+                });
+
+                ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                        star_rate=""+rating;
+                    }
+                });
+                //now that the dialog is set up, it's time to show it
                 ratingDialog.show();
-                btn_image3.setBackgroundResource(R.drawable.detail_icon_03_02);
+
             }
         });
 

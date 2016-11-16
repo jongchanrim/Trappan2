@@ -5,13 +5,15 @@
     android:gravity="center">
 
     <LinearLayout
-        android:background="@android:color/darker_gray"
+        android:background="@android:color/white"
         android:orientation="vertical"
         android:layout_centerInParent="true"
         android:layout_width="300dp"
         android:layout_height="200dp">
 
         <TextView
+            android:textColor="@android:color/black"
+            android:id="@+id/rating_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -30,16 +32,10 @@
 
             <Button
                 android:id="@+id/btn_check"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="평가하기"/>
-            <Button
-                android:id="@+id/btn_false"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="취소"/>
+
        </LinearLayout>
 
     </LinearLayout>

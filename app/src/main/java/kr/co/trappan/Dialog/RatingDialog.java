@@ -32,19 +32,11 @@ public class RatingDialog extends Dialog {
 
         setContentView(R.layout.rating_dialog);
 
-        btn_check = (Button) findViewById(R.id.btn_check);
-        btn_false=(Button)findViewById(R.id.btn_false);
-
-        btn_check.setOnClickListener(checklistener);
-        btn_false.setOnClickListener(falselistener);
-
     }
 
     // 클릭버튼이 하나일때 생성자 함수로 클릭이벤트를 받는다.
-    public RatingDialog(Context context,View.OnClickListener checklistener,View.OnClickListener falselistner,String string) {
+    public RatingDialog(Context context) {
         super(context, android.R.style.Theme_Translucent_NoTitleBar);
-        this.checklistener = checklistener;
-        this.falselistener = falselistner;
     }
 
 
