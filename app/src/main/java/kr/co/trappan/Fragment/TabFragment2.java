@@ -1,34 +1,18 @@
 package kr.co.trappan.Fragment;
 
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.ActionMode;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.RecyclerView;
-import android.widget.AbsListView;
 import android.widget.Button;
 import android.content.Intent;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import kr.co.trappan.Activity.SearchActivity;
-import kr.co.trappan.Adapter.HorizontalListAdapter;
 
 
-import kr.co.trappan.Item.Horizontal_item;
-import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
 
@@ -38,13 +22,30 @@ import kr.co.trappan.R;
 public class TabFragment2 extends Fragment {
 
     Context context;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter Adapter;
-    private RecyclerView.LayoutManager layoutManager;
+    Button[] areaButton;
+
+    int[] selectedItems;
+    int[] unSelectedIcon = {R.drawable.seoul_1,
+                          R.drawable.incheon_2,
+                          R.drawable.daegu_4,
+                          R.drawable.daejeon_3,
+                          R.drawable.gwangju_5,
+                          R.drawable.pusan_6,
+                          R.drawable.ulsan_7,
+                          R.drawable.sejong_8};
+
+    int[] selectedIcon = {R.drawable.seoul_1_c,
+            R.drawable.incheon_2_c,
+            R.drawable.daegu_4_c,
+            R.drawable.daejeon_3_c,
+            R.drawable.gwangju_5_c,
+            R.drawable.pusan_6_c,
+            R.drawable.ulsan_7_c,
+            R.drawable.sejong_8_c};
+
 
     public static View view_detail;
     public static View view_seoul;
-    public static View view_gyeonggi;
     public static View view_pusan;
     public static View view_incheon;
     public static View view_daegu;
@@ -52,65 +53,182 @@ public class TabFragment2 extends Fragment {
     public static View view_gwangju;
     public static View view_ulsan;
 
-    public static TextView region_name;
-    public static TextView region_code;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tabfragment2, container, false);
+        areaButton = new Button[17];
+        areaButton[0] = (Button) view.findViewById(R.id.search_seoul_button);
+        areaButton[1] = (Button) view.findViewById(R.id.search_incheon_button);
+        areaButton[2] = (Button) view.findViewById(R.id.search_daegu_button);
+        areaButton[3] = (Button) view.findViewById(R.id.search_daejeon_button);
+        areaButton[4] = (Button) view.findViewById(R.id.search_gwangju_button);
+        areaButton[5] = (Button) view.findViewById(R.id.search_pusan_button);
+        areaButton[6] = (Button) view.findViewById(R.id.search_ulsan_button);
+        areaButton[7] = (Button) view.findViewById(R.id.search_sejong_button);
 
-        context = getContext();
-        recyclerView = (RecyclerView) view.findViewById(R.id.horizontalView);
-        recyclerView.setHasFixedSize(true);
+        selectedItems = new int[17];
+        for(int i = 0; i < selectedItems.length; i++){
+            selectedItems[i] = 0;
+        }
 
-        ArrayList<Horizontal_item> items = new ArrayList<>();
+        areaButton[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setBackgroundResource(selectedIcon[0]);
+                view_detail.setVisibility(View.VISIBLE);
+                view_seoul.setVisibility(View.VISIBLE);
+                view_incheon.setVisibility(View.GONE);
+                view_daejeon.setVisibility(View.GONE);
+                view_daegu.setVisibility(View.GONE);
+                view_gwangju.setVisibility(View.GONE);
+                view_pusan.setVisibility(View.GONE);
+                view_ulsan.setVisibility(View.GONE);
+                for (int i = 0; i < 8; i++) {
+                    if (selectedItems[i] == 1) {
+                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
+                        selectedItems[i] =0;
+                    }
+                }
+                selectedItems[0] = 1;
+            }
+        });
 
-        items.add(new Horizontal_item(R.drawable.seoul_1, "서울", "1"));
-        items.add(new Horizontal_item(R.drawable.incheon_2, "인천", "2"));
-        items.add(new Horizontal_item(R.drawable.daejeon_3, "대전", "3"));
-        items.add(new Horizontal_item(R.drawable.daegu_4, "대구", "4"));
-        items.add(new Horizontal_item(R.drawable.gwangju_5, "광주", "5"));
-        items.add(new Horizontal_item(R.drawable.pusan_6, "부산", "6"));
-        items.add(new Horizontal_item(R.drawable.ulsan_7, "울산", "7"));
-        items.add(new Horizontal_item(R.drawable.sejong_8, "세종", "8"));
-        items.add(new Horizontal_item(R.drawable.gyeonggi_31, "경기", "31"));
-        items.add(new Horizontal_item(R.drawable.gangwon_32, "강원", "32"));
-        items.add(new Horizontal_item(R.drawable.chungbuk_33, "충북", "33"));
-        items.add(new Horizontal_item(R.drawable.chungnam_34, "충남", "34"));
-        items.add(new Horizontal_item(R.drawable.gyeongbuk_35, "경북", "35"));
-        items.add(new Horizontal_item(R.drawable.gyeongnam_36, "경남", "36"));
-        items.add(new Horizontal_item(R.drawable.jeonbuk_37, "전북", "37"));
-        items.add(new Horizontal_item(R.drawable.jeonnam_38, "전남", "38"));
-        items.add(new Horizontal_item(R.drawable.jeju_39, "제주", "39"));
+        areaButton[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setBackgroundResource(selectedIcon[1]);
+                view_detail.setVisibility(View.VISIBLE);
+                view_seoul.setVisibility(View.GONE);
+                view_incheon.setVisibility(View.VISIBLE);
+                view_daejeon.setVisibility(View.GONE);
+                view_daegu.setVisibility(View.GONE);
+                view_gwangju.setVisibility(View.GONE);
+                view_pusan.setVisibility(View.GONE);
+                view_ulsan.setVisibility(View.GONE);
+                for (int i = 0; i < 8; i++) {
+                    if (selectedItems[i] == 1) {
+                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
+                        selectedItems[i] =0;
+                    }
+                }
+                selectedItems[1] = 1;
+
+            }
+        });
+
+        areaButton[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setBackgroundResource(selectedIcon[2]);
+                view_detail.setVisibility(View.VISIBLE);
+                view_seoul.setVisibility(View.GONE);
+                view_incheon.setVisibility(View.GONE);
+                view_daejeon.setVisibility(View.GONE);
+                view_daegu.setVisibility(View.VISIBLE);
+                view_gwangju.setVisibility(View.GONE);
+                view_pusan.setVisibility(View.GONE);
+                view_ulsan.setVisibility(View.GONE);
+                for (int i = 0; i < 8; i++) {
+                    if (selectedItems[i] == 1) {
+                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
+                        selectedItems[i] =0;
+                    }
+                }
+                selectedItems[2] = 1;
+            }
+        });
+
+        areaButton[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setBackgroundResource(selectedIcon[3]);
+                view_detail.setVisibility(View.VISIBLE);
+                view_seoul.setVisibility(View.GONE);
+                view_incheon.setVisibility(View.GONE);
+                view_daejeon.setVisibility(View.VISIBLE);
+                view_daegu.setVisibility(View.GONE);
+                view_gwangju.setVisibility(View.GONE);
+                view_pusan.setVisibility(View.GONE);
+                view_ulsan.setVisibility(View.GONE);
+                for (int i = 0; i < 8; i++) {
+                    if (selectedItems[i] == 1) {
+                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
+                        selectedItems[i] =0;
+                    }
+                }
+                selectedItems[3] = 1;
+            }
+        });
+
+        areaButton[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setBackgroundResource(selectedIcon[4]);
+                view_detail.setVisibility(View.VISIBLE);
+                view_seoul.setVisibility(View.GONE);
+                view_incheon.setVisibility(View.GONE);
+                view_daejeon.setVisibility(View.GONE);
+                view_daegu.setVisibility(View.GONE);
+                view_gwangju.setVisibility(View.VISIBLE);
+                view_pusan.setVisibility(View.GONE);
+                view_ulsan.setVisibility(View.GONE);
+                for (int i = 0; i < 8; i++) {
+                    if (selectedItems[i] == 1) {
+                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
+                        selectedItems[i] =0;
+                    }
+                }
+                selectedItems[4] = 1;
+            }
+        });
+
+        areaButton[5].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setBackgroundResource(selectedIcon[5]);
+                view_detail.setVisibility(View.VISIBLE);
+                view_seoul.setVisibility(View.GONE);
+                view_incheon.setVisibility(View.GONE);
+                view_daejeon.setVisibility(View.GONE);
+                view_daegu.setVisibility(View.GONE);
+                view_gwangju.setVisibility(View.GONE);
+                view_pusan.setVisibility(View.VISIBLE);
+                view_ulsan.setVisibility(View.GONE);
+                for (int i = 0; i < 8; i++) {
+                    if (selectedItems[i] == 1) {
+                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
+                        selectedItems[i] =0;
+                    }
+                }
+                selectedItems[5] = 1;
+            }
+        });
+
+        areaButton[6].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setBackgroundResource(selectedIcon[6]);
+                view_detail.setVisibility(View.VISIBLE);
+                view_seoul.setVisibility(View.GONE);
+                view_incheon.setVisibility(View.GONE);
+                view_daejeon.setVisibility(View.GONE);
+                view_daegu.setVisibility(View.GONE);
+                view_gwangju.setVisibility(View.GONE);
+                view_pusan.setVisibility(View.GONE);
+                view_ulsan.setVisibility(View.VISIBLE);
+                for (int i = 0; i < 8; i++) {
+                    if (selectedItems[i] == 1) {
+                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
+                        selectedItems[i] =0;
+                    }
+                }
+                selectedItems[6] = 1;
+            }
+        });
 
 
-        layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
-        Adapter = new HorizontalListAdapter(getActivity(), items, R.layout.tabfragment2, recyclerView);
-        recyclerView.setAdapter(Adapter);
 
-
-
-/*
-        recyclerView_theme = (RecyclerView) view.findViewById(R.id.horizontalView_theme);
-//        recyclerView_theme.setHasFixedSize(true);
-
-        ArrayList<HorizontalTheme_item> items_Theme = new ArrayList<>();
-
-        items_Theme.add(new HorizontalTheme_item(R.drawable.gangwon,"자연"));
-        items_Theme.add(new HorizontalTheme_item(R.drawable.gangwon,"역사"));
-        items_Theme.add(new HorizontalTheme_item(R.drawable.gangwon,"체험"));
-        items_Theme.add(new HorizontalTheme_item(R.drawable.gangwon,"휴양"));
-        items_Theme.add(new HorizontalTheme_item(R.drawable.gangwon,"산업"));
-        items_Theme.add(new HorizontalTheme_item(R.drawable.gangwon,"건축/조형물"));
-        items_Theme.add(new HorizontalTheme_item(R.drawable.gangwon,"문화시설"));
-        items_Theme.add(new HorizontalTheme_item(R.drawable.gangwon,"축제"));
-
-        layoutManager_theme = new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL);
-        recyclerView_theme.setLayoutManager(layoutManager_theme);
-        Adapter_theme = new HorizontalThemeListAdapter(getActivity() ,items_Theme ,R.layout.tabfragment2);
-        recyclerView_theme.setAdapter(Adapter_theme);
-*/
 
         view_detail = view.findViewById(R.id.region_detail);
         view_seoul = view.findViewById(R.id.region_detail_seoul);
@@ -119,11 +237,17 @@ public class TabFragment2 extends Fragment {
         view_daegu = view.findViewById(R.id.region_detail_daegu);
         view_gwangju = view.findViewById(R.id.region_detail_gwangju);
         view_pusan = view.findViewById(R.id.region_detail_pusan);
-        view_gyeonggi = view.findViewById(R.id.region_detail_gyeonggi);
         view_ulsan = view.findViewById(R.id.region_detail_ulsan);
 
-        region_name = (TextView) view.findViewById(R.id.region_name);
-        region_code = (TextView) view.findViewById(R.id.region_code);
+        view_detail.setVisibility(View.GONE);
+        view_seoul.setVisibility(View.GONE);
+        view_incheon.setVisibility(View.GONE);
+        view_daejeon.setVisibility(View.GONE);
+        view_daegu.setVisibility(View.GONE);
+        view_gwangju.setVisibility(View.GONE);
+        view_pusan.setVisibility(View.GONE);
+        view_ulsan.setVisibility(View.GONE);
+
 
 
         // 버튼 리스너
@@ -207,9 +331,8 @@ public class TabFragment2 extends Fragment {
             Button b = (Button) v;
             //  b.setBackgroundColor();
             Intent intent = new Intent(v.getContext(), SearchActivity.class);
-            intent.putExtra("areacode", region_name.getText());
+            intent.putExtra("areacode", "test");
             intent.putExtra("sigungucode", b.getText());
-            Toast.makeText(context, b.getText(), Toast.LENGTH_SHORT).show();
             v.getContext().startActivity(intent);
 
         }

@@ -3,19 +3,15 @@ package kr.co.trappan.Fragment;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import kr.co.trappan.Adapter.HorizontalListAdapter;
 import kr.co.trappan.Adapter.ListViewAdapter;
-import kr.co.trappan.Item.Horizontal_item;
 import kr.co.trappan.Item.List_item;
 import kr.co.trappan.R;
 

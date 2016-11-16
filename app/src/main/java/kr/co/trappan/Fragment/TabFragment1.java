@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 
 import kr.co.trappan.Activity.DetailInformationActivity;
 import kr.co.trappan.Activity.MainActivity;
+import kr.co.trappan.Activity.ReviewPageActivity;
 import kr.co.trappan.Adapter.Horizontal_Pager_Adapter;
 import kr.co.trappan.R;
 
@@ -46,6 +47,13 @@ public class TabFragment1 extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),DetailInformationActivity.class);
+                startActivity(intent);
+            }
+        });
+        item2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),ReviewPageActivity.class);
                 startActivity(intent);
             }
         });
