@@ -242,7 +242,7 @@ public class TabFragment5 extends Fragment{
                     mybackimage.setImageURI(mlmageCaptureUri);
                     back_or_profile = 0;
                 }
-                else if(back_or_profile ==2){
+                else if(back_or_profile == 2){
                     circularImageView.setImageURI(mlmageCaptureUri);
                     back_or_profile = 0;
                 }
