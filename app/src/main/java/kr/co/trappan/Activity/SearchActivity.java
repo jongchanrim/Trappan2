@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -26,6 +27,7 @@ import kr.co.trappan.Adapter.SearchListAdapter;
 import kr.co.trappan.Bean.ListBean;
 import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.Item.CustomProgressDialog;
+import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
 /**
@@ -90,6 +92,19 @@ public class SearchActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                recyclerView.addOnItemTouchListener(new RecyclerViewOnItemClickListener(SearchActivity.this, recyclerView,
+                        new RecyclerViewOnItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View v, int position) {
+                                Log.d(TAG, "click");
+                            }
+
+                            @Override
+                            public void onItemLongClick(View v, int position) {
+                                Log.d(TAG, "long click");
+                            }
+                        }
+                ));
 
             }
 
