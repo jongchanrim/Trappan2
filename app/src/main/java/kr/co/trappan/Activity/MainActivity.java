@@ -31,11 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Initializing the TabLayout
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-//        tabLayout.addTab(tabLayout.newTab().setText("홈")); //setIcon
-//        tabLayout.addTab(tabLayout.newTab().setText("검색"));
-//        tabLayout.addTab(tabLayout.newTab().setText("추천"));
-//        tabLayout.addTab(tabLayout.newTab().setText("알림"));
-//        tabLayout.addTab(tabLayout.newTab().setText("마이"));
 
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.home_icon_selected)); //setIcon
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.search_icon));
