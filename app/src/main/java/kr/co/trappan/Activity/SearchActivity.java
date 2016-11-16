@@ -2,6 +2,7 @@ package kr.co.trappan.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -23,6 +26,8 @@ import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Adapter.SearchListAdapter;
 import kr.co.trappan.Bean.ListBean;
 import kr.co.trappan.Connector.HttpClient;
+import kr.co.trappan.Item.CustomProgressDialog;
+import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
 /**
@@ -38,13 +43,14 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<ListBean> items = new ArrayList<>();
     String areacode;
     String sigungucode;
-    ProgressDialog pd;
+    CustomProgressDialog pd;
     JSONArray jsonArray = new JSONArray();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
 
-        pd = new ProgressDialog(this);
+        pd = new CustomProgressDialog(SearchActivity.this);
+        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         pd.show();
         Intent intent = getIntent();
         areacode = intent.getExtras().getString("areacode");
@@ -57,6 +63,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new SearchListAdapter(this, items, R.layout.search);
         recyclerView.setAdapter(adapter);
+
 
         RequestParams params = new RequestParams();
 //        params.put("areacode", areacode.toString().trim());
@@ -85,6 +92,19 @@ public class SearchActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                recyclerView.addOnItemTouchListener(new RecyclerViewOnItemClickListener(SearchActivity.this, recyclerView,
+                        new RecyclerViewOnItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View v, int position) {
+                                Log.d(TAG, "click");
+                            }
+
+                            @Override
+                            public void onItemLongClick(View v, int position) {
+                                Log.d(TAG, "long click");
+                            }
+                        }
+                ));
 
             }
 

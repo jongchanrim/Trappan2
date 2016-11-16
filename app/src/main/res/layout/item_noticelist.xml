@@ -49,4 +49,8 @@
             android:layout_weight="5" />
     </LinearLayout>
 
+    <View
+        android:layout_width="1dip"
+        android:layout_height="match_parent"
+        android:background="#FF00FF"></View>
 </LinearLayout>

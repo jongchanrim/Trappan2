@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -51,8 +52,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_write);
 
-        review_img1 = (ImageButton)findViewById(R.id.review_img1);
-        review_img1.setOnClickListener(new View.OnClickListener(){
+        View.OnClickListener Click = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
@@ -83,7 +83,21 @@ public class ReviewWriteActivity extends AppCompatActivity {
                         .setNegativeButton("취소",cancelListener)
                         .show();
             }
-        });
+        };
+
+        review_img1 = (ImageButton)findViewById(R.id.review_img1);
+        review_img2 = (ImageButton)findViewById(R.id.review_img2);
+        review_img3 = (ImageButton)findViewById(R.id.review_img3);
+        review_img4 = (ImageButton)findViewById(R.id.review_img4);
+        review_img5 = (ImageButton)findViewById(R.id.review_img5);
+        review_img6 = (ImageButton)findViewById(R.id.review_img6);
+
+        review_img1.setOnClickListener(Click);
+        review_img2.setOnClickListener(Click);
+        review_img3.setOnClickListener(Click);
+        review_img4.setOnClickListener(Click);
+        review_img5.setOnClickListener(Click);
+        review_img6.setOnClickListener(Click);
     }
 
     public void doTakePhotoAction(){

@@ -15,5 +15,234 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"></android.support.v4.view.ViewPager>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:text=""/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/item1"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="좋아요 5"
+                android:textColor="#802010"
+                android:id="@+id/textView8"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/textView9"
+                android:layout_toStartOf="@+id/textView9"
+                android:layout_marginRight="47dp"
+                android:layout_marginEnd="47dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="남긴글 3"
+                android:textColor="#802010"
+                android:id="@+id/textView9"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="제주도"
+                android:id="@+id/textView10"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="36dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="주상절리"
+                android:id="@+id/textView11"
+                android:layout_alignTop="@+id/textView10"
+                android:layout_toLeftOf="@+id/textView8"
+                android:layout_toStartOf="@+id/textView8"
+                android:layout_marginRight="33dp"
+                android:layout_marginEnd="33dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="고등학교 친구들과 여행"
+                android:id="@+id/textView12"
+                android:layout_below="@+id/textView11"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="2016.3.15"
+                android:id="@+id/textView13"
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@+id/textView8"
+                android:layout_alignStart="@+id/textView8"
+                android:layout_marginLeft="47dp"
+                android:layout_marginStart="47dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/item2"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="좋아요 5"
+                android:textColor="#802010"
+                android:id="@+id/textView14"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/textView15"
+                android:layout_toStartOf="@+id/textView15"
+                android:layout_marginRight="47dp"
+                android:layout_marginEnd="47dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="남긴글 3"
+                android:textColor="#802010"
+                android:id="@+id/textView15"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="제주도"
+                android:id="@+id/textView16"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="36dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="주상절리"
+                android:id="@+id/textView17"
+                android:layout_alignTop="@+id/textView16"
+                android:layout_toLeftOf="@+id/textView14"
+                android:layout_toStartOf="@+id/textView14"
+                android:layout_marginRight="33dp"
+                android:layout_marginEnd="33dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="고등학교 친구들과 여행"
+                android:id="@+id/textView18"
+                android:layout_below="@+id/textView17"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="2016.3.15"
+                android:id="@+id/textView19"
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@+id/textView14"
+                android:layout_alignStart="@+id/textView14"
+                android:layout_marginLeft="47dp"
+                android:layout_marginStart="47dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/item3"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="좋아요 5"
+                android:textColor="#802010"
+                android:id="@+id/textView20"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/textView21"
+                android:layout_toStartOf="@+id/textView21"
+                android:layout_marginRight="47dp"
+                android:layout_marginEnd="47dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="남긴글 3"
+                android:textColor="#802010"
+                android:id="@+id/textView21"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="제주도"
+                android:id="@+id/textView22"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="36dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="주상절리"
+                android:id="@+id/textView23"
+                android:layout_alignTop="@+id/textView22"
+                android:layout_toLeftOf="@+id/textView20"
+                android:layout_toStartOf="@+id/textView20"
+                android:layout_marginRight="33dp"
+                android:layout_marginEnd="33dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="고등학교 친구들과 여행"
+                android:id="@+id/textView24"
+                android:layout_below="@+id/textView23"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="2016.3.15"
+                android:id="@+id/textView25"
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@+id/textView20"
+                android:layout_alignStart="@+id/textView20"
+                android:layout_marginLeft="47dp"
+                android:layout_marginStart="47dp" />
+        </RelativeLayout>
     </LinearLayout>
 </ScrollView>

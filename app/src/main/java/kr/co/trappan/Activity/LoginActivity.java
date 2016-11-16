@@ -3,6 +3,7 @@ package kr.co.trappan.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Connector.Encrypter;
+import kr.co.trappan.Item.CustomProgressDialog;
 import kr.co.trappan.R;
 import kr.co.trappan.Connector.HttpClient;
 /**
@@ -32,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     static final String TAG = MainActivity.class.getSimpleName();
     static int flag = 1;
-    ProgressDialog pd;
+    private CustomProgressDialog pd;
     EditText id;
     EditText password;
     Button loginButton;
@@ -44,7 +46,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        pd = new ProgressDialog(LoginActivity.this);
+
+        pd = new CustomProgressDialog(LoginActivity.this);
+        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+
         id = (EditText) findViewById(R.id.login_id_edittext);
         password = (EditText) findViewById(R.id.login_pw_edittext);
 
@@ -80,9 +86,9 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("id", id.getText().toString());
                                 editor.putString("pw", enpw);
                                 editor.putBoolean("autologin", true);
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지정
-                                pd.dismiss();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지
                                 startActivity(intent); // 다음 화면으로 넘어간다.
+                                pd.dismiss();
 //                            }
 //                            else{
 //                                //로그인 실패 다이얼로그
