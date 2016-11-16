@@ -1,4 +1,4 @@
-package kr.co.trappan.Bean;
+package kr.co.trappan.Item;
 
 import kr.co.trappan.Connector.NameSelector;
 
@@ -6,7 +6,7 @@ import kr.co.trappan.Connector.NameSelector;
  * Created by jongchanrim on 2016. 11. 14..
  */
 
-public class ListBean {
+public class SearchLists_item {
     private String contentId;
     private String title;
     private String areacode;
@@ -17,10 +17,10 @@ public class ListBean {
     private int like;
     private String sigunguName;
 
-    public ListBean() {
+    public SearchLists_item() {
     }
 
-    public ListBean(int like, String contentId, String title, String areacode, String sigungucode, String firstimage, int stamp, int rate) {
+    public SearchLists_item(int like, String contentId, String title, String areacode, String sigungucode, String firstimage, int stamp, int rate) {
         this.like = like;
         this.contentId = contentId;
         this.title = title;

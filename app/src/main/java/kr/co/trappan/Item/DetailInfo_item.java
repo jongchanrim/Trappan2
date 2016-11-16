@@ -1,10 +1,10 @@
-package kr.co.trappan.Bean;
+package kr.co.trappan.Item;
 
 /**
  * Created by jongchanrim on 2016. 11. 14..
  */
 
-public class DetailInfoBean {
+public class DetailInfo_item {
     private String contentid;
     private String contenttypeid;
     private String title;
@@ -26,10 +26,10 @@ public class DetailInfoBean {
     private String areaName;
     private String sigunguName;
 
-    public DetailInfoBean() {
+    public DetailInfo_item() {
     }
 
-    public DetailInfoBean(String contentid, String contenttypeid, String title, String addr1, String addr2, String areacode, String cat1, String cat2, String cat3, String firstimage, String firstimage2, String mlevel, String overview, String mapx, String mapy, int rate, int stamp, int like) {
+    public DetailInfo_item(String contentid, String contenttypeid, String title, String addr1, String addr2, String areacode, String cat1, String cat2, String cat3, String firstimage, String firstimage2, String mlevel, String overview, String mapx, String mapy, int rate, int stamp, int like) {
         this.contentid = contentid;
         this.contenttypeid = contenttypeid;
         this.title = title;

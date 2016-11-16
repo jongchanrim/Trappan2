@@ -1,48 +1,55 @@
 package kr.co.trappan.Activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.androidquery.AQuery;
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Adapter.DetailInfoCommentAdapter;
-import kr.co.trappan.Adapter.ListViewAdapter;
-import kr.co.trappan.Dialog.RatingDialog;
+import kr.co.trappan.Item.DetailInfo_item;
+import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.Item.DetailInfoComment_item;
-import kr.co.trappan.Item.List_item;
 import kr.co.trappan.R;
 
 public class DetailInformationActivity extends AppCompatActivity {
 
     private ImageView main_image;
-    private TextView main_image_text;
-    private ImageView btn_image1,btn_image2,btn_image3;
-
-    private ScrollView scrollView;
+    private TextView title;
+    private ImageView btn_want, btn_stamp, btn_rate;
+    private TextView detailRateAvg;
+    private TextView detailWant;
+    private TextView detailRate;
+    private ImageView detailBtnType;
+    private TextView detailType;
+    private TextView detailAddr;
+    private TextView detailStamp;
+    private ImageView deTailbtnReco;
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter Adapter;
@@ -51,47 +58,128 @@ public class DetailInformationActivity extends AppCompatActivity {
     private Dialog ratingDialog;
     private RatingBar ratingBar;
 
-    private TextView content;
+    private TextView overview;
     private TextView btn_more;
-    String test="서울대학교미술관은 여러 해 동안의 긴 준비끝에 서울대학교 박물관 현대미술부에서 독립하여 국내최초의 대학미술관으로 탄생하게 되었다.삼성그룹이 건립하여 그렇게되었다 블라블라 블라";
+    DetailInfo_item item;
 
     String star_rate="";
 
+    String contentid;
+    AQuery aq;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_information);
 
-        main_image=(ImageView)findViewById(R.id.main_image);
-        main_image_text=(TextView)findViewById(R.id.main_image_text);
-        btn_image1=(ImageView)findViewById(R.id.btn1_image1);
-        btn_image2=(ImageView)findViewById(R.id.btn1_image2);
-        btn_image3=(ImageView)findViewById(R.id.btn1_image3);
-
-        content=(TextView)findViewById(R.id.content_dd);
+        RequestParams params = new RequestParams();
+        Intent intent = new Intent();
+        contentid = intent.getExtras().getString("contentid");
+        params.put("contentid", contentid);
+        main_image=(ImageView)findViewById(R.id.detail_image);
+        title =(TextView)findViewById(R.id.detail_title);
+        btn_want =(ImageView)findViewById(R.id.detail_btn_want);
+        detailWant = (TextView)findViewById(R.id.detail_want);
+        btn_stamp =(ImageView)findViewById(R.id.detail_btn_stamp);
+        detailStamp = (TextView)findViewById(R.id.detail_stamp);
+        btn_rate =(ImageView)findViewById(R.id.detail_btn_rate);
+        overview =(TextView)findViewById(R.id.detail_overview);
         btn_more=(TextView)findViewById(R.id.btn_more);
+        detailRateAvg = (TextView)findViewById(R.id.detail_rate_average);
 
-        if(test.length()<30) {
-            content.setText(test);
-            btn_more.setVisibility(View.INVISIBLE);
-        } else{
-            content.setText(test.substring(0,30)+"...");
-        }
+        detailRate = (TextView)findViewById(R.id.detail_rate);
+        detailBtnType = (ImageView) findViewById(R.id.detail_btn_type);
+        detailType = (TextView)findViewById(R.id.detail_type);
+        detailAddr = (TextView) findViewById(R.id.detail_addr);
+        deTailbtnReco = (ImageView) findViewById(R.id.detail_btn_reco);
+        aq = new AQuery(this);
 
-        btn_more.setOnClickListener(new View.OnClickListener() {
+        HttpClient.get("test", params, new JsonHttpResponseHandler() {
             @Override
-            public void onClick(View v) {
-                if(btn_more.getText().toString()=="더보기"){
-                    btn_more.setText("접기");
-                    content.setText(test);
-                }else{
-                    content.setText(test.substring(0,30)+"...");
-                    btn_more.setText("더보기");
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                   item = new DetailInfo_item(response.getString("contentid"), response.getString("contenttypeid"),
+                            response.getString("title"), response.getString("addr1"), response.getString("addr2"), response.getString("areacode"), response.getString("cat1"),
+                            response.getString("cat2"), response.getString("cat3"), response.getString("firstimage"), response.getString("firstimage"), response.getString("mlevel"),
+                            response.getString("overview"), response.getString("mapx"), response.getString("mapy"),
+                            response.getInt("rate"), response.getInt("stamp"), response.getInt("like"));
+
+
+
+                    //이미지 세팅
+                    aq.id(main_image).image(item.getFirstimage());
+
+                    //평균 평점
+                    detailRateAvg.setText(item.getRate());
+
+                    //타이틀 세팅
+                    title.setText(item.getTitle());
+                    //주소
+                    detailAddr.setText(item.getAddr1());//볼드로 해야됨
+                    //좋아요
+                    detailWant.setText(item.getLike());
+                    //스탬프
+                    detailStamp.setText(item.getStamp());
+
+                    //타입
+                    switch (item.getCat2()){
+                        case "A0101":{ detailBtnType.setImageResource(R.drawable.detail_icon_04_a0101);
+                            detailType.setText("자연");
+                            break;}
+                        case "A0201":{ detailBtnType.setImageResource(R.drawable.detail_icon_04_a0201);
+                            detailType.setText("역사");
+                            break;}
+                        case "A0202":{ detailBtnType.setImageResource(R.drawable.detail_icon_04_a0202);
+                            detailType.setText("휴양");
+                            break;}
+                        case "A0203":{ detailBtnType.setImageResource(R.drawable.detail_icon_04_a0203);
+                            detailType.setText("체험");
+                            break;}
+                        case "A0205":{ detailBtnType.setImageResource(R.drawable.detail_icon_04_a0205);
+                            detailType.setText("건축");
+                            break;}
+                        case "A0206":{ detailBtnType.setImageResource(R.drawable.detail_icon_04_a0206);
+                            detailType.setText("문화시설");
+                            break;}
+                        case "A0207":{ detailBtnType.setImageResource(R.drawable.detail_icon_04_a0207);
+                            detailType.setText("축제");
+                            break;}
+                    }
+
+
+                    //설명 세팅
+                    if(item.getOverview().length()<30) {
+                        overview.setText(item.getOverview());
+                        btn_more.setVisibility(View.INVISIBLE);
+                    } else{
+                        overview.setText(item.getOverview().substring(0,30)+"...");
+                    }
+                    btn_more.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(btn_more.getText().toString()=="더보기"){
+                                btn_more.setText("접기");
+                                overview.setText(item.getOverview());
+                            }else{
+                                overview.setText(item.getOverview().substring(0,30)+"...");
+                                btn_more.setText("더보기");
+                            }
+
+                        }
+                    });
+
+
+                }catch (JSONException e){
+
                 }
 
             }
-        });
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
+                super.onFailure(statusCode, headers, throwable, response);
 
+            }
+        });
 
 
 
@@ -117,22 +205,20 @@ public class DetailInformationActivity extends AppCompatActivity {
         Adapter = new DetailInfoCommentAdapter(this ,items);
         recyclerView.setAdapter(Adapter);
         header.attachTo(recyclerView);
-        main_image.setBackgroundResource(R.drawable.seoul);
-        main_image_text.setPaintFlags(main_image_text.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
-        btn_image1.setOnClickListener(new View.OnClickListener() {
+        btn_want.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_image1.setBackgroundResource(R.drawable.detail_icon_01_02);
+                btn_want.setBackgroundResource(R.drawable.detail_icon_01_02);
             }
         });
-        btn_image2.setOnClickListener(new View.OnClickListener() {
+        btn_stamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_image2.setBackgroundResource(R.drawable.detail_icon_02_02);
+                btn_stamp.setBackgroundResource(R.drawable.detail_icon_02_02);
             }
         });
-        btn_image3.setOnClickListener(new View.OnClickListener() {
+        btn_rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ratingDialog=new Dialog(DetailInformationActivity.this);
@@ -155,7 +241,7 @@ public class DetailInformationActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Log.d("rate",star_rate);
-                        btn_image3.setBackgroundResource(R.drawable.detail_icon_03_02);
+                        btn_rate.setBackgroundResource(R.drawable.detail_icon_03_02);
                         ratingDialog.dismiss();
                     }
                 });

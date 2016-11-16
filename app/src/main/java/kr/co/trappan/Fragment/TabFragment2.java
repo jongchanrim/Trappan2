@@ -25,6 +25,7 @@ public class TabFragment2 extends Fragment {
     Button[] areaButton;
 
     int[] selectedItems;
+
     int[] unSelectedIcon = {R.drawable.seoul_1,
                           R.drawable.incheon_2,
                           R.drawable.daegu_4,
@@ -84,6 +85,7 @@ public class TabFragment2 extends Fragment {
                 view_gwangju.setVisibility(View.GONE);
                 view_pusan.setVisibility(View.GONE);
                 view_ulsan.setVisibility(View.GONE);
+
                 for (int i = 0; i < 8; i++) {
                     if (selectedItems[i] == 1) {
                         areaButton[i].setBackgroundResource(unSelectedIcon[i]);
