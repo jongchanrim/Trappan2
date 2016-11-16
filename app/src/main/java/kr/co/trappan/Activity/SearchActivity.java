@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -57,6 +58,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new SearchListAdapter(this, items, R.layout.search);
         recyclerView.setAdapter(adapter);
+
 
         RequestParams params = new RequestParams();
 //        params.put("areacode", areacode.toString().trim());

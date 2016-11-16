@@ -93,7 +93,7 @@
             android:id= "@+id/row1">
 
             //전체
-            <ImageButton
+            <Button
                 android:layout_width="65dip"
                 android:layout_height="30dip"
                 android:background="@drawable/tag_01_01_s"
@@ -105,7 +105,7 @@
                 android:layout_marginLeft = "15dip"/>
 
             // 강남구
-           <ImageButton
+           <Button
                 android:layout_width="65dip"
                 android:layout_height="30dip"
                 android:background="@drawable/tag_01_01"
@@ -117,7 +117,7 @@
                 android:layout_marginLeft = "85dip" />
 
             //강동구
-            <ImageButton
+            <Button
                 android:layout_width="65dip"
                 android:layout_height="30dip"
                 android:background="@drawable/tag_01_02"
@@ -129,7 +129,7 @@
                 android:layout_marginLeft = "160dip" />
 
             // 강북구
-            <ImageButton
+            <Button
                 android:layout_width="65dip"
                 android:layout_height="30dip"
                 android:background="@drawable/tag_01_03"
@@ -141,7 +141,7 @@
                 android:layout_marginLeft = "235dip" />
 
             //강서구
-            <ImageButton
+            <Button
                 android:layout_width="65dip"
                 android:layout_height="30dip"
                 android:background="@drawable/tag_01_04"
@@ -162,7 +162,7 @@
                 android:layout_below="@+id/row1">
 
                 //관악구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_05"
@@ -174,7 +174,7 @@
                     android:layout_marginLeft="15dip"/>
 
                 //광진구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_06"
@@ -187,7 +187,7 @@
                    />
 
                 //구로구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_07"
@@ -199,7 +199,7 @@
                     android:layout_marginLeft = "160dip"
                      />
                 //금천구
-                <ImageButton
+                <Button
                 android:layout_width="65dip"
                 android:layout_height="30dip"
                 android:background="@drawable/tag_01_08"
@@ -211,7 +211,7 @@
                 android:layout_marginLeft = "235dip"
                 />
                 //노원구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_09"
@@ -231,7 +231,7 @@
                 android:layout_below = "@+id/row2">
 
                 //도봉구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_10"
@@ -243,7 +243,7 @@
                     android:layout_marginLeft = "15dip"/>
 
                 //동대문구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_11"
@@ -255,7 +255,7 @@
                     android:layout_marginLeft = "85dip"/>
 
                 //동작구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_12"
@@ -267,7 +267,7 @@
                     android:layout_marginLeft = "160dip"/>
 
                 //마포구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_13"
@@ -280,7 +280,7 @@
                     />
 
                 //서대문구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_14"
@@ -302,7 +302,7 @@
                 android:layout_below = "@+id/row3">
 
                 //서초구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_15"
@@ -315,7 +315,7 @@
                     />
 
                 //성동구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_16"
@@ -328,7 +328,7 @@
                     />
 
                 //성북구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_17"
@@ -341,7 +341,7 @@
                     />
 
                 //송파구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_18"
@@ -353,7 +353,7 @@
                     android:layout_marginLeft="235dip"/>
 
                 //양천구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_19"
@@ -374,7 +374,7 @@
                 android:layout_below="@+id/row4">
 
                 //영등포구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_20"
@@ -387,7 +387,7 @@
                     />
 
                 //용산구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_21"
@@ -400,7 +400,7 @@
                     />
 
                 //은평구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_22"
@@ -412,7 +412,7 @@
                     android:layout_marginLeft = "160dip"/>
 
                 //종로구
-               <ImageButton
+               <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_23"
@@ -424,7 +424,7 @@
                     android:layout_marginLeft = "235dip"/>
 
                 //중구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_24"
@@ -445,7 +445,7 @@
                 android:layout_below = "@+id/row5">
 
                 //중랑구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_25"
@@ -501,7 +501,7 @@
                 android:id= "@+id/row_i_1">
 
 
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_01_s"
@@ -513,7 +513,7 @@
                     android:layout_marginLeft = "15dip"/>
 
                 //강화구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_02_01"
@@ -525,7 +525,7 @@
                     android:layout_marginLeft = "85dip" />
 
                 //계양구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_02_02"
@@ -537,7 +537,7 @@
                     android:layout_marginLeft = "160dip" />
 
                 //남구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_02_03"
@@ -549,7 +549,7 @@
                     android:layout_marginLeft = "235dip" />
 
                 //남동구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_02_04"
@@ -569,7 +569,7 @@
                 android:layout_below="@+id/row_i_1">
 
                 //동구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_02_05"
@@ -581,7 +581,7 @@
                     android:layout_marginLeft="15dip"/>
 
                 //부평구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_02_06"
@@ -594,7 +594,7 @@
                     />
 
                 //서구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_02_07"
@@ -607,7 +607,7 @@
                     />
 
                 //연수구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_02_08"
@@ -620,7 +620,7 @@
                     />
 
                 //옹진군
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_02_09"
@@ -642,7 +642,7 @@
 
 
                 //중구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_02_10"
@@ -672,7 +672,7 @@
                 android:id= "@+id/row_dae_1">
 
                 //전체
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_01_s"
@@ -684,7 +684,7 @@
                     android:layout_marginLeft = "15dip"/>
 
                 //대덕구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_03_01"
@@ -697,7 +697,7 @@
 
 
                 //동구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_03_02"
@@ -709,7 +709,7 @@
                     android:layout_marginLeft = "160dip" />
 
                 //서구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_03_03"
@@ -721,7 +721,7 @@
                     android:layout_marginLeft = "235dip" />
 
                 //유성구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_03_04"
@@ -741,7 +741,7 @@
                 android:layout_below="@+id/row_dae_1">
 
                 //중구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_03_05"
@@ -772,7 +772,7 @@
                 android:id= "@+id/row_d_1">
 
                 //전체
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_01_s"
@@ -784,7 +784,7 @@
                     android:layout_marginLeft = "15dip"/>
 
                 //남구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_04_01"
@@ -797,7 +797,7 @@
 
 
                 //달서구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_04_02"
@@ -809,7 +809,7 @@
                     android:layout_marginLeft = "160dip" />
 
                 //달성군
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_04_03"
@@ -821,7 +821,7 @@
                     android:layout_marginLeft = "235dip" />
 
                 //동구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_04_04"
@@ -841,7 +841,7 @@
                 android:layout_below="@+id/row_d_1">
 
                 //북구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_04_05"
@@ -853,7 +853,7 @@
                     android:layout_marginLeft="15dip"/>
 
                 //서구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_04_06"
@@ -866,7 +866,7 @@
                     />
 
                 //수성구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_04_07"
@@ -879,7 +879,7 @@
                     />
 
                 //중구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_04_08"
@@ -911,7 +911,7 @@
                 android:id= "@+id/row_gw_1">
 
                 //전체
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_01_s"
@@ -923,7 +923,7 @@
                     android:layout_marginLeft = "15dip"/>
 
                 //광산구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_05_01"
@@ -935,7 +935,7 @@
                     android:layout_marginLeft = "85dip" />
 
                 //남구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_05_02"
@@ -947,7 +947,7 @@
                     android:layout_marginLeft = "160dip" />
 
                 //동구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_05_03"
@@ -959,7 +959,7 @@
                     android:layout_marginLeft = "235dip" />
 
                 //북구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_05_04"
@@ -979,7 +979,7 @@
                 android:layout_below="@+id/row_gw_1">
 
                 //서구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_05_05"
@@ -1011,7 +1011,7 @@
                 android:id= "@+id/row_p_1">
 
                 //전체
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_01_s"
@@ -1023,7 +1023,7 @@
                     android:layout_marginLeft = "15dip"/>
 
                 //강서구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_01"
@@ -1036,7 +1036,7 @@
 
 
                 //금정구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_02"
@@ -1048,7 +1048,7 @@
                     android:layout_marginLeft = "160dip" />
 
                 //기장구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_03"
@@ -1060,7 +1060,7 @@
                     android:layout_marginLeft = "235dip" />
 
                 //남구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_04"
@@ -1081,7 +1081,7 @@
                 android:layout_below="@+id/row_p_1">
 
                 //동구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_05"
@@ -1093,7 +1093,7 @@
                     android:layout_marginLeft="15dip"/>
 
                 //동래구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_06"
@@ -1106,7 +1106,7 @@
                     />
 
                 //부산진
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_07"
@@ -1119,7 +1119,7 @@
                     />
 
                 //북구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_08"
@@ -1131,7 +1131,7 @@
                     android:layout_marginLeft = "235dip"
                     />
                 //사상구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_09"
@@ -1153,7 +1153,7 @@
                 android:layout_below = "@+id/row_p_2">
 
                 //사하구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_10"
@@ -1165,7 +1165,7 @@
                     android:layout_marginLeft = "15dip"/>
 
                 //서구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_11"
@@ -1177,7 +1177,7 @@
                     android:layout_marginLeft = "85dip"/>
 
                 //수영구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_12"
@@ -1189,7 +1189,7 @@
                     android:layout_marginLeft = "160dip"/>
 
                 //연제구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_13"
@@ -1202,7 +1202,7 @@
                     />
 
                 //영동구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_14"
@@ -1223,7 +1223,7 @@
                 android:layout_below = "@+id/row_p_3">
 
                 //중구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_15"
@@ -1236,7 +1236,7 @@
                     />
 
                 //해운대
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_06_16"
@@ -1269,7 +1269,7 @@
                 android:id= "@+id/row_u_1">
 
                 //전체
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_01_01_s"
@@ -1281,7 +1281,7 @@
                     android:layout_marginLeft = "15dip"/>
 
                 //중구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_07_01"
@@ -1293,7 +1293,7 @@
                     android:layout_marginLeft = "85dip" />
 
                 //남구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_07_02"
@@ -1305,7 +1305,7 @@
                     android:layout_marginLeft = "160dip" />
 
                 //동구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_07_03"
@@ -1317,7 +1317,7 @@
                     android:layout_marginLeft = "235dip" />
 
                 //북구
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_07_04"
@@ -1337,7 +1337,7 @@
                 android:layout_below="@+id/row_u_1">
 
                 //울주군
-                <ImageButton
+                <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:background="@drawable/tag_07_05"
