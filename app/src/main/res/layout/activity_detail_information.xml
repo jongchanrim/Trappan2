@@ -10,6 +10,8 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/detail_information_list"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     <!--FrameLayout 으로 해야함-->
@@ -181,7 +183,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/detail_icon_01_01"/>
+                        android:background="@drawable/detail_icon_04_a0101"/>
                     <LinearLayout
                         android:gravity="bottom|center"
                         android:layout_width="match_parent"
@@ -211,7 +213,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/detail_icon_01_01"/>
+                        android:background="@drawable/detail_icon_05"/>
                     <LinearLayout
                         android:gravity="bottom|center"
                         android:layout_width="match_parent"
@@ -244,14 +246,20 @@
                 android:text="서울특별시 > 관악구 > 서울대학교 미술관 > MOA"/>
 
             <TextView
+                android:id="@+id/content_dd"
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/black"></TextView>
+
+            <TextView
+                android:id="@+id/btn_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                android:text="서울대학교미술관은 여러 해 동안의 긴 준비끝에 서울대학교 박물관 현대미술부에서 독립하여 국내최초의 대학미술관으로 탄생하게 되었다. 삼성그룹이 건립히여..."/>
-
-
+                android:layout_gravity="bottom|right"
+                android:text="더보기"/>
 
         </LinearLayout>
 

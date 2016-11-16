@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 
 import kr.co.trappan.Adapter.DetailInfoCommentAdapter;
 import kr.co.trappan.Adapter.ListViewAdapter;
+import kr.co.trappan.Dialog.RatingDialog;
 import kr.co.trappan.Item.DetailInfoComment_item;
 import kr.co.trappan.Item.List_item;
 import kr.co.trappan.R;
@@ -37,6 +40,12 @@ public class DetailInformationActivity extends AppCompatActivity {
     private RecyclerView.Adapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private RatingDialog ratingDialog;
+
+    private TextView content;
+    private TextView btn_more;
+    String test="서울대학교미술관은 여러 해 동안의 긴 준비끝에 서울대학교 박물관 현대미술부에서 독립하여 국내최초의 대학미술관으로 탄생하게 되었다.삼성그룹이 건립하여 그렇게되었다 블라블라 블라";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +56,32 @@ public class DetailInformationActivity extends AppCompatActivity {
         btn_image1=(ImageView)findViewById(R.id.btn1_image1);
         btn_image2=(ImageView)findViewById(R.id.btn1_image2);
         btn_image3=(ImageView)findViewById(R.id.btn1_image3);
+
+        content=(TextView)findViewById(R.id.content_dd);
+        btn_more=(TextView)findViewById(R.id.btn_more);
+
+        if(test.length()<30) {
+            content.setText(test);
+            btn_more.setVisibility(View.INVISIBLE);
+        } else{
+            content.setText(test.substring(0,30)+"...");
+        }
+
+        btn_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btn_more.getText().toString()=="더보기"){
+                    btn_more.setText("접기");
+                    content.setText(test);
+                }else{
+                    content.setText(test.substring(0,30)+"...");
+                    btn_more.setText("더보기");
+                }
+
+            }
+        });
+
+
 
 
         recyclerView=(RecyclerView)findViewById(R.id.detail_information_list);
@@ -89,16 +124,27 @@ public class DetailInformationActivity extends AppCompatActivity {
         btn_image3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ratingDialog=new RatingDialog(DetailInformationActivity.this,checklistner,falselistner,"평가");
+                ratingDialog.show();
                 btn_image3.setBackgroundResource(R.drawable.detail_icon_03_02);
             }
         });
+
     }
 
-    private void resizeCommentList(int item_size){
-        ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
-        params.height = 10 * item_size;
-        recyclerView.setLayoutParams(params);
-    }
 
+
+    private View.OnClickListener checklistner = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
+    private View.OnClickListener falselistner = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
 
 }

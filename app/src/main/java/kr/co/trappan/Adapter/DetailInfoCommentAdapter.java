@@ -43,7 +43,7 @@ public class DetailInfoCommentAdapter extends RecyclerView.Adapter<DetailInfoCom
         holder.image.setImageResource(item.getImage());
         holder.title.setText(item.getTitle());
         holder.id.setText(item.getId());
-        holder.content.setText("111");
+        holder.content.setText(item.getContent());
 
     }
 
