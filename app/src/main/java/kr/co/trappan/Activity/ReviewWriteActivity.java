@@ -13,9 +13,11 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -30,6 +32,8 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private RecyclerView.Adapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView resizeList;
+
+    private ImageView reviewimage;
 
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -46,6 +50,9 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private ImageButton review_img4;
     private ImageButton review_img5;
     private ImageButton review_img6;
+
+    private ImageButton review_backbutton;
+    private Button review_completebutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +105,26 @@ public class ReviewWriteActivity extends AppCompatActivity {
         review_img4.setOnClickListener(Click);
         review_img5.setOnClickListener(Click);
         review_img6.setOnClickListener(Click);
+
+        reviewimage = (ImageView)findViewById(R.id.review_image);
+
+        review_backbutton = (ImageButton)findViewById(R.id.review_backbutton);
+        review_backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReviewWriteActivity.this, DetailInformationActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        review_completebutton = (Button)findViewById(R.id.review_completebutton);
+        review_completebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ReviewWriteActivity.this, "완료 버튼", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     public void doTakePhotoAction(){
@@ -147,6 +174,8 @@ public class ReviewWriteActivity extends AppCompatActivity {
                 intent.putExtra("scale",true);
                 intent.putExtra("return-data",true);
                 startActivityForResult(intent, CROP_FROM_IMAGE);
+
+                reviewimage.setImageURI(mlmageCaptureUri);
 
                 break;
 
