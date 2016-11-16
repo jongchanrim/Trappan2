@@ -71,6 +71,12 @@
             android:id = "@+id/region_name"
             android:visibility="gone"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/region_code"
+            android:visibility="gone"/>
+
         <!-- 서울 디테일 -->
 
         <RelativeLayout
@@ -86,57 +92,61 @@
             android:layout_height="35dip"
             android:id= "@+id/row1">
 
-            <Button
+            //전체
+            <ImageButton
                 android:layout_width="65dip"
                 android:layout_height="30dip"
-                android:background="@drawable/search_detail_button"
-                android:id="@+id/button1"
+                android:background="@drawable/tag_01_01_s"
+                android:id="@+id/tag_01"
                 android:text="전체"
                 android:textSize="10dip"
                 android:textColor="#A6A6A6"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft = "15dip"/>
 
-            <Button
+            // 강남구
+           <ImageButton
                 android:layout_width="65dip"
                 android:layout_height="30dip"
-                android:background="@drawable/search_detail_button"
-                android:id="@+id/button2"
-                android:text="강북구"
+                android:background="@drawable/tag_01_01"
+                android:id="@+id/tag_01_01"
+                android:text="1"
                 android:textSize="10dip"
                 android:textColor="#A6A6A6"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft = "85dip" />
 
-
-            <Button
+            //강동구
+            <ImageButton
                 android:layout_width="65dip"
                 android:layout_height="30dip"
-                android:background="@drawable/search_detail_button"
-                android:id="@+id/button3"
-                android:text="용산구"
+                android:background="@drawable/tag_01_02"
+                android:id="@+id/tag_01_02"
+                android:text="2"
                 android:textSize="10dip"
                 android:textColor="#A6A6A6"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft = "160dip" />
 
-            <Button
+            // 강북구
+            <ImageButton
                 android:layout_width="65dip"
                 android:layout_height="30dip"
-                android:background="@drawable/search_detail_button"
-                android:id="@+id/button4"
-                android:text="종로구"
+                android:background="@drawable/tag_01_03"
+                android:id="@+id/tag_01_03"
+                android:text="3"
                 android:textSize="10dip"
                 android:textColor="#A6A6A6"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft = "235dip" />
 
-            <Button
+            //강서구
+            <ImageButton
                 android:layout_width="65dip"
                 android:layout_height="30dip"
-                android:background="@drawable/search_detail_button"
-                android:id="@+id/button5"
-                android:text="광진구"
+                android:background="@drawable/tag_01_04"
+                android:id="@+id/tag_01_04"
+                android:text="4"
                 android:textSize="10dip"
                 android:textColor="#A6A6A6"
                 android:layout_centerVertical="true"
@@ -151,54 +161,66 @@
                 android:id="@+id/row2"
                 android:layout_below="@+id/row1">
 
-                <Button
+                //관악구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button6"
-                    android:text="중랑구"
+                    android:background="@drawable/tag_01_05"
+                    android:id="@+id/tag_01_05"
+                    android:text="5"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="40dip"/>
+                    android:layout_marginLeft="15dip"/>
 
-                <Button
+                //광진구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button7"
-                    android:text="노원구"
+                    android:background="@drawable/tag_01_06"
+                    android:id="@+id/tag_01_06"
+                    android:text="6"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "120dip"
+                    android:layout_marginLeft = "85dip"
                    />
 
-
-                <Button
+                //구로구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button8"
-                    android:text="양천구"
+                    android:background="@drawable/tag_01_07"
+                    android:id="@+id/tag_01_07"
+                    android:text="7"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "200dip"
+                    android:layout_marginLeft = "160dip"
                      />
-
-                <Button
+                //금천구
+                <ImageButton
+                android:layout_width="65dip"
+                android:layout_height="30dip"
+                android:background="@drawable/tag_01_08"
+                android:id="@+id/tag_01_08"
+                android:text="8"
+                android:textSize="10dip"
+                android:textColor="#A6A6A6"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft = "235dip"
+                />
+                //노원구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button9"
-                    android:text="서대문구"
+                    android:background="@drawable/tag_01_09"
+                    android:id="@+id/tag_01_09"
+                    android:text="9"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "280dip"
-                    />
-
+                    android:layout_marginLeft = "310dip"/>
 
             </RelativeLayout>
 
@@ -208,49 +230,67 @@
                 android:id="@+id/row3"
                 android:layout_below = "@+id/row2">
 
-                <Button
+                //도봉구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button10"
-                    android:text="영등포구"
+                    android:background="@drawable/tag_01_10"
+                    android:id="@+id/tag_01_10"
+                    android:text="10"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "55dip"/>
+                    android:layout_marginLeft = "15dip"/>
 
-                <Button
+                //동대문구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button11"
-                    android:text="관악구"
+                    android:background="@drawable/tag_01_11"
+                    android:id="@+id/tag_01_11"
+                    android:text="11"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "135dip"/>
+                    android:layout_marginLeft = "85dip"/>
 
-                <Button
+                //동작구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button12"
-                    android:text="강동구"
+                    android:background="@drawable/tag_01_12"
+                    android:id="@+id/tag_01_12"
+                    android:text="12"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "220dip"/>
+                    android:layout_marginLeft = "160dip"/>
 
-                <Button
+                //마포구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button13"
-                    android:text="구로구"
+                    android:background="@drawable/tag_01_13"
+                    android:id="@+id/tag_01_13"
+                    android:text="13"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "300dip"/>
+                    android:layout_marginLeft = "235dip"
+                    />
+
+                //서대문구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_01_14"
+                    android:id="@+id/tag_01_14"
+                    android:text="14"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "310dip"
+                    />
 
 
             </RelativeLayout>
@@ -261,60 +301,64 @@
                 android:id="@+id/row4"
                 android:layout_below = "@+id/row3">
 
-                <Button
+                //서초구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button14"
-                    android:text="중구"
+                    android:background="@drawable/tag_01_15"
+                    android:id="@+id/tag_01_15"
+                    android:text="15"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft = "15dip"
                     />
 
-                <Button
+                //성동구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button15"
-                    android:text="성동구"
+                    android:background="@drawable/tag_01_16"
+                    android:id="@+id/tag_01_16"
+                    android:text="16"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft = "85dip"
                     />
 
-                <Button
+                //성북구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button16"
-                    android:text="성북구"
+                    android:background="@drawable/tag_01_17"
+                    android:id="@+id/tag_01_17"
+                    android:text="17"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft = "160dip"
                     />
 
-                <Button
+                //송파구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button17"
-                    android:text="도봉구"
+                    android:background="@drawable/tag_01_18"
+                    android:id="@+id/tag_01_18"
+                    android:text="18"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "235dip"
-                    />
+                    android:layout_marginLeft="235dip"/>
 
-                <Button
+                //양천구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button18"
-                    android:text="은평구"
+                    android:background="@drawable/tag_01_19"
+                    android:id="@+id/tag_01_19"
+                    android:text="19"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
@@ -329,53 +373,68 @@
                 android:id="@+id/row5"
                 android:layout_below="@+id/row4">
 
-                <Button
+                //영등포구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button19"
-                    android:text="동대문구"
+                    android:background="@drawable/tag_01_20"
+                    android:id="@+id/tag_01_20"
+                    android:text="20"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="40dip"/>
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button20"
-                    android:text="마포구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "120dip"
+                    android:layout_marginLeft = "15dip"
                     />
 
-
-                <Button
+                //용산구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button21"
-                    android:text="강서구"
+                    android:background="@drawable/tag_01_21"
+                    android:id="@+id/tag_01_21"
+                    android:text="21"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "200dip"
+                    android:layout_marginLeft = "85dip"
                     />
 
-                <Button
+                //은평구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button22"
-                    android:text="금천구"
+                    android:background="@drawable/tag_01_22"
+                    android:id="@+id/tag_01_22"
+                    android:text="22"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "280dip"
-                    />
+                    android:layout_marginLeft = "160dip"/>
+
+                //종로구
+               <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_01_23"
+                    android:id="@+id/tag_01_23"
+                    android:text="23"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "235dip"/>
+
+                //중구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_01_24"
+                    android:id="@+id/tag_01_24"
+                    android:text="24"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "310dip"/>
+
 
             </RelativeLayout>
 
@@ -385,52 +444,21 @@
                 android:id="@+id/row6"
                 android:layout_below = "@+id/row5">
 
-                <Button
+                //중랑구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button23"
-                    android:text="동작구"
+                    android:background="@drawable/tag_01_25"
+                    android:id="@+id/tag_01_25"
+                    android:text="25"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "55dip"/>
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button24"
-                    android:text="서초구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "135dip"/>
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button25"
-                    android:text="송파구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "220dip"/>
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button26"
-                    android:text="강남구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "300dip"/>
+                    android:layout_marginLeft = "15dip"/>
 
 
             </RelativeLayout>
+
 
             <!-- 경기 디테일 -->
             <RelativeLayout
@@ -445,389 +473,11 @@
                 <Button
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
+                    android:background="@drawable/tag_01_01_s"
                     android:text="전체"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    />
-
-            </RelativeLayout>
-
-            </RelativeLayout>
-
-        <!--부산 디테일 -->
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="155dip"
-            android:id = "@+id/region_detail_pusan"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:visibility="gone"
-            >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dip"
-                android:id= "@+id/row_p_1">
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button27"
-                    android:text="전체"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "15dip"/>
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button28"
-                    android:text="강서구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "85dip" />
-
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button29"
-                    android:text="금정구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "160dip" />
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button30"
-                    android:text="기장구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "235dip" />
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button31"
-                    android:text="남구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_alignBaseline="@+id/button30"
-                    android:layout_alignBottom="@+id/button30"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dip"
-                android:id="@+id/row_p_2"
-                android:layout_below="@+id/row_p_1">
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button32"
-                    android:text="동구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="40dip"/>
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button33"
-                    android:text="동래구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "120dip"
-                    />
-
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button34"
-                    android:text="부산진"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "200dip"
-                    />
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button35"
-                    android:text="북구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "280dip"
-                    />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dip"
-                android:id="@+id/row_p_3"
-                android:layout_below = "@+id/row_p_2">
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button36"
-                    android:text="사상구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "55dip"/>
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button37"
-                    android:text="사하구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "135dip"/>
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button38"
-                    android:text="서구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "220dip"/>
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button39"
-                    android:text="수영구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "300dip"/>
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dip"
-                android:id="@+id/row_p_4"
-                android:layout_below = "@+id/row_p_3">
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button40"
-                    android:text="연제구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "15dip"
-                    />
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button41"
-                    android:text="영동구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "85dip"
-                    />
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button42"
-                    android:text="중구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "160dip"
-                    />
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button43"
-                    android:text="해운대"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "235dip"
-                    />
-
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-
-        <!-- 대구 디테일-->
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="110dip"
-            android:id = "@+id/region_detail_daegu"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:visibility="gone"
-            >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dip"
-                android:id= "@+id/row_d_1">
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button44"
-                    android:text="전체"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "15dip"/>
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button45"
-                    android:text="남구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "85dip" />
-
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button46"
-                    android:text="달서구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "160dip" />
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button47"
-                    android:text="달성군"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "235dip" />
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button48"
-                    android:text="동구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_marginLeft="310dip"
-                    android:layout_centerVertical="true" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dip"
-                android:id="@+id/row_d_2"
-                android:layout_below="@+id/row_d_1">
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button49"
-                    android:text="북구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="40dip"/>
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button50"
-                    android:text="서구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "120dip"
-                    />
-
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button51"
-                    android:text="수성구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "200dip"
-                    />
-
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button52"
-                    android:text="중구"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "280dip"
                     />
 
             </RelativeLayout>
@@ -850,57 +500,61 @@
                 android:layout_height="35dip"
                 android:id= "@+id/row_i_1">
 
-                <Button
+
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button53"
+                    android:background="@drawable/tag_01_01_s"
+                    android:id="@+id/tag_02"
                     android:text="전체"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft = "15dip"/>
 
-                <Button
+                //강화구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button54"
-                    android:text="강화군"
+                    android:background="@drawable/tag_02_01"
+                    android:id="@+id/tag_02_01"
+                    android:text="1"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft = "85dip" />
 
-
-                <Button
+                //계양구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button55"
-                    android:text="계약구"
+                    android:background="@drawable/tag_02_02"
+                    android:id="@+id/tag_02_02"
+                    android:text="2"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft = "160dip" />
 
-                <Button
+                //남구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button56"
-                    android:text="남구"
+                    android:background="@drawable/tag_02_03"
+                    android:id="@+id/tag_02_03"
+                    android:text="3"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft = "235dip" />
 
-                <Button
+                //남동구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button57"
-                    android:text="남동구"
+                    android:background="@drawable/tag_02_04"
+                    android:id="@+id/tag_02_04"
+                    android:text="4"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
@@ -914,53 +568,68 @@
                 android:id="@+id/row_i_2"
                 android:layout_below="@+id/row_i_1">
 
-                <Button
+                //동구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button58"
-                    android:text="동구"
+                    android:background="@drawable/tag_02_05"
+                    android:id="@+id/tag_02_05"
+                    android:text="5"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="40dip"/>
+                    android:layout_marginLeft="15dip"/>
 
-                <Button
+                //부평구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button59"
-                    android:text="부평구"
+                    android:background="@drawable/tag_02_06"
+                    android:id="@+id/tag_02_06"
+                    android:text="6"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "120dip"
+                    android:layout_marginLeft = "85dip"
                     />
 
-
-                <Button
+                //서구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button60"
-                    android:text="서구"
+                    android:background="@drawable/tag_02_07"
+                    android:id="@+id/tag_02_07"
+                    android:text="7"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "200dip"
+                    android:layout_marginLeft = "160dip"
                     />
 
-                <Button
+                //연수구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button61"
-                    android:text="연수구"
+                    android:background="@drawable/tag_02_08"
+                    android:id="@+id/tag_02_08"
+                    android:text="8"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "280dip"
+                    android:layout_marginLeft = "235dip"
                     />
+
+                //옹진군
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_02_09"
+                    android:id="@+id/tag_02_09"
+                    android:text="9"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "310dip"/>
 
 
             </RelativeLayout>
@@ -971,30 +640,719 @@
                 android:id="@+id/row_i_3"
                 android:layout_below = "@+id/row_i_2">
 
-                <Button
-                    android:layout_width="65dip"
-                    android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button62"
-                    android:text="옹진군"
-                    android:textSize="10dip"
-                    android:textColor="#A6A6A6"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft = "55dip"/>
 
-                <Button
+                //중구
+                <ImageButton
                     android:layout_width="65dip"
                     android:layout_height="30dip"
-                    android:background="@drawable/search_detail_button"
-                    android:id="@+id/button63"
-                    android:text="중구"
+                    android:background="@drawable/tag_02_10"
+                    android:id="@+id/tag_02_10"
+                    android:text="10"
                     android:textSize="10dip"
                     android:textColor="#A6A6A6"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft = "135dip"/>
+                    android:layout_marginLeft = "15dip"/>
 
             </RelativeLayout>
         </RelativeLayout>
+
+        <!--대전 디테일 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dip"
+            android:id = "@+id/region_detail_daegeon"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="gone"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id= "@+id/row_dae_1">
+
+                //전체
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_01_01_s"
+                    android:id="@+id/tag_03"
+                    android:text="전체"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "15dip"/>
+
+                //대덕구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_03_01"
+                    android:id="@+id/tag_03_01"
+                    android:text="1"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "85dip" />
+
+
+                //동구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_03_02"
+                    android:id="@+id/tag_03_02"
+                    android:text="2"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "160dip" />
+
+                //서구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_03_03"
+                    android:id="@+id/tag_03_03"
+                    android:text="3"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "235dip" />
+
+                //유성구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_03_04"
+                    android:id="@+id/tag_03_04"
+                    android:text="4"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_marginLeft = "310dip" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id="@+id/row_dae_2"
+                android:layout_below="@+id/row_dae_1">
+
+                //중구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_03_05"
+                    android:id="@+id/tag_03_05"
+                    android:text="5"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dip"/>
+
+            </RelativeLayout>
+</RelativeLayout>
+
+        <!-- 대구 디테일-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="110dip"
+            android:id = "@+id/region_detail_daegu"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="gone"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id= "@+id/row_d_1">
+
+                //전체
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_01_01_s"
+                    android:id="@+id/tag_04"
+                    android:text="전체"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "15dip"/>
+
+                //남구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_04_01"
+                    android:id="@+id/tag_04_01"
+                    android:text="1"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "85dip" />
+
+
+                //달서구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_04_02"
+                    android:id="@+id/tag_04_02"
+                    android:text="2"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "160dip" />
+
+                //달성군
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_04_03"
+                    android:id="@+id/tag_04_03"
+                    android:text="3"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "235dip" />
+
+                //동구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_04_04"
+                    android:id="@+id/tag_04_04"
+                    android:text="4"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_marginLeft="310dip"
+                    android:layout_centerVertical="true" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id="@+id/row_d_2"
+                android:layout_below="@+id/row_d_1">
+
+                //북구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_04_05"
+                    android:id="@+id/tag_04_05"
+                    android:text="5"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dip"/>
+
+                //서구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_04_06"
+                    android:id="@+id/tag_04_06"
+                    android:text="6"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "85dip"
+                    />
+
+                //수성구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_04_07"
+                    android:id="@+id/tag_04_07"
+                    android:text="7"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "160dip"
+                    />
+
+                //중구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_04_08"
+                    android:id="@+id/tag_04_08"
+                    android:text="8"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "235dip"
+                    />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <!--광주 디테일 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dip"
+            android:id = "@+id/region_detail_gwangju"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="gone"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id= "@+id/row_gw_1">
+
+                //전체
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_01_01_s"
+                    android:id="@+id/tag_05"
+                    android:text="전체"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "15dip"/>
+
+                //광산구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_05_01"
+                    android:id="@+id/tag_05_01"
+                    android:text="1"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "85dip" />
+
+                //남구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_05_02"
+                    android:id="@+id/tag_05_02"
+                    android:text="2"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "160dip" />
+
+                //동구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_05_03"
+                    android:id="@+id/tag_05_03"
+                    android:text="3"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "235dip" />
+
+                //북구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_05_04"
+                    android:id="@+id/tag_05_04"
+                    android:text="4"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_marginLeft="310dip" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id="@+id/row_gw_2"
+                android:layout_below="@+id/row_gw_1">
+
+                //서구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_05_05"
+                    android:id="@+id/tag_05_05"
+                    android:text="5"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dip"/>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+                <!--부산 디테일 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="155dip"
+            android:id = "@+id/region_detail_pusan"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="gone"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id= "@+id/row_p_1">
+
+                //전체
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_01_01_s"
+                    android:id="@+id/tag_06"
+                    android:text="전체"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "15dip"/>
+
+                //강서구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_01"
+                    android:id="@+id/tag_06_01"
+                    android:text="1"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "85dip" />
+
+
+                //금정구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_02"
+                    android:id="@+id/tag_06_02"
+                    android:text="2"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "160dip" />
+
+                //기장구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_03"
+                    android:id="@+id/tag_06_03"
+                    android:text="3"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "235dip" />
+
+                //남구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_04"
+                    android:id="@+id/tag_06_04"
+                    android:text="4"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="310dip" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id="@+id/row_p_2"
+                android:layout_below="@+id/row_p_1">
+
+                //동구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_05"
+                    android:id="@+id/tag_06_05"
+                    android:text="5"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dip"/>
+
+                //동래구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_06"
+                    android:id="@+id/tag_06_06"
+                    android:text="6"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "85dip"
+                    />
+
+                //부산진
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_07"
+                    android:id="@+id/tag_06_07"
+                    android:text="7"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "160dip"
+                    />
+
+                //북구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_08"
+                    android:id="@+id/tag_06_08"
+                    android:text="8"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "235dip"
+                    />
+                //사상구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_09"
+                    android:id="@+id/tag_06_09"
+                    android:text="9"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "310dip"/>
+
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id="@+id/row_p_3"
+                android:layout_below = "@+id/row_p_2">
+
+                //사하구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_10"
+                    android:id="@+id/tag_06_10"
+                    android:text="10"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "15dip"/>
+
+                //서구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_11"
+                    android:id="@+id/tag_06_11"
+                    android:text="11"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "85dip"/>
+
+                //수영구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_12"
+                    android:id="@+id/tag_06_12"
+                    android:text="12"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "160dip"/>
+
+                //연제구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_13"
+                    android:id="@+id/tag_06_13"
+                    android:text="13"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "235dip"
+                    />
+
+                //영동구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_14"
+                    android:id="@+id/tag_06_14"
+                    android:text="14"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "310dip"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id="@+id/row_p_4"
+                android:layout_below = "@+id/row_p_3">
+
+                //중구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_15"
+                    android:id="@+id/tag_06_15"
+                    android:text="15"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "15dip"
+                    />
+
+                //해운대
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_06_16"
+                    android:id="@+id/tag_06_16"
+                    android:text="16"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "85dip"
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <!--울산 디테일 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dip"
+            android:id = "@+id/region_detail_ulsan"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="gone"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id= "@+id/row_u_1">
+
+                //전체
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_01_01_s"
+                    android:id="@+id/tag_07"
+                    android:text="전체"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "15dip"/>
+
+                //중구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_07_01"
+                    android:id="@+id/tag_07_01"
+                    android:text="1"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "85dip" />
+
+                //남구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_07_02"
+                    android:id="@+id/tag_07_02"
+                    android:text="2"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "160dip" />
+
+                //동구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_07_03"
+                    android:id="@+id/tag_07_03"
+                    android:text="3"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft = "235dip" />
+
+                //북구
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_07_04"
+                    android:id="@+id/tag_07_04"
+                    android:text="4"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_marginLeft="310dip" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:id="@+id/row_u_2"
+                android:layout_below="@+id/row_u_1">
+
+                //울주군
+                <ImageButton
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:background="@drawable/tag_07_05"
+                    android:id="@+id/tag_07_05"
+                    android:text="5"
+                    android:textSize="10dip"
+                    android:textColor="#A6A6A6"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dip"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+
 
 </RelativeLayout>
 

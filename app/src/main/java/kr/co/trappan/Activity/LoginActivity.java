@@ -80,8 +80,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
             }
-
-
         });
         // 회원가입 버튼 클릭 시
         TextView signupButton = (TextView) findViewById(R.id.login_link_signup);

@@ -48,77 +48,106 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         final Horizontal_item item=items.get(position);
         holder.image.setImageResource(item.getImage());
         holder.title.setText(item.getTitle());
+        holder.code.setText(item.getCode());
+
+        holder.title.setVisibility(View.GONE);
+        holder.code.setVisibility(View.GONE);
 
         holder.image.setOnClickListener(new View.OnClickListener() {
+
+            boolean selected = true;
 
             @Override
             public void onClick(View v) {
 
-                if (item.getTitle()=="서울") {
+                if (item.getTitle()== "서울" && selected == true) {
 
-                    TabFragment2.view_detail.setVisibility(View.VISIBLE);
-                    TabFragment2.view_seoul.setVisibility(View.VISIBLE);
-                    TabFragment2.view_gyeonggi.setVisibility(View.GONE);
-                    TabFragment2.view_pusan.setVisibility(View.GONE);
-                    TabFragment2.view_incheon.setVisibility(View.GONE);
-                    TabFragment2.view_daegu.setVisibility(View.GONE);
+                        TabFragment2.view_detail.setVisibility(View.VISIBLE);
+                        TabFragment2.view_seoul.setVisibility(View.VISIBLE);
 
-                    TabFragment2.region_name.setText(item.getTitle());
+                        TabFragment2.region_name.setText(item.getTitle());
+                        TabFragment2.region_code.setText(item.getCode());
 
-                }
+                        holder.image.setImageResource(R.drawable.seoul_1_c);
+                        selected = false;
+
+                    }
                 else if (item.getTitle()=="경기"){
 
-                    TabFragment2.view_detail.setVisibility(View.VISIBLE);
-                    TabFragment2.view_gyeonggi.setVisibility(View.VISIBLE);
-                    TabFragment2.view_seoul.setVisibility(View.GONE);
-                    TabFragment2.view_pusan.setVisibility(View.GONE);
-                    TabFragment2.view_incheon.setVisibility(View.GONE);
-                    TabFragment2.view_daegu.setVisibility(View.GONE);
+                        TabFragment2.view_detail.setVisibility(View.VISIBLE);
+                        TabFragment2.view_gyeonggi.setVisibility(View.VISIBLE);
 
-                    TabFragment2.region_name.setText(item.getTitle());
+                        TabFragment2.region_name.setText(item.getTitle());
+                        TabFragment2.region_code.setText(item.getCode());
 
+                        holder.image.setImageResource(R.drawable.gyeonggi_31_c);
                 }
+
                 else if (item.getTitle()=="부산"){
 
-                    TabFragment2.view_detail.setVisibility(View.VISIBLE);
-                    TabFragment2.view_gyeonggi.setVisibility(View.GONE);
-                    TabFragment2.view_seoul.setVisibility(View.GONE);
-                    TabFragment2.view_incheon.setVisibility(View.GONE);
-                    TabFragment2.view_daegu.setVisibility(View.GONE);
-                    TabFragment2.view_pusan.setVisibility(View.VISIBLE);
 
-                    TabFragment2.region_name.setText(item.getTitle());
-                }
+                        TabFragment2.view_detail.setVisibility(View.VISIBLE);
+                        TabFragment2.view_pusan.setVisibility(View.VISIBLE);
+
+                        TabFragment2.region_name.setText(item.getTitle());
+                        TabFragment2.region_code.setText(item.getCode());
+
+                        holder.image.setImageResource(R.drawable.pusan_6_c);
+                    }
+
+
                 else if (item.getTitle()=="대구"){
 
-                    TabFragment2.view_detail.setVisibility(View.VISIBLE);
-                    TabFragment2.view_daegu.setVisibility(View.VISIBLE);
-                    TabFragment2.view_incheon.setVisibility(View.GONE);
-                    TabFragment2.view_gyeonggi.setVisibility(View.GONE);
-                    TabFragment2.view_seoul.setVisibility(View.GONE);
-                    TabFragment2.view_pusan.setVisibility(View.GONE);
 
-                    TabFragment2.region_name.setText(item.getTitle());
+                        TabFragment2.view_detail.setVisibility(View.VISIBLE);
+                        TabFragment2.view_daegu.setVisibility(View.VISIBLE);
+                        TabFragment2.view_incheon.setVisibility(View.GONE);
+                        TabFragment2.view_gyeonggi.setVisibility(View.GONE);
+                        TabFragment2.view_seoul.setVisibility(View.GONE);
+                        TabFragment2.view_pusan.setVisibility(View.GONE);
+
+                        TabFragment2.region_name.setText(item.getTitle());
+                        TabFragment2.region_code.setText(item.getCode());
+                        holder.image.setImageResource(R.drawable.daegu_4_c);
 
                 }
-                else if (item.getTitle()=="인천"){
 
-                    TabFragment2.view_detail.setVisibility(View.VISIBLE);
-                    TabFragment2.view_daegu.setVisibility(View.GONE);
-                    TabFragment2.view_incheon.setVisibility(View.VISIBLE);
-                    TabFragment2.view_gyeonggi.setVisibility(View.GONE);
+                else if (item.getTitle()=="인천" && selected == true){
+
+                        TabFragment2.view_detail.setVisibility(View.VISIBLE);
+                        TabFragment2.view_incheon.setVisibility(View.VISIBLE);
+                        TabFragment2.view_seoul.setVisibility(View.GONE);
+                        TabFragment2.view_gyeonggi.setVisibility(View.GONE);
+                        TabFragment2.view_pusan.setVisibility(View.GONE);
+                        TabFragment2.view_daegu.setVisibility(View.GONE);
+
+                        TabFragment2.region_name.setText(item.getTitle());
+                        TabFragment2.region_code.setText(item.getCode());
+
+                        holder.image.setImageResource(R.drawable.incheon_2_c);
+                        selected = false;
+                }
+                else {
+
+                    holder.image.setImageResource(item.getImage());
+
+                    TabFragment2.view_detail.setVisibility(View.GONE);
                     TabFragment2.view_seoul.setVisibility(View.GONE);
+                    TabFragment2.view_gyeonggi.setVisibility(View.GONE);
                     TabFragment2.view_pusan.setVisibility(View.GONE);
+                    TabFragment2.view_incheon.setVisibility(View.GONE);
+                    TabFragment2.view_daegu.setVisibility(View.GONE);
 
-                    TabFragment2.region_name.setText(item.getTitle());
+                    selected = true;
                 }
             }
-         });
+        });
+
     }
 
     @Override
@@ -129,16 +158,16 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
+        TextView code;
 
         public ViewHolder(final View itemView) {
 
             super(itemView);
             image=(ImageView)itemView.findViewById(R.id.list_iamge);
             title=(TextView)itemView.findViewById(R.id.list_text);
-
+            code = (TextView)itemView.findViewById(R.id.region_code);
         }
     }
-
     public void clear() {
         items.clear();
         notifyDataSetChanged();

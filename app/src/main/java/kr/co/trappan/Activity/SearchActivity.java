@@ -10,13 +10,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import kr.co.trappan.Adapter.ListViewAdapter;
 import kr.co.trappan.Adapter.SearchListAdapter;
-import kr.co.trappan.Item.List_item;
 import kr.co.trappan.Item.SearchList_item;
 import kr.co.trappan.R;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by thfad_000 on 2016-11-11.
