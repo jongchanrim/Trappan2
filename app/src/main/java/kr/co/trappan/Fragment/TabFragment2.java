@@ -86,81 +86,10 @@ public class TabFragment2 extends Fragment {
 
         layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        Adapter = new HorizontalListAdapter(getActivity(), items, R.layout.tabfragment2);
+        Adapter = new HorizontalListAdapter(getActivity(), items, R.layout.tabfragment2, recyclerView);
         recyclerView.setAdapter(Adapter);
 
-        recyclerView.addOnItemTouchListener(new RecyclerViewOnItemClickListener(getActivity(), recyclerView,
-                new RecyclerViewOnItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View v, int position) {
-                        if(view_detail.getVisibility() == View.VISIBLE){
-                            if(view_seoul.getVisibility() == View.VISIBLE) {
-                                ImageView t = (ImageView) recyclerView.getChildAt(0).findViewById(R.id.search_imageVIew);
-                                t.setImageResource(R.drawable.seoul_1);
-                                view_seoul.setVisibility(View.GONE);
-                            }
-                            if(view_gyeonggi.getVisibility() == View.VISIBLE) {
-                                ImageView t = (ImageView) recyclerView.getChildAt(0).findViewById(R.id.search_imageVIew);
-                                t.setImageResource(R.drawable.gyeonggi_31);
-                                view_gyeonggi.setVisibility(View.GONE);
-                            }
-                            if(view_pusan.getVisibility() == View.VISIBLE) {
-                                ImageView t = (ImageView) recyclerView.getChildAt(0).findViewById(R.id.search_imageVIew);
-                                t.setImageResource(R.drawable.pusan_6);
-                                view_pusan.setVisibility(View.GONE);
-                            }
-                            if(view_daegu.getVisibility() == View.VISIBLE) {
-                                ImageView t = (ImageView) recyclerView.getChildAt(0).findViewById(R.id.search_imageVIew);
-                                t.setImageResource(R.drawable.daegu_4);
-                                view_daegu.setVisibility(View.GONE);
-                            }
-                            if(view_incheon.getVisibility() == View.VISIBLE) {
-                                ImageView t = (ImageView) recyclerView.getChildAt(0).findViewById(R.id.search_imageVIew);
-                                t.setImageResource(R.drawable.incheon_2);
-                                view_incheon.setVisibility(View.GONE);
-                            }
 
-                        }
-
-                        ImageView iv = (ImageView) v.findViewById(R.id.search_imageVIew);
-                        if (position == 0) {
-
-                            view_detail.setVisibility(View.VISIBLE);
-                            view_seoul.setVisibility(View.VISIBLE);
-                            iv.setImageResource(R.drawable.seoul_1_c);
-
-
-
-                        } else if (position == 1) {
-
-                            view_detail.setVisibility(View.VISIBLE);
-                            view_gyeonggi.setVisibility(View.VISIBLE);
-                            iv.setImageResource(R.drawable.gyeonggi_31_c);
-                        } else if (position == 2) {
-
-                            view_detail.setVisibility(View.VISIBLE);
-                            view_pusan.setVisibility(View.VISIBLE);
-                            iv.setImageResource(R.drawable.pusan_6_c);
-                        } else if (position == 3) {
-
-                            view_detail.setVisibility(View.VISIBLE);
-                            view_daegu.setVisibility(View.VISIBLE);
-                            iv.setImageResource(R.drawable.daegu_4_c);
-
-                        } else if (position == 4) {
-
-                            view_detail.setVisibility(View.VISIBLE);
-                            view_incheon.setVisibility(View.VISIBLE);
-                            iv.setImageResource(R.drawable.incheon_2_c);
-                        }
-
-                    }
-
-                    @Override
-                    public void onItemLongClick(View v, int position) {
-                    }
-                }
-        ));
 
 /*
         recyclerView_theme = (RecyclerView) view.findViewById(R.id.horizontalView_theme);
@@ -200,32 +129,33 @@ public class TabFragment2 extends Fragment {
         // 버튼 리스너
 
         // 서울
-        view.findViewById(R.id.tag_01).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_01).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_02).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_03).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_04).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_05).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_06).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_07).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_08).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_09).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_10).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_11).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_12).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_13).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_14).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_15).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_16).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_17).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_18).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_19).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_20).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_21).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_22).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_23).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_24).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_01_25).setOnClickListener(mClickListener);
+        // 서울
+        view.findViewById(R.id.tag_1).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_1).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_2).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_3).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_4).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_5).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_6).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_7).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_8).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_9).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_10).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_11).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_12).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_13).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_14).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_15).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_16).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_17).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_18).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_19).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_20).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_21).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_22).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_23).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_24).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_25).setOnClickListener(mClickListener);
 //        view.findViewById(R.id.button27).setOnClickListener(mClickListener);
 //        view.findViewById(R.id.button28).setOnClickListener(mClickListener);
 //        view.findViewById(R.id.button29).setOnClickListener(mClickListener);

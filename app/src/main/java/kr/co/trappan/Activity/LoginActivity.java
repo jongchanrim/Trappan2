@@ -3,6 +3,7 @@ package kr.co.trappan.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Connector.Encrypter;
+import kr.co.trappan.Item.CustomProgressDialog;
 import kr.co.trappan.R;
 import kr.co.trappan.Connector.HttpClient;
 /**
@@ -32,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     static final String TAG = MainActivity.class.getSimpleName();
     static int flag = 1;
-    ProgressDialog pd;
+    private CustomProgressDialog pd;
     EditText id;
     EditText password;
     Button loginButton;
@@ -44,7 +46,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        pd = new ProgressDialog(LoginActivity.this);
+
+        pd = new CustomProgressDialog(LoginActivity.this);
+        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
         id = (EditText) findViewById(R.id.login_id_edittext);
         password = (EditText) findViewById(R.id.login_pw_edittext);
 
