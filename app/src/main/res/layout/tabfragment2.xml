@@ -45,11 +45,156 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/horizontalView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/filter" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="124dip"
+        android:id = "@+id/region_view"
+        android:layout_below="@+id/filter">
+
+        <HorizontalScrollView
+            android:id="@+id/areascrollview"
+            android:layout_width="fill_parent"
+            android:layout_height="122dip">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:orientation="horizontal">
+                <!-- Content here -->
+
+                <Button
+                    android:id="@+id/search_seoul_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/seoul_1"
+                    android:layout_margin="2dip"/>
+
+                <Button
+                    android:id="@+id/search_incheon_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/incheon_2"
+                    android:layout_margin = "2dip"/>
+
+                <Button
+                    android:id="@+id/search_daejeon_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/daejeon_3"
+                    android:layout_margin = "2dip"/>
+
+                <Button
+                    android:id="@+id/search_daegu_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/daegu_4"
+                    android:layout_margin = "2dip"/>
+
+                <Button
+                    android:id="@+id/search_gwangju_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/gwangju_5"
+                    android:layout_margin = "2dip"/>
+
+                <Button
+                    android:id="@+id/search_pusan_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/pusan_6"
+                    android:layout_margin = "2dip"/>
+
+                <Button
+                    android:id="@+id/search_ulsan_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/ulsan_7"
+                    android:layout_margin = "2dip"/>
+
+                <Button
+                    android:id="@+id/search_sejong_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/sejong_8"
+                    android:layout_margin = "2dip"/>
+
+
+                <Button
+                    android:id="@+id/search_gyeonggi_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/gyeonggi_31"
+                    android:layout_margin = "2dip"/>
+
+
+                <Button
+                    android:id="@+id/search_gangwon_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/gangwon_32"
+                    android:layout_margin = "2dip"/>
+
+
+                <Button
+                    android:id="@+id/search_chungbuk_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/chungbuk_33"
+                    android:layout_margin = "2dip"/>
+
+
+                <Button
+                    android:id="@+id/search_chungnam_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/chungnam_34"
+                    android:layout_margin = "2dip"/>
+
+
+                <Button
+                    android:id="@+id/search_gyeongbuk_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/gyeongbuk_35"
+                    android:layout_margin = "2dip"/>
+
+
+
+                <Button
+                    android:id="@+id/search_gyeongnam_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/gyeongnam_36"
+                    android:layout_margin = "2dip"/>
+
+
+                <Button
+                    android:id="@+id/search_jeonbuk_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/jeonbuk_37"
+                    android:layout_margin = "2dip"/>
+
+
+                <Button
+                    android:id="@+id/search_jeonnam_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/jeonnam_38"
+                    android:layout_margin = "2dip"/>
+
+
+                <Button
+                    android:id="@+id/search_jeju_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/jeju_39"
+                    android:layout_margin = "2dip"/>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </RelativeLayout>
 
 
     <!-- 지역 선택 디테일 -->
@@ -60,7 +205,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/horizontalView"
+        android:layout_below="@+id/region_view"
         android:layout_marginTop="17dp">
 
         <TextView
@@ -92,7 +237,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_1"
+                    android:id="@+id/tag_1_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -471,8 +616,7 @@
 
 
             </RelativeLayout>
-            </RelativeLayout>
-
+        </RelativeLayout>
 
 
         <!-- 인천 디테일 -->
@@ -493,7 +637,7 @@
 
 
                 <Button
-                    android:id="@+id/tag_2"
+                    android:id="@+id/tag_2_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -777,7 +921,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_4"
+                    android:id="@+id/tag_4_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -921,7 +1065,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_5"
+                    android:id="@+id/tag_5_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -1026,7 +1170,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_6"
+                    android:id="@+id/tag_6_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -1291,7 +1435,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_7"
+                    android:id="@+id/tag_7_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -1424,7 +1568,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_9"
+                    android:id="@+id/tag_31_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -1493,7 +1637,7 @@
                 android:id="@+id/row_gy_2"
                 android:layout_width="match_parent"
                 android:layout_height="35dip"
-                android:layout_below="@+id/_gy_row1">
+                android:layout_below="@+id/row_gy_1">
 
                 //광주시
 
@@ -1535,6 +1679,7 @@
                     android:textSize="10dip" />
 
                 //김포시
+
                 <Button
                     android:id="@+id/tag_31_8"
                     android:layout_width="65dip"
@@ -1889,7 +2034,7 @@
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
-                </RelativeLayout>
+            </RelativeLayout>
 
         </RelativeLayout>
 
@@ -1911,7 +2056,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_10"
+                    android:id="@+id/tag_32_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -1935,7 +2080,7 @@
                     android:textSize="10dip" />
 
 
-                //금정구
+                //고성군
 
                 <Button
                     android:id="@+id/tag_32_2"
@@ -1944,33 +2089,33 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="160dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#금정구"
+                    android:text="#고성군"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
-                //기장구
+                //동해시
 
                 <Button
-                    android:id="@+id/tag_6_3"
+                    android:id="@+id/tag_32_3"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="235dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#기장구"
+                    android:text="#동해시"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
-                //남구
+                //삼척시
 
                 <Button
-                    android:id="@+id/tag_6_4"
+                    android:id="@+id/tag_32_4"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="310dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#남구"
+                    android:text="#삼척시"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
@@ -1978,72 +2123,73 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/row_p_2"
+                android:id="@+id/row_ga_2"
                 android:layout_width="match_parent"
                 android:layout_height="35dip"
-                android:layout_below="@+id/row_p_1">
+                android:layout_below="@+id/row_ga_1">
 
-                //동구
+                //속초시
 
                 <Button
-                    android:id="@+id/tag_6_5"
+                    android:id="@+id/tag_32_5"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#동구"
+                    android:text="#속초시"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
-                //동래구
+                //양구군
 
                 <Button
-                    android:id="@+id/tag_6_6"
+                    android:id="@+id/tag_32_6"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="85dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#동래구"
+                    android:text="#양구군"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
-                //부산진
+                //양양군
 
                 <Button
-                    android:id="@+id/tag_6_7"
+                    android:id="@+id/tag_32_7"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="160dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#부산진"
+                    android:text="#양양군"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
-                //북구
+                //영월군
 
                 <Button
-                    android:id="@+id/tag_6_8"
+                    android:id="@+id/tag_32_8"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="235dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#북구"
+                    android:text="#영월군"
                     android:textColor="#000000"
                     android:textSize="10dip" />
-                //사상구
+
+                //원주시
 
                 <Button
-                    android:id="@+id/tag_6_9"
+                    android:id="@+id/tag_32_9"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="310dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#사상구"
+                    android:text="#원주시"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
@@ -2051,107 +2197,133 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/row_p_3"
+                android:id="@+id/row_ga_3"
                 android:layout_width="match_parent"
                 android:layout_height="35dip"
-                android:layout_below="@+id/row_p_2">
+                android:layout_below="@+id/row_ga_2">
 
-                //사하구
+                //인제군
 
                 <Button
-                    android:id="@+id/tag_6_10"
+                    android:id="@+id/tag_32_10"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#사하구"
+                    android:text="#인제군"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
-                //서구
+                //정선군
 
                 <Button
-                    android:id="@+id/tag_6_11"
+                    android:id="@+id/tag_32_11"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="85dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#서구"
+                    android:text="#정선군"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
-                //수영구
+                //철원군
 
                 <Button
-                    android:id="@+id/tag_6_12"
+                    android:id="@+id/tag_32_12"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="160dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#수영구"
+                    android:text="#철원군"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
-                //연제구
+                //춘천시
 
                 <Button
-                    android:id="@+id/tag_6_13"
+                    android:id="@+id/tag_32_13"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="235dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#연제구"
+                    android:text="#춘천시"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
-                //영동구
+                //태백시
 
                 <Button
-                    android:id="@+id/tag_6_14"
+                    android:id="@+id/tag_32_14"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="310dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#영동구"
+                    android:text="#태백시"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/row_p_4"
+                android:id="@+id/row_ga_4"
                 android:layout_width="match_parent"
                 android:layout_height="35dip"
-                android:layout_below="@+id/row_p_3">
+                android:layout_below="@+id/row_ga_3">
 
-                //중구
+                //평창군
 
                 <Button
-                    android:id="@+id/tag_6_15"
+                    android:id="@+id/tag_32_15"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#중구"
+                    android:text="#평창군"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
-                //해운대
+                //홍청군
 
                 <Button
-                    android:id="@+id/tag_6_16"
+                    android:id="@+id/tag_32_16"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="85dip"
                     android:background="@drawable/search_detail_button"
-                    android:text="#해운대"
+                    android:text="#홍천군"
+                    android:textColor="#000000"
+                    android:textSize="10dip" />
+
+                //화천군
+
+                <Button
+                    android:id="@+id/tag_32_17"
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="130dip"
+                    android:background="@drawable/search_detail_button"
+                    android:text="#화천군"
+                    android:textColor="#000000"
+                    android:textSize="10dip" />
+
+                //횡성군
+
+                <Button
+                    android:id="@+id/tag_32_18"
+                    android:layout_width="65dip"
+                    android:layout_height="30dip"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="85dip"
+                    android:background="@drawable/search_detail_button"
+                    android:text="#횡성군"
                     android:textColor="#000000"
                     android:textSize="10dip" />
 
@@ -2176,7 +2348,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_33"
+                    android:id="@+id/tag_33_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -2288,6 +2460,7 @@
                     android:textSize="10dip" />
 
                 //진천군
+
                 <Button
                     android:id="@+id/tag_33_8"
                     android:layout_width="65dip"
@@ -2380,7 +2553,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_34"
+                    android:id="@+id/tag_34_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -2491,6 +2664,7 @@
                     android:textSize="10dip" />
 
                 //서천군
+
                 <Button
                     android:id="@+id/tag_34_8"
                     android:layout_width="65dip"
@@ -2630,7 +2804,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_35"
+                    android:id="@+id/tag_35_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -2741,6 +2915,7 @@
                     android:textSize="10dip" />
 
                 //봉화군
+
                 <Button
                     android:id="@+id/tag_35_8"
                     android:layout_width="65dip"
@@ -2992,7 +3167,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_37"
+                    android:id="@+id/tag_36_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3005,7 +3180,7 @@
                 // 거제시
 
                 <Button
-                    android:id="@+id/tag_37_1"
+                    android:id="@+id/tag_36_1"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3018,7 +3193,7 @@
                 //거창군
 
                 <Button
-                    android:id="@+id/tag_37_2"
+                    android:id="@+id/tag_36_2"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3031,7 +3206,7 @@
                 // 고성군
 
                 <Button
-                    android:id="@+id/tag_37_3"
+                    android:id="@+id/tag_36_3"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3044,7 +3219,7 @@
                 //김해시
 
                 <Button
-                    android:id="@+id/tag_37_4"
+                    android:id="@+id/tag_36_4"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3066,7 +3241,7 @@
                 //남해군
 
                 <Button
-                    android:id="@+id/tag_37_5"
+                    android:id="@+id/tag_36_5"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3079,7 +3254,7 @@
                 //마산시
 
                 <Button
-                    android:id="@+id/tag_37_6"
+                    android:id="@+id/tag_36_6"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3092,7 +3267,7 @@
                 //밀양시
 
                 <Button
-                    android:id="@+id/tag_37_7"
+                    android:id="@+id/tag_36_7"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3103,8 +3278,9 @@
                     android:textSize="10dip" />
 
                 //사천시
+
                 <Button
-                    android:id="@+id/tag_37_8"
+                    android:id="@+id/tag_36_8"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3117,7 +3293,7 @@
                 //산청군
 
                 <Button
-                    android:id="@+id/tag_37_9"
+                    android:id="@+id/tag_36_9"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3138,7 +3314,7 @@
                 //양산시
 
                 <Button
-                    android:id="@+id/tag_37_10"
+                    android:id="@+id/tag_36_10"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3151,7 +3327,7 @@
                 //의령군
 
                 <Button
-                    android:id="@+id/tag_37_12"
+                    android:id="@+id/tag_36_12"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3164,7 +3340,7 @@
                 //진주시
 
                 <Button
-                    android:id="@+id/tag_37_13"
+                    android:id="@+id/tag_36_13"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3177,7 +3353,7 @@
                 //진해시
 
                 <Button
-                    android:id="@+id/tag_37_14"
+                    android:id="@+id/tag_36_14"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3190,7 +3366,7 @@
                 //창녕군
 
                 <Button
-                    android:id="@+id/tag_37_15"
+                    android:id="@+id/tag_36_15"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3212,7 +3388,7 @@
                 //창원시
 
                 <Button
-                    android:id="@+id/tag_37_16"
+                    android:id="@+id/tag_36_16"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3225,7 +3401,7 @@
                 //통영시
 
                 <Button
-                    android:id="@+id/tag_37_17"
+                    android:id="@+id/tag_36_17"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3238,7 +3414,7 @@
                 //하동군
 
                 <Button
-                    android:id="@+id/tag_37_18"
+                    android:id="@+id/tag_36_18"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3251,7 +3427,7 @@
                 //함안군
 
                 <Button
-                    android:id="@+id/tag_37_19"
+                    android:id="@+id/tag_36_19"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3264,7 +3440,7 @@
                 //함양군
 
                 <Button
-                    android:id="@+id/tag_37_20"
+                    android:id="@+id/tag_36_20"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3286,7 +3462,7 @@
                 //합천군
 
                 <Button
-                    android:id="@+id/tag_37_21"
+                    android:id="@+id/tag_36_21"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3316,7 +3492,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_37"
+                    android:id="@+id/tag_37_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3427,6 +3603,7 @@
                     android:textSize="10dip" />
 
                 //완주군
+
                 <Button
                     android:id="@+id/tag_37_8"
                     android:layout_width="65dip"
@@ -3546,7 +3723,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_38"
+                    android:id="@+id/tag_38_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3817,6 +3994,7 @@
                     android:textSize="10dip" />
 
                 //진도군
+
                 <Button
                     android:id="@+id/tag_38_21"
                     android:layout_width="65dip"
@@ -3896,7 +4074,7 @@
                 //전체
 
                 <Button
-                    android:id="@+id/tag_39"
+                    android:id="@+id/tag_39_0"
                     android:layout_width="65dip"
                     android:layout_height="30dip"
                     android:layout_centerVertical="true"
@@ -3963,10 +4141,6 @@
         </RelativeLayout>
 
 
-
-
-
-
     </RelativeLayout>
 
     <!--테마 별 보기-->
@@ -3991,11 +4165,7 @@
     </RelativeLayout>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/horizontalView_theme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/theme" />
+
 
 
 </RelativeLayout>
