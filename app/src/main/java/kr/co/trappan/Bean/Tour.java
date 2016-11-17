@@ -1,10 +1,10 @@
-package kr.co.trappan.Item;
+package kr.co.trappan.Bean;
 
 /**
  * Created by jongchanrim on 2016. 11. 14..
  */
 
-public class DetailInfo_item {
+public class Tour {
     private String contentid;
     private String contenttypeid;
     private String title;
@@ -23,13 +23,14 @@ public class DetailInfo_item {
     private int rate;
     private int stamp;
     private int like;
+    private String sigungucode;
     private String areaName;
     private String sigunguName;
 
-    public DetailInfo_item() {
+    public Tour() {
     }
 
-    public DetailInfo_item(String contentid, String contenttypeid, String title, String addr1, String addr2, String areacode, String cat1, String cat2, String cat3, String firstimage, String firstimage2, String mlevel, String overview, String mapx, String mapy, int rate, int stamp, int like) {
+    public Tour(String contentid, String contenttypeid, String title, String addr1, String addr2, String areacode, String cat1, String cat2, String cat3, String firstimage, String firstimage2, String mlevel, String overview, String mapx, String mapy, int rate, int stamp, int like, String sigungucode) {
         this.contentid = contentid;
         this.contenttypeid = contenttypeid;
         this.title = title;
@@ -48,6 +49,15 @@ public class DetailInfo_item {
         this.rate = rate;
         this.stamp = stamp;
         this.like = like;
+        this.sigungucode = sigungucode;
+    }
+
+    public String getSigungucode() {
+        return sigungucode;
+    }
+
+    public void setSigungucode(String sigungucode) {
+        this.sigungucode = sigungucode;
     }
 
     public String getContentid() {
