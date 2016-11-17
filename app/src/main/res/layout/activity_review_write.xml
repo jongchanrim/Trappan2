@@ -48,74 +48,91 @@
         android:layout_marginTop="6dp"
         android:layout_marginLeft="10dp" />
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        app:srcCompat="@drawable/a"
-        android:id="@+id/review_image"
-        android:background="@android:color/black" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/white">
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@android:color/white">
+            android:id="@+id/review_img1"
+            android:layout_weight="1"
+            android:background="@drawable/review_imageaddpost"
+            android:src="@drawable/review_imageadd"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"/>
 
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/review_img1"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:src="@drawable/review_imageaddpost" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/review_img2"
+            android:layout_weight="1"
+            android:background="@drawable/review_imageaddpost"
+            android:src="@drawable/review_imageadd"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"/>
 
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/review_img2"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:src="@drawable/review_imageaddpost" />
-
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/review_img3"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:src="@drawable/review_imageaddpost" />
-
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/review_img4"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:src="@drawable/review_imageaddpost" />
-
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/review_img5"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:src="@drawable/review_imageaddpost" />
-
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/review_img6"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:src="@drawable/review_imageaddpost" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/review_img3"
+            android:layout_weight="1"
+            android:background="@drawable/review_imageaddpost"
+            android:src="@drawable/review_imageadd"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"/>
 
 
-        </LinearLayout>
-    </HorizontalScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/review_img4"
+            android:layout_weight="1"
+            android:background="@drawable/review_imageaddpost"
+            android:src="@drawable/review_imageadd"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/review_img5"
+            android:layout_weight="1"
+            android:background="@drawable/review_imageaddpost"
+            android:src="@drawable/review_imageadd"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/review_img6"
+            android:layout_weight="1"
+            android:background="@drawable/review_imageaddpost"
+            android:src="@drawable/review_imageadd"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"/>
+
+    </LinearLayout>
+
+    <Button
+        android:text="사진 업로드"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/review_imageupload_button"
+        android:background="@color/colorAccent"
+        android:textSize="16sp"
+        android:layout_margin="10dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -129,7 +146,8 @@
         android:padding="5dp"
         android:hint="제목을 입력하세요"
         android:textColorHint="@color/cardview_dark_background"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:layout_marginTop="10dp" />
 
     <EditText
         android:layout_width="match_parent"
