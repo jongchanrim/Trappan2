@@ -15,7 +15,7 @@ import com.androidquery.AQuery;
 
 import java.util.List;
 
-import kr.co.trappan.Bean.ListBean;
+import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.R;
 
 /**
@@ -25,7 +25,7 @@ import kr.co.trappan.R;
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
 
     Context context;
-    List<ListBean> items;
+    List<SearchLists_item> items;
     int item_layout;
     AQuery aq;
    //
@@ -35,13 +35,13 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
 
 
-    public SearchListAdapter (Context context, List<ListBean> items, int item_layout) {
+    public SearchListAdapter (Context context, List<SearchLists_item> items, int item_layout) {
         this.context=context;
         this.items=items;
         this.item_layout=item_layout;
     }
 
-    public void setItems(List<ListBean> items) {
+    public void setItems(List<SearchLists_item> items) {
         this.items = items;
     }
 
@@ -56,7 +56,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     @Override
     public void onBindViewHolder(SearchListAdapter.ViewHolder holder, int position) {
 
-        final ListBean item=items.get(position);
+        final SearchLists_item item=items.get(position);
 
         aq.id(holder.image).image(item.getFirstimage());
         holder.image.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);

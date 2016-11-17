@@ -69,11 +69,6 @@ public class LoginActivity extends AppCompatActivity {
                 RequestParams params = new RequestParams();
                 params.put("id", id.getText().toString().trim());
                 params.put("pw", enpw);
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
 
                 HttpClient.post("test", params, new JsonHttpResponseHandler() {
                     @Override

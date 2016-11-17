@@ -1,16 +1,13 @@
 package kr.co.trappan.Activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -24,7 +21,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Adapter.SearchListAdapter;
-import kr.co.trappan.Bean.ListBean;
+import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.Item.CustomProgressDialog;
 import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
@@ -40,7 +37,7 @@ public class SearchActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     SearchListAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
-    ArrayList<ListBean> items = new ArrayList<>();
+    ArrayList<SearchLists_item> items = new ArrayList<>();
     String areacode;
     String sigungucode;
     CustomProgressDialog pd;
@@ -72,6 +69,7 @@ public class SearchActivity extends AppCompatActivity {
         params.put("areacode", "1");
         params.put("sigungucode", "1");
         HttpClient.get("arealist", params, new JsonHttpResponseHandler() {
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
@@ -81,7 +79,7 @@ public class SearchActivity extends AppCompatActivity {
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject obj = response.getJSONObject(i);
 
-                        items.add(new ListBean(obj.getInt("like"), obj.getString("contentid"), obj.getString("title"),
+                        items.add(new SearchLists_item(obj.getInt("like"), obj.getString("contentid"), obj.getString("title"),
                                 obj.getString("areacode"), obj.getString("sigungucode"), obj.getString("firstimage"), obj.getInt("stamp"), obj.getInt("rate")));
                         Log.d(TAG, "httpOK: " + items.get(i).getFirstimage().toString());
                     }
@@ -92,19 +90,7 @@ public class SearchActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                recyclerView.addOnItemTouchListener(new RecyclerViewOnItemClickListener(SearchActivity.this, recyclerView,
-                        new RecyclerViewOnItemClickListener.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(View v, int position) {
-                                Log.d(TAG, "click");
-                            }
 
-                            @Override
-                            public void onItemLongClick(View v, int position) {
-                                Log.d(TAG, "long click");
-                            }
-                        }
-                ));
 
             }
 
@@ -116,7 +102,23 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
+        recyclerView.addOnItemTouchListener(new RecyclerViewOnItemClickListener(SearchActivity.this, recyclerView,
+                new RecyclerViewOnItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        Log.d(TAG, "click");
 
+                        Intent intent = new Intent(SearchActivity.this, DetailInformationActivity.class);
+                        intent.putExtra("contentid", items.get(position).getContentId());
+                        startActivity(intent); // 다음 화면으로 넘어간다.
+                    }
+
+                    @Override
+                    public void onItemLongClick(View v, int position) {
+                        Log.d(TAG, "long click");
+                    }
+                }
+        ));
 
 
 //        Intent intent = getIntent();
