@@ -13,17 +13,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.androidquery.AQuery;
+
 import java.util.List;
 
-import kr.co.trappan.Item.DetailInfoComment_item;
+import kr.co.trappan.Bean.Review;
+import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.R;
 
-public class DetailInfoCommentAdapter extends RecyclerView.Adapter<DetailInfoCommentAdapter.ViewHolder> {
+public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.ViewHolder> {
 
     Context context;
-    List<DetailInfoComment_item> items;
+    List<Review> items;
+    AQuery aq;
 
-    public DetailInfoCommentAdapter(Context context, List<DetailInfoComment_item> items) {
+    public ReviewListAdapter(Context context, List<Review> items) {
         this.context=context;
         this.items=items;
     }
@@ -32,24 +36,29 @@ public class DetailInfoCommentAdapter extends RecyclerView.Adapter<DetailInfoCom
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_infomation,parent,false);
         ViewHolder holder = new ViewHolder(v);
+        aq=new AQuery(v);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        final DetailInfoComment_item item=items.get(position);
+        final Review item=items.get(position);
 
-        holder.image.setImageResource(item.getImage());
-        holder.title.setText(item.getTitle());
+        aq.id(holder.image).image(item.getImg_1());
+        holder.title.setText(item.getReview_title());
         holder.id.setText(item.getId());
-        holder.content.setText(item.getContent());
+        holder.content.setText(item.getReview_content());
 
     }
 
     @Override
     public int getItemCount() {
         return this.items.size();
+    }
+
+    public void setItems(List<Review> items) {
+        this.items = items;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

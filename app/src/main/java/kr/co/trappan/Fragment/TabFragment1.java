@@ -47,6 +47,7 @@ public class TabFragment1 extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),DetailInformationActivity.class);
+                intent.putExtra("contentid","23");
                 startActivity(intent);
             }
         });
@@ -54,6 +55,7 @@ public class TabFragment1 extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),ReviewPageActivity.class);
+                intent.putExtra("reviewid","23");
                 startActivity(intent);
             }
         });

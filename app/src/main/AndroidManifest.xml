@@ -46,7 +46,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".Activity.SignupActivity" />
         <activity android:name=".Activity.SearchActivity" />
-
+        <activity android:name=".Activity.ReviewPageActivity" />
         <activity android:name=".Activity.DetailInformationActivity"></activity>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for

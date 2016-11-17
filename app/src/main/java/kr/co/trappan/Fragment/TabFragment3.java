@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import kr.co.trappan.Adapter.SearchListAdapter;
-import kr.co.trappan.Bean.ListBean;
+import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.R;
 /**
  * Created by thfad_000 on 2016-10-04.
@@ -74,7 +74,7 @@ public class TabFragment3 extends Fragment {
 
 
         // 리스트 뷰
-        ArrayList<ListBean> items = new ArrayList<>();
+        ArrayList<SearchLists_item> items = new ArrayList<>();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recmmand_list);
         recyclerView.setHasFixedSize(true);
