@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("id", id.getText().toString());
                                 editor.putString("pw", enpw);
                                 editor.putBoolean("autologin", true);
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지
+                                Intent intent = new Intent(LoginActivity.this, ReviewWriteActivity.class); // 다음 넘어갈 클래스 지
                                 startActivity(intent); // 다음 화면으로 넘어간다.
                                 pd.dismiss();
 //                            }

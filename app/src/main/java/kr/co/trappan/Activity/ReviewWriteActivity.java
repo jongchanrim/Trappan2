@@ -11,13 +11,16 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.LinearLayout.LayoutParams;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -58,6 +61,18 @@ public class ReviewWriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_write);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        WindowManager windowManager = (WindowManager) getApplicationContext()
+                .getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(metrics);
+
+        ImageView img = (ImageView) findViewById(R.id.review_img1);
+        LayoutParams params = (LayoutParams) img.getLayoutParams();
+        params.width = metrics.widthPixels/6;
+        params.height = metrics.heightPixels/6;
+
+        img.setLayoutParams(params);
 
         View.OnClickListener Click = new View.OnClickListener(){
             @Override
