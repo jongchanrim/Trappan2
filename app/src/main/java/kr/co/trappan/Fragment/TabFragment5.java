@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
@@ -16,9 +17,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -292,9 +295,14 @@ public class TabFragment5 extends Fragment{
         File copyFile = new File(filePath);
         BufferedOutputStream out = null;
 
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        // Calculate image's size by maintain the image's aspect ratio
+
         try{
             copyFile.createNewFile();
             out = new BufferedOutputStream(new FileOutputStream(copyFile));
+            //bitmap = Bitmap.createScaledBitmap(bitmap, (width=5000), (height=height*1000/width), true);
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
 
             //sendBroadcast를 통해 Crop된 사진을 앨범에 보이도록 갱신한다.
@@ -307,5 +315,68 @@ public class TabFragment5 extends Fragment{
             e.printStackTrace();
         }
     }
+
+//    public BitmapFactory.Options getBitmapSize(BitmapFactory.Options options){
+//        int targetWidth = 0;
+//        int targetHeight = 0;
+//
+//        if(options.outWidth > options.outHeight){
+//            targetWidth = (int)(600 * 1.3);
+//            targetHeight = 600;
+//        }else{
+//            targetWidth = 600;
+//            targetHeight = (int)(600 * 1.3);
+//        }
+//
+//        Boolean scaleByHeight = Math.abs(options.outHeight - targetHeight) >= Math.abs(options.outWidth - targetWidth);
+//        if(options.outHeight * options.outWidth * 2 >= 16384){
+//            double sampleSize = scaleByHeight
+//                    ? options.outHeight / targetHeight
+//                    : options.outWidth / targetWidth;
+//            options.inSampleSize = (int) Math.pow(2d, Math.floor(Math.log(sampleSize)/Math.log(2d)));
+//        }
+//        options.inJustDecodeBounds = false;
+//        options.inTempStorage = new byte[16*1024];
+//
+//        return options;
+//    }
+//
+//    public static Bitmap loadBackgroundBitmap(Context context, String imgFilePath) {
+//        File file = new File(imgFilePath);
+//        if (file.exists() == false) {
+//            return null;
+//        }
+//
+//        // 폰의 화면 사이즈를 구한다.
+//        Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+//        int displayWidth = display.getWidth();
+//        int displayHeight = display.getHeight();
+//
+//        // 읽어들일 이미지의 사이즈를 구한다.
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inPreferredConfig = Bitmap.Config.RGB_565;
+//        options.inJustDecodeBounds = true;
+//        BitmapFactory.decodeFile(imgFilePath, options);
+//
+//        // 화면 사이즈에 가장 근접하는 이미지의 스케일 팩터를 구한다.
+//        // 스케일 팩터는 이미지 손실을 최소화하기 위해 짝수로 한다.
+//        float widthScale = options.outWidth / displayWidth;
+//        float heightScale = options.outHeight / displayHeight;
+//        float scale = widthScale > heightScale ? widthScale : heightScale;
+//
+//        if (scale >= 8)
+//            options.inSampleSize = 8;
+//        else if (scale >= 6)
+//            options.inSampleSize = 6;
+//        else if (scale >= 4)
+//            options.inSampleSize = 4;
+//        else if (scale >= 2)
+//            options.inSampleSize = 2;
+//        else
+//            options.inSampleSize = 1;
+//        options.inJustDecodeBounds = false;
+//
+//        return BitmapFactory.decodeFile(imgFilePath, options);
+//    }
 
 }
