@@ -99,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
                         super.onFailure(statusCode, headers, throwable, response);
-                        Log.d(TAG, "httpFail: " + response.toString());
 
                     }
                 });

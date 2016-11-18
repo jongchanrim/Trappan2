@@ -13,6 +13,10 @@ public class Member {
 	private String pro_img;
 	private String intro;
 
+	public Member() {
+
+	}
+
 
 	public String getId() {
 		return id;
@@ -39,13 +43,13 @@ public class Member {
 		this.name = name;
 	}
 	public String getBack_img() {
-		return back_img.replaceAll("\\", "");
+		return back_img;
 	}
 	public void setBack_img(String back_img) {
 		this.back_img = back_img;
 	}
 	public String getPro_img() {
-		return pro_img.replaceAll("\\", "");
+		return pro_img;
 	}
 	public void setPro_img(String pro_img) {
 		this.pro_img = pro_img;

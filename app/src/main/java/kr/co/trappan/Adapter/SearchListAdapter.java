@@ -15,6 +15,7 @@ import com.androidquery.AQuery;
 
 import java.util.List;
 
+import kr.co.trappan.Bean.Tour;
 import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.R;
 
@@ -25,7 +26,7 @@ import kr.co.trappan.R;
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
 
     Context context;
-    List<SearchLists_item> items;
+    List<Tour> items;
     int item_layout;
     AQuery aq;
    //
@@ -35,13 +36,13 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
 
 
-    public SearchListAdapter (Context context, List<SearchLists_item> items, int item_layout) {
+    public SearchListAdapter (Context context, List<Tour> items, int item_layout) {
         this.context=context;
         this.items=items;
         this.item_layout=item_layout;
     }
 
-    public void setItems(List<SearchLists_item> items) {
+    public void setItems(List<Tour> items) {
         this.items = items;
     }
 
@@ -56,21 +57,16 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     @Override
     public void onBindViewHolder(SearchListAdapter.ViewHolder holder, int position) {
 
-        final SearchLists_item item=items.get(position);
+        final Tour item=items.get(position);
 
         aq.id(holder.image).image(item.getFirstimage());
         holder.image.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
         holder.title.setText(item.getTitle());
-//        holder.rate.setText(item.getRate());
-//        holder.like.setText(item.getLike());
-//        holder.stamp.setText(item.getStamp());
-       holder.sigunguName.setText(item.getSigunguName());
+        holder.rate.setText(Double.toString(item.getRate()));
+        holder.like.setText(Integer.toString(item.getLike()));
+        holder.stamp.setText(Integer.toString(item.getStamp()));
 
-       //holder.title.setText("0");
-        holder.rate.setText("0");
-        holder.like.setText("0");
-        holder.stamp.setText("0");
-       // holder.sigunguName.setText("0");
+
 
     }
 
@@ -82,10 +78,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayout Header;
         ImageView image;
         TextView title;
-        TextView sigunguName;
         TextView rate;
         TextView like;
         TextView stamp;
@@ -96,7 +90,6 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         public ViewHolder(View itemView) {
             super(itemView);
             image=(ImageView)itemView.findViewById(R.id.search_imageVIew);
-            sigunguName=(TextView)itemView.findViewById(R.id.search_sigungu);
             title = (TextView)itemView.findViewById(R.id.search_title);
             rate = (TextView)itemView.findViewById(R.id.search_star);
             like = (TextView)itemView.findViewById(R.id.search_like);

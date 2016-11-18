@@ -17,7 +17,7 @@ public class Tour {
     private String overview;
     private float mapx;
     private float mapy;
-    private int rate;
+    private Double rate;
     private int stamp;
     private int like;
     private String sigungucode;
@@ -27,7 +27,7 @@ public class Tour {
     public Tour() {
     }
 
-    public Tour(String addr1, String addr2, String areacode, String cat2, String contentid, String contenttypeid, String firstimage, int like, String mapx, String mapy, String mlevel, String overview, int rate, String sigungucode, int stamp, String title) {
+    public Tour(String addr1, String addr2, String areacode, String cat2, String contentid, String contenttypeid, String firstimage, int like, String mapx, String mapy, String mlevel, String overview, double rate, String sigungucode, int stamp, String title) {
         this.addr1 = addr1;
         this.addr2 = addr2;
         this.areacode = areacode;
@@ -142,7 +142,7 @@ public class Tour {
 
 
     public String getFirstimage() {
-        return firstimage.replaceAll("\\", "");
+        return firstimage;
     }
 
     public void setFirstimage(String firstimage) {
@@ -183,11 +183,11 @@ public class Tour {
         this.mapy = Float.parseFloat(mapy);
     }
 
-    public int getRate() {
+    public double getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(double rate) {
         this.rate = rate;
     }
 
