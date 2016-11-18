@@ -304,7 +304,7 @@ public class DetailInformationActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent intent=new Intent(this,);
+
             }
         });
 
