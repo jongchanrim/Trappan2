@@ -69,12 +69,14 @@ public class TabFragment5 extends Fragment{
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
 
-    private Uri mlmageCaptureUri;
+    private Uri mlmageCaptureUri_background;  //Uri 배경이미지 변수
+    private Uri mlmageCaptureUri_profile;   //Uri 프로필이미지 변수
+
     private ImageView iv_UserPhoto;
     private int id_view;
     private String absoultePath;
 
-    private int back_or_profile = 0;  //배경이미지와 프로필 이미지 선택 변수
+    private int back_or_profile = 0;  //배경이미지와 프로필 이미지 선택 변수 (1로바뀌면 배경, 2로바뀌면 프로필)
 
 
     @Override
@@ -235,8 +237,15 @@ public class TabFragment5 extends Fragment{
 
         //임시로 사용할 파일의 경로를 생성
         String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
-        mlmageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, mlmageCaptureUri);
+
+        if(back_or_profile == 1) { //배경 이미지 Uri
+            mlmageCaptureUri_background = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, mlmageCaptureUri_background);
+        }
+        else if(back_or_profile == 2){
+            mlmageCaptureUri_profile = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, mlmageCaptureUri_profile);
+        }
         startActivityForResult(intent, PICK_FROM_CAMERA);
     }
 
@@ -260,15 +269,26 @@ public class TabFragment5 extends Fragment{
             {
                 //이후의 처리가 카메라와 같으므로 일단 break없이 진행
                 //실제코드에서는 좀더 합리적인 방법 선택
-                mlmageCaptureUri = data.getData();
-                Log.d("SmartWeel", mlmageCaptureUri.getPath().toString());
+                if(back_or_profile == 1) {
+                    mlmageCaptureUri_background = data.getData();
+                    Log.d("SmartWeel", mlmageCaptureUri_background.getPath().toString());
+                }
+                else if(back_or_profile == 2){
+                    mlmageCaptureUri_profile = data.getData();
+                    Log.d("SmartWeel", mlmageCaptureUri_profile.getPath().toString());
+                }
             }
             case PICK_FROM_CAMERA:
             {
                 //이미지를 가져온 이후의 리사이즈할 이미지 크기 결정
                 //이후에 이미지 크롭 어플리케이션 호출
                 Intent intent = new Intent("com.android.camera.action.CROP");
-                intent.setDataAndType(mlmageCaptureUri, "image/");
+                if(back_or_profile == 1) {
+                    intent.setDataAndType(mlmageCaptureUri_background, "image/");
+                }
+                else if(back_or_profile == 2){
+                    intent.setDataAndType(mlmageCaptureUri_profile, "image/");
+                }
 
                 //크롭할 이미지를 200*200으로 저장
                 intent.putExtra("outputX",200);
@@ -280,11 +300,11 @@ public class TabFragment5 extends Fragment{
                 startActivityForResult(intent, CROP_FROM_IMAGE);
 
                 if(back_or_profile == 1) {
-                    back_img.setImageURI(mlmageCaptureUri);
+                    back_img.setImageURI(mlmageCaptureUri_background);
                     back_or_profile = 0;
                 }
                 else if(back_or_profile == 2){
-                    pro_img.setImageURI(mlmageCaptureUri);
+                    pro_img.setImageURI(mlmageCaptureUri_profile);
                     back_or_profile = 0;
                 }
 
@@ -313,9 +333,17 @@ public class TabFragment5 extends Fragment{
                     break;
                 }
                 //임시파일삭제
-                File f = new File(mlmageCaptureUri.getPath());
-                if(f.exists()){
-                    f.delete();
+                if(back_or_profile == 1) {
+                    File f = new File(mlmageCaptureUri_background.getPath());
+                    if(f.exists()){
+                        f.delete();
+                    }
+                }
+                else if(back_or_profile == 2){
+                    File f = new File(mlmageCaptureUri_profile.getPath());
+                    if(f.exists()){
+                        f.delete();
+                    }
                 }
             }
 

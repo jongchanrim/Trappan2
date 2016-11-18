@@ -10,39 +10,53 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 
+import cz.msebera.android.httpclient.Header;
+import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.R;
 
 public class ReviewWriteActivity extends AppCompatActivity {
 
     Context context;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter Adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView resizeList;
 
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
 
-    private Uri mlmageCaptureUri;
+    /**************완료 버튼 눌렀을 때 서버로 보낼 변수들**************/
+    private Uri mlmageCaptureUri_img1;  //Uri 업로드이미지1 변수
+    private Uri mlmageCaptureUri_img2;  //Uri 업로드이미지2 변수
+    private Uri mlmageCaptureUri_img3;  //Uri 업로드이미지3 변수
+    private Uri mlmageCaptureUri_img4;  //Uri 업로드이미지4 변수
+    private Uri mlmageCaptureUri_img5;  //Uri 업로드이미지5 변수
+    private Uri mlmageCaptureUri_img6;  //Uri 업로드이미지6 변수
+    private String review_title;        //리뷰 제목 변수
+    private String review_content;      //리뷰 내용 변수
+    /******************************************************************/
+
     private ImageView iv_UserPhoto;
-    private int id_view;
     private String absoultePath;
 
     private ImageView review_img1;
@@ -52,14 +66,19 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private ImageView review_img5;
     private ImageView review_img6;
 
+    private EditText review_title_edittext;
+    private EditText review_content_edittext;
+
     private ImageButton review_backbutton;
     private Button review_completebutton;
     private Button review_imageupload_button;
 
-    private int imagenumber = 0; //업로드이미지 버튼 위치에 보여주기
-
+    private int imagenumber = 0; //업로드이미지 위치에 순서대로 보여주기 위한 변수
+    private String contentid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        contentid = intent.getExtras().getString("contentid");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_write);
 
@@ -75,6 +94,10 @@ public class ReviewWriteActivity extends AppCompatActivity {
         review_img5 = (ImageView) findViewById(R.id.review_img5);
         review_img6 = (ImageView) findViewById(R.id.review_img6);
 
+        review_title_edittext = (EditText) findViewById(R.id.review_title);
+        review_content_edittext =(EditText) findViewById(R.id.review_content);
+
+        /*사이즈 조절하기 위한 함수들*/
         LayoutParams params1 = (LayoutParams) review_img1.getLayoutParams();
         LayoutParams params2 = (LayoutParams) review_img2.getLayoutParams();
         LayoutParams params3 = (LayoutParams) review_img3.getLayoutParams();
@@ -101,6 +124,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
         review_img4.setLayoutParams(params4);
         review_img5.setLayoutParams(params5);
         review_img6.setLayoutParams(params6);
+        /*여기까지 사이즈 조절 함수*/
 
         View.OnClickListener Click = new View.OnClickListener(){
             @Override
@@ -116,7 +140,12 @@ public class ReviewWriteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         imagenumber++;
-                        doTakeAlbumAction();
+                        if(imagenumber <= 6) {
+                            doTakeAlbumAction();
+                        }
+                        else{
+                            Toast.makeText(ReviewWriteActivity.this, "사진 6장 초과", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 };
 
@@ -136,6 +165,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
             }
         };
 
+        //뒤로가기 버튼
         review_backbutton = (ImageButton)findViewById(R.id.review_backbutton);
         review_backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,11 +175,33 @@ public class ReviewWriteActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //완료 버튼
         review_completebutton = (Button)findViewById(R.id.review_completebutton);
         review_completebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ReviewWriteActivity.this, "완료 버튼", Toast.LENGTH_SHORT).show();
+               // File myFile = new File("/path/to/file.png");
+//                RequestParams params = new RequestParams();
+//                try {
+//                    //params.put("profile_picture", myFile);
+//                } catch(FileNotFoundException e) {
+//
+//                }
+//                HttpClient.get("addreaview", params, new JsonHttpResponseHandler() {
+//                            @Override
+//                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                                super.onSuccess(statusCode, headers, response);
+//                                Intent intent = new Intent(ReviewWriteActivity.this, DetailInformationActivity.class);
+//                                startActivity(intent);
+//                                finish();
+//                            }
+//                        }
+//
+//                );
+                review_title = review_title_edittext.getText().toString();
+                review_content = review_content_edittext.getText().toString();
+                Toast.makeText(ReviewWriteActivity.this, "완료", Toast.LENGTH_SHORT).show();
             }
         });
         review_imageupload_button = (Button)findViewById(R.id.review_imageupload_button);
@@ -162,8 +214,24 @@ public class ReviewWriteActivity extends AppCompatActivity {
 
         //임시로 사용할 파일의 경로를 생성
         String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
-        mlmageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
-                url));
+        if(imagenumber == 1) {
+            mlmageCaptureUri_img1 = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
+        }
+        else if(imagenumber == 2){
+            mlmageCaptureUri_img2 = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
+        }
+        else if(imagenumber == 3){
+            mlmageCaptureUri_img3 = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
+        }
+        else if(imagenumber == 4){
+            mlmageCaptureUri_img4 = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
+        }
+        else if(imagenumber == 5){
+            mlmageCaptureUri_img5 = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
+        }
+        else if(imagenumber == 6){
+            mlmageCaptureUri_img6 = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
+        }
     }
 
     //앨범에서 이미지 가져오기
@@ -186,15 +254,54 @@ public class ReviewWriteActivity extends AppCompatActivity {
             {
                 //이후의 처리가 카메라와 가으므로 일단 break없이 진행
                 //실제코드에서는 좀더 합리적인 방법 선택
-                mlmageCaptureUri = data.getData();
-                Log.d("SmartWeel", mlmageCaptureUri.getPath().toString());
+                if(imagenumber == 1) {
+                    mlmageCaptureUri_img1 = data.getData();
+                    Log.d("SmartWeel", mlmageCaptureUri_img1.getPath().toString());
+                }
+                else if(imagenumber == 2){
+                    mlmageCaptureUri_img2 = data.getData();
+                    Log.d("SmartWeel", mlmageCaptureUri_img2.getPath().toString());
+                }
+                else if(imagenumber == 3){
+                    mlmageCaptureUri_img3 = data.getData();
+                    Log.d("SmartWeel", mlmageCaptureUri_img3.getPath().toString());
+                }
+                else if(imagenumber == 4){
+                    mlmageCaptureUri_img4 = data.getData();
+                    Log.d("SmartWeel", mlmageCaptureUri_img4.getPath().toString());
+                }
+                else if(imagenumber == 5){
+                    mlmageCaptureUri_img5 = data.getData();
+                    Log.d("SmartWeel", mlmageCaptureUri_img5.getPath().toString());
+                }
+                else if(imagenumber == 6){
+                    mlmageCaptureUri_img6 = data.getData();
+                    Log.d("SmartWeel", mlmageCaptureUri_img6.getPath().toString());
+                }
             }
             case PICK_FROM_CAMERA:
             {
                 //이미지를 가져온 이후의 리사이즈할 이미지 크기 결정
                 //이후에 이미지 크롭 어플리케이션 호출
                 Intent intent = new Intent("com.android.camera.action.CROP");
-                intent.setDataAndType(mlmageCaptureUri, "image/");
+                if(imagenumber == 1) {
+                    intent.setDataAndType(mlmageCaptureUri_img1, "image/");
+                }
+                else if(imagenumber == 2){
+                    intent.setDataAndType(mlmageCaptureUri_img2, "image/");
+                }
+                else if(imagenumber == 3){
+                    intent.setDataAndType(mlmageCaptureUri_img3, "image/");
+                }
+                else if(imagenumber == 4){
+                    intent.setDataAndType(mlmageCaptureUri_img4, "image/");
+                }
+                else if(imagenumber == 5){
+                    intent.setDataAndType(mlmageCaptureUri_img5, "image/");
+                }
+                else if(imagenumber == 6){
+                    intent.setDataAndType(mlmageCaptureUri_img6, "image/");
+                }
 
                 //크롭할 이미지를 200*200으로 저장
                 intent.putExtra("outputX",200);
@@ -206,27 +313,24 @@ public class ReviewWriteActivity extends AppCompatActivity {
                 startActivityForResult(intent, CROP_FROM_IMAGE);
 
                 if(imagenumber == 1) {
-                    review_img1.setImageURI(mlmageCaptureUri);
+                    review_img1.setImageURI(mlmageCaptureUri_img1);
                 }
                 else if(imagenumber == 2){
-                    review_img2.setImageURI(mlmageCaptureUri);
+                    review_img2.setImageURI(mlmageCaptureUri_img2);
                 }
                 else if(imagenumber == 3){
-                    review_img3.setImageURI(mlmageCaptureUri);
+                    review_img3.setImageURI(mlmageCaptureUri_img3);
                 }
                 else if(imagenumber == 4){
-                    review_img4.setImageURI(mlmageCaptureUri);
+                    review_img4.setImageURI(mlmageCaptureUri_img4);
                 }
                 else if(imagenumber == 5){
-                    review_img5.setImageURI(mlmageCaptureUri);
+                    review_img5.setImageURI(mlmageCaptureUri_img5);
                 }
                 else if(imagenumber == 6){
-                    review_img6.setImageURI(mlmageCaptureUri);
-                    imagenumber = 0;
+                    review_img6.setImageURI(mlmageCaptureUri_img6);
                 }
-
                 break;
-
             }
             case CROP_FROM_IMAGE:
             {
@@ -251,10 +355,44 @@ public class ReviewWriteActivity extends AppCompatActivity {
                     break;
                 }
                 //임시파일삭제
-                File f = new File(mlmageCaptureUri.getPath());
-                if(f.exists()){
-                    f.delete();
+                if(imagenumber == 1) {
+                    File f = new File(mlmageCaptureUri_img1.getPath());
+                    if (f.exists()) {
+                        f.delete();
+                    }
                 }
+                else if(imagenumber == 2){
+                    File f = new File(mlmageCaptureUri_img2.getPath());
+                    if (f.exists()) {
+                        f.delete();
+                    }
+                }
+                else if(imagenumber == 3){
+                    File f = new File(mlmageCaptureUri_img3.getPath());
+                    if (f.exists()) {
+                        f.delete();
+                    }
+                }
+                else if(imagenumber == 4){
+                    File f = new File(mlmageCaptureUri_img4.getPath());
+                    if (f.exists()) {
+                        f.delete();
+                    }
+                }
+                else if(imagenumber == 5){
+                    File f = new File(mlmageCaptureUri_img5.getPath());
+                    if (f.exists()) {
+                        f.delete();
+                    }
+                }
+                else if(imagenumber == 6){
+                    File f = new File(mlmageCaptureUri_img6.getPath());
+                    if (f.exists()) {
+                        f.delete();
+                    }
+                }
+
+
             }
         }
     }

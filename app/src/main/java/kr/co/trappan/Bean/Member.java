@@ -4,13 +4,20 @@ import java.sql.Date;
 
 //DTO(Data Transfer Object) = VO(Value Object) = JavaBean
 public class Member {
+
 	private String id;
 	private String email; 
 	private String password;
 	private String name;
 	private String back_img;
 	private String pro_img;
-	private String intro_img="\\";
+	private String intro;
+
+	public Member() {
+
+	}
+
+
 	public String getId() {
 		return id;
 	}
@@ -36,25 +43,34 @@ public class Member {
 		this.name = name;
 	}
 	public String getBack_img() {
-		return back_img;
+		return back_img.replaceAll("\\", "");
 	}
 	public void setBack_img(String back_img) {
 		this.back_img = back_img;
 	}
 	public String getPro_img() {
-		return pro_img;
+		return pro_img.replaceAll("\\", "");
 	}
 	public void setPro_img(String pro_img) {
 		this.pro_img = pro_img;
 	}
-	public String getIntro_img() {
-		return intro_img.replaceAll("\\", "");
+	public String getIntro() {
+		return intro;
 	}
-	public void setIntro_img(String intro_img) {
-		this.intro_img = intro_img;
+	public void setIntro(String intro_img) {
+		this.intro = intro_img;
 	}
-	
-	
+
+	public Member(String id, String email, String password, String name, String back_img, String pro_img, String intro)
+	{
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.back_img = back_img;
+		this.pro_img = pro_img;
+		this.intro = intro;
+	}
 
 	
 }

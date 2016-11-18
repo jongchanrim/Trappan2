@@ -40,7 +40,8 @@
                         android:layout_height="30dp"
                         android:background="@drawable/profileedit"
                         android:clickable="true"
-                        android:layout_gravity="bottom|end" />
+                        android:layout_gravity="bottom|end"
+                        android:layout_margin="10dp" />
 
                 </FrameLayout>
 
@@ -231,7 +232,6 @@
 
 
     </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
-
 
 
 </FrameLayout>
