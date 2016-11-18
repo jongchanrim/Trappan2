@@ -27,34 +27,30 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginTop="30dp">
+                    android:layout_marginBottom="30dp">
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/mybackimage"
-                        android:src="@drawable/gangwon"
-                        android:background="#ffffff" />
+                        android:layout_height="200dp"
+                        android:id="@+id/f5_backimg"
+                        android:background="@drawable/profile_background_default_image" />
 
-                    <ImageButton android:id="@+id/mybackedit"
+                    <ImageButton android:id="@+id/f5_btn_backimg"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:background="@drawable/profileedit"
                         android:clickable="true"
-                        android:layout_gravity="bottom|end"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginEnd="10dp" />
+                        android:layout_gravity="bottom|end" />
 
                 </FrameLayout>
 
                 <com.pkmmte.view.CircularImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/gangwon"
+                    android:src="@drawable/profile_default_image"
                     app:border_color="#ffffff"
                     app:border_width="2dp"
-                    android:id="@+id/CircularImageView"
+                    android:id="@+id/f5_proimg"
                     android:baselineAlignBottom="false"
                     app:selector_stroke_width="2dp"
                     app:border="true"
@@ -63,7 +59,7 @@
                     app:selector="true"
                     android:layout_gravity="bottom|center_horizontal" />
 
-                <ImageButton android:id="@+id/myprofileedit"
+                <ImageButton android:id="@+id/f5_btn_proimg"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/profileedit"
@@ -74,6 +70,8 @@
 
             </FrameLayout>
 
+
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -83,20 +81,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="이름"
-                    android:id="@+id/myname"
+                    android:id="@+id/f5_username"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:textColor="#8C8C8C" />
+                    android:textColor="@android:color/black" />
 
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText"
-                    android:hint="자기 소개글을 작성해주세요"
+                    android:id="@+id/f5_profile"
+                    android:text="자기 소개글을 작성해주세요"
                     android:gravity="center"
                     android:textSize="15dp"
-                    android:background="@null"
-                    android:textColor="#8C8C8C" />
+                    android:textColor="@android:color/black" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -108,119 +105,117 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="팔로워 0"
-                        android:id="@+id/follower"
+                        android:text="팔로워 "
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:textColor="#8C8C8C" />
+                        android:textColor="@android:color/black" />
+                    <TextView
+                        android:textColor="@android:color/black"
+                        android:id="@+id/f5_follower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" / "
                         android:id="@+id/textView3"
-                        android:textColor="#8C8C8C" />
+                        android:textColor="@android:color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="팔로잉 1"
-                        android:id="@+id/following"
+                        android:text="팔로잉 "
                         android:layout_weight="1"
-                        android:textColor="#8C8C8C" />
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:textColor="@android:color/black"
+                        android:id="@+id/f5_following"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="60dp"
-                    android:paddingRight="60dp"
-                    android:paddingBottom="10dp">
+                    android:layout_height="wrap_content">
 
-                    <TextView
+                    <LinearLayout
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:id="@+id/textView"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:textColor="#8C8C8C" />
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@android:color/black"
+                            android:text="0"
+                            android:id="@+id/f5_tlike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="@android:color/black"
+                            android:text="가고싶어요"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
 
-                    <TextView
+                    <LinearLayout
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="8"
-                        android:id="@+id/textView11"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@android:color/black"
+                            android:text="0"
+                            android:id="@+id/f5_stamp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="@android:color/black"
+                            android:text="스탬프"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:padding="10dp"
                         android:gravity="center"
-                        android:layout_weight="1"
-                        android:textColor="#8C8C8C" />
-
-                    <TextView
+                        android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1"
-                        android:id="@+id/textView2"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@android:color/black"
+                            android:text="0"
+                            android:id="@+id/f5_rlike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="@android:color/black"
+                            android:text="좋아요"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:padding="10dp"
                         android:gravity="center"
-                        android:layout_weight="1"
-                        android:textColor="#8C8C8C" />
-
-                    <TextView
+                        android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2"
-                        android:id="@+id/textView4"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:textColor="#8C8C8C" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="60dp"
-                    android:paddingRight="60dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="가고싶어요"
-                        android:id="@+id/textView5"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textColor="#8C8C8C" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="스탬프"
-                        android:id="@+id/textView8"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textColor="#8C8C8C" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="좋아요"
-                        android:id="@+id/textView6"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textColor="#8C8C8C" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="코멘트"
-                        android:id="@+id/textView7"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textColor="#8C8C8C" />
-
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textColor="@android:color/black"
+                            android:text="0"
+                            android:id="@+id/f5_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="@android:color/black"
+                            android:text="코멘트"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <!--<ListView-->

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -81,17 +82,19 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("id", id.getText().toString());
                                 editor.putString("pw", enpw);
                                 editor.putBoolean("autologin", true);
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("user_id", id.getText().toString());
                                 startActivity(intent); // 다음 화면으로 넘어간다.
                                 pd.dismiss();
-//                            }
+                            }
 //                            else{
+//                                Toast.makeText(LoginActivity.this,"로그인 실패",Toast.LENGTH_LONG).show();
 //                                //로그인 실패 다이얼로그
 //                            }
 //                        } catch (JSONException e) {
 //                            e.printStackTrace();
 //                        }
-                    }
+//                    }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
