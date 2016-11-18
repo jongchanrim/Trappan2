@@ -72,7 +72,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private ImageButton review_backbutton;
     private Button review_completebutton;
     private Button review_imageupload_button;
-///////////////////
+
     private int imagenumber = 0; //업로드이미지 위치에 순서대로 보여주기 위한 변수
     private String contentid;
     @Override
