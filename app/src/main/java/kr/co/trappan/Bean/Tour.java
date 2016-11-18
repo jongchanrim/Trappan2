@@ -12,7 +12,7 @@ public class Tour {
     private String addr2;
     private String areacode;
     private String cat2;
-    private String firstimage;
+    private String firstimage="\\";
     private String mlevel;
     private String overview;
     private float mapx;
@@ -110,8 +110,33 @@ public class Tour {
         return cat2;
     }
 
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
+
+    public void setMapx(float mapx) {
+        this.mapx = mapx;
+    }
+
+    public void setMapy(float mapy) {
+        this.mapy = mapy;
+    }
+
+    public String getSigunguName() {
+        return sigunguName;
+    }
+
+    public void setSigunguName(String sigunguName) {
+        this.sigunguName = sigunguName;
+    }
+
     public void setCat2(String cat2) {
         this.cat2 = cat2;
+
     }
 
 

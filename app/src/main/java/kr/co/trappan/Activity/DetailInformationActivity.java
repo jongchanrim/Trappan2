@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,6 +59,8 @@ public class DetailInformationActivity extends AppCompatActivity {
     private Dialog ratingDialog;
     private RatingBar ratingBar;
 
+    private FloatingActionButton floatingActionButton;
+
     private TextView overview;
     private TextView btn_more;
     Tour item;
@@ -92,6 +95,8 @@ public class DetailInformationActivity extends AppCompatActivity {
         detailType = (TextView)findViewById(R.id.detail_type);
         detailAddr = (TextView) findViewById(R.id.detail_addr);
         deTailbtnReco = (ImageView) findViewById(R.id.detail_btn_reco);
+
+        floatingActionButton=(FloatingActionButton)findViewById(R.id.floating_button);
         aq = new AQuery(this);
 
         HttpClient.get("test", params, new JsonHttpResponseHandler() {
@@ -210,7 +215,6 @@ public class DetailInformationActivity extends AppCompatActivity {
         header.attachTo(recyclerView);
 
         HttpClient.get("test", params, new JsonHttpResponseHandler() {
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
@@ -218,8 +222,12 @@ public class DetailInformationActivity extends AppCompatActivity {
 
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject obj = response.getJSONObject(i);
-
-                        items.add(new Review(obj.getString("id"),obj.getString("img_1"),obj.getString("review_title"),obj.getString("review_content")));
+                        Review item=new Review();
+                        item.setId(obj.getString("id"));
+                        item.setImg_1(obj.getString("img_1"));
+                        item.setReview_title(obj.getString("review_title"));
+                        item.setReview_content(obj.getString("review_content"));
+                        items.add(item);
                     }
                     Adapter.setItems(items);
                     Adapter.notifyDataSetChanged();
@@ -290,6 +298,13 @@ public class DetailInformationActivity extends AppCompatActivity {
                 //now that the dialog is set up, it's time to show it
                 ratingDialog.show();
 
+            }
+        });
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Intent intent=new Intent(this,);
             }
         });
 

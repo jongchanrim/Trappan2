@@ -1,27 +1,18 @@
 package kr.co.trappan.Bean;
 
 public class Review {
-	private String user_image;
 	private int review_id;
 	private String id;
 	private String contentid;
 	private String review_title;
 	private String review_content;
-	private String img_1;
-	private String img_2;
-	private String img_3;
-	private String img_4;
-	private String img_5;
-	private String img_6;
+	private String img_1="\\";
+	private String img_2="\\";
+	private String img_3="\\";
+	private String img_4="\\";
+	private String img_5="\\";
+	private String img_6="\\";
 	private String c_date;
-
-	public String getUser_image() {
-		return user_image.replaceAll("\\", "");
-	}
-
-	public void setUser_image(String user_image) {
-		this.user_image = user_image;
-	}
 
 	public int getReview_id() {
 		return review_id;
@@ -96,21 +87,5 @@ public class Review {
 		this.c_date = c_date;
 	}
 
-	public Review() {
-	}
 
-	public Review(String id, String img_1, String review_title, String review_content) {
-		this.id = id;
-		this.img_1 = img_1;
-		this.review_content = review_content;
-		this.review_title = review_title;
-	}
-
-	public Review(String user_image,String id, String c_date, String review_content, String review_title){
-		this.id = id;
-		this.c_date = c_date;
-		this.review_content = review_content;
-		this.review_title = review_title;
-		this.user_image = user_image;
-	}
 }

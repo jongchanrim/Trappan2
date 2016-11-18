@@ -26,6 +26,7 @@ import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.pkmmte.view.CircularImageView;
 
 import java.io.BufferedOutputStream;
@@ -76,6 +77,7 @@ public class TabFragment5 extends Fragment{
         View view = inflater.inflate(R.layout.tabfragment5, container, false);
 
         resizeList = (RecyclerView) view.findViewById(R.id.mypage_scroll);
+        RecyclerViewHeader header = (RecyclerViewHeader) view.findViewById(R.id.header5);
 
         mybackimage = (ImageView) view.findViewById(R.id.mybackimage);
         circularImageView = (CircularImageView) view.findViewById(R.id.CircularImageView);
@@ -180,8 +182,9 @@ public class TabFragment5 extends Fragment{
         recyclerView.setLayoutManager(layoutManager);
         Adapter = new ListViewAdapter(getActivity() ,items ,R.layout.tabfragment5);
         recyclerView.setAdapter(Adapter);
+        header.attachTo(recyclerView);
 
-        resizeCommentList(items.size());
+        //resizeCommentList(items.size());
 
         return view;
     }

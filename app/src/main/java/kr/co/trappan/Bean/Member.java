@@ -10,7 +10,7 @@ public class Member {
 	private String name;
 	private String back_img;
 	private String pro_img;
-	private String intro_img;
+	private String intro_img="\\";
 	public String getId() {
 		return id;
 	}
@@ -48,7 +48,7 @@ public class Member {
 		this.pro_img = pro_img;
 	}
 	public String getIntro_img() {
-		return intro_img;
+		return intro_img.replaceAll("\\", "");
 	}
 	public void setIntro_img(String intro_img) {
 		this.intro_img = intro_img;

@@ -6,6 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.androidquery.AQuery;
+
+import java.util.ArrayList;
+
 import kr.co.trappan.R;
 
 /**
@@ -14,17 +18,20 @@ import kr.co.trappan.R;
 public class ReviewPagerAdapter extends PagerAdapter{
 
     LayoutInflater inflater;
-
-    public ReviewPagerAdapter(LayoutInflater inflater) {
+    ArrayList<String> list;
+    AQuery aq;
+    public ReviewPagerAdapter(LayoutInflater inflater,ArrayList<String> list) {
         this.inflater=inflater;
+        this.list=list;
     }
-
 
     @Override
     public int getCount() {
-        return 6;
+        if(list ==null)
+            return 0;
+        else
+            return list.size();
     }
-
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
@@ -32,24 +39,13 @@ public class ReviewPagerAdapter extends PagerAdapter{
         View view = null;
         view = inflater.inflate(R.layout.horizontal_viewpager, null);
 
+        aq=new AQuery(view);
+
         ImageView img = (ImageView) view.findViewById(R.id.viewpager_image);
 
-        if (position == 0) {
-            img.setBackgroundResource(R.drawable.a);
-        } else if (position == 1) {
-            img.setBackgroundResource(R.drawable.seoul);
-        } else if (position == 2) {
-            img.setBackgroundResource(R.drawable.back_button);
-        } else if (position == 3) {
-            img.setBackgroundResource(R.drawable.detail_icon_01_02);
-        } else if (position == 4) {
-            img.setBackgroundResource(R.drawable.detail_icon_04_a0203);
-        } else if (position == 5) {
-            img.setBackgroundResource(R.drawable.seoul);
-        }
-            //img.setImageResource(R.drawable.a);
+        aq.id(img).image(list.get(position));
 
-            container.addView(view);
+        container.addView(view);
 
             return view;
         }
