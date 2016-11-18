@@ -1,5 +1,6 @@
 package kr.co.trappan.Adapter;
 
+import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -9,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.androidquery.AQuery;
+
+import java.util.ArrayList;
+
 import kr.co.trappan.R;
 
 /**
@@ -17,15 +22,17 @@ import kr.co.trappan.R;
 public class Horizontal_Pager_Adapter extends PagerAdapter{
 
     LayoutInflater inflater;
+    ArrayList<String> list;
+    AQuery aq;
 
-    public Horizontal_Pager_Adapter(LayoutInflater inflater) {
+    public Horizontal_Pager_Adapter(LayoutInflater inflater, ArrayList<String> list) {
         this.inflater=inflater;
+        this.list=list;
     }
-
 
     @Override
     public int getCount() {
-        return 10;
+        return 5;
     }
 
 
@@ -35,24 +42,23 @@ public class Horizontal_Pager_Adapter extends PagerAdapter{
         View view=null;
         view= inflater.inflate(R.layout.horizontal_viewpager, null);
 
-        ImageView img= (ImageView)view.findViewById(R.id.viewpager_image);
+        aq=new AQuery(view);
 
-        if (position==0){
-            img.setBackgroundResource(R.drawable.a);
-        }else if(position==1){
-            img.setBackgroundResource(R.drawable.seoul);
-        }else if(position==2){
-            img.setBackgroundResource(R.drawable.back_button);
-        }else if(position==3){
-            img.setBackgroundResource(R.drawable.detail_icon_01_02);
-        }else if(position==4){
-            img.setBackgroundResource(R.drawable.detail_icon_04_a0203);
-        }else if(position==5){
-            img.setBackgroundResource(R.drawable.seoul);
-        }else if(position==6){
-            img.setBackgroundResource(R.drawable.seoul);
-        }
-        //img.setImageResource(R.drawable.a);
+        ImageView img= (ImageView)view.findViewById(R.id.viewpager_image);
+        ImageView ball[]=new ImageView[5];
+        ball[0]=(ImageView)view.findViewById(R.id.ball_1);
+        ball[1]=(ImageView)view.findViewById(R.id.ball_2);
+        ball[2]=(ImageView)view.findViewById(R.id.ball_3);
+        ball[3]=(ImageView)view.findViewById(R.id.ball_4);
+        ball[4]=(ImageView)view.findViewById(R.id.ball_5);
+
+        ball[position].setBackgroundResource(R.drawable.alarm_icon);
+
+
+
+        //aq.id(img).image(list.get(position));
+
+
 
         container.addView(view);
 

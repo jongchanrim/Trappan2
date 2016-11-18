@@ -11,11 +11,8 @@ public class Tour {
     private String addr1;
     private String addr2;
     private String areacode;
-    private String cat1;
     private String cat2;
-    private String cat3;
-    private String firstimage;
-    private String firstimage2;
+    private String firstimage="\\";
     private String mlevel;
     private String overview;
     private float mapx;
@@ -30,27 +27,26 @@ public class Tour {
     public Tour() {
     }
 
-    public Tour(String contentid, String contenttypeid, String title, String addr1, String addr2, String areacode, String cat1, String cat2, String cat3, String firstimage, String firstimage2, String mlevel, String overview, String mapx, String mapy, int rate, int stamp, int like, String sigungucode) {
-        this.contentid = contentid;
-        this.contenttypeid = contenttypeid;
-        this.title = title;
+    public Tour(String addr1, String addr2, String areacode, String cat2, String contentid, String contenttypeid, String firstimage, int like, String mapx, String mapy, String mlevel, String overview, int rate, String sigungucode, int stamp, String title) {
         this.addr1 = addr1;
         this.addr2 = addr2;
         this.areacode = areacode;
-        this.cat1 = cat1;
         this.cat2 = cat2;
-        this.cat3 = cat3;
+        this.contentid = contentid;
+        this.contenttypeid = contenttypeid;
         this.firstimage = firstimage;
-        this.firstimage2 = firstimage2;
-        this.mlevel = mlevel;
-        this.overview = overview;
+        this.like = like;
         this.mapx = Float.parseFloat(mapx);
         this.mapy = Float.parseFloat(mapy);
+        this.mlevel = mlevel;
+        this.overview = overview;
         this.rate = rate;
-        this.stamp = stamp;
-        this.like = like;
         this.sigungucode = sigungucode;
+        this.stamp = stamp;
+        this.title = title;
     }
+
+
 
     public String getSigungucode() {
         return sigungucode;
@@ -108,45 +104,52 @@ public class Tour {
         this.areacode = areacode;
     }
 
-    public String getCat1() {
-        return cat1;
-    }
 
-    public void setCat1(String cat1) {
-        this.cat1 = cat1;
-    }
 
     public String getCat2() {
         return cat2;
     }
 
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
+
+    public void setMapx(float mapx) {
+        this.mapx = mapx;
+    }
+
+    public void setMapy(float mapy) {
+        this.mapy = mapy;
+    }
+
+    public String getSigunguName() {
+        return sigunguName;
+    }
+
+    public void setSigunguName(String sigunguName) {
+        this.sigunguName = sigunguName;
+    }
+
     public void setCat2(String cat2) {
         this.cat2 = cat2;
+
     }
 
-    public String getCat3() {
-        return cat3;
-    }
 
-    public void setCat3(String cat3) {
-        this.cat3 = cat3;
-    }
 
     public String getFirstimage() {
-        return firstimage;
+        return firstimage.replaceAll("\\", "");
     }
 
     public void setFirstimage(String firstimage) {
         this.firstimage = firstimage;
     }
 
-    public String getFirstimage2() {
-        return firstimage2;
-    }
 
-    public void setFirstimage2(String firstimage2) {
-        this.firstimage2 = firstimage2;
-    }
 
     public String getMlevel() {
         return mlevel;

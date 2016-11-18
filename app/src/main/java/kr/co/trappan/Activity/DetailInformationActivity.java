@@ -3,10 +3,10 @@ package kr.co.trappan.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,17 +24,18 @@ import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
-import kr.co.trappan.Adapter.DetailInfoCommentAdapter;
-import kr.co.trappan.Item.DetailInfo_item;
+import kr.co.trappan.Adapter.ReviewListAdapter;
+import kr.co.trappan.Bean.Review;
+import kr.co.trappan.Bean.Tour;
 import kr.co.trappan.Connector.HttpClient;
-import kr.co.trappan.Item.DetailInfoComment_item;
+import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.R;
 
 public class DetailInformationActivity extends AppCompatActivity {
@@ -52,17 +53,20 @@ public class DetailInformationActivity extends AppCompatActivity {
     private ImageView deTailbtnReco;
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter Adapter;
+    private ReviewListAdapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     private Dialog ratingDialog;
     private RatingBar ratingBar;
 
+    private FloatingActionButton floatingActionButton;
+
     private TextView overview;
     private TextView btn_more;
-    DetailInfo_item item;
+    Tour item;
 
     String star_rate="";
+    ArrayList<Review> items = new ArrayList<>();
 
     String contentid;
     AQuery aq;
@@ -72,7 +76,7 @@ public class DetailInformationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_information);
 
         RequestParams params = new RequestParams();
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         contentid = intent.getExtras().getString("contentid");
         params.put("contentid", contentid);
         main_image=(ImageView)findViewById(R.id.detail_image);
@@ -91,6 +95,8 @@ public class DetailInformationActivity extends AppCompatActivity {
         detailType = (TextView)findViewById(R.id.detail_type);
         detailAddr = (TextView) findViewById(R.id.detail_addr);
         deTailbtnReco = (ImageView) findViewById(R.id.detail_btn_reco);
+
+        floatingActionButton=(FloatingActionButton)findViewById(R.id.floating_button);
         aq = new AQuery(this);
 
         HttpClient.get("test", params, new JsonHttpResponseHandler() {
@@ -98,11 +104,23 @@ public class DetailInformationActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                   item = new DetailInfo_item(response.getString("contentid"), response.getString("contenttypeid"),
-                            response.getString("title"), response.getString("addr1"), response.getString("addr2"), response.getString("areacode"), response.getString("cat1"),
-                            response.getString("cat2"), response.getString("cat3"), response.getString("firstimage"), response.getString("firstimage"), response.getString("mlevel"),
-                            response.getString("overview"), response.getString("mapx"), response.getString("mapy"),
-                            response.getInt("rate"), response.getInt("stamp"), response.getInt("like"));
+                    item = new Tour(response.getString("addr1"),
+                            response.getString("addr2"),
+                            response.getString("areacode"),
+                            response.getString("cat2"),
+                            response.getString("contentid"),
+                            response.getString("contenttypeid"),
+                            response.getString("firstimage"),
+                            response.getInt("like"),
+                            response.getString("mapx"),
+                            response.getString("mapy"),
+                            response.getString("mlevel"),
+                            response.getString("overview"),
+                            response.getInt("rate"),
+                            response.getString("sigungucode"),
+                            response.getInt("stamp"),
+                            response.getString("title")
+                    );
 
 
 
@@ -164,7 +182,6 @@ public class DetailInformationActivity extends AppCompatActivity {
                                 overview.setText(item.getOverview().substring(0,30)+"...");
                                 btn_more.setText("더보기");
                             }
-
                         }
                     });
 
@@ -188,23 +205,49 @@ public class DetailInformationActivity extends AppCompatActivity {
 
         RecyclerViewHeader header = (RecyclerViewHeader) findViewById(R.id.header);
 
-        ArrayList<DetailInfoComment_item> items = new ArrayList<>();
-        items.add(new DetailInfoComment_item("@hyojoo",R.drawable.gangwon,"전시회 너무 대단했다","동해물과 백두산이 마르고 닳도록..."));
-        items.add(new DetailInfoComment_item("@hyojoo",R.drawable.gangwon,"전시회 너무 대단했다","동해물과 백두산이 마르고 닳도록..."));
-        items.add(new DetailInfoComment_item("@hyojoo",R.drawable.gangwon,"전시회 너무 대단했다","동해물과 백두산이 마르고 닳도록..."));
-        items.add(new DetailInfoComment_item("@hyojoo",R.drawable.gangwon,"전시회 너무 대단했다","동해물과 백두산이 마르고 닳도록..."));
-        items.add(new DetailInfoComment_item("@hyojoo",R.drawable.gangwon,"전시회 너무 대단했다","동해물과 백두산이 마르고 닳도록..."));
-        items.add(new DetailInfoComment_item("@hyojoo",R.drawable.gangwon,"전시회 너무 대단했다","동해물과 백두산이 마르고 닳도록..."));
-        items.add(new DetailInfoComment_item("@hyojoo",R.drawable.gangwon,"전시회 너무 대단했다","동해물과 백두산이 마르고 닳도록..."));
-        items.add(new DetailInfoComment_item("@hyojoo",R.drawable.gangwon,"전시회 너무 대단했다","동해물과 백두산이 마르고 닳도록..."));
-        items.add(new DetailInfoComment_item("@hyojoo",R.drawable.gangwon,"전시회 너무 대단했다","동해물과 백두산이 마르고 닳도록..."));
+
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        Adapter = new DetailInfoCommentAdapter(this ,items);
+        Adapter = new ReviewListAdapter(this ,items);
         recyclerView.setAdapter(Adapter);
         header.attachTo(recyclerView);
+
+        HttpClient.get("test", params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject obj = response.getJSONObject(i);
+                        Review item=new Review();
+                        item.setId(obj.getString("id"));
+                        item.setImg_1(obj.getString("img_1"));
+                        item.setReview_title(obj.getString("review_title"));
+                        item.setReview_content(obj.getString("review_content"));
+                        items.add(item);
+                    }
+                    Adapter.setItems(items);
+                    Adapter.notifyDataSetChanged();
+                    //pd.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray response) {
+                super.onFailure(statusCode, headers, throwable, response);
+
+            }
+        });
+
+
 
         btn_want.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,21 +301,14 @@ public class DetailInformationActivity extends AppCompatActivity {
             }
         });
 
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Intent intent=new Intent(this,);
+            }
+        });
+
     }
 
-
-
-    private View.OnClickListener checklistner = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    };
-    private View.OnClickListener falselistner = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    };
 
 }

@@ -3,6 +3,7 @@ package kr.co.trappan.Bean;
 public class Comment {
 	private int comment_id;
 	private int review_id;
+	private int comment_count;
 	private String id;
 	private String comment_content;
 	private String c_date;
@@ -25,6 +26,15 @@ public class Comment {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public int getComment_count() {
+		return comment_count;
+	}
+
+	public void setComment_count(int comment_count) {
+		this.comment_count = comment_count;
+	}
+
 	public String getComment_content() {
 		return comment_content;
 	}

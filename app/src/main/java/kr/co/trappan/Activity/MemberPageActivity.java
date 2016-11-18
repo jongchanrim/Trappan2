@@ -1,39 +1,30 @@
-package kr.co.trappan.Fragment;
+package kr.co.trappan.Activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
-import android.support.design.widget.Snackbar;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.pkmmte.view.CircularImageView;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import kr.co.trappan.Adapter.ListViewAdapter;
@@ -42,11 +33,7 @@ import kr.co.trappan.R;
 
 import static android.app.Activity.RESULT_OK;
 
-
-/**
- * Created by thfad_000 on 2016-10-04.
- */
-public class TabFragment5 extends Fragment{
+public class MemberPageActivity extends AppCompatActivity {
 
     Context context;
     private RecyclerView recyclerView;
@@ -71,98 +58,24 @@ public class TabFragment5 extends Fragment{
 
     private int back_or_profile = 0;  //배경이미지와 프로필 이미지 선택 변수
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tabfragment5, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_member_page);
 
-        resizeList = (RecyclerView) view.findViewById(R.id.mypage_scroll);
-        RecyclerViewHeader header = (RecyclerViewHeader) view.findViewById(R.id.header5);
+        resizeList = (RecyclerView) findViewById(R.id.mypage_scroll);
 
-        mybackimage = (ImageView) view.findViewById(R.id.mybackimage);
-        circularImageView = (CircularImageView) view.findViewById(R.id.CircularImageView);
+        mybackimage = (ImageView) findViewById(R.id.mybackimage);
+        circularImageView = (CircularImageView) findViewById(R.id.CircularImageView);
 
-        mybackedit = (ImageButton)view.findViewById(R.id.mybackedit);
-        mybackedit.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakePhotoAction();
-                    }
-                };
-
-                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        back_or_profile = 1;
-                        doTakeAlbumAction();
-                    }
-                };
-
-                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                };
-
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("업로드 이미지 선택")
-                        .setPositiveButton("카메라",cameraListener)
-                        .setNeutralButton("갤러리",albumListener)
-                        .setNegativeButton("취소",cancelListener)
-                        .show();
-            }
-        });
-
-        myprofileedit = (ImageButton)view.findViewById(R.id.myprofileedit);
-        myprofileedit.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakePhotoAction();
-                    }
-                };
-
-                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        back_or_profile = 2;
-                        doTakeAlbumAction();
-                    }
-                };
-
-                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener(){
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                };
-
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("업로드 이미지 선택")
-                        .setPositiveButton("카메라",cameraListener)
-                        .setNeutralButton("갤러리",albumListener)
-                        .setNegativeButton("취소",cancelListener)
-                        .show();
-            }
-        });
-
-        CircularImageView circularImageView = (CircularImageView)view.findViewById(R.id.CircularImageView);
+        CircularImageView circularImageView = (CircularImageView)findViewById(R.id.CircularImageView);
         circularImageView.setBorderWidth(10);
         circularImageView.setSelectorStrokeWidth(10);
         circularImageView.addShadow();
 
 
-        context = getContext();
-        recyclerView = (RecyclerView) view.findViewById(R.id.mypage_scroll);
+        //context = getContext();
+        recyclerView = (RecyclerView) findViewById(R.id.mypage_scroll);
         recyclerView.setHasFixedSize(true);
 
         ArrayList<List_item> items = new ArrayList<>();
@@ -178,15 +91,12 @@ public class TabFragment5 extends Fragment{
         items.add(new List_item(R.drawable.gangwon,"후기","9","테스트9"));
         items.add(new List_item(R.drawable.gangwon,"후기","10","테스트10"));
 
-        layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        Adapter = new ListViewAdapter(getActivity() ,items ,R.layout.tabfragment5);
+        Adapter = new ListViewAdapter(this ,items ,R.layout.tabfragment5);
         recyclerView.setAdapter(Adapter);
-        header.attachTo(recyclerView);
 
-        //resizeCommentList(items.size());
-
-        return view;
+        resizeCommentList(items.size());
     }
 
     private void resizeCommentList(int item_size){
@@ -318,68 +228,5 @@ public class TabFragment5 extends Fragment{
             e.printStackTrace();
         }
     }
-
-//    public BitmapFactory.Options getBitmapSize(BitmapFactory.Options options){
-//        int targetWidth = 0;
-//        int targetHeight = 0;
-//
-//        if(options.outWidth > options.outHeight){
-//            targetWidth = (int)(600 * 1.3);
-//            targetHeight = 600;
-//        }else{
-//            targetWidth = 600;
-//            targetHeight = (int)(600 * 1.3);
-//        }
-//
-//        Boolean scaleByHeight = Math.abs(options.outHeight - targetHeight) >= Math.abs(options.outWidth - targetWidth);
-//        if(options.outHeight * options.outWidth * 2 >= 16384){
-//            double sampleSize = scaleByHeight
-//                    ? options.outHeight / targetHeight
-//                    : options.outWidth / targetWidth;
-//            options.inSampleSize = (int) Math.pow(2d, Math.floor(Math.log(sampleSize)/Math.log(2d)));
-//        }
-//        options.inJustDecodeBounds = false;
-//        options.inTempStorage = new byte[16*1024];
-//
-//        return options;
-//    }
-//
-//    public static Bitmap loadBackgroundBitmap(Context context, String imgFilePath) {
-//        File file = new File(imgFilePath);
-//        if (file.exists() == false) {
-//            return null;
-//        }
-//
-//        // 폰의 화면 사이즈를 구한다.
-//        Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-//        int displayWidth = display.getWidth();
-//        int displayHeight = display.getHeight();
-//
-//        // 읽어들일 이미지의 사이즈를 구한다.
-//        BitmapFactory.Options options = new BitmapFactory.Options();
-//        options.inPreferredConfig = Bitmap.Config.RGB_565;
-//        options.inJustDecodeBounds = true;
-//        BitmapFactory.decodeFile(imgFilePath, options);
-//
-//        // 화면 사이즈에 가장 근접하는 이미지의 스케일 팩터를 구한다.
-//        // 스케일 팩터는 이미지 손실을 최소화하기 위해 짝수로 한다.
-//        float widthScale = options.outWidth / displayWidth;
-//        float heightScale = options.outHeight / displayHeight;
-//        float scale = widthScale > heightScale ? widthScale : heightScale;
-//
-//        if (scale >= 8)
-//            options.inSampleSize = 8;
-//        else if (scale >= 6)
-//            options.inSampleSize = 6;
-//        else if (scale >= 4)
-//            options.inSampleSize = 4;
-//        else if (scale >= 2)
-//            options.inSampleSize = 2;
-//        else
-//            options.inSampleSize = 1;
-//        options.inJustDecodeBounds = false;
-//
-//        return BitmapFactory.decodeFile(imgFilePath, options);
-//    }
 
 }

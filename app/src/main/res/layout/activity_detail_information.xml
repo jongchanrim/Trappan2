@@ -270,12 +270,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
 
-                <fragment
-                    android:id="@+id/map"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    class="com.google.android.gms.maps.SupportMapFragment"
-                    />
+                <!--<fragment-->
+                    <!--android:id="@+id/map"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--class="com.google.android.gms.maps.SupportMapFragment"-->
+                    <!--/>-->
             </LinearLayout>
 
         </LinearLayout>
@@ -288,6 +288,14 @@
 
     </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 
+    <android.support.design.widget.FloatingActionButton
+        android:src="@drawable/profileedit"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="bottom|end"
+        android:id="@+id/floating_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
 </FrameLayout>
 

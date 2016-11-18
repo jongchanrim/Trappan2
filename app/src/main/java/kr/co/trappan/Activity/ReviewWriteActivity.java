@@ -11,13 +11,16 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.LinearLayout.LayoutParams;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -33,8 +36,6 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView resizeList;
 
-    private ImageView reviewimage;
-
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
@@ -44,20 +45,62 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private int id_view;
     private String absoultePath;
 
-    private ImageButton review_img1;
-    private ImageButton review_img2;
-    private ImageButton review_img3;
-    private ImageButton review_img4;
-    private ImageButton review_img5;
-    private ImageButton review_img6;
+    private ImageView review_img1;
+    private ImageView review_img2;
+    private ImageView review_img3;
+    private ImageView review_img4;
+    private ImageView review_img5;
+    private ImageView review_img6;
 
     private ImageButton review_backbutton;
     private Button review_completebutton;
+    private Button review_imageupload_button;
+
+    private int imagenumber = 0; //업로드이미지 버튼 위치에 보여주기
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_write);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        WindowManager windowManager = (WindowManager) getApplicationContext()
+                .getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(metrics);
+
+        review_img1 = (ImageView) findViewById(R.id.review_img1);
+        review_img2 = (ImageView) findViewById(R.id.review_img2);
+        review_img3 = (ImageView) findViewById(R.id.review_img3);
+        review_img4 = (ImageView) findViewById(R.id.review_img4);
+        review_img5 = (ImageView) findViewById(R.id.review_img5);
+        review_img6 = (ImageView) findViewById(R.id.review_img6);
+
+        LayoutParams params1 = (LayoutParams) review_img1.getLayoutParams();
+        LayoutParams params2 = (LayoutParams) review_img2.getLayoutParams();
+        LayoutParams params3 = (LayoutParams) review_img3.getLayoutParams();
+        LayoutParams params4 = (LayoutParams) review_img4.getLayoutParams();
+        LayoutParams params5 = (LayoutParams) review_img5.getLayoutParams();
+        LayoutParams params6 = (LayoutParams) review_img6.getLayoutParams();
+
+        params1.width = metrics.widthPixels/3;
+        params1.height = metrics.heightPixels/6;
+        params2.width = metrics.widthPixels/3;
+        params2.height = metrics.heightPixels/6;
+        params3.width = metrics.widthPixels/3;
+        params3.height = metrics.heightPixels/6;
+        params4.width = metrics.widthPixels/3;
+        params4.height = metrics.heightPixels/6;
+        params5.width = metrics.widthPixels/3;
+        params5.height = metrics.heightPixels/6;
+        params6.width = metrics.widthPixels/3;
+        params6.height = metrics.heightPixels/6;
+
+        review_img1.setLayoutParams(params1);
+        review_img2.setLayoutParams(params2);
+        review_img3.setLayoutParams(params3);
+        review_img4.setLayoutParams(params4);
+        review_img5.setLayoutParams(params5);
+        review_img6.setLayoutParams(params6);
 
         View.OnClickListener Click = new View.OnClickListener(){
             @Override
@@ -72,6 +115,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
                 DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        imagenumber++;
                         doTakeAlbumAction();
                     }
                 };
@@ -92,22 +136,6 @@ public class ReviewWriteActivity extends AppCompatActivity {
             }
         };
 
-        review_img1 = (ImageButton)findViewById(R.id.review_img1);
-        review_img2 = (ImageButton)findViewById(R.id.review_img2);
-        review_img3 = (ImageButton)findViewById(R.id.review_img3);
-        review_img4 = (ImageButton)findViewById(R.id.review_img4);
-        review_img5 = (ImageButton)findViewById(R.id.review_img5);
-        review_img6 = (ImageButton)findViewById(R.id.review_img6);
-
-        review_img1.setOnClickListener(Click);
-        review_img2.setOnClickListener(Click);
-        review_img3.setOnClickListener(Click);
-        review_img4.setOnClickListener(Click);
-        review_img5.setOnClickListener(Click);
-        review_img6.setOnClickListener(Click);
-
-        reviewimage = (ImageView)findViewById(R.id.review_image);
-
         review_backbutton = (ImageButton)findViewById(R.id.review_backbutton);
         review_backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +152,8 @@ public class ReviewWriteActivity extends AppCompatActivity {
                 Toast.makeText(ReviewWriteActivity.this, "완료 버튼", Toast.LENGTH_SHORT).show();
             }
         });
+        review_imageupload_button = (Button)findViewById(R.id.review_imageupload_button);
+        review_imageupload_button.setOnClickListener(Click);
 
     }
 
@@ -172,10 +202,28 @@ public class ReviewWriteActivity extends AppCompatActivity {
                 intent.putExtra("aspectX",1);
                 intent.putExtra("aspectY",1);
                 intent.putExtra("scale",true);
-                intent.putExtra("return-data",true);
+                intent.putExtra("return-data",false);
                 startActivityForResult(intent, CROP_FROM_IMAGE);
 
-                reviewimage.setImageURI(mlmageCaptureUri);
+                if(imagenumber == 1) {
+                    review_img1.setImageURI(mlmageCaptureUri);
+                }
+                else if(imagenumber == 2){
+                    review_img2.setImageURI(mlmageCaptureUri);
+                }
+                else if(imagenumber == 3){
+                    review_img3.setImageURI(mlmageCaptureUri);
+                }
+                else if(imagenumber == 4){
+                    review_img4.setImageURI(mlmageCaptureUri);
+                }
+                else if(imagenumber == 5){
+                    review_img5.setImageURI(mlmageCaptureUri);
+                }
+                else if(imagenumber == 6){
+                    review_img6.setImageURI(mlmageCaptureUri);
+                    imagenumber = 0;
+                }
 
                 break;
 
