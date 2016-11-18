@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,16 +46,6 @@ public class Horizontal_Pager_Adapter extends PagerAdapter{
         aq=new AQuery(view);
 
         ImageView img= (ImageView)view.findViewById(R.id.viewpager_image);
-        ImageView ball[]=new ImageView[5];
-        ball[0]=(ImageView)view.findViewById(R.id.ball_1);
-        ball[1]=(ImageView)view.findViewById(R.id.ball_2);
-        ball[2]=(ImageView)view.findViewById(R.id.ball_3);
-        ball[3]=(ImageView)view.findViewById(R.id.ball_4);
-        ball[4]=(ImageView)view.findViewById(R.id.ball_5);
-
-        ball[position].setBackgroundResource(R.drawable.alarm_icon);
-
-
 
         //aq.id(img).image(list.get(position));
 

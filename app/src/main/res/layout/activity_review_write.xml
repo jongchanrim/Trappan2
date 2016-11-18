@@ -140,12 +140,12 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/review_title"
-        android:textColor="?android:attr/textColorTertiaryInverse"
+        android:textColor="@android:color/black"
         android:layout_marginBottom="10dp"
         android:background="@drawable/xml_border"
         android:padding="5dp"
         android:hint="제목을 입력하세요"
-        android:textColorHint="@color/cardview_dark_background"
+        android:textColorHint="@color/cardview_shadow_start_color"
         android:textSize="14sp"
         android:layout_marginTop="10dp" />
 
@@ -154,14 +154,14 @@
         android:layout_height="match_parent"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/review_contents"
-        android:textColor="?android:attr/textColorHintInverse"
+        android:id="@+id/review_content"
+        android:textColor="@android:color/black"
         android:layout_marginBottom="10dp"
         android:background="@drawable/xml_border"
         android:gravity="top|center_vertical"
         android:padding="5dp"
         android:hint="내용을 입력하세요"
-        android:textColorHint="@color/cardview_dark_background"
+        android:textColorHint="@color/cardview_shadow_start_color"
         android:textSize="14sp" />
 
 </LinearLayout>
