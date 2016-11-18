@@ -4,39 +4,36 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
-import android.support.design.widget.Snackbar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.pkmmte.view.CircularImageView;
+
+import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Adapter.ListViewAdapter;
+import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.Item.List_item;
 import kr.co.trappan.R;
 
@@ -52,13 +49,21 @@ public class TabFragment5 extends Fragment{
     private RecyclerView recyclerView;
     private RecyclerView.Adapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView resizeList;
 
-    private ImageView mybackimage;
-    private CircularImageView circularImageView;
+    private ImageView back_img;
+    private CircularImageView pro_img;
 
-    private ImageButton mybackedit;
-    private ImageButton myprofileedit;
+    private ImageButton f5_btn_backimg;
+    private ImageButton f5_btn_proimg;
+
+    private TextView user_name;
+    private TextView user_profile;
+    private TextView follower;
+    private TextView following;
+    private TextView tlike;
+    private TextView stamp;
+    private TextView rlike;
+    private TextView comment;
 
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -75,15 +80,39 @@ public class TabFragment5 extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tabfragment5, container, false);
+        context = getContext();
 
-        resizeList = (RecyclerView) view.findViewById(R.id.mypage_scroll);
+        CircularImageView circularImageView = (CircularImageView)view.findViewById(R.id.f5_proimg);
+        circularImageView.setBorderWidth(10);
+        circularImageView.setSelectorStrokeWidth(10);
+        circularImageView.addShadow();
+        back_img = (ImageView) view.findViewById(R.id.f5_backimg);
+        pro_img = (CircularImageView) view.findViewById(R.id.f5_proimg);
+        f5_btn_backimg = (ImageButton)view.findViewById(R.id.f5_btn_backimg);
+        f5_btn_proimg = (ImageButton)view.findViewById(R.id.f5_btn_proimg);
+
+        user_name=(TextView)view.findViewById(R.id.f5_username) ;
+        user_profile=(TextView)view.findViewById(R.id.f5_profile);
+        follower=(TextView)view.findViewById(R.id.f5_follower);
+        following=(TextView)view.findViewById(R.id.f5_following);
+        tlike=(TextView)view.findViewById(R.id.f5_tlike);
+        stamp=(TextView)view.findViewById(R.id.f5_stamp);
+        rlike=(TextView)view.findViewById(R.id.f5_rlike);
+        comment=(TextView)view.findViewById(R.id.f5_comment);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.mypage_scroll);
         RecyclerViewHeader header = (RecyclerViewHeader) view.findViewById(R.id.header5);
+        recyclerView.setHasFixedSize(true);
+        ArrayList<List_item> items = new ArrayList<>();
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        Adapter = new ListViewAdapter(getActivity() ,items ,R.layout.tabfragment5);
+        recyclerView.setAdapter(Adapter);
+        header.attachTo(recyclerView);
 
-        mybackimage = (ImageView) view.findViewById(R.id.mybackimage);
-        circularImageView = (CircularImageView) view.findViewById(R.id.CircularImageView);
+        //resizeCommentList(items.size());
 
-        mybackedit = (ImageButton)view.findViewById(R.id.mybackedit);
-        mybackedit.setOnClickListener(new View.OnClickListener(){
+        f5_btn_backimg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
@@ -117,8 +146,7 @@ public class TabFragment5 extends Fragment{
             }
         });
 
-        myprofileedit = (ImageButton)view.findViewById(R.id.myprofileedit);
-        myprofileedit.setOnClickListener(new View.OnClickListener(){
+        f5_btn_proimg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
@@ -155,44 +183,51 @@ public class TabFragment5 extends Fragment{
             }
         });
 
-        CircularImageView circularImageView = (CircularImageView)view.findViewById(R.id.CircularImageView);
-        circularImageView.setBorderWidth(10);
-        circularImageView.setSelectorStrokeWidth(10);
-        circularImageView.addShadow();
+        HttpClient.get("test", null, new JsonHttpResponseHandler() { // Profile
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+
+                }catch (Exception e){
+
+                }
+            }
 
 
-        context = getContext();
-        recyclerView = (RecyclerView) view.findViewById(R.id.mypage_scroll);
-        recyclerView.setHasFixedSize(true);
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
+                super.onFailure(statusCode, headers, throwable, response);
 
-        ArrayList<List_item> items = new ArrayList<>();
+            }
+        });
 
-        items.add(new List_item(R.drawable.gangwon,"후기","1","테스트1"));
-        items.add(new List_item(R.drawable.gangwon,"후기","2","테스트2"));
-        items.add(new List_item(R.drawable.gangwon,"후기","3","테스트3"));
-        items.add(new List_item(R.drawable.gangwon,"후기","4","테스트4"));
-        items.add(new List_item(R.drawable.gangwon,"후기","5","테스트5"));
-        items.add(new List_item(R.drawable.gangwon,"후기","6","테스트6"));
-        items.add(new List_item(R.drawable.gangwon,"후기","7","테스트7"));
-        items.add(new List_item(R.drawable.gangwon,"후기","8","테스트8"));
-        items.add(new List_item(R.drawable.gangwon,"후기","9","테스트9"));
-        items.add(new List_item(R.drawable.gangwon,"후기","10","테스트10"));
+        HttpClient.get("test", null, new JsonHttpResponseHandler() { // List
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
 
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        Adapter = new ListViewAdapter(getActivity() ,items ,R.layout.tabfragment5);
-        recyclerView.setAdapter(Adapter);
-        header.attachTo(recyclerView);
+                }catch (Exception e){
 
-        //resizeCommentList(items.size());
+                }
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
+                super.onFailure(statusCode, headers, throwable, response);
+
+            }
+        });
 
         return view;
     }
 
     private void resizeCommentList(int item_size){
-        ViewGroup.LayoutParams params = resizeList.getLayoutParams();
+        ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
         params.height = 350 * item_size;
-        resizeList.setLayoutParams(params);
+        recyclerView.setLayoutParams(params);
     }
 
     public void doTakePhotoAction(){
@@ -245,11 +280,11 @@ public class TabFragment5 extends Fragment{
                 startActivityForResult(intent, CROP_FROM_IMAGE);
 
                 if(back_or_profile == 1) {
-                    mybackimage.setImageURI(mlmageCaptureUri);
+                    back_img.setImageURI(mlmageCaptureUri);
                     back_or_profile = 0;
                 }
                 else if(back_or_profile == 2){
-                    circularImageView.setImageURI(mlmageCaptureUri);
+                    pro_img.setImageURI(mlmageCaptureUri);
                     back_or_profile = 0;
                 }
 

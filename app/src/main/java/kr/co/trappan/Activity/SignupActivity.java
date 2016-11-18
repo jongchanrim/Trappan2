@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -71,11 +72,12 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                             if (responseBody.toString().equals("success")) {
-                                Intent intetn1;
-                                intetn1 = new Intent(SignupActivity.this, LoginActivity.class);
-                                startActivity(intetn1);
+                                Intent intent;
+                                intent = new Intent(SignupActivity.this, LoginActivity.class);
+                                startActivity(intent);
                                 finish();
                             } else {
+                                Toast.makeText(SignupActivity.this,"회원가입이 실패하였습니다",Toast.LENGTH_LONG).show();
                                 //아이디 중복 다이얼로그
                             }
                         }

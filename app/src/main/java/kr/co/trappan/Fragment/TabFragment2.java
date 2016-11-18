@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.util.StringTokenizer;
 
 import kr.co.trappan.Activity.SearchActivity;
 
@@ -23,6 +27,8 @@ public class TabFragment2 extends Fragment {
 
     Context context;
     Button[] areaButton;
+    private ImageView btn_keyword;
+    private EditText keyword;
 
     int[] selectedItems;
     int[] unSelectedIcon = {R.drawable.seoul_1,
@@ -66,6 +72,19 @@ public class TabFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tabfragment2, container, false);
+
+        btn_keyword=(ImageView)view.findViewById(R.id.f2_btn_keyword);
+        keyword=(EditText)view.findViewById(R.id.f2_keyword);
+
+        btn_keyword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("keyword", keyword.getText().toString());
+                v.getContext().startActivity(intent);
+            }
+        });
+
         areaButton = new Button[17];
         areaButton[0] = (Button) view.findViewById(R.id.search_seoul_button);
         areaButton[1] = (Button) view.findViewById(R.id.search_incheon_button);
@@ -1048,8 +1067,10 @@ public class TabFragment2 extends Fragment {
             Button b = (Button) v;
             //  b.setBackgroundColor();
             Intent intent = new Intent(v.getContext(), SearchActivity.class);
-            intent.putExtra("areacode", getResources().getResourceEntryName(b.getId()));
-            intent.putExtra("sigungucode", b.getText());
+
+            String[] tag = getResources().getResourceEntryName(b.getId()).split("_");
+            intent.putExtra("areacode", tag[1]);
+            intent.putExtra("sigungucode", tag[2]);
             v.getContext().startActivity(intent);
 
         }
