@@ -4,8 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-
     <uses-permission android:name="com.tistory.webnautes.googlemap.locationapi.maps.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -22,10 +20,10 @@
         android:value="AIzaSyAzGywE-iwvdsyBzv-7kdiIuz2thtYZiVA" />
 
     <application
-        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -33,13 +31,13 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-        android:name=".Activity.LoginActivity"
-        android:label="@string/app_name">
-        </activity>
+            android:name=".Activity.LoginActivity"
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".Activity.MainActivity"
             android:label="MainActivity"
@@ -47,7 +45,7 @@
         <activity android:name=".Activity.SignupActivity" />
         <activity android:name=".Activity.SearchActivity" />
         <activity android:name=".Activity.ReviewPageActivity" />
-        <activity android:name=".Activity.DetailInformationActivity"></activity>
+        <activity android:name=".Activity.DetailInformationActivity" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -56,7 +54,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Activity.ReviewWriteActivity"></activity>
+        <activity android:name=".Activity.ReviewWriteActivity" />
+        <activity android:name=".Activity.MemberPageActivity"></activity>
     </application>
 
 </manifest>

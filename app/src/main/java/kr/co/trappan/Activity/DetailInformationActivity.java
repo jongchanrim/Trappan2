@@ -104,23 +104,23 @@ public class DetailInformationActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                   item = new Tour(response.getString("addr1"),
-                           response.getString("addr2"),
-                           response.getString("areacode"),
-                           response.getString("cat2"),
-                           response.getString("contentid"),
-                           response.getString("contenttypeid"),
-                           response.getString("firstimage"),
-                           response.getInt("like"),
-                           response.getString("mapx"),
-                           response.getString("mapy"),
-                           response.getString("mlevel"),
-                           response.getString("overview"),
-                           response.getInt("rate"),
-                           response.getString("sigungucode"),
-                           response.getInt("stamp"),
-                           response.getString("title")
-                   );
+                    item = new Tour(response.getString("addr1"),
+                            response.getString("addr2"),
+                            response.getString("areacode"),
+                            response.getString("cat2"),
+                            response.getString("contentid"),
+                            response.getString("contenttypeid"),
+                            response.getString("firstimage"),
+                            response.getInt("like"),
+                            response.getString("mapx"),
+                            response.getString("mapy"),
+                            response.getString("mlevel"),
+                            response.getString("overview"),
+                            response.getInt("rate"),
+                            response.getString("sigungucode"),
+                            response.getInt("stamp"),
+                            response.getString("title")
+                    );
 
 
 
