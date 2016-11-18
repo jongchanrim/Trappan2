@@ -22,10 +22,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 
+import cz.msebera.android.httpclient.Header;
+import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.R;
 
 public class ReviewWriteActivity extends AppCompatActivity {
@@ -57,9 +66,11 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private Button review_imageupload_button;
 
     private int imagenumber = 0; //업로드이미지 버튼 위치에 보여주기
-
+    private String contentid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        contentid = intent.getExtras().getString("contentid");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_write);
 
@@ -149,7 +160,25 @@ public class ReviewWriteActivity extends AppCompatActivity {
         review_completebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ReviewWriteActivity.this, "완료 버튼", Toast.LENGTH_SHORT).show();
+               // File myFile = new File("/path/to/file.png");
+//                RequestParams params = new RequestParams();
+//                try {
+//                    //params.put("profile_picture", myFile);
+//                } catch(FileNotFoundException e) {
+//
+//                }
+//                HttpClient.get("addreaview", params, new JsonHttpResponseHandler() {
+//                            @Override
+//                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                                super.onSuccess(statusCode, headers, response);
+//                                Intent intent = new Intent(ReviewWriteActivity.this, DetailInformationActivity.class);
+//                                startActivity(intent);
+//                                finish();
+//                            }
+//                        }
+//
+//                );
+                Toast.makeText(ReviewWriteActivity.this, "완료", Toast.LENGTH_SHORT).show();
             }
         });
         review_imageupload_button = (Button)findViewById(R.id.review_imageupload_button);
