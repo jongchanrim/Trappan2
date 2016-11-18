@@ -13,6 +13,10 @@ public class Member {
 	private String pro_img;
 	private String intro;
 
+	public Member() {
+
+	}
+
 
 	public String getId() {
 		return id;
