@@ -4175,6 +4175,78 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="124dip"
+        android:id = "@+id/theme_view"
+        android:layout_below="@+id/theme">
+
+        <HorizontalScrollView
+            android:id="@+id/themescrollview"
+            android:layout_width="fill_parent"
+            android:layout_height="122dip">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:orientation="horizontal">
+                <!-- Content here -->
+
+                <Button
+                    android:id="@+id/search_nature_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/theme_a0101"
+                    android:layout_margin="2dip"/>
+
+                <Button
+                    android:id="@+id/search_history_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/theme_a0201"
+                    android:layout_margin = "2dip"/>
+
+                <Button
+                    android:id="@+id/search_rest_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/theme_a0202"
+                    android:layout_margin = "2dip"/>
+
+                <Button
+                    android:id="@+id/search_activity_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/theme_a0203"
+                    android:layout_margin = "2dip"/>
+
+                <Button
+                    android:id="@+id/search_building_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/theme_a0205"
+                    android:layout_margin = "2dip"/>
+
+                <Button
+                    android:id="@+id/search_culture_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/theme_a0206"
+                    android:layout_margin = "2dip"/>
+
+                <Button
+                    android:id="@+id/search_festival_button"
+                    android:layout_width="120dip"
+                    android:layout_height="120dip"
+                    android:background="@drawable/theme_a0207"
+                    android:layout_margin = "2dip"/>
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </RelativeLayout>
+
 
 
 
