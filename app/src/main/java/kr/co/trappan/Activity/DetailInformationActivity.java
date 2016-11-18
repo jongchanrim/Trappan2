@@ -304,7 +304,9 @@ public class DetailInformationActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(DetailInformationActivity.this,ReviewWriteActivity.class);
+                intent.putExtra("contentid","22");
+                startActivity(intent);
             }
         });
 
