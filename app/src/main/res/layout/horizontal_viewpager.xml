@@ -3,48 +3,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <ImageView
+            android:background="@drawable/seoul"
             android:id="@+id/viewpager_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <LinearLayout
-            android:paddingBottom="20dp"
-            android:gravity="center|bottom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/ball_1"
-                android:background="@mipmap/ic_launcher"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-            <ImageView
-                android:id="@+id/ball_2"
-                android:background="@mipmap/ic_launcher"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-            <ImageView
-                android:id="@+id/ball_3"
-                android:background="@mipmap/ic_launcher"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-            <ImageView
-                android:id="@+id/ball_4"
-                android:background="@mipmap/ic_launcher"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-            <ImageView
-                android:id="@+id/ball_5"
-                android:background="@mipmap/ic_launcher"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-        </LinearLayout>
-    </FrameLayout>
 
 </LinearLayout>

@@ -19,237 +19,278 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"></android.support.v4.view.ViewPager>
 
+            <LinearLayout
+                android:paddingBottom="20dp"
+                android:gravity="center|bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginRight="3dp"
+                    android:id="@+id/ball_1"
+                    android:background="@drawable/pager_02"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
+                <ImageView
+                    android:layout_marginRight="3dp"
+                    android:id="@+id/ball_2"
+                    android:background="@drawable/pager_01"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
+                <ImageView
+                    android:layout_marginRight="3dp"
+                    android:id="@+id/ball_3"
+                    android:background="@drawable/pager_01"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
+                <ImageView
+                    android:layout_marginRight="3dp"
+                    android:id="@+id/ball_4"
+                    android:background="@drawable/pager_01"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
+                <ImageView
+                    android:id="@+id/ball_5"
+                    android:background="@drawable/pager_01"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
+            </LinearLayout>
 
         </FrameLayout>
 
-        <TextView
+        <View
+            android:background="@android:color/white"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:text=""/>
-
-        <RelativeLayout
+            android:layout_height="10dp" />
+        <!--///////////////////////////ITEM1/////////////////////////////////-->
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/item1"
-            android:orientation="horizontal">
-
-
+            android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="좋아요 5"
-                android:textColor="#802010"
-                android:id="@+id/textView8"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/textView9"
-                android:layout_toStartOf="@+id/textView9"
-                android:layout_marginRight="47dp"
-                android:layout_marginEnd="47dp" />
+                android:paddingLeft="10dp"
+                android:textColor="@android:color/black"
+                android:text="이 주의 HOT! 여행"
+                android:background="@drawable/textbackground"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="남긴글 3"
-                android:textColor="#802010"
-                android:id="@+id/textView9"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/week_review_img"
+                    android:background="@drawable/seoul"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+                <LinearLayout
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|bottom">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="제주도"
-                android:id="@+id/textView10"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="36dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="주상절리"
-                android:id="@+id/textView11"
-                android:layout_alignTop="@+id/textView10"
-                android:layout_toLeftOf="@+id/textView8"
-                android:layout_toStartOf="@+id/textView8"
-                android:layout_marginRight="33dp"
-                android:layout_marginEnd="33dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="고등학교 친구들과 여행"
-                android:id="@+id/textView12"
-                android:layout_below="@+id/textView11"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="2016.3.15"
-                android:id="@+id/textView13"
-                android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/textView8"
-                android:layout_alignStart="@+id/textView8"
-                android:layout_marginLeft="47dp"
-                android:layout_marginStart="47dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
+                    <LinearLayout
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/week_review_areaname"
+                            android:textSize="20sp"
+                            android:layout_marginRight="10dp"
+                            android:textColor="@android:color/white"
+                            android:text="가평군"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/week_review_main_title"
+                            android:textSize="20sp"
+                            android:textColor="@android:color/white"
+                            android:text="화악산"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/week_review_title"
+                        android:textColor="@android:color/white"
+                        android:text="단풍놀이 꿀잼이당"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </FrameLayout>
+            <View
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+            </View>
+        </LinearLayout>
+        <!--/////////////////////////ITEM2///////////////////////////////////-->
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/item2"
-            android:orientation="horizontal">
-
-
+            android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="좋아요 5"
-                android:textColor="#802010"
-                android:id="@+id/textView14"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/textView15"
-                android:layout_toStartOf="@+id/textView15"
-                android:layout_marginRight="47dp"
-                android:layout_marginEnd="47dp" />
+                android:paddingLeft="10dp"
+                android:textColor="@android:color/black"
+                android:text="이 주의 추천 여행지"
+                android:background="@drawable/textbackground"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="남긴글 3"
-                android:textColor="#802010"
-                android:id="@+id/textView15"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="제주도"
-                android:id="@+id/textView16"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="36dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="주상절리"
-                android:id="@+id/textView17"
-                android:layout_alignTop="@+id/textView16"
-                android:layout_toLeftOf="@+id/textView14"
-                android:layout_toStartOf="@+id/textView14"
-                android:layout_marginRight="33dp"
-                android:layout_marginEnd="33dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="고등학교 친구들과 여행"
-                android:id="@+id/textView18"
-                android:layout_below="@+id/textView17"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="2016.3.15"
-                android:id="@+id/textView19"
-                android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/textView14"
-                android:layout_alignStart="@+id/textView14"
-                android:layout_marginLeft="47dp"
-                android:layout_marginStart="47dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/week_tour_img"
+                    android:background="@drawable/seoul"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+                <LinearLayout
+                    android:layout_gravity="center|center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/week_tour_areaname"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        android:text="가평군"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/week_tour_main_title"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        android:text="화악산"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </FrameLayout>
+            <View
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+            </View>
+        </LinearLayout>
+        <!--/////////////////////////ITEM3///////////////////////////////////-->
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/item3"
-            android:orientation="horizontal">
-
-
+            android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="좋아요 5"
-                android:textColor="#802010"
-                android:id="@+id/textView20"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/textView21"
-                android:layout_toStartOf="@+id/textView21"
-                android:layout_marginRight="47dp"
-                android:layout_marginEnd="47dp" />
+                android:paddingLeft="10dp"
+                android:textColor="@android:color/black"
+                android:text="이 달의 HOT! 여행"
+                android:background="@drawable/textbackground"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="남긴글 3"
-                android:textColor="#802010"
-                android:id="@+id/textView21"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/month_review_img"
+                    android:background="@drawable/seoul"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+                <LinearLayout
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|bottom">
 
+                    <LinearLayout
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/month_review_areaname"
+                            android:textSize="20sp"
+                            android:textColor="@android:color/white"
+                            android:layout_marginRight="10dp"
+                            android:text="가평군"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/month_review_main_title"
+                            android:textSize="20sp"
+                            android:textColor="@android:color/white"
+                            android:text="화악산"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/month_review_title"
+                        android:textColor="@android:color/white"
+                        android:text="단풍놀이 꿀잼이당"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </FrameLayout>
+            <View
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+            </View>
+        </LinearLayout>
+        <!--/////////////////////////ITEM4///////////////////////////////////-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="제주도"
-                android:id="@+id/textView22"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="36dp" />
+                android:paddingLeft="10dp"
+                android:textColor="@android:color/black"
+                android:text="이 달의 추천 여행지"
+                android:background="@drawable/textbackground"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="주상절리"
-                android:id="@+id/textView23"
-                android:layout_alignTop="@+id/textView22"
-                android:layout_toLeftOf="@+id/textView20"
-                android:layout_toStartOf="@+id/textView20"
-                android:layout_marginRight="33dp"
-                android:layout_marginEnd="33dp" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/month_tour_img"
+                    android:background="@drawable/seoul"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+                <LinearLayout
+                    android:layout_gravity="center|center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/month_tour_areaname"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"
+                        android:layout_marginRight="10dp"
+                        android:text="가평군"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/month_tour_main_title"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"
+                        android:text="화악산"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </FrameLayout>
+            <View
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+            </View>
+        </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="고등학교 친구들과 여행"
-                android:id="@+id/textView24"
-                android:layout_below="@+id/textView23"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="2016.3.15"
-                android:id="@+id/textView25"
-                android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/textView20"
-                android:layout_alignStart="@+id/textView20"
-                android:layout_marginLeft="47dp"
-                android:layout_marginStart="47dp" />
-        </RelativeLayout>
     </LinearLayout>
 </ScrollView>

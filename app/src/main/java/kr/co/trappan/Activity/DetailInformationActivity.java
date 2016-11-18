@@ -99,7 +99,7 @@ public class DetailInformationActivity extends AppCompatActivity {
         floatingActionButton=(FloatingActionButton)findViewById(R.id.floating_button);
         aq = new AQuery(this);
 
-        HttpClient.get("test", params, new JsonHttpResponseHandler() {
+        HttpClient.get("detailinfo", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);

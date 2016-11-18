@@ -3,12 +3,14 @@ package kr.co.trappan.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,8 +78,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
                         Log.d(TAG, "httpOK: " + response.toString());
-//                        try {
-//                            if(response.get("login").equals("success")) {
+                        try {
+                            if(response.get("login").equals("success")) {
                                 //자동 로그인하기 위한 데이터 저장
                                 editor.putString("id", id.getText().toString());
                                 editor.putString("pw", enpw);
@@ -87,14 +89,14 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(intent); // 다음 화면으로 넘어간다.
                                 pd.dismiss();
                             }
-//                            else{
-//                                Toast.makeText(LoginActivity.this,"로그인 실패",Toast.LENGTH_LONG).show();
-//                                //로그인 실패 다이얼로그
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
+                            else{
+                                Toast.makeText(LoginActivity.this,"로그인 실패",Toast.LENGTH_LONG).show();
+                                //로그인 실패 다이얼로그
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
