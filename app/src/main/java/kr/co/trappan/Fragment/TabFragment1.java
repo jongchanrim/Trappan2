@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -33,14 +35,54 @@ import kr.co.trappan.R;
 
 public class TabFragment1 extends Fragment {
 
+    private ImageView week_review_img;
+    private TextView week_review_areaname;
+    private TextView week_review_main_title;
+    private TextView week_review_title;
+
+    private ImageView week_tour_img;
+    private TextView week_tour_areaname;
+    private TextView week_tour_main_title;
+
+    private ImageView month_review_img;
+    private TextView month_review_areaname;
+    private TextView month_review_main_title;
+    private TextView month_review_title;
+
+    private ImageView month_tour_img;
+    private TextView month_tour_areaname;
+    private TextView month_tour_main_title;
+
     private ViewPager horizontal_viewpager;
-    private RelativeLayout item1,item2,item3;
-
+    private ImageView ball[]=new ImageView[5];
     ArrayList<String> list=new ArrayList<>();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tabfragment1, container, false);
+
+        week_review_img=(ImageView)view.findViewById(R.id.week_review_img) ;
+        week_review_areaname=(TextView) view.findViewById(R.id.week_review_areaname);
+        week_review_main_title=(TextView) view.findViewById(R.id.week_review_main_title);
+        week_review_title=(TextView) view.findViewById(R.id.week_review_title);
+
+        week_tour_img=(ImageView)view.findViewById(R.id.week_tour_img);
+        week_tour_areaname=(TextView) view.findViewById(R.id.week_tour_areaname);
+        week_tour_main_title=(TextView) view.findViewById(R.id.week_tour_main_title);
+
+        month_review_img=(ImageView)view.findViewById(R.id.month_review_img);
+        month_review_areaname=(TextView) view.findViewById(R.id.month_review_areaname);
+        month_review_main_title=(TextView) view.findViewById(R.id.month_review_main_title);
+        month_review_title=(TextView) view.findViewById(R.id.month_review_title);
+
+        month_tour_img=(ImageView)view.findViewById(R.id.month_tour_img);
+        month_tour_areaname=(TextView) view.findViewById(R.id.month_tour_areaname);
+        month_tour_main_title=(TextView) view.findViewById(R.id.month_tour_main_title);
+
+        ball[0]=(ImageView) view.findViewById(R.id.ball_1);
+        ball[1]=(ImageView) view.findViewById(R.id.ball_2);
+        ball[2]=(ImageView) view.findViewById(R.id.ball_3);
+        ball[3]=(ImageView) view.findViewById(R.id.ball_4);
+        ball[4]=(ImageView) view.findViewById(R.id.ball_5);
 
         HttpClient.get("test", null, new JsonHttpResponseHandler() {
             @Override
@@ -63,15 +105,19 @@ public class TabFragment1 extends Fragment {
         Horizontal_Pager_Adapter adapter=new Horizontal_Pager_Adapter(getLayoutInflater(savedInstanceState),list);
         horizontal_viewpager.setAdapter(adapter);
 
-        item1=(RelativeLayout)view.findViewById(R.id.item1);
-        item2=(RelativeLayout)view.findViewById(R.id.item2);
-        item3=(RelativeLayout)view.findViewById(R.id.item3);
+        horizontal_viewpager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            public void onPageSelected(int position) {
+                Log.i("po" ,"page selected " + position);
+                for(int i=0;i<5;i++){
+                    if(position==i)
+                        ball[i].setBackgroundResource(R.drawable.pager_02);
+                    else
+                        ball[i].setBackgroundResource(R.drawable.pager_01);
+                }
+            }
+        });
 
-        item1.setBackgroundResource(R.drawable.a);
-        item2.setBackgroundResource(R.drawable.a);
-        item3.setBackgroundResource(R.drawable.a);
-
-        item1.setOnClickListener(new View.OnClickListener() {
+        week_review_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),DetailInformationActivity.class);
@@ -79,7 +125,7 @@ public class TabFragment1 extends Fragment {
                 startActivity(intent);
             }
         });
-        item2.setOnClickListener(new View.OnClickListener() {
+        week_tour_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(),ReviewPageActivity.class);
@@ -87,10 +133,8 @@ public class TabFragment1 extends Fragment {
                 startActivity(intent);
             }
         });
-
         return view;
     }
-
 
 
 }
