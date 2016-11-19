@@ -35,6 +35,7 @@ import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Activity.CommentActivity;
 import kr.co.trappan.Activity.FollowerActivity;
 import kr.co.trappan.Activity.FollowingActivity;
+import kr.co.trappan.Activity.LikeActivity;
 import kr.co.trappan.Activity.My_CommentActivity;
 import kr.co.trappan.Adapter.ListViewAdapter;
 import kr.co.trappan.Connector.HttpClient;
@@ -212,6 +213,14 @@ public class TabFragment5 extends Fragment{
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), My_CommentActivity.class);
                 startActivity(intent);
+            }
+        });
+        tlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (getContext(), LikeActivity.class);
+                startActivity(intent);
+
             }
         });
             HttpClient.get("test", null, new JsonHttpResponseHandler() { // Profile

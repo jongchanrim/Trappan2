@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +37,6 @@ import kr.co.trappan.Bean.Review;
 import kr.co.trappan.Bean.Tour;
 import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
-import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.R;
 
 public class DetailInformationActivity extends AppCompatActivity {
@@ -288,7 +286,7 @@ public class DetailInformationActivity extends AppCompatActivity {
 
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject obj = response.getJSONObject(i);
-                        Review item = new Review();
+                        Review item = new Review("a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a");
                         item.setId(obj.getString("id"));
                         item.setImg_1(obj.getString("img_1"));
                         item.setReview_title(obj.getString("review_title"));

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -47,7 +48,7 @@ public class FollowerActivity extends AppCompatActivity {
         items.add(new Member("id", "email", "password", "name", "back_img", " ", "intro"));
 
         //뒤로가기 버튼
-        ImageButton review_backbutton = (ImageButton)findViewById(R.id.follower_backbutton);
+        ImageView review_backbutton = (ImageView)findViewById(R.id.follower_backbutton);
         review_backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

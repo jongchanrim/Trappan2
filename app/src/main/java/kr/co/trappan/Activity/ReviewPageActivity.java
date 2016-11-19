@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,7 +18,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Adapter.ReviewPagerAdapter;
@@ -88,7 +86,7 @@ public class ReviewPageActivity extends AppCompatActivity {
         num_comment=(TextView)findViewById(R.id.num_comment);
         btn_like=(Button)findViewById(R.id.review_like_button);
         btn_comment=(Button)findViewById(R.id.review_comment_button);
-        review =new Review();
+        review =new Review("a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a");
         final ReviewPagerAdapter adapter=new ReviewPagerAdapter(getLayoutInflater(),pager_image_list);
         viewPager.setAdapter(adapter);
         RequestParams params = new RequestParams();
