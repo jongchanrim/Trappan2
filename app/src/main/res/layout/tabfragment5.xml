@@ -104,7 +104,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingBottom="20dp"
-                    android:paddingTop="15dp">
+                    android:paddingTop="15dp"
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -113,9 +114,11 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:textColor="@android:color/black" />
+
                     <TextView
                         android:textColor="@android:color/black"
                         android:id="@+id/f5_follower"
+                        android:text = "0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -136,6 +139,7 @@
                     <TextView
                         android:textColor="@android:color/black"
                         android:id="@+id/f5_following"
+                        android:text = "0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 

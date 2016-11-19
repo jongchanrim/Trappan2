@@ -47,11 +47,27 @@ public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapte
     public void onBindViewHolder(FollowerListAdapter.ViewHolder holder, int position) {
 
         final Member item =items.get(position);
+      //  aq.id(holder.image).image(item.getPro_img());
 
-        aq.id(holder.image).image(item.getPro_img());
+        aq.id(holder.image).image(R.drawable.profile_default_image);
         holder.userId.setText(item.getId());
         holder.desc.setText(item.getIntro());
         holder.f_button.setBackgroundResource(R.drawable.follow);
+
+        holder.f_button.setOnClickListener(new View.OnClickListener() {
+            int button_click = 0;
+            @Override
+            public void onClick(View v) {
+
+                if (button_click == 0) {
+                    v.setBackgroundResource(R.drawable.following);
+                    button_click=1;
+                }else{
+                    v.setBackgroundResource(R.drawable.follow);
+                    button_click=0;
+                }
+            }
+        });
 
     }
 
@@ -71,7 +87,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapte
 
             super(itemView);
 
-            image = (ImageView) itemView.findViewById(R.id.followingImage);
+            image = (ImageView) itemView.findViewById(R.id.followier_image);
             userId = (TextView) itemView.findViewById(R.id.follower_user);
             desc = (TextView) itemView.findViewById(R.id.follower_desc);
             f_button = (Button) itemView.findViewById(R.id.follower_button);

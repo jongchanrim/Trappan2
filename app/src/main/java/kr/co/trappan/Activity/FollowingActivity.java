@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -42,6 +44,18 @@ public class FollowingActivity extends AppCompatActivity {
         recyclerView.setAdapter(Adapter);
 
         items.add(new Member("id","email","password","name","back_img"," ","intro"));
+        items.add(new Member("id","email","password","name","back_img"," ","intro"));
+        items.add(new Member("id","email","password","name","back_img"," ","intro"));
+
+        //뒤로가기 버튼
+        ImageButton review_backbutton = (ImageButton)findViewById(R.id.following_backbutton);
+        review_backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
     }
 }
