@@ -170,8 +170,6 @@ public class ReviewWriteActivity extends AppCompatActivity {
         review_backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ReviewWriteActivity.this, DetailInformationActivity.class);
-                startActivity(intent);
                 finish();
             }
         });

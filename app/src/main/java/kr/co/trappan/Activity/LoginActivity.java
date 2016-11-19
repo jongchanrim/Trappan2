@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("id", id.getText().toString());
                                 editor.putString("pw", enpw);
                                 editor.putBoolean("autologin", true);
+                                editor.commit();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("user_id", id.getText().toString());
                                 startActivity(intent); // 다음 화면으로 넘어간다.

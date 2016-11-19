@@ -79,7 +79,7 @@ public class DetailInformationActivity extends AppCompatActivity {
         Intent intent = getIntent();
         contentid = intent.getExtras().getString("contentid");
         params.put("contentid", contentid);
-        main_image=(ImageView)findViewById(R.id.detail_image);
+        main_image=(ImageView)findViewById(R.id.main_image);
         title =(TextView)findViewById(R.id.detail_title);
         btn_want =(ImageView)findViewById(R.id.detail_btn_want);
         detailWant = (TextView)findViewById(R.id.detail_want);
