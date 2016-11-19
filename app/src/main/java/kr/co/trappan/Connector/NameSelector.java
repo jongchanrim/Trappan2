@@ -8,6 +8,23 @@ public class NameSelector {
 
     private static NameSelector client = new NameSelector();
 
+    public static String selectCAT2(String cat2){
+        String typename = "";
+        switch (cat2){
+            case "A0101": typename = "자연"; break;
+            case "A0201": typename = "역사"; break;
+            case "A0202": typename = "체험"; break;
+            case "A0203": typename = "휴"; break;
+            case "A0205": typename = "건축/조형"; break;
+            case "A0206": typename = "문화시"; break;
+            case "A0207": typename = "축제"; break;
+
+            default: break;
+        }
+
+        return typename;
+    }
+
     public static String selectAreaName(String areacode){
         String areaName = "";
         int code = Integer.parseInt(areacode);

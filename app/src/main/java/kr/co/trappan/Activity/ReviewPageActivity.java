@@ -50,7 +50,9 @@ public class ReviewPageActivity extends AppCompatActivity {
     private Button btn_like;
     private Button btn_comment;
 
-    String reviewid;
+    int rlikeflag;
+    int reviewid;
+    String id;
     Review review;
     Member member;
     Comment comment;
@@ -65,7 +67,9 @@ public class ReviewPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_page);
         Intent intent = getIntent();
-        reviewid = intent.getExtras().getString("review_id");
+        reviewid = intent.getExtras().getInt("review_id");
+        id = intent.getExtras().getString("id");
+
 
         aq=new AQuery(this);
 
@@ -84,16 +88,18 @@ public class ReviewPageActivity extends AppCompatActivity {
         num_comment=(TextView)findViewById(R.id.num_comment);
         btn_like=(Button)findViewById(R.id.review_like_button);
         btn_comment=(Button)findViewById(R.id.review_comment_button);
-
-
+        review =new Review();
+        final ReviewPagerAdapter adapter=new ReviewPagerAdapter(getLayoutInflater(),pager_image_list);
+        viewPager.setAdapter(adapter);
         RequestParams params = new RequestParams();
         params.put("review_id", reviewid);
-        HttpClient.get("test", params, new JsonHttpResponseHandler() {
+        params.put("id", id);
+        HttpClient.get("detailreview", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                    review =new Review();
+
                     review.setC_date(response.getString("c_date"));
                     review.setReview_title(response.getString("review_title"));
                     review.setReview_content(response.getString("review_content"));
@@ -103,8 +109,6 @@ public class ReviewPageActivity extends AppCompatActivity {
                     review.setImg_4(response.getString("img_4"));
                     review.setImg_5(response.getString("img_5"));
                     review.setImg_6(response.getString("img_6"));
-
-
 
                     member=new Member();
                     member.setPro_img(response.getString("id"));
@@ -120,7 +124,11 @@ public class ReviewPageActivity extends AppCompatActivity {
                     tour.setTitle(response.getString("title"));
                     tour.setAreaName(response.getString("areaName"));
 
-                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    if(response.getInt("islike")==0){
+                        rlikeflag = 0;
+                    }else{
+                        rlikeflag =1;
+                    }
 
                     //이미지 세팅
 
@@ -152,14 +160,13 @@ public class ReviewPageActivity extends AppCompatActivity {
                         pager_image_list.add(review.getImg_6());
 
 
-
+                    adapter.notifyDataSetChanged();
 
                 }catch (JSONException e){
 
                 }
 
-                ReviewPagerAdapter adapter=new ReviewPagerAdapter(getLayoutInflater(),pager_image_list);
-                viewPager.setAdapter(adapter);
+
 
 
 

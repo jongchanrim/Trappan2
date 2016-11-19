@@ -12,8 +12,7 @@ import com.androidquery.AQuery;
 
 import java.util.List;
 
-import kr.co.trappan.Bean.Member;
-import kr.co.trappan.Item.List_item;
+import kr.co.trappan.Bean.Comment;
 import kr.co.trappan.R;
 
 import static android.support.v7.appcompat.R.id.image;
@@ -22,15 +21,15 @@ import static android.support.v7.appcompat.R.id.image;
  * Created by thfad_000 on 2016-11-17.
  */
 
-public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdapter.ViewHolder> {
+public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.ViewHolder> {
 
     Context context;
-    List<Member> items;
+    List<Comment> items;
     int item_layout;
     AQuery aq;
 
 
-    public FollowingListAdapter (Context context, List<Member> items, int item_layout) {
+    public CommentListAdapter (Context context, List<Comment> items, int item_layout) {
 
         this.context=context;
         this.items=items;
@@ -38,22 +37,25 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
     }
 
     @Override
-    public FollowingListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CommentListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_following,parent,false);
-        FollowingListAdapter.ViewHolder holder = new FollowingListAdapter.ViewHolder(v);
+        CommentListAdapter.ViewHolder holder = new CommentListAdapter.ViewHolder(v);
         aq = new AQuery(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(FollowingListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(CommentListAdapter.ViewHolder holder, int position) {
 
-        final Member item =items.get(position);
+        final Comment item =items.get(position);
 
-        //aq.id(holder.image).image(item.getPro_img());
-        aq.id(holder.image).image(R.drawable.icon);
+//       aq.id(holder.image).image(item.getPro_img());
+//         holder.userId.setText(item.getId());
+//        holder.desc.setText(item.getIntro());
+
         holder.userId.setText(item.getId());
-        holder.desc.setText(item.getIntro());
+        holder.date.setText(item.getC_date());
+        holder.desc.setText(item.getComment_content());
 
     }
 
@@ -64,17 +66,17 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView image;
         TextView userId;
+        TextView date;
         TextView desc;
 
         public ViewHolder(View itemView) {
 
             super(itemView);
 
-            image = (ImageView) itemView.findViewById(R.id.followingImage);
-            userId = (TextView) itemView.findViewById(R.id.follwing_user);
-            desc = (TextView) itemView.findViewById(R.id.following_desc);
+            userId = (TextView) itemView.findViewById(R.id.comment_user);
+            date = (TextView) itemView.findViewById(R.id.comment_date);
+            desc = (TextView) itemView.findViewById(R.id.comment_desc);
 
         }
     }

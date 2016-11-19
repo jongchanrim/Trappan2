@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import kr.co.trappan.Adapter.SearchListAdapter;
+import kr.co.trappan.Bean.Tour;
 import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.R;
 /**
@@ -28,6 +29,8 @@ public class TabFragment3 extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
+    ArrayList<Tour>
+            items = new ArrayList<>();
 
     Button[] areaButton;
 
@@ -74,7 +77,6 @@ public class TabFragment3 extends Fragment {
 
 
         // 리스트 뷰
-        ArrayList<SearchLists_item> items = new ArrayList<>();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recmmand_list);
         recyclerView.setHasFixedSize(true);
