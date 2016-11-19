@@ -27,6 +27,7 @@ public class TabFragment2 extends Fragment {
 
     Context context;
     Button[] areaButton;
+    Button[] themeButton;
     private ImageView btn_keyword;
     private EditText keyword;
 
@@ -68,6 +69,27 @@ public class TabFragment2 extends Fragment {
             R.drawable.gyeongbuk_35_c,
             R.drawable.jeju_39_c,};
 
+    int[] theme_selectedItems;
+    int[] theme_unSelectedIcon = {
+            R.drawable.theme_a0101,
+            R.drawable.theme_a0201,
+            R.drawable.theme_a0202,
+            R.drawable.theme_a0203,
+            R.drawable.theme_a0205,
+            R.drawable.theme_a0206,
+            R.drawable.theme_a0207,
+    };
+
+    int[] theme_selectedIcon = {
+            R.drawable.theme_a0101_s,
+            R.drawable.theme_a0201_s,
+            R.drawable.theme_a0202_s,
+            R.drawable.theme_a0203_s,
+            R.drawable.theme_a0205_s,
+            R.drawable.theme_a0206_s,
+            R.drawable.theme_a0207_s,};
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,6 +103,7 @@ public class TabFragment2 extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SearchActivity.class);
                 intent.putExtra("keyword", keyword.getText().toString());
+                intent.putExtra("case", "keyword");
                 v.getContext().startActivity(intent);
             }
         });
@@ -1056,6 +1079,131 @@ public class TabFragment2 extends Fragment {
         view.findViewById(R.id.tag_39_3).setOnClickListener(mClickListener);
         view.findViewById(R.id.tag_39_4).setOnClickListener(mClickListener);
 
+
+
+
+        themeButton = new Button[7];
+        themeButton[0] = (Button) view.findViewById(R.id.search_nature_button);
+        themeButton[1] = (Button) view.findViewById(R.id.search_history_button);
+        themeButton[2] = (Button) view.findViewById(R.id.search_rest_button);
+        themeButton[3] = (Button) view.findViewById(R.id.search_activity_button);
+        themeButton[4] = (Button) view.findViewById(R.id.search_building_button);
+        themeButton[5] = (Button) view.findViewById(R.id.search_culture_button);
+        themeButton[6] = (Button) view.findViewById(R.id.search_festival_button);
+
+        theme_selectedItems = new int[7];
+        for (int i = 0; i < theme_selectedItems.length; i++) {
+            theme_selectedItems[i] = 0;
+        }
+
+
+        // 자연
+        themeButton[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[0]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", "A0101");
+                intent.putExtra("case", "type");
+                v.getContext().startActivity(intent);
+
+            }
+
+        });
+
+        // 역사
+        themeButton[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[1]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", "A0201");
+                intent.putExtra("case", "type");
+                v.getContext().startActivity(intent);
+
+            }
+
+        });
+        //휴양
+        themeButton[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[2]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("case", "type");
+                intent.putExtra("type", "A0202");
+
+                v.getContext().startActivity(intent);
+
+
+            }
+
+        });
+
+        // 체험
+        themeButton[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[3]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", "A0203");
+                intent.putExtra("case", "type");
+                v.getContext().startActivity(intent);
+
+
+            }
+
+        });
+
+        // 건축
+        themeButton[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[4]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", "A0205");
+                intent.putExtra("case", "type");
+                v.getContext().startActivity(intent);
+
+
+            }
+
+        });
+        //문화
+        themeButton[5].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[5]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", "A0206");
+                intent.putExtra("case", "type");
+                v.getContext().startActivity(intent);
+
+
+            }
+
+        });
+        // 축제
+        themeButton[6].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[6]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", "A0207");
+                intent.putExtra("case", "type");
+                v.getContext().startActivity(intent);
+
+            }
+
+        });
+
         return view;
     }
 
@@ -1071,6 +1219,7 @@ public class TabFragment2 extends Fragment {
             String[] tag = getResources().getResourceEntryName(b.getId()).split("_");
             intent.putExtra("areacode", tag[1]);
             intent.putExtra("sigungucode", tag[2]);
+            intent.putExtra("case", "area");
             v.getContext().startActivity(intent);
 
         }
