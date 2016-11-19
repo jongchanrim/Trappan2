@@ -40,11 +40,11 @@ public class CommentActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        Adapter = new CommentListAdapter(this, items, R.layout.activity_following_page);
+        Adapter = new CommentListAdapter(this, items, R.layout.activity_comment_page);
         recyclerView.setAdapter(Adapter);
 
         //items.add(new Comment(comment_id,review_id,comment_count,"id","comment_content","c_date"));
-        items.add(new Comment(1, 2, 3, "id", "리뷰를 남겼다. 리뷰를 남겼다, 리뷰를 남겼다. 리뷰를 남겼다.", "2016-11-18"));
+        items.add(new Comment(1, 2, 3, "아이디", "리뷰를 남겼다. 리뷰를 남겼다, 리뷰를 남겼다. 리뷰를 남겼다.", "2016-11-18"));
 
 
         // 코멘트 내용
