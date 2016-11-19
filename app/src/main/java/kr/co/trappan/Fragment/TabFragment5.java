@@ -20,31 +20,26 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.androidquery.AQuery;
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.pkmmte.view.CircularImageView;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
-import kr.co.trappan.Activity.DetailInformationActivity;
-import kr.co.trappan.Activity.ReviewPageActivity;
+import kr.co.trappan.Activity.CommentActivity;
+import kr.co.trappan.Activity.FollowerActivity;
+import kr.co.trappan.Activity.FollowingActivity;
+import kr.co.trappan.Activity.LikeActivity;
+import kr.co.trappan.Activity.My_CommentActivity;
 import kr.co.trappan.Adapter.ListViewAdapter;
-import kr.co.trappan.Adapter.ReviewListAdapter;
-import kr.co.trappan.Bean.Member;
-import kr.co.trappan.Bean.Review;
 import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.Item.List_item;
-import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
 import static android.app.Activity.RESULT_OK;
@@ -53,11 +48,11 @@ import static android.app.Activity.RESULT_OK;
 /**
  * Created by thfad_000 on 2016-10-04.
  */
-public class TabFragment5 extends Fragment {
+public class TabFragment5 extends Fragment{
 
     Context context;
     private RecyclerView recyclerView;
-    private ReviewListAdapter Adapter;
+    private RecyclerView.Adapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     private ImageView back_img;
@@ -85,8 +80,7 @@ public class TabFragment5 extends Fragment {
     private ImageView iv_UserPhoto;
     private int id_view;
     private String absoultePath;
-    ArrayList<Review> items;
-    AQuery aq;
+
     private int back_or_profile = 0;  //배경이미지와 프로필 이미지 선택 변수 (1로바뀌면 배경, 2로바뀌면 프로필)
 
 
@@ -94,67 +88,48 @@ public class TabFragment5 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tabfragment5, container, false);
         context = getContext();
-        aq = new AQuery(view);
-        CircularImageView circularImageView = (CircularImageView) view.findViewById(R.id.f5_proimg);
+
+        CircularImageView circularImageView = (CircularImageView)view.findViewById(R.id.f5_proimg);
         circularImageView.setBorderWidth(10);
         circularImageView.setSelectorStrokeWidth(10);
         circularImageView.addShadow();
         back_img = (ImageView) view.findViewById(R.id.f5_backimg);
         pro_img = (CircularImageView) view.findViewById(R.id.f5_proimg);
-        f5_btn_backimg = (ImageButton) view.findViewById(R.id.f5_btn_backimg);
-        f5_btn_proimg = (ImageButton) view.findViewById(R.id.f5_btn_proimg);
+        f5_btn_backimg = (ImageButton)view.findViewById(R.id.f5_btn_backimg);
+        f5_btn_proimg = (ImageButton)view.findViewById(R.id.f5_btn_proimg);
 
-        user_name = (TextView) view.findViewById(R.id.f5_username);
-        user_profile = (TextView) view.findViewById(R.id.f5_profile);
-        follower = (TextView) view.findViewById(R.id.f5_follower);
-        following = (TextView) view.findViewById(R.id.f5_following);
-        tlike = (TextView) view.findViewById(R.id.f5_tlike);
-        stamp = (TextView) view.findViewById(R.id.f5_stamp);
-        rlike = (TextView) view.findViewById(R.id.f5_rlike);
-        comment = (TextView) view.findViewById(R.id.f5_comment);
+        user_name=(TextView)view.findViewById(R.id.f5_username) ;
+        user_profile=(TextView)view.findViewById(R.id.f5_profile);
+        follower=(TextView)view.findViewById(R.id.f5_follower);
+        following=(TextView)view.findViewById(R.id.f5_following);
+        tlike=(TextView)view.findViewById(R.id.f5_tlike);
+        stamp=(TextView)view.findViewById(R.id.f5_stamp);
+        rlike=(TextView)view.findViewById(R.id.f5_rlike);
+        comment=(TextView)view.findViewById(R.id.f5_comment);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.mypage_scroll);
         RecyclerViewHeader header = (RecyclerViewHeader) view.findViewById(R.id.header5);
         recyclerView.setHasFixedSize(true);
-        items = new ArrayList<>();
+        ArrayList<List_item> items = new ArrayList<>();
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        Adapter = new ReviewListAdapter(getActivity(), items);
+        Adapter = new ListViewAdapter(getActivity() ,items ,R.layout.tabfragment5);
         recyclerView.setAdapter(Adapter);
         header.attachTo(recyclerView);
 
-        recyclerView.addOnItemTouchListener(new
+        //resizeCommentList(items.size());
 
-                RecyclerViewOnItemClickListener(getActivity(), recyclerView,
-                new RecyclerViewOnItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View v, int position) {
-
-                        Intent intent = new Intent(getActivity(), ReviewPageActivity.class);
-                        intent.putExtra("review_id", items.get(position).getReview_id());
-                        intent.putExtra("id", items.get(position).getId());
-                        startActivity(intent); // 다음 화면으로 넘어간다.
-                    }
-
-                    @Override
-                    public void onItemLongClick(View v, int position) {
-                    }
-                }
-
-        ));
-
-
-        f5_btn_backimg.setOnClickListener(new View.OnClickListener() {
+        f5_btn_backimg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
+                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         doTakePhotoAction();
                     }
                 };
 
-                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         back_or_profile = 1;
@@ -162,7 +137,7 @@ public class TabFragment5 extends Fragment {
                     }
                 };
 
-                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -171,17 +146,17 @@ public class TabFragment5 extends Fragment {
 
                 new AlertDialog.Builder(getActivity())
                         .setTitle("업로드 이미지 선택")
-                        .setPositiveButton("카메라", cameraListener)
-                        .setNeutralButton("갤러리", albumListener)
-                        .setNegativeButton("취소", cancelListener)
+                        .setPositiveButton("카메라",cameraListener)
+                        .setNeutralButton("갤러리",albumListener)
+                        .setNegativeButton("취소",cancelListener)
                         .show();
             }
         });
 
-        f5_btn_proimg.setOnClickListener(new View.OnClickListener() {
+        f5_btn_proimg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
+                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -189,7 +164,7 @@ public class TabFragment5 extends Fragment {
                     }
                 };
 
-                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -198,7 +173,7 @@ public class TabFragment5 extends Fragment {
                     }
                 };
 
-                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener(){
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -208,37 +183,53 @@ public class TabFragment5 extends Fragment {
 
                 new AlertDialog.Builder(getActivity())
                         .setTitle("업로드 이미지 선택")
-                        .setPositiveButton("카메라", cameraListener)
-                        .setNeutralButton("갤러리", albumListener)
-                        .setNegativeButton("취소", cancelListener)
+                        .setPositiveButton("카메라",cameraListener)
+                        .setNeutralButton("갤러리",albumListener)
+                        .setNegativeButton("취소",cancelListener)
                         .show();
             }
         });
 
-        HttpClient.get("detailmypage", null, new JsonHttpResponseHandler() { // Profile
+        follower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(v.getContext(), FollowerActivity.class);
+
+                v.getContext().startActivity(intent);
+
+            }
+        });
+        following.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (getContext(), FollowingActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (getContext(), My_CommentActivity.class);
+                startActivity(intent);
+            }
+        });
+        tlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (getContext(), LikeActivity.class);
+                startActivity(intent);
+
+            }
+        });
+            HttpClient.get("test", null, new JsonHttpResponseHandler() { // Profile
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                    Member m = new Member();
-                    m.setName(response.getString("name"));
-                    m.setId(response.getString("id"));
-                    m.setBack_img(response.getString("back_img"));
-                    m.setPro_img(response.getString("pro_img"));
 
-//                    user_name
-//                    user_profile
-//                    follower
-//                    following
-//                    tlike
-//                    stamp
-//                    rlike
-//                    comment
-
-
-
-
-                } catch (Exception e) {
+                }catch (Exception e){
 
                 }
             }
@@ -251,24 +242,13 @@ public class TabFragment5 extends Fragment {
             }
         });
 
-        HttpClient.get("myreviewlist", null, new JsonHttpResponseHandler() { // List
+        HttpClient.get("test", null, new JsonHttpResponseHandler() { // List
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                        for (int i = 0; i < response.length(); i++) {
-                            JSONObject obj = response.getJSONObject(i);
-                            Review item = new Review();
-                            item.setId(obj.getString("id"));
-                            item.setImg_1(obj.getString("img_1"));
-                            item.setReview_title(obj.getString("review_title"));
-                            item.setReview_content(obj.getString("review_content"));
-                            items.add(item);
-                        }
-                        Adapter.setItems(items);
-                        Adapter.notifyDataSetChanged();
-                        //pd.dismiss();
-                } catch (Exception e) {
+
+                }catch (Exception e){
 
                 }
             }
@@ -284,16 +264,23 @@ public class TabFragment5 extends Fragment {
         return view;
     }
 
-    public void doTakePhotoAction() {
+    private void resizeCommentList(int item_size){
+        ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+        params.height = 350 * item_size;
+        recyclerView.setLayoutParams(params);
+    }
+
+    public void doTakePhotoAction(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         //임시로 사용할 파일의 경로를 생성
         String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
 
-        if (back_or_profile == 1) { //배경 이미지 Uri
+        if(back_or_profile == 1) { //배경 이미지 Uri
             mlmageCaptureUri_background = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
             intent.putExtra(MediaStore.EXTRA_OUTPUT, mlmageCaptureUri_background);
-        } else if (back_or_profile == 2) {
+        }
+        else if(back_or_profile == 2){
             mlmageCaptureUri_profile = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
             intent.putExtra(MediaStore.EXTRA_OUTPUT, mlmageCaptureUri_profile);
         }
@@ -301,7 +288,7 @@ public class TabFragment5 extends Fragment {
     }
 
     //앨범에서 이미지 가져오기
-    public void doTakeAlbumAction() {
+    public void doTakeAlbumAction(){
         //앨범 호출
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
@@ -309,105 +296,72 @@ public class TabFragment5 extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode != RESULT_OK)
+        if(resultCode != RESULT_OK)
             return;
 
-        switch (requestCode) {
-            case PICK_FROM_ALBUM: {
+        switch(requestCode){
+            case PICK_FROM_ALBUM:
+            {
                 //이후의 처리가 카메라와 같으므로 일단 break없이 진행
                 //실제코드에서는 좀더 합리적인 방법 선택
-                if (back_or_profile == 1) {
+                if(back_or_profile == 1) {
                     mlmageCaptureUri_background = data.getData();
                     Log.d("SmartWeel", mlmageCaptureUri_background.getPath().toString());
-                } else if (back_or_profile == 2) {
+                }
+                else if(back_or_profile == 2){
                     mlmageCaptureUri_profile = data.getData();
                     Log.d("SmartWeel", mlmageCaptureUri_profile.getPath().toString());
                 }
             }
-            case PICK_FROM_CAMERA: {
+            case PICK_FROM_CAMERA:
+            {
                 //이미지를 가져온 이후의 리사이즈할 이미지 크기 결정
                 //이후에 이미지 크롭 어플리케이션 호출
                 Intent intent = new Intent("com.android.camera.action.CROP");
-                if (back_or_profile == 1) {
+                if(back_or_profile == 1) {
                     intent.setDataAndType(mlmageCaptureUri_background, "image/");
-                } else if (back_or_profile == 2) {
+                }
+                else if(back_or_profile == 2){
                     intent.setDataAndType(mlmageCaptureUri_profile, "image/");
                 }
 
                 //크롭할 이미지를 200*200으로 저장
-                intent.putExtra("outputX", 200);
-                intent.putExtra("outputY", 200);
-                intent.putExtra("aspectX", 1);
-                intent.putExtra("aspectY", 1);
-                intent.putExtra("scale", true);
-                intent.putExtra("return-data", false);
+                intent.putExtra("outputX",200);
+                intent.putExtra("outputY",200);
+                intent.putExtra("aspectX",1);
+                intent.putExtra("aspectY",1);
+                intent.putExtra("scale",true);
+                intent.putExtra("return-data",false);
                 startActivityForResult(intent, CROP_FROM_IMAGE);
 
-                if (back_or_profile == 1) {
+                if(back_or_profile == 1) {
+                    back_img.setImageURI(mlmageCaptureUri_background);
                     back_or_profile = 0;
-                    File myFile = new File(mlmageCaptureUri_background.toString());
-                    RequestParams params = new RequestParams();
-                    try {
-                        params.put("back_img", myFile);
-                    } catch (FileNotFoundException e) {
-
-                    }
-                    HttpClient.get("updatebackimg", params, new JsonHttpResponseHandler() {
-                                @Override
-                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                    super.onSuccess(statusCode, headers, response);
-                                    try {
-                                        aq.id(back_img).image(response.get("back_img").toString());
-                                    }catch (Exception e){
-
-                                    }
-                                }
-                            }
-
-                    );
-                } else if (back_or_profile == 2) {
+                }
+                else if(back_or_profile == 2){
                     pro_img.setImageURI(mlmageCaptureUri_profile);
                     back_or_profile = 0;
-                    File myFile = new File(mlmageCaptureUri_background.toString());
-                    RequestParams params = new RequestParams();
-                    try {
-                        params.put("pro_img", myFile);
-                    } catch (FileNotFoundException e) {
-
-                    }
-                    HttpClient.get("updateproimg", params, new JsonHttpResponseHandler() {
-                                @Override
-                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                    super.onSuccess(statusCode, headers, response);
-                                    try {
-                                       // aq.id(back_img).image(response.get("pro_img").toString());
-                                    }catch (Exception e){
-
-                                    }
-                                }
-                            }
-
-                    );
                 }
 
                 break;
             }
-            case CROP_FROM_IMAGE: {
+            case CROP_FROM_IMAGE:
+            {
                 //크롭이 된 이후의 이미지 넘겨받기
                 //이미지 뷰에 이미지를 보여준다거나 부가적인 작업 이후에
                 //임시파일 삭제
-                if (resultCode != RESULT_OK) {
+                if(resultCode != RESULT_OK){
                     return;
                 }
                 final Bundle extras = data.getExtras();
 
                 //CROP된 이미지를 저장하기 위한 FILE경로
-                String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                        "/SmartWheel/" + System.currentTimeMillis() + ".jpg";
-                if (extras != null) {
+                String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+
+                        "/SmartWheel/"+ System.currentTimeMillis()+".jpg";
+                if(extras != null){
                     Bitmap photo = extras.getParcelable("data"); //CROP된 BITMAP
                     iv_UserPhoto.setImageBitmap(photo); //레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
 
@@ -417,14 +371,15 @@ public class TabFragment5 extends Fragment {
                     break;
                 }
                 //임시파일삭제
-                if (back_or_profile == 1) {
+                if(back_or_profile == 1) {
                     File f = new File(mlmageCaptureUri_background.getPath());
-                    if (f.exists()) {
+                    if(f.exists()){
                         f.delete();
                     }
-                } else if (back_or_profile == 2) {
+                }
+                else if(back_or_profile == 2){
                     File f = new File(mlmageCaptureUri_profile.getPath());
-                    if (f.exists()) {
+                    if(f.exists()){
                         f.delete();
                     }
                 }
@@ -433,12 +388,12 @@ public class TabFragment5 extends Fragment {
         }
     }
 
-    private void storeCropImage(Bitmap bitmap, String filePath) {
+    private void storeCropImage(Bitmap bitmap, String filePath){
         //SmartWheel 폴더를 생성하여 이미지를 저장하는 방식이다.
-        String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SmartWeel";
+        String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath()+ "/SmartWeel";
         File directory_SmartWheel = new File(dirPath);
 
-        if (!directory_SmartWheel.exists())//SmartWheel 디렉토리에 폴더가없다면
+        if(!directory_SmartWheel.exists())//SmartWheel 디렉토리에 폴더가없다면
             directory_SmartWheel.mkdir();
 
         File copyFile = new File(filePath);
@@ -448,11 +403,11 @@ public class TabFragment5 extends Fragment {
         int height = bitmap.getHeight();
         // Calculate image's size by maintain the image's aspect ratio
 
-        try {
+        try{
             copyFile.createNewFile();
             out = new BufferedOutputStream(new FileOutputStream(copyFile));
             //bitmap = Bitmap.createScaledBitmap(bitmap, (width=5000), (height=height*1000/width), true);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
 
             //sendBroadcast를 통해 Crop된 사진을 앨범에 보이도록 갱신한다.
             context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(copyFile)));

@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // 로그인 버튼 클릭 시
         loginButton = (Button) findViewById(R.id.login_button);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

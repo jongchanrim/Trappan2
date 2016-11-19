@@ -8,11 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.content.Intent;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import java.util.StringTokenizer;
 
 import kr.co.trappan.Activity.SearchActivity;
 
@@ -28,8 +24,6 @@ public class TabFragment2 extends Fragment {
     Context context;
     Button[] areaButton;
     Button[] themeButton;
-    private ImageView btn_keyword;
-    private EditText keyword;
 
     int[] selectedItems;
     int[] unSelectedIcon = {R.drawable.seoul_1,
@@ -89,24 +83,9 @@ public class TabFragment2 extends Fragment {
             R.drawable.theme_a0206_s,
             R.drawable.theme_a0207_s,};
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tabfragment2, container, false);
-
-        btn_keyword=(ImageView)view.findViewById(R.id.f2_btn_keyword);
-        keyword=(EditText)view.findViewById(R.id.f2_keyword);
-
-        btn_keyword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("keyword", keyword.getText().toString());
-                intent.putExtra("case", "keyword");
-                v.getContext().startActivity(intent);
-            }
-        });
 
         areaButton = new Button[17];
         areaButton[0] = (Button) view.findViewById(R.id.search_seoul_button);
@@ -127,9 +106,24 @@ public class TabFragment2 extends Fragment {
         areaButton[15] = (Button) view.findViewById(R.id.search_jeonnam_button);
         areaButton[16] = (Button) view.findViewById(R.id.search_jeju_button);
 
+        themeButton = new Button[7];
+        themeButton[0] = (Button) view.findViewById(R.id.search_nature_button);
+        themeButton[1] = (Button) view.findViewById(R.id.search_history_button);
+        themeButton[2] = (Button) view.findViewById(R.id.search_rest_button);
+        themeButton[3] = (Button) view.findViewById(R.id.search_activity_button);
+        themeButton[4] = (Button) view.findViewById(R.id.search_building_button);
+        themeButton[5] = (Button) view.findViewById(R.id.search_culture_button);
+        themeButton[6] = (Button) view.findViewById(R.id.search_festival_button);
+
+
         selectedItems = new int[17];
         for (int i = 0; i < selectedItems.length; i++) {
             selectedItems[i] = 0;
+        }
+
+        theme_selectedItems = new int[7];
+        for (int i = 0; i < theme_selectedItems.length; i++) {
+            theme_selectedItems[i] = 0;
         }
 
         final View view_detail = view.findViewById(R.id.region_detail);
@@ -436,12 +430,10 @@ public class TabFragment2 extends Fragment {
                     if (selectedItems[i] == 1) {
                         areaButton[i].setBackgroundResource(unSelectedIcon[i]);
                         selectedItems[i] = 0;
-
                     }
                 }
                 selectedItems[7] = 1;
             }
-
 
         });
 
@@ -782,6 +774,165 @@ public class TabFragment2 extends Fragment {
             }
         });
 
+        // 자연
+        themeButton[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[0]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
+                //     intent.putExtra("sigungucode", v.getText());
+                v.getContext().startActivity(intent);
+
+                for (int i = 0; i < 8; i++) {
+                    if (theme_selectedItems[i] == 1) {
+                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
+                        theme_selectedItems[i] = 0;
+                    }
+                }
+
+                theme_selectedItems[0] = 1;
+            }
+
+        });
+
+        // 역사
+        themeButton[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[1]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
+                //     intent.putExtra("sigungucode", v.getText());
+                v.getContext().startActivity(intent);
+
+                for (int i = 0; i < 8; i++) {
+                    if (theme_selectedItems[i] == 1) {
+                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
+                        theme_selectedItems[i] = 0;
+                    }
+                }
+
+                theme_selectedItems[1] = 1;
+            }
+
+        });
+        //휴양
+        themeButton[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[2]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
+                //     intent.putExtra("sigungucode", v.getText());
+                v.getContext().startActivity(intent);
+
+                for (int i = 0; i < 8; i++) {
+                    if (theme_selectedItems[i] == 1) {
+                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
+                        theme_selectedItems[i] = 0;
+                    }
+                }
+
+                theme_selectedItems[2] = 1;
+            }
+
+        });
+
+        // 체험
+        themeButton[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[3]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
+                //     intent.putExtra("sigungucode", v.getText());
+                v.getContext().startActivity(intent);
+
+                for (int i = 0; i < 8; i++) {
+                    if (theme_selectedItems[i] == 1) {
+                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
+                        theme_selectedItems[i] = 0;
+                    }
+                }
+
+                theme_selectedItems[3] = 1;
+            }
+
+        });
+
+        // 건축
+        themeButton[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[4]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
+                //     intent.putExtra("sigungucode", v.getText());
+                v.getContext().startActivity(intent);
+
+                for (int i = 0; i < 8; i++) {
+                    if (theme_selectedItems[i] == 1) {
+                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
+                        theme_selectedItems[i] = 0;
+                    }
+                }
+
+                theme_selectedItems[4] = 1;
+            }
+
+        });
+        //문화
+        themeButton[5].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[5]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
+                //     intent.putExtra("sigungucode", v.getText());
+                v.getContext().startActivity(intent);
+
+                for (int i = 0; i < 8; i++) {
+                    if (theme_selectedItems[i] == 1) {
+                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
+                        theme_selectedItems[i] = 0;
+                    }
+                }
+
+                theme_selectedItems[5] = 1;
+            }
+
+        });
+        // 축제
+        themeButton[6].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.setBackgroundResource(theme_selectedIcon[6]);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
+                //     intent.putExtra("sigungucode", v.getText());
+                v.getContext().startActivity(intent);
+
+                for (int i = 0; i < 8; i++) {
+                    if (theme_selectedItems[i] == 1) {
+                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
+                        theme_selectedItems[i] = 0;
+                    }
+                }
+
+                theme_selectedItems[6] = 1;
+            }
+
+        });
+
+
 
 /*
         view_detail.setVisibility(View.GONE);
@@ -808,401 +959,1008 @@ public class TabFragment2 extends Fragment {
         // 버튼 리스너
 
         // 서울
-        view.findViewById(R.id.tag_1_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_8).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_9).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_10).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_11).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_12).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_13).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_14).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_15).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_16).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_17).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_18).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_19).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_20).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_21).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_22).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_23).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_24).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_1_25).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_1_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_8).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_9).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_10).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_11).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_12).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_13).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_14).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_15).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_16).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_17).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_18).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_19).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_20).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_21).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_22).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_23).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_24).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_1_25).
+
+                setOnClickListener(mClickListener);
         // 인천
-        view.findViewById(R.id.tag_2_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_2_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_2_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_2_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_2_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_2_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_2_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_2_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_2_8).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_2_9).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_2_10).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_2_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_2_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_2_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_2_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_2_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_2_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_2_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_2_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_2_8).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_2_9).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_2_10).
+
+                setOnClickListener(mClickListener);
         // 대전
-        view.findViewById(R.id.tag_3_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_3_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_3_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_3_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_3_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_3_5).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_3_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_3_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_3_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_3_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_3_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_3_5).
+
+                setOnClickListener(mClickListener);
         //대구
-        view.findViewById(R.id.tag_4_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_4_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_4_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_4_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_4_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_4_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_4_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_4_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_4_8).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_4_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_4_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_4_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_4_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_4_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_4_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_4_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_4_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_4_8).
+
+                setOnClickListener(mClickListener);
         //광주
-        view.findViewById(R.id.tag_5_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_5_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_5_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_5_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_5_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_5_5).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_5_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_5_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_5_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_5_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_5_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_5_5).
+
+                setOnClickListener(mClickListener);
         //부산
-        view.findViewById(R.id.tag_6_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_8).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_9).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_10).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_11).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_12).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_13).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_14).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_15).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_6_16).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_6_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_8).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_9).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_10).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_11).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_12).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_13).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_14).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_15).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_6_16).
+
+                setOnClickListener(mClickListener);
         //울산
-        view.findViewById(R.id.tag_7_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_7_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_7_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_7_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_7_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_7_5).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_7_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_7_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_7_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_7_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_7_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_7_5).
+
+                setOnClickListener(mClickListener);
         //세종
-        view.findViewById(R.id.tag_8_1).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_8_1).
+
+                setOnClickListener(mClickListener);
         //경기
-        view.findViewById(R.id.tag_31_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_8).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_9).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_10).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_11).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_12).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_13).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_14).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_15).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_16).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_17).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_18).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_19).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_20).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_21).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_22).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_23).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_24).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_25).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_26).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_27).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_28).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_29).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_30).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_31_31).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_31_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_8).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_9).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_10).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_11).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_12).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_13).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_14).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_15).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_16).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_17).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_18).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_19).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_20).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_21).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_22).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_23).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_24).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_25).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_26).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_27).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_28).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_29).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_30).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_31_31).
+
+                setOnClickListener(mClickListener);
         //강원
-        view.findViewById(R.id.tag_32_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_8).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_9).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_10).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_11).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_12).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_13).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_14).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_15).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_16).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_17).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_32_18).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_32_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_8).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_9).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_10).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_11).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_12).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_13).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_14).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_15).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_16).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_17).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_32_18).
+
+                setOnClickListener(mClickListener);
         //충북
-        view.findViewById(R.id.tag_33_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_8).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_9).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_10).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_11).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_33_12).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_33_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_8).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_9).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_10).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_11).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_33_12).
+
+                setOnClickListener(mClickListener);
 
         //충남
-        view.findViewById(R.id.tag_34_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_8).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_9).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_11).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_12).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_13).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_14).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_15).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_34_16).setOnClickListener(mClickListener);
-        //경북
-        view.findViewById(R.id.tag_35_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_8).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_9).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_10).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_11).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_12).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_13).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_14).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_15).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_16).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_17).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_18).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_19).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_20).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_21).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_22).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_35_23).setOnClickListener(mClickListener);
-        //경남
-        view.findViewById(R.id.tag_36_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_8).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_9).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_10).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_34_0).
 
-        view.findViewById(R.id.tag_36_12).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_13).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_14).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_15).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_16).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_17).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_18).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_19).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_20).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_36_21).setOnClickListener(mClickListener);
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_8).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_9).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_11).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_12).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_13).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_14).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_15).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_34_16).
+
+                setOnClickListener(mClickListener);
+        //경북
+        view.findViewById(R.id.tag_35_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_8).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_9).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_10).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_11).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_12).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_13).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_14).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_15).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_16).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_17).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_18).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_19).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_20).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_21).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_22).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_35_23).
+
+                setOnClickListener(mClickListener);
+        //경남
+        view.findViewById(R.id.tag_36_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_8).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_9).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_10).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_12).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_13).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_14).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_15).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_16).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_17).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_18).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_19).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_20).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_36_21).
+
+                setOnClickListener(mClickListener);
         //전북
-        view.findViewById(R.id.tag_37_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_8).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_9).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_10).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_11).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_12).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_13).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_37_14).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_37_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_8).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_9).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_10).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_11).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_12).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_13).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_37_14).
+
+                setOnClickListener(mClickListener);
         //전남
 
-        view.findViewById(R.id.tag_38_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_4).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_5).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_6).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_7).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_8).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_9).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_10).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_11).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_12).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_13).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_16).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_17).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_18).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_19).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_20).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_21).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_22).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_23).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_38_24).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_38_0).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_1).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_2).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_3).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_4).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_5).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_6).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_7).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_8).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_9).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_10).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_11).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_12).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_13).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_16).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_17).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_18).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_19).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_20).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_21).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_22).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_23).
+
+                setOnClickListener(mClickListener);
+
+        view.findViewById(R.id.tag_38_24).
+
+                setOnClickListener(mClickListener);
 
         //제주
-        view.findViewById(R.id.tag_39_0).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_39_1).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_39_2).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_39_3).setOnClickListener(mClickListener);
-        view.findViewById(R.id.tag_39_4).setOnClickListener(mClickListener);
+        view.findViewById(R.id.tag_39_0).
 
+                setOnClickListener(mClickListener);
 
+        view.findViewById(R.id.tag_39_1).
 
+                setOnClickListener(mClickListener);
 
-        themeButton = new Button[7];
-        themeButton[0] = (Button) view.findViewById(R.id.search_nature_button);
-        themeButton[1] = (Button) view.findViewById(R.id.search_history_button);
-        themeButton[2] = (Button) view.findViewById(R.id.search_rest_button);
-        themeButton[3] = (Button) view.findViewById(R.id.search_activity_button);
-        themeButton[4] = (Button) view.findViewById(R.id.search_building_button);
-        themeButton[5] = (Button) view.findViewById(R.id.search_culture_button);
-        themeButton[6] = (Button) view.findViewById(R.id.search_festival_button);
+        view.findViewById(R.id.tag_39_2).
 
-        theme_selectedItems = new int[7];
-        for (int i = 0; i < theme_selectedItems.length; i++) {
-            theme_selectedItems[i] = 0;
-        }
+                setOnClickListener(mClickListener);
 
+        view.findViewById(R.id.tag_39_3).
 
-        // 자연
-        themeButton[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                setOnClickListener(mClickListener);
 
-                v.setBackgroundResource(theme_selectedIcon[0]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", "A0101");
-                intent.putExtra("case", "type");
-                v.getContext().startActivity(intent);
+        view.findViewById(R.id.tag_39_4).
 
-            }
-
-        });
-
-        // 역사
-        themeButton[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(theme_selectedIcon[1]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", "A0201");
-                intent.putExtra("case", "type");
-                v.getContext().startActivity(intent);
-
-            }
-
-        });
-        //휴양
-        themeButton[2].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(theme_selectedIcon[2]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("case", "type");
-                intent.putExtra("type", "A0202");
-
-                v.getContext().startActivity(intent);
-
-
-            }
-
-        });
-
-        // 체험
-        themeButton[3].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(theme_selectedIcon[3]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", "A0203");
-                intent.putExtra("case", "type");
-                v.getContext().startActivity(intent);
-
-
-            }
-
-        });
-
-        // 건축
-        themeButton[4].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(theme_selectedIcon[4]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", "A0205");
-                intent.putExtra("case", "type");
-                v.getContext().startActivity(intent);
-
-
-            }
-
-        });
-        //문화
-        themeButton[5].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(theme_selectedIcon[5]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", "A0206");
-                intent.putExtra("case", "type");
-                v.getContext().startActivity(intent);
-
-
-            }
-
-        });
-        // 축제
-        themeButton[6].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(theme_selectedIcon[6]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", "A0207");
-                intent.putExtra("case", "type");
-                v.getContext().startActivity(intent);
-
-            }
-
-        });
+                setOnClickListener(mClickListener);
 
         return view;
     }
@@ -1215,11 +1973,8 @@ public class TabFragment2 extends Fragment {
             Button b = (Button) v;
             //  b.setBackgroundColor();
             Intent intent = new Intent(v.getContext(), SearchActivity.class);
-
-            String[] tag = getResources().getResourceEntryName(b.getId()).split("_");
-            intent.putExtra("areacode", tag[1]);
-            intent.putExtra("sigungucode", tag[2]);
-            intent.putExtra("case", "area");
+            intent.putExtra("areacode", getResources().getResourceEntryName(b.getId()));
+            intent.putExtra("sigungucode", b.getText());
             v.getContext().startActivity(intent);
 
         }

@@ -1,20 +1,12 @@
 package kr.co.trappan.Activity;
 
-import android.Manifest;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.location.Location;
-import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,25 +19,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationAvailability;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -64,17 +40,7 @@ import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.R;
 
-public class DetailInformationActivity extends AppCompatActivity implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, OnMapReadyCallback {
-
-    /*********************************구글맵 변수들***********************************/
-    static final LatLng SEOUL = new LatLng(37.56, 126.97);
-    private static final String MAP_TAG = "@@@";
-    private GoogleApiClient mGoogleApiClient;
-    private LocationRequest mLocationRequest;
-    private static final int REQUEST_CODE_LOCATION = 2000;//임의의 정수로 정의
-    private GoogleMap googleMap;
-    /**********************************************************************************/
+public class DetailInformationActivity extends AppCompatActivity {
 
     private ImageView main_image;
     private TextView title;
@@ -120,26 +86,6 @@ public class DetailInformationActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_information);
 
-        /**************************구글맵************************************************************/
-        //권한검사
-        if (ActivityCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //Marshmallow이상이면 코드에서 권한요청이 필요
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_LOCATION);
-            }
-        }
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        /************************************************************************************************/
 
         Intent intent = getIntent();
         contentid = intent.getExtras().getString("contentid");
@@ -299,8 +245,6 @@ public class DetailInformationActivity extends AppCompatActivity implements
                                 overview.setText(item.getOverview().substring(0, 100) + "...");
                                 btn_more.setText("더보기");
                             }
-                            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
                         }
                     });
 
@@ -639,114 +583,4 @@ public class DetailInformationActivity extends AppCompatActivity implements
             }
         });
     }
-
-
-     /********************************* GoogleMap 함수들 ****************************************/
-     @Override
-     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-         switch (requestCode) {
-             case REQUEST_CODE_LOCATION: {
-                 // If request is cancelled, the result arrays are empty.
-                 if (grantResults.length > 0
-                         && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                         && (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                         || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
-
-                     LocationAvailability locationAvailability = LocationServices.FusedLocationApi.getLocationAvailability(mGoogleApiClient);
-                     if (locationAvailability.isLocationAvailable()) {
-                         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-                     } else {
-
-                         Marker location = googleMap.addMarker(new MarkerOptions().position(new LatLng(item.getMapx(), item.getMapy())).title("Location"));
-                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(item.getMapx(), item.getMapy()), 15));
-                         googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-
-                         Toast.makeText(this,"Location Unavialable",Toast.LENGTH_LONG).show();
-                     }
-                 }
-             }
-         }
-     }
-
-    @Override
-    public void onMapReady(final GoogleMap map) {
-        googleMap = map;
-
-        Marker location = googleMap.addMarker(new MarkerOptions().position(new LatLng(item.getMapx(), item.getMapy())).title("Location"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(item.getMapx(), item.getMapy()), 15));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-    }
-
-    /**
-     * Runs when a GoogleApiClient object successfully connects.
-     */
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(3000);
-        mLocationRequest.setFastestInterval(1500);
-
-
-        if (ActivityCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission( this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
-            // Gets the best and most recent location currently available, which may be null
-            // in rare cases when a location is not available.
-            LocationAvailability locationAvailability = LocationServices.FusedLocationApi.getLocationAvailability(mGoogleApiClient);
-            if (locationAvailability.isLocationAvailable()) {
-                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-            } else {
-                Marker location = googleMap.addMarker(new MarkerOptions().position(new LatLng(item.getMapx(), item.getMapy())).title("Location"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(item.getMapx(), item.getMapy()), 15));
-                googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-
-                Toast.makeText(this, "Location Unavialable", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-        // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
-        // onConnectionFailed.
-        Log.i(MAP_TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
-    }
-
-
-    @Override
-    public void onConnectionSuspended(int cause) {
-        // The connection to Google Play services was lost for some reason. We call connect() to
-        // attempt to re-establish the connection.
-        Log.i(MAP_TAG, "Connection suspended");
-        mGoogleApiClient.connect();
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        LatLng LOCATION = new LatLng(item.getMapx(), item.getMapy());
-        googleMap.clear();
-        Marker Location = googleMap.addMarker(new MarkerOptions().position(LOCATION).title("Location"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION, 15));
-    }
-    /************************************************************************************/
-
-
 }

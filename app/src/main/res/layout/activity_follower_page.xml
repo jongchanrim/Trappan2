@@ -16,22 +16,22 @@
             android:background="@drawable/back_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id = "@+id/follwing_backbutton"/>
+            android:id = "@+id/follower_backbutton"/>
 
         <TextView
             android:textSize="20sp"
             android:textColor="@android:color/black"
-            android:text="  팔로잉"
+            android:text="  팔로워"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
-
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/follwing_list"
+        android:id="@+id/follower_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+
 
 </LinearLayout>

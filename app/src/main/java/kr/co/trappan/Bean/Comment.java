@@ -20,6 +20,7 @@ public class Comment {
 	public void setReview_id(int review_id) {
 		this.review_id = review_id;
 	}
+
 	public String getId() {
 		return id;
 	}

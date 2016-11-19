@@ -4,6 +4,29 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_01">
 
+    <LinearLayout
+        android:id="@+id/btn_back"
+        android:paddingLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:gravity="center">
+
+        <ImageView
+            android:background="@drawable/back_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id = "@+id/comment_backbutton"/>
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="  코멘트"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/comment_list"
         android:layout_width="match_parent"
@@ -22,15 +45,18 @@
             android:layout_height="35dip"
             android:layout_marginLeft= "2dip"
             android:background="#FFFFFF"
+            android:textColor = "#000000"
             android:layout_gravity="center_vertical"
             android:id = "@+id/comment_write_comment"/>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="76dip"
+            android:layout_height="38dip"
             android:layout_gravity="right"
             android:id = "@+id/comment_send_button"
-            android:text = "보내기"/>
+            android:background = "@drawable/send_button"
+            android:layout_margin = "3dip"
+            />
 
     </LinearLayout>
 
