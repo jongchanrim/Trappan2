@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 
+import com.google.android.gms.plus.model.people.Person;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -70,8 +72,9 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private EditText review_content_edittext;
 
     private ImageButton review_backbutton;
+    private ViewGroup review_layoutbutton;
     private Button review_completebutton;
-    private Button review_imageupload_button;
+
 
     private int imagenumber = 0; //업로드이미지 위치에 순서대로 보여주기 위한 변수
     private String contentid;
@@ -170,8 +173,6 @@ public class ReviewWriteActivity extends AppCompatActivity {
         review_backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ReviewWriteActivity.this, DetailInformationActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
@@ -204,8 +205,10 @@ public class ReviewWriteActivity extends AppCompatActivity {
                 Toast.makeText(ReviewWriteActivity.this, "완료", Toast.LENGTH_SHORT).show();
             }
         });
-        review_imageupload_button = (Button)findViewById(R.id.review_imageupload_button);
-        review_imageupload_button.setOnClickListener(Click);
+
+        //이미지 업로드 버튼
+        review_layoutbutton = (ViewGroup) findViewById(R.id.review_layoutbutton);
+        review_layoutbutton.setOnClickListener(Click);
 
     }
 
