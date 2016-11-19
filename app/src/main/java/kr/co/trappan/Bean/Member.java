@@ -13,9 +13,7 @@ public class Member {
 	private String pro_img;
 	private String intro;
 
-	public Member() {
 
-	}
 
 
 	public String getId() {
@@ -61,6 +59,10 @@ public class Member {
 		this.intro = intro_img;
 	}
 
+
+	public Member (){
+
+	}
 	public Member(String id, String email, String password, String name, String back_img, String pro_img, String intro)
 	{
 		this.id = id;
@@ -71,6 +73,5 @@ public class Member {
 		this.pro_img = pro_img;
 		this.intro = intro;
 	}
-
 	
 }
