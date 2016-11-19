@@ -99,6 +99,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
 
         review_title_edittext = (EditText) findViewById(R.id.review_title);
         review_content_edittext =(EditText) findViewById(R.id.review_content);
+        review_content_edittext.setBackground(null);
 
         /*사이즈 조절하기 위한 함수들*/
         LayoutParams params1 = (LayoutParams) review_img1.getLayoutParams();
