@@ -17,9 +17,9 @@ public class Tour {
     private String overview;
     private float mapx;
     private float mapy;
-    private Double rate;
-    private int stamp;
-    private int like;
+    private Double rate=0.0;
+    private int stamp=0;
+    private int like=0;
     private String sigungucode;
     private String areaName;
     private String sigunguName;

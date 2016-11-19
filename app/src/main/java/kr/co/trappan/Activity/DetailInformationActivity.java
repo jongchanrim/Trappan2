@@ -74,13 +74,14 @@ public class DetailInformationActivity extends AppCompatActivity {
     String contentid;
     AQuery aq;
 
-    Double myrate=0.0;
+    Double myrate = 0.0;
     int myrateflag;
     String mystamp;
     int mystampflag;
     String mytlike;
     int mytlikeflag;
     static final String TAG = DetailInformationActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +91,7 @@ public class DetailInformationActivity extends AppCompatActivity {
         Intent intent = getIntent();
         contentid = intent.getExtras().getString("contentid");
 
-        main_image = (ImageView) findViewById(R.id.detail_image);
+        main_image = (ImageView) findViewById(R.id.detail_main_image);
         title = (TextView) findViewById(R.id.detail_title);
         btn_want = (ImageView) findViewById(R.id.detail_btn_want);
         detailWant = (TextView) findViewById(R.id.detail_want);
@@ -109,11 +110,9 @@ public class DetailInformationActivity extends AppCompatActivity {
 
         floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_button);
         aq = new AQuery(this);
-
+        item = new Tour();
         RequestParams params = new RequestParams();
         params.put("contentid", contentid);
-
-
 
         HttpClient.get("detailinfo", params, new JsonHttpResponseHandler() {
             @Override
@@ -121,27 +120,31 @@ public class DetailInformationActivity extends AppCompatActivity {
                 super.onSuccess(statusCode, headers, response);
                 Log.d(TAG, "httpOK: " + response.toString());
                 try {
-                    item = new Tour(response.getString("addr1"),
-                            response.getString("addr2"),
-                            response.getString("areacode"),
-                            response.getString("cat2"),
-                            response.getString("contentid"),
-                            response.getString("contenttypeid"),
-                            response.getString("firstimage"),
-                            response.getInt("tlike"),
-                            response.getString("mapx"),
-                            response.getString("mapy"),
-                            response.getString("mlevel"),
-                            response.getString("overview"),
-                            response.getDouble("rate"),
-                            response.getString("sigungucode"),
-                            response.getInt("stamp"),
-                            response.getString("title")
-                    );
+                    item.setAddr1(response.getString("addr1"));
+                    item.setAreacode(response.getString("areacode"));
+                    item.setCat2(response.getString("cat2"));
+                    item.setContentid(response.getString("contentid"));
+                    item.setFirstimage(response.getString("firstimage"));
+                    item.setLike(response.getInt("tlike"));
+                    item.setMapx(response.getString("mapx"));
+                    item.setMapy(response.getString("mapy"));
+                    item.setMlevel(response.getString("mlevel"));
+                    item.setOverview(response.getString("overview"));
+                    item.setRate(response.getDouble("rate"));
+                    item.setSigungucode(response.getString("sigungucode"));
+                    item.setStamp(response.getInt("stamp"));
+                    item.setTitle(response.getString("title"));
+
+                    Log.d(TAG, "getStamp: " + item.getFirstimage());
+                    Log.d(TAG, "getTitle: " + item.getTitle());
+
 
                     myrate = response.getDouble("myrate");
                     mystamp = response.getString("mystamp");
                     mytlike = response.getString("mytlike");
+
+                    Log.d(TAG, "mytlike: " + mytlike);
+                    Log.d(TAG, "mystamp: " + mystamp);
 
                     if (myrate == 0) {
                         btn_rate.setBackgroundResource(R.drawable.detail_icon_03_01);
@@ -153,7 +156,7 @@ public class DetailInformationActivity extends AppCompatActivity {
 
                     }
 
-                    if (mystamp == null) {
+                    if (mystamp.equals("0")) {
                         btn_stamp.setBackgroundResource(R.drawable.detail_icon_02_01);
                         mystampflag = 0;
                     } else {
@@ -161,7 +164,7 @@ public class DetailInformationActivity extends AppCompatActivity {
                         mystampflag = 1;
                     }
 
-                    if (mytlike == null) {
+                    if (mytlike .equals("0")) {
                         btn_want.setBackgroundResource(R.drawable.detail_icon_01_01);
                         mytlikeflag = 0;
                     } else {
@@ -172,6 +175,7 @@ public class DetailInformationActivity extends AppCompatActivity {
 
                     //이미지 세팅
                     aq.id(main_image).image(item.getFirstimage());
+                    main_image.setColorFilter(Color.parseColor("#DADADA"), PorterDuff.Mode.MULTIPLY);
 
                     //평균 평점
                     detailRateAvg.setText(Double.toString(item.getRate()));
@@ -226,11 +230,11 @@ public class DetailInformationActivity extends AppCompatActivity {
 
 
                     //설명 세팅
-                    if (item.getOverview().length() < 30) {
+                    if (item.getOverview().length() < 100) {
                         overview.setText(item.getOverview());
                         btn_more.setVisibility(View.INVISIBLE);
                     } else {
-                        overview.setText(item.getOverview().substring(0, 30) + "...");
+                        overview.setText(item.getOverview().substring(0, 100) + "...");
                     }
                     btn_more.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -239,7 +243,7 @@ public class DetailInformationActivity extends AppCompatActivity {
                                 btn_more.setText("접기");
                                 overview.setText(item.getOverview());
                             } else {
-                                overview.setText(item.getOverview().substring(0, 30) + "...");
+                                overview.setText(item.getOverview().substring(0, 100) + "...");
                                 btn_more.setText("더보기");
                             }
                         }
@@ -248,6 +252,9 @@ public class DetailInformationActivity extends AppCompatActivity {
                 } catch (JSONException e) {
 
                 }
+
+                ViewGroup myViewGroup = (ViewGroup) findViewById (R.id.activity_detail_information);
+                myViewGroup.invalidate();
 
 
             }
@@ -258,8 +265,6 @@ public class DetailInformationActivity extends AppCompatActivity {
 
             }
         });
-
-
 
 
         recyclerView = (RecyclerView) findViewById(R.id.detail_information_list);
@@ -326,7 +331,7 @@ public class DetailInformationActivity extends AppCompatActivity {
                             }
 
                     );
-                }else{
+                } else {
                     btn_want.setBackgroundResource(R.drawable.detail_icon_01_01);
                     RequestParams params = new RequestParams();
                     params.put("contentid", contentid);
@@ -354,7 +359,7 @@ public class DetailInformationActivity extends AppCompatActivity {
                                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                     super.onSuccess(statusCode, headers, response);
                                     detailStamp.setText(Integer.toString(item.getStamp() + 1));
-                                    mystampflag =1;
+                                    mystampflag = 1;
                                 }
                             }
 
@@ -364,91 +369,91 @@ public class DetailInformationActivity extends AppCompatActivity {
             }
         });
         btn_rate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ratingDialog = new Dialog(DetailInformationActivity.this);
-                ratingDialog.setContentView(R.layout.rating_dialog);
-                ratingDialog.setCancelable(true);
-                ratingBar = (RatingBar) ratingDialog.findViewById(R.id.ratingBar);
-                ratingBar.setRating(0);
+                                        @Override
+                                        public void onClick(View v) {
+                                            ratingDialog = new Dialog(DetailInformationActivity.this);
+                                            ratingDialog.setContentView(R.layout.rating_dialog);
+                                            ratingDialog.setCancelable(true);
+                                            ratingBar = (RatingBar) ratingDialog.findViewById(R.id.ratingBar);
+                                            ratingBar.setRating(0);
 
-                Drawable progress = ratingBar.getProgressDrawable();
-                DrawableCompat.setTint(progress, Color.LTGRAY);
+                                            Drawable progress = ratingBar.getProgressDrawable();
+                                            DrawableCompat.setTint(progress, Color.LTGRAY);
 
-                LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-                stars.getDrawable(2).setColorFilter(Color.parseColor("#f8b62b"), PorterDuff.Mode.SRC_ATOP);
+                                            LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
+                                            stars.getDrawable(2).setColorFilter(Color.parseColor("#f8b62b"), PorterDuff.Mode.SRC_ATOP);
 
-                TextView text = (TextView) ratingDialog.findViewById(R.id.rating_text);
-                text.setText("별점주기");
+                                            TextView text = (TextView) ratingDialog.findViewById(R.id.rating_text);
+                                            text.setText("별점주기");
 
-                Button updateButton = (Button) ratingDialog.findViewById(R.id.btn_check);
-                updateButton.setOnClickListener(new View.OnClickListener() {
+                                            Button updateButton = (Button) ratingDialog.findViewById(R.id.btn_check);
+                                            updateButton.setOnClickListener(new View.OnClickListener() {
+                                                                                @Override
+                                                                                public void onClick(View v) {
+                                                                                    Log.d("rate", star_rate);
+                                                                                    btn_rate.setBackgroundResource(R.drawable.detail_icon_03_02);
+                                                                                    RequestParams params = new RequestParams();
+                                                                                    params.put("rate", star_rate);
+                                                                                    if (myrateflag == 0) {
+                                                                                        HttpClient.get("addrate", params, new JsonHttpResponseHandler() {
+                                                                                                    @Override
+                                                                                                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                                                                                        super.onSuccess(statusCode, headers, response);
+                                                                                                        detailRate.setText(star_rate);
+                                                                                                        myrateflag = 1;
+                                                                                                    }
+                                                                                                }
+
+                                                                                        );
+                                                                                    } else {
+                                                                                        if (myrateflag == 1) {
+                                                                                            HttpClient.get("updaterate", params, new JsonHttpResponseHandler() {
+                                                                                                        @Override
+                                                                                                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                                                                                            super.onSuccess(statusCode, headers, response);
+                                                                                                            detailRate.setText(star_rate);
+                                                                                                        }
+                                                                                                    }
+
+                                                                                            );
+                                                                                        }
+                                                                                        ratingDialog.dismiss();
+                                                                                    }
+                                                                                }
+                                                                            }
+                                            );
+
+                                            ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
+
+                                                                                   {
+                                                                                       @Override
+                                                                                       public void onRatingChanged(RatingBar ratingBar, float rating,
+                                                                                                                   boolean fromUser) {
+                                                                                           star_rate = "" + rating;
+                                                                                       }
+                                                                                   }
+
+                                            );
+                                            //now that the dialog is set up, it's time to show it
+                                            ratingDialog.show();
+
+                                        }
+                                    }
+
+        );
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener()
+
+                                                {
                                                     @Override
                                                     public void onClick(View v) {
-                                                        Log.d("rate", star_rate);
-                                                        btn_rate.setBackgroundResource(R.drawable.detail_icon_03_02);
-                                                        RequestParams params = new RequestParams();
-                                                        params.put("rate", star_rate);
-                                                        if (myrateflag == 0) {
-                                                            HttpClient.get("addrate", params, new JsonHttpResponseHandler() {
-                                                                        @Override
-                                                                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                                                            super.onSuccess(statusCode, headers, response);
-                                                                            detailStamp.setText(star_rate);
-                                                                            myrateflag =1;
-                                                                        }
-                                                                    }
-
-                                                            );
-                                                        } else {
-                                                            if (myrateflag == 1) {
-                                                                HttpClient.get("updaterate", params, new JsonHttpResponseHandler() {
-                                                                            @Override
-                                                                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                                                                super.onSuccess(statusCode, headers, response);
-                                                                                detailStamp.setText(star_rate);
-                                                                            }
-                                                                        }
-
-                                                                );
-                                                            }
-                                                            ratingDialog.dismiss();
-                                                        }
+                                                        Intent intent = new Intent(DetailInformationActivity.this, ReviewWriteActivity.class);
+                                                        intent.putExtra("contentid", contentid);
+                                                        startActivity(intent);
                                                     }
                                                 }
-                    );
 
-                    ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
-
-                    {
-                        @Override
-                        public void onRatingChanged (RatingBar ratingBar,float rating,
-                        boolean fromUser){
-                        star_rate = "" + rating;
-                    }
-                    }
-
-                    );
-                    //now that the dialog is set up, it's time to show it
-                    ratingDialog.show();
-
-                }
-            }
-
-            );
-
-            floatingActionButton.setOnClickListener(new View.OnClickListener()
-
-            {
-                @Override
-                public void onClick (View v){
-                    Intent intent=new Intent(DetailInformationActivity.this, ReviewWriteActivity.class);
-                    intent.putExtra("contentid", contentid);
-                    startActivity(intent);
-            }
-            }
-
-            );
+        );
 
         recyclerView.addOnItemTouchListener(new
 
@@ -473,11 +478,10 @@ public class DetailInformationActivity extends AppCompatActivity {
     }
 
 
-
-//    @Override
+    //    @Override
 //    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
 //        super.onPostCreate(savedInstanceState);
-    public void test(){
+    public void test() {
         if (myrate == 0.0) {
             btn_rate.setBackgroundResource(R.drawable.detail_icon_03_01);
             myrateflag = 0;

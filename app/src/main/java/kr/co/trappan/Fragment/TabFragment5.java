@@ -383,7 +383,7 @@ public class TabFragment5 extends Fragment {
                                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                     super.onSuccess(statusCode, headers, response);
                                     try {
-                                        aq.id(back_img).image(response.get("pro_img").toString());
+                                       // aq.id(back_img).image(response.get("pro_img").toString());
                                     }catch (Exception e){
 
                                     }

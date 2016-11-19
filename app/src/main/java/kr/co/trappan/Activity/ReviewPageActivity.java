@@ -88,8 +88,9 @@ public class ReviewPageActivity extends AppCompatActivity {
         num_comment=(TextView)findViewById(R.id.num_comment);
         btn_like=(Button)findViewById(R.id.review_like_button);
         btn_comment=(Button)findViewById(R.id.review_comment_button);
-
-
+        review =new Review();
+        final ReviewPagerAdapter adapter=new ReviewPagerAdapter(getLayoutInflater(),pager_image_list);
+        viewPager.setAdapter(adapter);
         RequestParams params = new RequestParams();
         params.put("review_id", reviewid);
         params.put("id", id);
@@ -98,7 +99,7 @@ public class ReviewPageActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                    review =new Review();
+
                     review.setC_date(response.getString("c_date"));
                     review.setReview_title(response.getString("review_title"));
                     review.setReview_content(response.getString("review_content"));
@@ -159,14 +160,13 @@ public class ReviewPageActivity extends AppCompatActivity {
                         pager_image_list.add(review.getImg_6());
 
 
-
+                    adapter.notifyDataSetChanged();
 
                 }catch (JSONException e){
 
                 }
 
-                ReviewPagerAdapter adapter=new ReviewPagerAdapter(getLayoutInflater(),pager_image_list);
-                viewPager.setAdapter(adapter);
+
 
 
 

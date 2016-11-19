@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,9 +31,12 @@
                 android:layout_height="200dip">
 
                 <ImageView
-                    android:id="@+id/main_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:id="@+id/detail_main_image"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_weight="0.2"
+                    android:layout_alignParentTop="true"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -72,10 +76,18 @@
             </FrameLayout>
 
 
+            <View
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@android:color/black"></View>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="90dip">
+                android:layout_height="90dip"
+                android:gravity="center">
 
                 <!--버튼1-->
                 <FrameLayout
@@ -218,6 +230,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/detail_icon_05"/>
+
                     <LinearLayout
                         android:gravity="bottom|center"
                         android:layout_width="match_parent"
@@ -234,13 +247,6 @@
                 </FrameLayout>
 
             </LinearLayout>
-
-            <View
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:background="@android:color/black"></View>
 
             <TextView
                 android:layout_marginLeft="10dip"
@@ -290,13 +296,17 @@
     </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
 
     <android.support.design.widget.FloatingActionButton
-        android:src="@drawable/profileedit"
+        android:src="@drawable/review_imageaddpost"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="15dp"
         android:layout_gravity="bottom|end"
         android:id="@+id/floating_button"
         android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        app:backgroundTint="?attr/colorPrimary"
+        app:elevation="24dp" />
 
 </FrameLayout>
 
