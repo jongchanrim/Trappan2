@@ -191,7 +191,7 @@ public class TabFragment3 extends Fragment {
                             }
 
                         }
-                        HttpClient.get("randomreco", null, new JsonHttpResponseHandler() {
+                        HttpClient.get("areareco", params, new JsonHttpResponseHandler() {
 
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

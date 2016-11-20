@@ -1,6 +1,7 @@
 package kr.co.trappan.Activity;
 
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -22,8 +23,13 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.vision.barcode.Barcode;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,6 +71,8 @@ public class DetailInformationActivity extends AppCompatActivity {
 
     private TextView overview;
     private TextView btn_more;
+
+
     Tour item;
 
     String star_rate = "";
@@ -81,11 +89,25 @@ public class DetailInformationActivity extends AppCompatActivity {
     int mytlikeflag;
     static final String TAG = DetailInformationActivity.class.getSimpleName();
 
+    MapView map;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_information);
 
+        map = (MapView) findViewById(R.id.map);
+
+        // 위도와 경도 정보를 갖는 GeoPoint 객체 생성
+
+        //MapView.GeoPoint gp = getPoint(40.76793169992044, -73.98180484771729);
+
+
+// 위치 (내위치 또는 기준이 되는 위치)를 표시하는 마커를 생성
+
+       // MapView.LayoutParams mapParams = new MapView.LayoutParams(LayoutParams
+       //         .WRAP_CONTENT, LayoutParams.WRAP_CONTENT, gp, MapView.LayoutParams.CENTER);
+//
 
         Intent intent = getIntent();
         contentid = intent.getExtras().getString("contentid");
@@ -247,6 +269,9 @@ public class DetailInformationActivity extends AppCompatActivity {
                             }
                         }
                     });
+
+                //    .setGpsCurrent(mLongitude.getText().toString(), mLatitude
+                 //           .getText().toString());
 
                 } catch (JSONException e) {
 

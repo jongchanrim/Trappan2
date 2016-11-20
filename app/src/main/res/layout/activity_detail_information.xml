@@ -283,7 +283,7 @@
                     <!--android:layout_height="match_parent"-->
                     <!--class="com.google.android.gms.maps.SupportMapFragment"-->
                     <!--/>-->
-                <fragment
+                <com.google.android.gms.maps.MapView
                     android:id="@+id/map"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

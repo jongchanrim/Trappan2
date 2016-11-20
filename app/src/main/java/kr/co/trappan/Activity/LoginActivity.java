@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 params.put("id", id.getText().toString().trim());
                 params.put("pw", enpw);
 
-                HttpClient.post("test", params, new JsonHttpResponseHandler() {
+                HttpClient.post("login", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
