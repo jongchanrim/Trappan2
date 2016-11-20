@@ -75,6 +75,8 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private ViewGroup review_layoutbutton;
     private Button review_completebutton;
 
+    int islike;
+
 
     private int imagenumber = 0; //업로드이미지 위치에 순서대로 보여주기 위한 변수
     private String contentid;
@@ -99,6 +101,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
 
         review_title_edittext = (EditText) findViewById(R.id.review_title);
         review_content_edittext =(EditText) findViewById(R.id.review_content);
+        review_content_edittext.setBackground(null);
 
         /*사이즈 조절하기 위한 함수들*/
         LayoutParams params1 = (LayoutParams) review_img1.getLayoutParams();

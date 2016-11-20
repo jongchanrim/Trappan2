@@ -133,6 +133,7 @@ public class TabFragment1 extends Fragment {
                 startActivity(intent);
             }
         });
+
         return view;
     }
 

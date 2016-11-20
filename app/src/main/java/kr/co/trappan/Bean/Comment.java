@@ -20,6 +20,7 @@ public class Comment {
 	public void setReview_id(int review_id) {
 		this.review_id = review_id;
 	}
+
 	public String getId() {
 		return id;
 	}
@@ -46,6 +47,22 @@ public class Comment {
 	}
 	public void setC_date(String c_date) {
 		this.c_date = c_date;
+	}
+
+	public Comment ()
+	{
+
+	}
+
+	public Comment (int comment_id,int review_id, int comment_count, String id, String comment_content, String c_date ){
+
+		this.comment_id = comment_id;
+		this.review_id = review_id;
+		this.comment_count = comment_count;
+		this.id = id;
+		this.comment_content = comment_content;
+		this.c_date = c_date;
+
 	}
 	
 	

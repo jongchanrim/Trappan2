@@ -40,46 +40,11 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/review_title"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/xml_border"
-            android:padding="5dp"
-            android:hint="제목을 입력하세요"
-            android:textColorHint="@color/cardview_shadow_start_color"
-            android:textSize="14sp"
-            android:layout_marginTop="10dp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/review_content"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/xml_border"
-            android:gravity="top|center_vertical"
-            android:padding="5dp"
-            android:hint="내용을 입력하세요"
-            android:textColorHint="@color/cardview_shadow_start_color"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/review_layoutbutton"
         android:clickable="true"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,9 +57,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/review_img1"
                 android:layout_weight="1"
-                android:background="@drawable/review_imageaddpost"
                 android:src="@drawable/review_imageadd"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:scaleType="centerCrop"/>
 
             <ImageView
@@ -102,9 +66,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/review_img2"
                 android:layout_weight="1"
-                android:background="@drawable/review_imageaddpost"
                 android:src="@drawable/review_imageadd"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:scaleType="centerCrop"/>
 
             <ImageView
@@ -112,18 +75,15 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/review_img3"
                 android:layout_weight="1"
-                android:background="@drawable/review_imageaddpost"
                 android:src="@drawable/review_imageadd"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:scaleType="centerCrop"/>
-
-
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:background="@android:color/white">
 
             <ImageView
@@ -131,9 +91,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/review_img4"
                 android:layout_weight="1"
-                android:background="@drawable/review_imageaddpost"
                 android:src="@drawable/review_imageadd"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:scaleType="centerCrop"/>
 
             <ImageView
@@ -141,9 +100,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/review_img5"
                 android:layout_weight="1"
-                android:background="@drawable/review_imageaddpost"
                 android:src="@drawable/review_imageadd"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:scaleType="centerCrop"/>
 
             <ImageView
@@ -151,12 +109,56 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/review_img6"
                 android:layout_weight="1"
-                android:background="@drawable/review_imageaddpost"
                 android:src="@drawable/review_imageadd"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:scaleType="centerCrop"/>
 
+
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/white">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/review_title"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/xml_border"
+            android:padding="5dp"
+            android:hint="제목을 입력하세요"
+            android:textColorHint="@color/cardview_shadow_start_color"
+            android:textSize="14sp"
+            android:layout_marginTop="9dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/review_content"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/xml_border"
+            android:gravity="top|center_vertical"
+            android:padding="5dp"
+            android:hint="내용을 입력하세요"
+            android:textColorHint="@color/cardview_shadow_start_color"
+            android:textSize="14sp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:scrollHorizontally="false"
+            android:lines="8" />
     </LinearLayout>
 
     <Button
@@ -166,6 +168,6 @@
         android:id="@+id/review_completebutton"
         android:background="@drawable/login_button"
         android:textSize="16sp"
-        android:layout_margin="10dp" />
+        android:layout_margin="7dp" />
 
 </LinearLayout>

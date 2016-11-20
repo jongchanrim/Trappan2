@@ -73,9 +73,9 @@ public class TabFragment3 extends Fragment {
             R.drawable.jeju_39_c,};
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tabfragment3, container, false);
+        View view = inflater.inflate(R.layout.testfragment, container, false);
 
-
+    /*
         // 리스트 뷰
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recmmand_list);
@@ -419,7 +419,7 @@ public class TabFragment3 extends Fragment {
                 selectedItems[16] = 1;
             }
         });
-
+*/
                 return view;
     }
 }

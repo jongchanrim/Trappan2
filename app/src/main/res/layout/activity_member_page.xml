@@ -29,7 +29,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/mybackimage"
-                        android:src="@drawable/gangwon"
                         android:background="#ffffff" />
 
                 </FrameLayout>
@@ -37,7 +36,6 @@
                 <com.pkmmte.view.CircularImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/gangwon"
                     app:border_color="#ffffff"
                     app:border_width="2dp"
                     android:id="@+id/CircularImageView"

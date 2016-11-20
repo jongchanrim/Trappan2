@@ -80,16 +80,6 @@ public class MemberPageActivity extends AppCompatActivity {
 
         ArrayList<List_item> items = new ArrayList<>();
 
-        items.add(new List_item(R.drawable.gangwon,"후기","1","테스트1"));
-        items.add(new List_item(R.drawable.gangwon,"후기","2","테스트2"));
-        items.add(new List_item(R.drawable.gangwon,"후기","3","테스트3"));
-        items.add(new List_item(R.drawable.gangwon,"후기","4","테스트4"));
-        items.add(new List_item(R.drawable.gangwon,"후기","5","테스트5"));
-        items.add(new List_item(R.drawable.gangwon,"후기","6","테스트6"));
-        items.add(new List_item(R.drawable.gangwon,"후기","7","테스트7"));
-        items.add(new List_item(R.drawable.gangwon,"후기","8","테스트8"));
-        items.add(new List_item(R.drawable.gangwon,"후기","9","테스트9"));
-        items.add(new List_item(R.drawable.gangwon,"후기","10","테스트10"));
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
