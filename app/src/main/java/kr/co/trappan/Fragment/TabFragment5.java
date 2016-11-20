@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
@@ -22,7 +23,9 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.pkmmte.view.CircularImageView;
 
 import org.json.JSONArray;
@@ -31,7 +34,10 @@ import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
@@ -40,6 +46,7 @@ import kr.co.trappan.Activity.FollowerActivity;
 import kr.co.trappan.Activity.FollowingActivity;
 import kr.co.trappan.Activity.LikeActivity;
 import kr.co.trappan.Activity.My_CommentActivity;
+import kr.co.trappan.Activity.SearchActivity;
 import kr.co.trappan.Adapter.ListViewAdapter;
 import kr.co.trappan.Adapter.ReviewListAdapter;
 import kr.co.trappan.Bean.Review;
@@ -54,7 +61,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by thfad_000 on 2016-10-04.
  */
 public class TabFragment5 extends Fragment{
-
+    static final String TAG = SearchActivity.class.getSimpleName();
     Context context;
     private RecyclerView recyclerView;
     private ReviewListAdapter Adapter;
@@ -301,7 +308,7 @@ public class TabFragment5 extends Fragment{
 
     public void doTakePhotoAction(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
+        Log.d(TAG, "doTakePhotoAction");
         //임시로 사용할 파일의 경로를 생성
         String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
 
@@ -319,6 +326,7 @@ public class TabFragment5 extends Fragment{
     //앨범에서 이미지 가져오기
     public void doTakeAlbumAction(){
         //앨범 호출
+        Log.d(TAG, "doTakeAlbumAction");
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent, PICK_FROM_ALBUM);
@@ -327,7 +335,7 @@ public class TabFragment5 extends Fragment{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-
+        Log.d(TAG, "onActivityResult");
         if(resultCode != RESULT_OK)
             return;
 
@@ -337,114 +345,55 @@ public class TabFragment5 extends Fragment{
                 //이후의 처리가 카메라와 같으므로 일단 break없이 진행
                 //실제코드에서는 좀더 합리적인 방법 선택
                 if(back_or_profile == 1) {
+
                     mlmageCaptureUri_background = data.getData();
-                    Log.d("SmartWeel", mlmageCaptureUri_background.getPath().toString());
+                    Log.d("PICK_FROM_ALBUM", mlmageCaptureUri_background.getPath().toString());
+
+                    RequestParams params = new RequestParams();
+                    try {
+                        InputStream fin = new FileInputStream(mlmageCaptureUri_background.getPath().toString());
+                        params.put("back_img", fin);
+
+                    } catch(FileNotFoundException e) {}
+
+                    HttpClient.get("updatebackimg", params, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                            aq.id(back_img).image(mlmageCaptureUri_background.getPath().toString());
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                        }
+                    });
+
                 }
                 else if(back_or_profile == 2){
                     mlmageCaptureUri_profile = data.getData();
-                    Log.d("SmartWeel", mlmageCaptureUri_profile.getPath().toString());
+                    Log.d("PICK_FROM_ALBUM", mlmageCaptureUri_profile.getPath().toString());
                 }
-            }
-            case PICK_FROM_CAMERA:
-            {
-                //이미지를 가져온 이후의 리사이즈할 이미지 크기 결정
-                //이후에 이미지 크롭 어플리케이션 호출
-                Intent intent = new Intent("com.android.camera.action.CROP");
-                if(back_or_profile == 1) {
-                    intent.setDataAndType(mlmageCaptureUri_background, "image/");
-                }
-                else if(back_or_profile == 2){
-                    intent.setDataAndType(mlmageCaptureUri_profile, "image/");
-                }
-
-                //크롭할 이미지를 200*200으로 저장
-                intent.putExtra("outputX",200);
-                intent.putExtra("outputY",200);
-                intent.putExtra("aspectX",1);
-                intent.putExtra("aspectY",1);
-                intent.putExtra("scale",true);
-                intent.putExtra("return-data",false);
-                startActivityForResult(intent, CROP_FROM_IMAGE);
-
-                if(back_or_profile == 1) {
-                    back_img.setImageURI(mlmageCaptureUri_background);
-                    back_or_profile = 0;
-                }
-                else if(back_or_profile == 2){
-                    pro_img.setImageURI(mlmageCaptureUri_profile);
-                    back_or_profile = 0;
-                }
-
                 break;
             }
-            case CROP_FROM_IMAGE:
-            {
-                //크롭이 된 이후의 이미지 넘겨받기
-                //이미지 뷰에 이미지를 보여준다거나 부가적인 작업 이후에
-                //임시파일 삭제
-                if(resultCode != RESULT_OK){
-                    return;
-                }
-                final Bundle extras = data.getExtras();
-
-                //CROP된 이미지를 저장하기 위한 FILE경로
-                String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+
-                        "/SmartWheel/"+ System.currentTimeMillis()+".jpg";
-                if(extras != null){
-                    Bitmap photo = extras.getParcelable("data"); //CROP된 BITMAP
-                    storeCropImage(photo, filePath); //CROP된 이미지를 외부저장소, 앨범에 저장
-                    absoultePath = filePath;
-                    break;
-                }
-                //임시파일삭제
-                if(back_or_profile == 1) {
-                    File f = new File(mlmageCaptureUri_background.getPath());
-                    if(f.exists()){
-                        f.delete();
-                    }
-                }
-                else if(back_or_profile == 2){
-                    File f = new File(mlmageCaptureUri_profile.getPath());
-                    if(f.exists()){
-                        f.delete();
-                    }
-                }
-            }
+//            case PICK_FROM_CAMERA:
+//            {
+//
+//                if(back_or_profile == 1) {
+//                    Log.d("PICK_FROM_CAMERA", " back_img.setImageURI(mlmageCaptureUri_background);");
+//
+//                    back_or_profile = 0;
+//                }
+//                else if(back_or_profile == 2){
+//                    Log.d("PICK_FROM_CAMERA", "pro_img.setImageURI(mlmageCaptureUri_profile);");
+//                    pro_img.setImageURI(mlmageCaptureUri_profile);
+//                    back_or_profile = 0;
+//                }
+//                break;
+//            }
 
         }
     }
 
-    private void storeCropImage(Bitmap bitmap, String filePath){
-        //SmartWheel 폴더를 생성하여 이미지를 저장하는 방식이다.
-        String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath()+ "/SmartWeel";
-        File directory_SmartWheel = new File(dirPath);
-
-        if(!directory_SmartWheel.exists())//SmartWheel 디렉토리에 폴더가없다면
-            directory_SmartWheel.mkdir();
-
-        File copyFile = new File(filePath);
-        BufferedOutputStream out = null;
-
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        // Calculate image's size by maintain the image's aspect ratio
-
-        try{
-            copyFile.createNewFile();
-            out = new BufferedOutputStream(new FileOutputStream(copyFile));
-            //bitmap = Bitmap.createScaledBitmap(bitmap, (width=5000), (height=height*1000/width), true);
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
-
-            //sendBroadcast를 통해 Crop된 사진을 앨범에 보이도록 갱신한다.
-            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(copyFile)));
-
-            out.flush();
-            out.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
 }
