@@ -40,6 +40,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -66,7 +67,7 @@ import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.R;
 
 public class DetailInformationActivity extends AppCompatActivity implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, OnMapReadyCallback {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     /*************************************************구글맵***********************************************/
     static final LatLng SEOUL = new LatLng(37.56, 126.97);
@@ -93,7 +94,6 @@ public class DetailInformationActivity extends AppCompatActivity implements
     private RecyclerView recyclerView;
     private ReviewListAdapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerViewHeader header;
 
     private Dialog ratingDialog;
     private RatingBar ratingBar;
@@ -136,8 +136,8 @@ public class DetailInformationActivity extends AppCompatActivity implements
         btn_rate = (ImageView) findViewById(R.id.detail_btn_rate);
         overview = (TextView) findViewById(R.id.detail_overview);
         btn_more = (TextView) findViewById(R.id.btn_more);
-        btn_more.setText("더보기");
         detailRateAvg = (TextView) findViewById(R.id.detail_rate_average);
+
         detailRate = (TextView) findViewById(R.id.detail_rate);
         detailBtnType = (ImageView) findViewById(R.id.detail_btn_type);
         detailType = (TextView) findViewById(R.id.detail_type);
@@ -275,7 +275,7 @@ public class DetailInformationActivity extends AppCompatActivity implements
                     btn_more.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (btn_more.getText() == "더보기") {
+                            if (btn_more.getText().toString() == "더보기") {
                                 btn_more.setText("접기");
                                 overview.setText(item.getOverview());
                             } else {
@@ -306,7 +306,7 @@ public class DetailInformationActivity extends AppCompatActivity implements
         recyclerView = (RecyclerView) findViewById(R.id.detail_information_list);
         recyclerView.setHasFixedSize(true);
 
-        header = (RecyclerViewHeader) findViewById(R.id.header);
+        RecyclerViewHeader header = (RecyclerViewHeader) findViewById(R.id.header);
 
 
         layoutManager = new LinearLayoutManager(this);
@@ -453,9 +453,8 @@ public class DetailInformationActivity extends AppCompatActivity implements
 
                                                                                             );
                                                                                         }
-
+                                                                                        ratingDialog.dismiss();
                                                                                     }
-                                                                                    ratingDialog.dismiss();
                                                                                 }
                                                                             }
                                             );
@@ -513,6 +512,7 @@ public class DetailInformationActivity extends AppCompatActivity implements
         ));
 
 
+
         /*******************************************************************구글맵*****************************************************************/
         //권한검사
         if (ActivityCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -528,120 +528,27 @@ public class DetailInformationActivity extends AppCompatActivity implements
                 .addApi(LocationServices.API)
                 .build();
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        MapView mapView = (MapView) findViewById(R.id.map);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                setUpMap(googleMap);
+            }
+        });
+
+
         /*****************************************************************************************************************************************/
     }
 
+    private void setUpMap(GoogleMap map) {
+        googleMap = map;
+         LatLng ONE = new LatLng(32.882216, -117.222028);
 
-    //    @Override
-//    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-//        super.onPostCreate(savedInstanceState);
-    public void test() {
-        if (myrate == 0.0) {
-            btn_rate.setBackgroundResource(R.drawable.detail_icon_03_01);
-            myrateflag = 0;
-        } else {
-            btn_rate.setBackgroundResource(R.drawable.detail_icon_03_02);
-            myrateflag = 1;
+        googleMap.addMarker(new MarkerOptions().position(ONE).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-
-        }
-
-        if (mystamp == null) {
-            btn_stamp.setBackgroundResource(R.drawable.detail_icon_02_01);
-            mystampflag = 0;
-        } else {
-            btn_stamp.setBackgroundResource(R.drawable.detail_icon_02_02);
-            mystampflag = 1;
-        }
-
-        if (mytlike == null) {
-            btn_want.setBackgroundResource(R.drawable.detail_icon_01_01);
-            mytlikeflag = 0;
-        } else {
-            btn_want.setBackgroundResource(R.drawable.detail_icon_01_02);
-            mytlikeflag = 1;
-        }
-
-
-        //이미지 세팅
-        aq.id(main_image).image(item.getFirstimage());
-
-        //평균 평점
-        detailRateAvg.setText(Double.toString(item.getRate()));
-
-        //타이틀 세팅
-        title.setText(item.getTitle());
-        //주소
-        detailAddr.setText(item.getAddr1());//볼드로 해야됨
-        //좋아요
-        detailWant.setText(Integer.toString(item.getLike()));
-        //스탬프
-        detailStamp.setText(Integer.toString(item.getStamp()));
-
-        //타입
-        switch (item.getCat2()) {
-            case "A0101": {
-                detailBtnType.setImageResource(R.drawable.detail_icon_04_a0101);
-                detailType.setText("자연");
-                break;
-            }
-            case "A0201": {
-                detailBtnType.setImageResource(R.drawable.detail_icon_04_a0201);
-                detailType.setText("역사");
-                break;
-            }
-            case "A0202": {
-                detailBtnType.setImageResource(R.drawable.detail_icon_04_a0202);
-                detailType.setText("휴양");
-                break;
-            }
-            case "A0203": {
-                detailBtnType.setImageResource(R.drawable.detail_icon_04_a0203);
-                detailType.setText("체험");
-                break;
-            }
-            case "A0205": {
-                detailBtnType.setImageResource(R.drawable.detail_icon_04_a0205);
-                detailType.setText("건축");
-                break;
-            }
-            case "A0206": {
-                detailBtnType.setImageResource(R.drawable.detail_icon_04_a0206);
-                detailType.setText("문화시설");
-                break;
-            }
-            case "A0207": {
-                detailBtnType.setImageResource(R.drawable.detail_icon_04_a0207);
-                detailType.setText("축제");
-                break;
-            }
-        }
-
-
-        //설명 세팅
-        if (item.getOverview().length() < 30) {
-            overview.setText(item.getOverview());
-            btn_more.setVisibility(View.INVISIBLE);
-        } else {
-            overview.setText(item.getOverview().substring(0, 30) + "...");
-        }
-        btn_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btn_more.getText() == "더보기") {
-                    btn_more.setText("접기");
-                    overview.setText(item.getOverview());
-                    header.attachTo(recyclerView);
-                } else {
-                    overview.setText(item.getOverview().substring(0, 30) + "...");
-                    btn_more.setText("더보기");
-                    header.attachTo(recyclerView);
-                }
-            }
-        });
     }
+
 
     /*************************************************************구글맵*************************************************************/
     @Override
@@ -746,6 +653,12 @@ public class DetailInformationActivity extends AppCompatActivity implements
         Marker seoul = googleMap.addMarker(new MarkerOptions().position(SEOUL).title("Seoul"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 15));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+    }
+
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+
     }
     /**************************************************************************************************************/
 }
