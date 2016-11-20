@@ -1,10 +1,13 @@
 package kr.co.trappan.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,10 +15,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
+import kr.co.trappan.Activity.SearchActivity;
+import kr.co.trappan.Adapter.ReviewListAdapter;
+import kr.co.trappan.Adapter.SearchFragmentAdapter;
 import kr.co.trappan.Adapter.SearchListAdapter;
 import kr.co.trappan.Bean.Tour;
+import kr.co.trappan.Connector.HttpClient;
+import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
+import kr.co.trappan.Item.SearchFragmentItem;
 import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.R;
 /**
@@ -23,403 +41,204 @@ import kr.co.trappan.R;
  */
 public class TabFragment3 extends Fragment {
 
-    private Thread splashThread;
-
-    Context context;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter Adapter;
-    private RecyclerView.LayoutManager layoutManager;
+    RecyclerView recyclerViewArea;
+    private RecyclerView recyclerViewc;
+    private RecyclerView.Adapter Adapterc;
+    private LinearLayoutManager layoutManagerc;
     ArrayList<Tour>
             items = new ArrayList<>();
 
-    Button[] areaButton;
 
-    int[] selectedItems;
-    int[] unSelectedIcon = {R.drawable.seoul_1,
-            R.drawable.incheon_2,
-            R.drawable.daegu_4,
-            R.drawable.daejeon_3,
-            R.drawable.gwangju_5,
-            R.drawable.pusan_6,
-            R.drawable.ulsan_7,
-            R.drawable.sejong_8,
-            R.drawable.gyeonggi_31,
-            R.drawable.gangwon_32,
-            R.drawable.chungbuk_33,
-            R.drawable.chungnam_34,
-            R.drawable.jeonnam_38,
-            R.drawable.jeonbuk_37,
-            R.drawable.gyeongbuk_35,
-            R.drawable.gyeongnam_36,
-            R.drawable.jeju_39,
-    };
-
-    int[] selectedIcon = {R.drawable.seoul_1_c,
-            R.drawable.incheon_2_c,
-            R.drawable.daegu_4_c,
-            R.drawable.daejeon_3_c,
-            R.drawable.gwangju_5_c,
-            R.drawable.pusan_6_c,
-            R.drawable.ulsan_7_c,
-            R.drawable.sejong_8_c,
-            R.drawable.gyeonggi_31_c,
-            R.drawable.gangwon_32,
-            R.drawable.chungbuk_33_c,
-            R.drawable.chungnam_34_c,
-            R.drawable.jeonbuk_37_c,
-            R.drawable.jeonnam_38_c,
-            R.drawable.gyeongbuk_35_c,
-            R.drawable.gyeongbuk_35_c,
-            R.drawable.jeju_39_c,};
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.testfragment, container, false);
+        View view = inflater.inflate(R.layout.tabfragment3, container, false);
 
-    /*
-        // 리스트 뷰
+        recyclerViewArea = (RecyclerView) view.findViewById(R.id.reco_area);
+        recyclerViewArea.setHasFixedSize(true);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recmmand_list);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        Adapter = new SearchListAdapter(getActivity(), items, R.layout.tabfragment3);
-        recyclerView.setAdapter(Adapter);
+        ArrayList<SearchFragmentItem> itemsb = new ArrayList<>();
+
+        itemsb.add(new SearchFragmentItem(R.drawable.seoul_1_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.incheon_2_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.daejeon_3_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.daegu_4_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.gwangju_5_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.pusan_6_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.ulsan_7_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.sejong_8_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.gyeonggi_31_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.gangwon_32));
+        itemsb.add(new SearchFragmentItem(R.drawable.chungbuk_33_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.chungnam_34_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.gyeongbuk_35_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.gyeongnam_36_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.jeonbuk_37_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.jeonnam_38_c));
+        itemsb.add(new SearchFragmentItem(R.drawable.jeju_39_c));
+
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
+        recyclerViewArea.setLayoutManager(layoutManager);
+
+        SearchFragmentAdapter Adapter = new SearchFragmentAdapter(itemsb);
+        recyclerViewArea.setAdapter(Adapter);
 
 
-        // horizontal 스크롤뷰 버튼
-        areaButton = new Button[17];
-        areaButton[0] = (Button) view.findViewById(R.id.search_seoul_button);
-        areaButton[1] = (Button) view.findViewById(R.id.search_incheon_button);
-        areaButton[2] = (Button) view.findViewById(R.id.search_daegu_button);
-        areaButton[3] = (Button) view.findViewById(R.id.search_daejeon_button);
-        areaButton[4] = (Button) view.findViewById(R.id.search_gwangju_button);
-        areaButton[5] = (Button) view.findViewById(R.id.search_pusan_button);
-        areaButton[6] = (Button) view.findViewById(R.id.search_ulsan_button);
-        areaButton[7] = (Button) view.findViewById(R.id.search_sejong_button);
-        areaButton[8] = (Button) view.findViewById(R.id.search_gyeonggi_button);
-        areaButton[9] = (Button) view.findViewById(R.id.search_gangwon_button);
-        areaButton[10] = (Button) view.findViewById(R.id.search_chungbuk_button);
-        areaButton[11] = (Button) view.findViewById(R.id.search_chungnam_button);
-        areaButton[12] = (Button) view.findViewById(R.id.search_gyeongbuk_button);
-        areaButton[13] = (Button) view.findViewById(R.id.search_gyeongnam_button);
-        areaButton[14] = (Button) view.findViewById(R.id.search_jeonbuk_button);
-        areaButton[15] = (Button) view.findViewById(R.id.search_jeonnam_button);
-        areaButton[16] = (Button) view.findViewById(R.id.search_jeju_button);
 
-        selectedItems = new int[17];
-        for (int i = 0; i < selectedItems.length; i++) {
-            selectedItems[i] = 0;
-        }
 
-        final TextView recommandName = (TextView) view.findViewById(R.id.recommand_regionName);
+        recyclerViewc = (RecyclerView) view.findViewById(R.id.recmmand_list);
+        layoutManagerc = new LinearLayoutManager(getActivity());
+        recyclerViewc.setLayoutManager(layoutManagerc);
+        Adapterc = new SearchListAdapter(getActivity(),items, 1);
+        recyclerViewc.setAdapter(Adapterc);
 
-        // 서울 클릭
-        areaButton[0].setOnClickListener(new View.OnClickListener() {
+        HttpClient.get("randomreco", null, new JsonHttpResponseHandler() {
+
             @Override
-            public void onClick(View v) {
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
 
-                v.setBackgroundResource(selectedIcon[0]);
-
-                recommandName.setText("서울 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject obj = response.getJSONObject(i);
+                        Tour tour = new Tour();
+                        tour.setContentid(obj.getString("contentid"));
+                        tour.setTitle(obj.getString("title"));
+                        tour.setAreacode(obj.getString("areacode"));
+                        tour.setCat2(obj.getString("cat2"));
+                        tour.setFirstimage(obj.getString("firstimage"));
+                        tour.setSigungucode(obj.getString("sigungucode"));
+                        tour.setLike(obj.getInt("tlike"));
+                        tour.setStamp(obj.getInt("stamp"));
+                        tour.setRate(obj.getDouble("rate"));
+                        items.add(tour);
                     }
+                    Adapterc.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                selectedItems[0] = 1;
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray response) {
+                super.onFailure(statusCode, headers, throwable, response);
+
             }
         });
-        // 인천 클릭
-        areaButton[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                v.setBackgroundResource(selectedIcon[1]);
+        recyclerViewArea.addOnItemTouchListener(new
+                RecyclerViewOnItemClickListener(getActivity(), recyclerViewArea,
+                new RecyclerViewOnItemClickListener.OnItemClickListener() {
 
-                recommandName.setText("인천 추천 여행지");
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        RequestParams params = new RequestParams();
+                        switch(position){
+                            case 0: {
+                                params.put("areacode", "1");
+                                break;
+                            }
+                            case 1: {
+                                params.put("areacode", "2");                                break;
+                            }
+                            case 2: {
+                                params.put("areacode", "3");                                break;
+                            }
+                            case 3: {
+                                params.put("areacode", "4");                                 break;
+                            }
+                            case 4: {
+                                params.put("areacode", "5");                                 break;
+                            }
+                            case 5: {
+                                params.put("areacode", "6");                                 break;
+                            }
+                            case 6: {
+                                params.put("areacode", "7");                                 break;
+                            }
+                            case 7: {
+                                params.put("areacode", "8");                                 break;
+                            }
+                            case 8: {
+                                params.put("areacode", "9");                                 break;
+                            }
+                            case 9: {
+                                params.put("areacode", "31");                                 break;
+                            }
+                            case 10: {
+                                params.put("areacode", "32");                                 break;
+                            }
+                            case 11: {
+                                params.put("areacode", "33");                                 break;
+                            }
+                            case 12: {
+                                params.put("areacode", "34");                                 break;
+                            }
+                            case 13: {
+                                params.put("areacode", "35");                                 break;
+                            }
+                            case 14: {
+                                params.put("areacode", "36");                                 break;
+                            }
+                            case 15: {
+                                params.put("areacode", "37");                                 break;
+                            }
+                            case 16: {
+                                params.put("areacode", "38");                                 break;
+                            }
+                            case 17: {
+                                params.put("areacode", "39");                                 break;
+                            }
 
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
+                        }
+                        HttpClient.get("randomreco", null, new JsonHttpResponseHandler() {
+
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                                super.onSuccess(statusCode, headers, response);
+                                try {
+                                    ArrayList<Tour> temp = new ArrayList<Tour>();
+
+                                    for (int i = 0; i < response.length(); i++) {
+                                        JSONObject obj = response.getJSONObject(i);
+                                        Tour tour = new Tour();
+                                        tour.setContentid(obj.getString("contentid"));
+                                        tour.setTitle(obj.getString("title"));
+                                        tour.setAreacode(obj.getString("areacode"));
+                                        tour.setCat2(obj.getString("cat2"));
+                                        tour.setFirstimage(obj.getString("firstimage"));
+                                        tour.setSigungucode(obj.getString("sigungucode"));
+                                        tour.setLike(obj.getInt("tlike"));
+                                        tour.setStamp(obj.getInt("stamp"));
+                                        tour.setRate(obj.getDouble("rate"));
+                                        temp.add(tour);
+                                    }
+                                    items = temp;
+                                    Adapterc.notifyDataSetChanged();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray response) {
+                                super.onFailure(statusCode, headers, throwable, response);
+
+                            }
+                        });
+
                     }
-                }
-                selectedItems[1] = 1;
-            }
-        });
-        // 대전 클릭
-        areaButton[2].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                    @Override
+                    public void onItemLongClick(View v, int position) {
 
-                v.setBackgroundResource(selectedIcon[2]);
-
-                recommandName.setText("대전 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
                     }
-                }
-                selectedItems[0] = 1;
-            }
-        });
-        // 대구 클릭
-        areaButton[3].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                }));
 
-                v.setBackgroundResource(selectedIcon[3]);
 
-                recommandName.setText("대구 추천 여행지");
 
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[3] = 1;
-            }
-        });
-        // 광주 클릭
-        areaButton[4].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                v.setBackgroundResource(selectedIcon[4]);
 
-                recommandName.setText("광주 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[4] = 1;
-            }
-        });
-        // 부산 클릭
-        areaButton[5].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[5]);
-
-                recommandName.setText("부산 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[5] = 1;
-            }
-        });
-        // 울산 클릭
-        areaButton[6].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[6]);
-
-                recommandName.setText("울산 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[6] = 1;
-            }
-        });
-        // 세종 클릭
-        areaButton[7].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[7]);
-
-                recommandName.setText("세종 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[7] = 1;
-            }
-        });
-        // 경기 클릭
-        areaButton[8].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[8]);
-
-                recommandName.setText("경기 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[8] = 1;
-            }
-        });
-        // 강원 클릭
-        areaButton[9].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[9]);
-
-                recommandName.setText("강원 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[9] = 1;
-            }
-        });
-        // 충북 클릭
-        areaButton[10].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[10]);
-
-                recommandName.setText("충북 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[10] = 1;
-            }
-        });
-        // 충남 클릭
-        areaButton[11].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[11]);
-
-                recommandName.setText("충남 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[11] = 1;
-            }
-        });
-        // 경북 클릭
-        areaButton[12].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[12]);
-
-                recommandName.setText("경북 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[12] = 1;
-            }
-        });
-        // 경남 클릭
-        areaButton[13].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[13]);
-
-                recommandName.setText("경남 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[13] = 1;
-            }
-        });
-        // 전북 클릭
-        areaButton[14].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[14]);
-
-                recommandName.setText("전북 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[14] = 1;
-            }
-        });
-        // 전남 클릭
-        areaButton[15].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[0]);
-
-                recommandName.setText("전남 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[15] = 1;
-            }
-        });
-        // 제주 클릭
-        areaButton[16].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[16]);
-
-                recommandName.setText("제주 추천 여행지");
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[16] = 1;
-            }
-        });
-*/
-                return view;
+                    return view;
     }
 }

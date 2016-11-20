@@ -14,25 +14,5 @@
 
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:id="@+id/list_iamge" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SOEOUL"
-            android:id="@+id/list_text"
-            android:textSize="25dip"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:layout_weight="1"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id = "@+id/region_code"
-            android:visibility = "gone"/>
-
+            android:id="@+id/search_fragment_img" />
 </RelativeLayout>
