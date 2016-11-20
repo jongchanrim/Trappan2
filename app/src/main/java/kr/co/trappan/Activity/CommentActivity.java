@@ -44,8 +44,6 @@ public class CommentActivity extends AppCompatActivity {
         recyclerView.setAdapter(Adapter);
 
         //items.add(new Comment(comment_id,review_id,comment_count,"id","comment_content","c_date"));
-        items.add(new Comment(1, 2, 3, "id", "리뷰를 남겼다. 리뷰를 남겼다, 리뷰를 남겼다. 리뷰를 남겼다.", "2016-11-18"));
-
 
         // 코멘트 내용
         EditText comment_write_content = (EditText) findViewById(R.id.comment_write_comment);

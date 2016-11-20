@@ -104,13 +104,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingBottom="20dp"
-                    android:paddingTop="15dp">
+                    android:paddingTop="15dp"
+                    android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="팔로워 "
-                        android:layout_weight="1"
                         android:gravity="right"
                         android:textColor="@android:color/black" />
                     <TextView
@@ -130,7 +130,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="팔로잉 "
-                        android:layout_weight="1"
                         android:textColor="@android:color/black" />
 
                     <TextView

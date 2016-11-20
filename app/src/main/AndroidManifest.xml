@@ -20,12 +20,16 @@
         android:value="AIzaSyAzGywE-iwvdsyBzv-7kdiIuz2thtYZiVA" />
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name="android.support.multidex.MultiDexApplication"
+        android:hardwareAccelerated="false">
+
         <activity
             android:name=".Activity.StartActivity"
             android:label="@string/app_name"
@@ -71,7 +75,6 @@
         <activity
             android:name=".Activity.MemberPageActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activity.MapsActivity"></activity>
     </application>
 
 </manifest>

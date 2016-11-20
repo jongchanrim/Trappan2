@@ -3,8 +3,38 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/btn_mynews"
+            android:background="@color/colorAccent"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:layout_weight="1"
+            android:text="내 소식"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center" />
+        <TextView
+            android:background="#c1c1c1"
+            android:id="@+id/btn_friendsnews"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:layout_weight="1"
+            android:text="친구 소식"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center" />
+    </LinearLayout>
+    <View
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"></View>
+
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="130px"
         android:id="@+id/notice_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

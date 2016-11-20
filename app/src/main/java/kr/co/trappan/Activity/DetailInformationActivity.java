@@ -58,6 +58,7 @@ public class DetailInformationActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ReviewListAdapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private RecyclerViewHeader header;
 
     private Dialog ratingDialog;
     private RatingBar ratingBar;
@@ -100,8 +101,8 @@ public class DetailInformationActivity extends AppCompatActivity {
         btn_rate = (ImageView) findViewById(R.id.detail_btn_rate);
         overview = (TextView) findViewById(R.id.detail_overview);
         btn_more = (TextView) findViewById(R.id.btn_more);
+        btn_more.setText("더보기");
         detailRateAvg = (TextView) findViewById(R.id.detail_rate_average);
-
         detailRate = (TextView) findViewById(R.id.detail_rate);
         detailBtnType = (ImageView) findViewById(R.id.detail_btn_type);
         detailType = (TextView) findViewById(R.id.detail_type);
@@ -239,7 +240,7 @@ public class DetailInformationActivity extends AppCompatActivity {
                     btn_more.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (btn_more.getText().toString() == "더보기") {
+                            if (btn_more.getText() == "더보기") {
                                 btn_more.setText("접기");
                                 overview.setText(item.getOverview());
                             } else {
@@ -270,7 +271,7 @@ public class DetailInformationActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.detail_information_list);
         recyclerView.setHasFixedSize(true);
 
-        RecyclerViewHeader header = (RecyclerViewHeader) findViewById(R.id.header);
+        header = (RecyclerViewHeader) findViewById(R.id.header);
 
 
         layoutManager = new LinearLayoutManager(this);
@@ -417,8 +418,9 @@ public class DetailInformationActivity extends AppCompatActivity {
 
                                                                                             );
                                                                                         }
-                                                                                        ratingDialog.dismiss();
+
                                                                                     }
+                                                                                    ratingDialog.dismiss();
                                                                                 }
                                                                             }
                                             );
@@ -574,12 +576,14 @@ public class DetailInformationActivity extends AppCompatActivity {
         btn_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (btn_more.getText().toString() == "더보기") {
+                if (btn_more.getText() == "더보기") {
                     btn_more.setText("접기");
                     overview.setText(item.getOverview());
+                    header.attachTo(recyclerView);
                 } else {
                     overview.setText(item.getOverview().substring(0, 30) + "...");
                     btn_more.setText("더보기");
+                    header.attachTo(recyclerView);
                 }
             }
         });
