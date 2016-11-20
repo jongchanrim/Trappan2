@@ -3,16 +3,28 @@ package kr.co.trappan.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import kr.co.trappan.Activity.DetailInformationActivity;
 import kr.co.trappan.Activity.SearchActivity;
 
 
+import kr.co.trappan.Adapter.SearchFragmentAdapter;
+import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
+import kr.co.trappan.Item.SearchFragmentItem;
 import kr.co.trappan.R;
 
 
@@ -21,111 +33,29 @@ import kr.co.trappan.R;
  */
 public class TabFragment2 extends Fragment {
 
+    EditText f2_keyword;
+     ImageView f2_btn_keyword;
+
     Context context;
-    Button[] areaButton;
-    Button[] themeButton;
-
-    int[] selectedItems;
-    int[] unSelectedIcon = {R.drawable.seoul_1,
-            R.drawable.incheon_2,
-            R.drawable.daegu_4,
-            R.drawable.daejeon_3,
-            R.drawable.gwangju_5,
-            R.drawable.pusan_6,
-            R.drawable.ulsan_7,
-            R.drawable.sejong_8,
-            R.drawable.gyeonggi_31,
-            R.drawable.gangwon_32,
-            R.drawable.chungbuk_33,
-            R.drawable.chungnam_34,
-            R.drawable.jeonnam_38,
-            R.drawable.jeonbuk_37,
-            R.drawable.gyeongbuk_35,
-            R.drawable.gyeongnam_36,
-            R.drawable.jeju_39,
-    };
-
-    int[] selectedIcon = {R.drawable.seoul_1_c,
-            R.drawable.incheon_2_c,
-            R.drawable.daegu_4_c,
-            R.drawable.daejeon_3_c,
-            R.drawable.gwangju_5_c,
-            R.drawable.pusan_6_c,
-            R.drawable.ulsan_7_c,
-            R.drawable.sejong_8_c,
-            R.drawable.gyeonggi_31_c,
-            R.drawable.gangwon_32,
-            R.drawable.chungbuk_33_c,
-            R.drawable.chungnam_34_c,
-            R.drawable.jeonbuk_37_c,
-            R.drawable.jeonnam_38_c,
-            R.drawable.gyeongbuk_35_c,
-            R.drawable.gyeongbuk_35_c,
-            R.drawable.jeju_39_c,};
-
-    int[] theme_selectedItems;
-    int[] theme_unSelectedIcon = {
-            R.drawable.theme_a0101,
-            R.drawable.theme_a0201,
-            R.drawable.theme_a0202,
-            R.drawable.theme_a0203,
-            R.drawable.theme_a0205,
-            R.drawable.theme_a0206,
-            R.drawable.theme_a0207,
-    };
-
-    int[] theme_selectedIcon = {
-            R.drawable.theme_a0101_s,
-            R.drawable.theme_a0201_s,
-            R.drawable.theme_a0202_s,
-            R.drawable.theme_a0203_s,
-            R.drawable.theme_a0205_s,
-            R.drawable.theme_a0206_s,
-            R.drawable.theme_a0207_s,};
+    RecyclerView recyclerViewArea;
+    RecyclerView recyclerViewType;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.testfragment, container, false);
-/*
-        areaButton = new Button[17];
-        areaButton[0] = (Button) view.findViewById(R.id.search_seoul_button);
-        areaButton[1] = (Button) view.findViewById(R.id.search_incheon_button);
-        areaButton[2] = (Button) view.findViewById(R.id.search_daegu_button);
-        areaButton[3] = (Button) view.findViewById(R.id.search_daejeon_button);
-        areaButton[4] = (Button) view.findViewById(R.id.search_gwangju_button);
-        areaButton[5] = (Button) view.findViewById(R.id.search_pusan_button);
-        areaButton[6] = (Button) view.findViewById(R.id.search_ulsan_button);
-        areaButton[7] = (Button) view.findViewById(R.id.search_sejong_button);
-        areaButton[8] = (Button) view.findViewById(R.id.search_gyeonggi_button);
-        areaButton[9] = (Button) view.findViewById(R.id.search_gangwon_button);
-        areaButton[10] = (Button) view.findViewById(R.id.search_chungbuk_button);
-        areaButton[11] = (Button) view.findViewById(R.id.search_chungnam_button);
-        areaButton[12] = (Button) view.findViewById(R.id.search_gyeongbuk_button);
-        areaButton[13] = (Button) view.findViewById(R.id.search_gyeongnam_button);
-        areaButton[14] = (Button) view.findViewById(R.id.search_jeonbuk_button);
-        areaButton[15] = (Button) view.findViewById(R.id.search_jeonnam_button);
-        areaButton[16] = (Button) view.findViewById(R.id.search_jeju_button);
+        View view = inflater.inflate(R.layout.tabfragment2, container, false);
 
-        themeButton = new Button[7];
-        themeButton[0] = (Button) view.findViewById(R.id.search_nature_button);
-        themeButton[1] = (Button) view.findViewById(R.id.search_history_button);
-        themeButton[2] = (Button) view.findViewById(R.id.search_rest_button);
-        themeButton[3] = (Button) view.findViewById(R.id.search_activity_button);
-        themeButton[4] = (Button) view.findViewById(R.id.search_building_button);
-        themeButton[5] = (Button) view.findViewById(R.id.search_culture_button);
-        themeButton[6] = (Button) view.findViewById(R.id.search_festival_button);
+        f2_btn_keyword = (ImageView) view.findViewById(R.id.f2_btn_keyword);
+        f2_keyword = (EditText) view.findViewById(R.id.f2_keyword);
 
+        f2_btn_keyword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("keyword", f2_keyword.getText().toString());
+            }
+        });
 
-        selectedItems = new int[17];
-        for (int i = 0; i < selectedItems.length; i++) {
-            selectedItems[i] = 0;
-        }
-
-        theme_selectedItems = new int[7];
-        for (int i = 0; i < theme_selectedItems.length; i++) {
-            theme_selectedItems[i] = 0;
-        }
 
         final View view_detail = view.findViewById(R.id.region_detail);
         final View view_seoul = view.findViewById(R.id.region_detail_seoul);
@@ -146,792 +76,498 @@ public class TabFragment2 extends Fragment {
         final View view_jeonnam = view.findViewById(R.id.region_detail_junnam);
         final View view_jeju = view.findViewById(R.id.region_detail_jeju);
 
-        // 서울 클릭
-        areaButton[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        context = getContext();
+        recyclerViewArea = (RecyclerView) view.findViewById(R.id.search_area);
+        recyclerViewArea.setHasFixedSize(true);
 
-                v.setBackgroundResource(selectedIcon[0]);
+        ArrayList<SearchFragmentItem> items = new ArrayList<>();
 
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.VISIBLE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
+        items.add(new SearchFragmentItem(R.drawable.seoul_1_c));
+        items.add(new SearchFragmentItem(R.drawable.incheon_2_c));
+        items.add(new SearchFragmentItem(R.drawable.daejeon_3_c));
+        items.add(new SearchFragmentItem(R.drawable.daegu_4_c));
+        items.add(new SearchFragmentItem(R.drawable.gwangju_5_c));
+        items.add(new SearchFragmentItem(R.drawable.pusan_6_c));
+        items.add(new SearchFragmentItem(R.drawable.ulsan_7_c));
+        items.add(new SearchFragmentItem(R.drawable.sejong_8_c));
+        items.add(new SearchFragmentItem(R.drawable.gyeonggi_31_c));
+        items.add(new SearchFragmentItem(R.drawable.gangwon_32_c));
+        items.add(new SearchFragmentItem(R.drawable.chungbuk_33_c));
+        items.add(new SearchFragmentItem(R.drawable.chungnam_34_c));
+        items.add(new SearchFragmentItem(R.drawable.gyeongbuk_35_c));
+        items.add(new SearchFragmentItem(R.drawable.gyeongnam_36_c));
+        items.add(new SearchFragmentItem(R.drawable.jeonbuk_37_c));
+        items.add(new SearchFragmentItem(R.drawable.jeonnam_38_c));
+        items.add(new SearchFragmentItem(R.drawable.jeju_39_c));
 
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
+        recyclerViewArea.setLayoutManager(layoutManager);
 
-                selectedItems[0] = 1;
-            }
-        });
-        //인천 클릭
-        areaButton[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        SearchFragmentAdapter Adapter = new SearchFragmentAdapter(items);
+        recyclerViewArea.setAdapter(Adapter);
 
-                v.setBackgroundResource(selectedIcon[1]);
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.VISIBLE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
+        recyclerViewType = (RecyclerView) view.findViewById(R.id.search_theme);
+        recyclerViewType.setHasFixedSize(true);
 
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
+        StaggeredGridLayoutManager layoutManager2 = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
+        recyclerViewType.setLayoutManager(layoutManager2);
+        ArrayList<SearchFragmentItem> items2 = new ArrayList<>();
 
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[1] = 1;
-
-            }
-        });
-
-        // 대전
-        areaButton[2].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setBackgroundResource(selectedIcon[2]);
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.VISIBLE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[2] = 1;
-            }
-        });
-
-        //대구
-        areaButton[3].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setBackgroundResource(selectedIcon[3]);
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.VISIBLE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[3] = 1;
-            }
-        });
-
-        //광주
-        areaButton[4].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[4]);
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.VISIBLE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[4] = 1;
-            }
-        });
-        // 부산
-        areaButton[5].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[5]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.VISIBLE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[5] = 1;
-            }
-        });
-        // 울산
-        areaButton[6].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[6]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.VISIBLE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[6] = 1;
-            }
+        items2.add(new SearchFragmentItem(R.drawable.theme_a0101_s));
+        items2.add(new SearchFragmentItem(R.drawable.theme_a0201_s));
+        items2.add(new SearchFragmentItem(R.drawable.theme_a0202_s));
+        items2.add(new SearchFragmentItem(R.drawable.theme_a0203_s));
+        items2.add(new SearchFragmentItem(R.drawable.theme_a0205_s));
+        items2.add(new SearchFragmentItem(R.drawable.theme_a0206_s));
+        items2.add(new SearchFragmentItem(R.drawable.theme_a0207_s));
+        SearchFragmentAdapter Adapter2 = new SearchFragmentAdapter(items2);
+        recyclerViewType.setAdapter(Adapter2);
 
 
-        });
-        // 세종
-        areaButton[7].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[6]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.VISIBLE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-                    }
-                }
-                selectedItems[7] = 1;
-            }
-
-        });
-
-        // 경기
-        areaButton[8].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[8]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.VISIBLE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[8] = 1;
-            }
-
-
-        });
-        // 강원
-        areaButton[9].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[9]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.VISIBLE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[9] = 1;
-            }
-        });
-
-        // 충북
-        areaButton[10].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[10]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.VISIBLE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[10] = 1;
-            }
-        });
-
-        // 충남
-        areaButton[11].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[11]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.VISIBLE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
+        recyclerViewArea.addOnItemTouchListener(new
+                RecyclerViewOnItemClickListener(getActivity(), recyclerViewArea,
+                new RecyclerViewOnItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        switch (position){
+                            case 0:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.VISIBLE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 1:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.VISIBLE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 2:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.VISIBLE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 3:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.VISIBLE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 4:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.VISIBLE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 5:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.VISIBLE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 6:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.VISIBLE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 7:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.VISIBLE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 8:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.VISIBLE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 9:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.VISIBLE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 10:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.VISIBLE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 11:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.VISIBLE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;case 12:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.VISIBLE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;case 13:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.VISIBLE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;case 14:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.VISIBLE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 15:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.VISIBLE);
+                                view_jeju.setVisibility(View.GONE);
+                            }
+                            break;
+                            case 16:{
+                                view_detail.setVisibility(View.VISIBLE);
+                                view_seoul.setVisibility(View.GONE);
+                                view_incheon.setVisibility(View.GONE);
+                                view_daejeon.setVisibility(View.GONE);
+                                view_daegu.setVisibility(View.GONE);
+                                view_gwangju.setVisibility(View.GONE);
+                                view_pusan.setVisibility(View.GONE);
+                                view_ulsan.setVisibility(View.GONE);
+                                view_sejong.setVisibility(View.GONE);
+                                view_gyeonggi.setVisibility(View.GONE);
+                                view_gangwon.setVisibility(View.GONE);
+                                view_chungbuk.setVisibility(View.GONE);
+                                view_chungnam.setVisibility(View.GONE);
+                                view_gyeongbuk.setVisibility(View.GONE);
+                                view_gyeongnam.setVisibility(View.GONE);
+                                view_jeonbuk.setVisibility(View.GONE);
+                                view_jeonnam.setVisibility(View.GONE);
+                                view_jeju.setVisibility(View.VISIBLE);
+                            }
+                            break;
+                        }
 
                     }
-                }
-                selectedItems[11] = 1;
-            }
-        });
 
-        // 경북
-        areaButton[12].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[12]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.VISIBLE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[12] = 1;
-            }
-        });
-
-        // 세종
-        areaButton[13].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[13]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.VISIBLE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[13] = 1;
-            }
-        });
-
-        // 전북
-        areaButton[14].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[14]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.VISIBLE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[14] = 1;
-            }
-
-        });
-        // 전남
-        areaButton[15].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[15]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.VISIBLE);
-                view_jeju.setVisibility(View.GONE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-
-                        selectedItems[i] = 0;
-
-                    }
-                }
-                selectedItems[15] = 1;
-            }
-
-        });
-        // 제주
-        areaButton[16].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(selectedIcon[16]);
-
-                view_detail.setVisibility(View.VISIBLE);
-                view_seoul.setVisibility(View.GONE);
-                view_incheon.setVisibility(View.GONE);
-                view_daejeon.setVisibility(View.GONE);
-                view_daegu.setVisibility(View.GONE);
-                view_gwangju.setVisibility(View.GONE);
-                view_pusan.setVisibility(View.GONE);
-                view_ulsan.setVisibility(View.GONE);
-                view_sejong.setVisibility(View.GONE);
-                view_gyeonggi.setVisibility(View.GONE);
-                view_gangwon.setVisibility(View.GONE);
-                view_chungbuk.setVisibility(View.GONE);
-                view_chungnam.setVisibility(View.GONE);
-                view_gyeongbuk.setVisibility(View.GONE);
-                view_gyeongnam.setVisibility(View.GONE);
-                view_jeonbuk.setVisibility(View.GONE);
-                view_jeonnam.setVisibility(View.GONE);
-                view_jeju.setVisibility(View.VISIBLE);
-
-                for (int i = 0; i < 17; i++) {
-                    if (selectedItems[i] == 1) {
-                        areaButton[i].setBackgroundResource(unSelectedIcon[i]);
-
-                        selectedItems[i] = 0;
+                    @Override
+                    public void onItemLongClick(View v, int position) {
 
 
                     }
                 }
-                selectedItems[16] = 1;
-            }
-        });
 
-        // 자연
-        themeButton[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        ));
 
-                v.setBackgroundResource(theme_selectedIcon[0]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
-                //     intent.putExtra("sigungucode", v.getText());
-                v.getContext().startActivity(intent);
+                    recyclerViewType.addOnItemTouchListener(new
+                    RecyclerViewOnItemClickListener(getActivity(), recyclerViewArea,
+                    new RecyclerViewOnItemClickListener.OnItemClickListener() {
 
-                for (int i = 0; i < 8; i++) {
-                    if (theme_selectedItems[i] == 1) {
-                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
-                        theme_selectedItems[i] = 0;
+                        @Override
+                        public void onItemClick(View v, int position) {
+                            Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                            intent.putExtra("case", "type");
+                            switch(position){
+                                case 0: {
+                                    intent.putExtra("type", "A0101");
+                                    break;
+                                }
+                                case 1: {
+                                    intent.putExtra("type", "A0201");
+                                    break;
+                                }
+                                case 2: {
+                                    intent.putExtra("type", "A0202");
+                                    break;
+                                }
+                                case 3: {
+                                    intent.putExtra("type", "A0203");
+                                    break;
+                                }
+                                case 4: {
+                                    intent.putExtra("type", "A0205");
+                                    break;
+                                }
+                                case 5: {
+                                    intent.putExtra("type", "A0206");
+                                    break;
+                                }
+                                case 6: {
+                                    intent.putExtra("type", "A0207");
+                                    break;
+                                }
+                            }
+                            v.getContext().startActivity(intent);
+                        }
+                        @Override
+                    public void onItemLongClick(View v, int position) {
+
                     }
-                }
+                }));
 
-                theme_selectedItems[0] = 1;
-            }
 
-        });
 
-        // 역사
-        themeButton[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                v.setBackgroundResource(theme_selectedIcon[1]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
-                //     intent.putExtra("sigungucode", v.getText());
-                v.getContext().startActivity(intent);
-
-                for (int i = 0; i < 8; i++) {
-                    if (theme_selectedItems[i] == 1) {
-                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
-                        theme_selectedItems[i] = 0;
-                    }
-                }
-
-                theme_selectedItems[1] = 1;
-            }
-
-        });
-        //휴양
-        themeButton[2].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(theme_selectedIcon[2]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
-                //     intent.putExtra("sigungucode", v.getText());
-                v.getContext().startActivity(intent);
-
-                for (int i = 0; i < 8; i++) {
-                    if (theme_selectedItems[i] == 1) {
-                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
-                        theme_selectedItems[i] = 0;
-                    }
-                }
-
-                theme_selectedItems[2] = 1;
-            }
-
-        });
-
-        // 체험
-        themeButton[3].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(theme_selectedIcon[3]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
-                //     intent.putExtra("sigungucode", v.getText());
-                v.getContext().startActivity(intent);
-
-                for (int i = 0; i < 8; i++) {
-                    if (theme_selectedItems[i] == 1) {
-                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
-                        theme_selectedItems[i] = 0;
-                    }
-                }
-
-                theme_selectedItems[3] = 1;
-            }
-
-        });
-
-        // 건축
-        themeButton[4].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(theme_selectedIcon[4]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
-                //     intent.putExtra("sigungucode", v.getText());
-                v.getContext().startActivity(intent);
-
-                for (int i = 0; i < 8; i++) {
-                    if (theme_selectedItems[i] == 1) {
-                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
-                        theme_selectedItems[i] = 0;
-                    }
-                }
-
-                theme_selectedItems[4] = 1;
-            }
-
-        });
-        //문화
-        themeButton[5].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(theme_selectedIcon[5]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
-                //     intent.putExtra("sigungucode", v.getText());
-                v.getContext().startActivity(intent);
-
-                for (int i = 0; i < 8; i++) {
-                    if (theme_selectedItems[i] == 1) {
-                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
-                        theme_selectedItems[i] = 0;
-                    }
-                }
-
-                theme_selectedItems[5] = 1;
-            }
-
-        });
-        // 축제
-        themeButton[6].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.setBackgroundResource(theme_selectedIcon[6]);
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
-                //     intent.putExtra("sigungucode", v.getText());
-                v.getContext().startActivity(intent);
-
-                for (int i = 0; i < 8; i++) {
-                    if (theme_selectedItems[i] == 1) {
-                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
-                        theme_selectedItems[i] = 0;
-                    }
-                }
-
-                theme_selectedItems[6] = 1;
-            }
-
-        });
+//        // 축제
+//        themeButton[6].setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                v.setBackgroundResource(theme_selectedIcon[6]);
+//                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+//                intent.putExtra("type", getResources().getResourceEntryName(v.getId()));
+//                //     intent.putExtra("sigungucode", v.getText());
+//                v.getContext().startActivity(intent);
+//
+//                for (int i = 0; i < 8; i++) {
+//                    if (theme_selectedItems[i] == 1) {
+//                        themeButton[i].setBackgroundResource(theme_unSelectedIcon[i]);
+//                        theme_selectedItems[i] = 0;
+//                    }
+//                }
+//
+//                theme_selectedItems[6] = 1;
+//            }
+//
+//        });
 
 
         // 버튼 리스너
@@ -1939,7 +1575,7 @@ public class TabFragment2 extends Fragment {
         view.findViewById(R.id.tag_39_4).
 
                 setOnClickListener(mClickListener);
-*/
+
         return view;
     }
 
@@ -1951,8 +1587,10 @@ public class TabFragment2 extends Fragment {
             Button b = (Button) v;
             //  b.setBackgroundColor();
             Intent intent = new Intent(v.getContext(), SearchActivity.class);
-            intent.putExtra("areacode", getResources().getResourceEntryName(b.getId()));
-            intent.putExtra("sigungucode", b.getText());
+            intent.putExtra("case", "area");
+            String[] s = getResources().getResourceEntryName(b.getId()).split("_");
+            intent.putExtra("areacode", s[1]);
+            intent.putExtra("sigungucode", s[2]);
             v.getContext().startActivity(intent);
 
         }

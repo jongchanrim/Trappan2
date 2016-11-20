@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_01">
@@ -54,149 +55,15 @@
         android:id = "@+id/region_view"
         android:layout_below="@+id/filter">
 
-        <HorizontalScrollView
-            android:id="@+id/areascrollview"
-            android:layout_width="fill_parent"
-            android:layout_height="122dip">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_area">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:orientation="horizontal">
-                <!-- Content here -->
-
-                <Button
-                    android:id="@+id/search_seoul_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/seoul_1"
-                    android:layout_margin="2dip"/>
-
-                <Button
-                    android:id="@+id/search_incheon_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/incheon_2"
-                    android:layout_margin = "2dip"/>
-
-                <Button
-                    android:id="@+id/search_daejeon_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/daejeon_3"
-                    android:layout_margin = "2dip"/>
-
-                <Button
-                    android:id="@+id/search_daegu_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/daegu_4"
-                    android:layout_margin = "2dip"/>
-
-                <Button
-                    android:id="@+id/search_gwangju_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/gwangju_5"
-                    android:layout_margin = "2dip"/>
-
-                <Button
-                    android:id="@+id/search_pusan_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/pusan_6"
-                    android:layout_margin = "2dip"/>
-
-                <Button
-                    android:id="@+id/search_ulsan_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/ulsan_7"
-                    android:layout_margin = "2dip"/>
-
-                <Button
-                    android:id="@+id/search_sejong_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/sejong_8"
-                    android:layout_margin = "2dip"/>
-
-
-                <Button
-                    android:id="@+id/search_gyeonggi_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/gyeonggi_31"
-                    android:layout_margin = "2dip"/>
-
-
-                <Button
-                    android:id="@+id/search_gangwon_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/gangwon_32"
-                    android:layout_margin = "2dip"/>
-
-
-                <Button
-                    android:id="@+id/search_chungbuk_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/chungbuk_33"
-                    android:layout_margin = "2dip"/>
-
-
-                <Button
-                    android:id="@+id/search_chungnam_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/chungnam_34"
-                    android:layout_margin = "2dip"/>
-
-
-                <Button
-                    android:id="@+id/search_gyeongbuk_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/gyeongbuk_35"
-                    android:layout_margin = "2dip"/>
+        </android.support.v7.widget.RecyclerView>
 
 
 
-                <Button
-                    android:id="@+id/search_gyeongnam_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/gyeongnam_36"
-                    android:layout_margin = "2dip"/>
-
-
-                <Button
-                    android:id="@+id/search_jeonbuk_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/jeonbuk_37"
-                    android:layout_margin = "2dip"/>
-
-
-                <Button
-                    android:id="@+id/search_jeonnam_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/jeonnam_38"
-                    android:layout_margin = "2dip"/>
-
-
-                <Button
-                    android:id="@+id/search_jeju_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/jeju_39"
-                    android:layout_margin = "2dip"/>
-
-            </LinearLayout>
-        </HorizontalScrollView>
     </RelativeLayout>
 
 
@@ -4167,80 +4034,23 @@
 
     </RelativeLayout>
 
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="124dip"
         android:id = "@+id/theme_view"
         android:layout_below="@+id/theme">
 
-        <HorizontalScrollView
-            android:id="@+id/themescrollview"
-            android:layout_width="fill_parent"
-            android:layout_height="122dip">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:orientation="horizontal">
-                <!-- Content here -->
-
-                <Button
-                    android:id="@+id/search_nature_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/theme_a0101"
-                    android:layout_margin="2dip"/>
-
-                <Button
-                    android:id="@+id/search_history_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/theme_a0201"
-                    android:layout_margin = "2dip"/>
-
-                <Button
-                    android:id="@+id/search_rest_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/theme_a0202"
-                    android:layout_margin = "2dip"/>
-
-                <Button
-                    android:id="@+id/search_activity_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/theme_a0203"
-                    android:layout_margin = "2dip"/>
-
-                <Button
-                    android:id="@+id/search_building_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/theme_a0205"
-                    android:layout_margin = "2dip"/>
-
-                <Button
-                    android:id="@+id/search_culture_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/theme_a0206"
-                    android:layout_margin = "2dip"/>
-
-                <Button
-                    android:id="@+id/search_festival_button"
-                    android:layout_width="120dip"
-                    android:layout_height="120dip"
-                    android:background="@drawable/theme_a0207"
-                    android:layout_margin = "2dip"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_theme">
+            </android.support.v7.widget.RecyclerView>
 
 
-            </LinearLayout>
-        </HorizontalScrollView>
+
     </RelativeLayout>
-
-
-
 
 
 </RelativeLayout>
