@@ -50,8 +50,11 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
 
         final Member item =items.get(position);
 
-        //aq.id(holder.image).image(item.getPro_img());
-        aq.id(holder.image).image(R.drawable.default_image);
+        if(item.getPro_img() ==null) {
+            aq.id(holder.image).image(R.drawable.profile_default_image);
+        }else{
+            aq.id(holder.image).image(item.getPro_img());
+        }
         holder.userId.setText(item.getId());
         holder.desc.setText(item.getIntro());
 

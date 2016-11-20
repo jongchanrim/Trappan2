@@ -12,7 +12,6 @@
         android:layout_height="70dip"
         android:layout_marginTop="5dip"
         android:id="@+id/followier_image"
-        android:src = "@drawable/gangwon"
         android:layout_marginLeft = "10dip"
         android:layout_marginBottom = "10dip"
         />

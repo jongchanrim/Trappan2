@@ -85,8 +85,9 @@ public class TabFragment2 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tabfragment2, container, false);
 
+        View view = inflater.inflate(R.layout.testfragment, container, false);
+/*
         areaButton = new Button[17];
         areaButton[0] = (Button) view.findViewById(R.id.search_seoul_button);
         areaButton[1] = (Button) view.findViewById(R.id.search_incheon_button);
@@ -932,29 +933,6 @@ public class TabFragment2 extends Fragment {
 
         });
 
-
-
-/*
-        view_detail.setVisibility(View.GONE);
-        view_seoul.setVisibility(View.GONE);
-        view_incheon.setVisibility(View.GONE);
-        view_daejeon.setVisibility(View.GONE);
-        view_daegu.setVisibility(View.GONE);
-        view_gwangju.setVisibility(View.GONE);
-        view_pusan.setVisibility(View.GONE);
-        view_ulsan.setVisibility(View.GONE);
-        view_sejong.setVisibility(View.GONE);
-        view_gyeonggi.setVisibility(View.GONE);
-        view_gangwon.setVisibility(View.GONE);
-        view_chungbuk.setVisibility(View.GONE);
-        view_chungnam.setVisibility(View.GONE);
-        view_gyeongbuk.setVisibility(View.GONE);
-        view_gyeongnam.setVisibility(View.GONE);
-        view_jeonbuk.setVisibility(View.GONE);
-        view_jeonnam.setVisibility(View.GONE);
-        view_jeju.setVisibility(View.GONE);
-
-*/
 
         // 버튼 리스너
 
@@ -1961,7 +1939,7 @@ public class TabFragment2 extends Fragment {
         view.findViewById(R.id.tag_39_4).
 
                 setOnClickListener(mClickListener);
-
+*/
         return view;
     }
 

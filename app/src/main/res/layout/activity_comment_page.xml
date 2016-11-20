@@ -54,7 +54,6 @@
             android:layout_height="38dip"
             android:layout_gravity="right"
             android:id = "@+id/comment_send_button"
-            android:background = "@drawable/send_button"
             android:layout_margin = "3dip"
             />
 

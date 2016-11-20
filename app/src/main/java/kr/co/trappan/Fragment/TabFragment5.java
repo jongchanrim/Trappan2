@@ -20,10 +20,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.androidquery.AQuery;
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.pkmmte.view.CircularImageView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
@@ -38,6 +41,8 @@ import kr.co.trappan.Activity.FollowingActivity;
 import kr.co.trappan.Activity.LikeActivity;
 import kr.co.trappan.Activity.My_CommentActivity;
 import kr.co.trappan.Adapter.ListViewAdapter;
+import kr.co.trappan.Adapter.ReviewListAdapter;
+import kr.co.trappan.Bean.Review;
 import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.Item.List_item;
 import kr.co.trappan.R;
@@ -52,9 +57,9 @@ public class TabFragment5 extends Fragment{
 
     Context context;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter Adapter;
+    private ReviewListAdapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
-
+    ArrayList<Review> items = new ArrayList<>();
     private ImageView back_img;
     private CircularImageView pro_img;
 
@@ -73,22 +78,21 @@ public class TabFragment5 extends Fragment{
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
-
     private Uri mlmageCaptureUri_background;  //Uri 배경이미지 변수
     private Uri mlmageCaptureUri_profile;   //Uri 프로필이미지 변수
-
     private ImageView iv_UserPhoto;
     private int id_view;
     private String absoultePath;
 
+
+
     private int back_or_profile = 0;  //배경이미지와 프로필 이미지 선택 변수 (1로바뀌면 배경, 2로바뀌면 프로필)
-
-
+    AQuery aq;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tabfragment5, container, false);
         context = getContext();
-
+        aq = new AQuery(view);
         CircularImageView circularImageView = (CircularImageView)view.findViewById(R.id.f5_proimg);
         circularImageView.setBorderWidth(10);
         circularImageView.setSelectorStrokeWidth(10);
@@ -110,14 +114,80 @@ public class TabFragment5 extends Fragment{
         recyclerView = (RecyclerView) view.findViewById(R.id.mypage_scroll);
         RecyclerViewHeader header = (RecyclerViewHeader) view.findViewById(R.id.header5);
         recyclerView.setHasFixedSize(true);
-        ArrayList<List_item> items = new ArrayList<>();
+
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        Adapter = new ListViewAdapter(getActivity() ,items ,R.layout.tabfragment5);
+        Adapter = new ReviewListAdapter(getActivity(),items);
         recyclerView.setAdapter(Adapter);
         header.attachTo(recyclerView);
 
-        //resizeCommentList(items.size());
+        HttpClient.get("detailmypage", null, new JsonHttpResponseHandler() { // Profile
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+
+                    user_name.setText(response.getString("name"));
+                    user_profile.setText(response.getString("intro"));
+                    follower.setText(response.getString("count_following"));
+                    following.setText(response.getString("count_follower"));
+                    tlike.setText(response.getString("count_tlike"));
+                    stamp.setText(response.getString("count_stamp"));
+                    rlike.setText(response.getString("count_rlike"));
+                    comment.setText(response.getString("count_comment"));
+
+                    try {
+                        aq.id(pro_img).image(response.getString("pro_img"));
+                        aq.id(back_img).image(response.getString("back_img"));
+                    }catch (Exception e){
+
+                    }
+
+                }catch (Exception e){
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
+                super.onFailure(statusCode, headers, throwable, response);
+
+            }
+        });
+
+        HttpClient.get("mreviewlist", null, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject obj = response.getJSONObject(i);
+                        Review item = new Review();
+                        item.setId(obj.getString("id"));
+                        item.setImg_1(obj.getString("img_1"));
+                        item.setReview_title(obj.getString("review_title"));
+                        item.setReview_content(obj.getString("review_content"));
+                        items.add(item);
+                    }
+
+                    Adapter.notifyDataSetChanged();
+                    //pd.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+        @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
+                super.onFailure(statusCode, headers, throwable, response);
+
+            }
+        });
+
 
         f5_btn_backimg.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -193,11 +263,8 @@ public class TabFragment5 extends Fragment{
         follower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(v.getContext(), FollowerActivity.class);
-
                 v.getContext().startActivity(intent);
-
             }
         });
         following.setOnClickListener(new View.OnClickListener(){
@@ -215,7 +282,7 @@ public class TabFragment5 extends Fragment{
                 startActivity(intent);
             }
         });
-        tlike.setOnClickListener(new View.OnClickListener() {
+       /* tlike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), LikeActivity.class);
@@ -223,52 +290,14 @@ public class TabFragment5 extends Fragment{
 
             }
         });
-            HttpClient.get("test", null, new JsonHttpResponseHandler() { // Profile
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-
-                }catch (Exception e){
-
-                }
-            }
+        스템프 액티비티도 넣어야함
+        */
 
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
-                super.onFailure(statusCode, headers, throwable, response);
-
-            }
-        });
-
-        HttpClient.get("test", null, new JsonHttpResponseHandler() { // List
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                try {
-
-                }catch (Exception e){
-
-                }
-            }
-
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
-                super.onFailure(statusCode, headers, throwable, response);
-
-            }
-        });
 
         return view;
     }
 
-    private void resizeCommentList(int item_size){
-        ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
-        params.height = 350 * item_size;
-        recyclerView.setLayoutParams(params);
-    }
 
     public void doTakePhotoAction(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -363,10 +392,7 @@ public class TabFragment5 extends Fragment{
                         "/SmartWheel/"+ System.currentTimeMillis()+".jpg";
                 if(extras != null){
                     Bitmap photo = extras.getParcelable("data"); //CROP된 BITMAP
-                    iv_UserPhoto.setImageBitmap(photo); //레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
-
                     storeCropImage(photo, filePath); //CROP된 이미지를 외부저장소, 앨범에 저장
-
                     absoultePath = filePath;
                     break;
                 }
@@ -420,67 +446,5 @@ public class TabFragment5 extends Fragment{
         }
     }
 
-//    public BitmapFactory.Options getBitmapSize(BitmapFactory.Options options){
-//        int targetWidth = 0;
-//        int targetHeight = 0;
-//
-//        if(options.outWidth > options.outHeight){
-//            targetWidth = (int)(600 * 1.3);
-//            targetHeight = 600;
-//        }else{
-//            targetWidth = 600;
-//            targetHeight = (int)(600 * 1.3);
-//        }
-//
-//        Boolean scaleByHeight = Math.abs(options.outHeight - targetHeight) >= Math.abs(options.outWidth - targetWidth);
-//        if(options.outHeight * options.outWidth * 2 >= 16384){
-//            double sampleSize = scaleByHeight
-//                    ? options.outHeight / targetHeight
-//                    : options.outWidth / targetWidth;
-//            options.inSampleSize = (int) Math.pow(2d, Math.floor(Math.log(sampleSize)/Math.log(2d)));
-//        }
-//        options.inJustDecodeBounds = false;
-//        options.inTempStorage = new byte[16*1024];
-//
-//        return options;
-//    }
-//
-//    public static Bitmap loadBackgroundBitmap(Context context, String imgFilePath) {
-//        File file = new File(imgFilePath);
-//        if (file.exists() == false) {
-//            return null;
-//        }
-//
-//        // 폰의 화면 사이즈를 구한다.
-//        Display display = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-//        int displayWidth = display.getWidth();
-//        int displayHeight = display.getHeight();
-//
-//        // 읽어들일 이미지의 사이즈를 구한다.
-//        BitmapFactory.Options options = new BitmapFactory.Options();
-//        options.inPreferredConfig = Bitmap.Config.RGB_565;
-//        options.inJustDecodeBounds = true;
-//        BitmapFactory.decodeFile(imgFilePath, options);
-//
-//        // 화면 사이즈에 가장 근접하는 이미지의 스케일 팩터를 구한다.
-//        // 스케일 팩터는 이미지 손실을 최소화하기 위해 짝수로 한다.
-//        float widthScale = options.outWidth / displayWidth;
-//        float heightScale = options.outHeight / displayHeight;
-//        float scale = widthScale > heightScale ? widthScale : heightScale;
-//
-//        if (scale >= 8)
-//            options.inSampleSize = 8;
-//        else if (scale >= 6)
-//            options.inSampleSize = 6;
-//        else if (scale >= 4)
-//            options.inSampleSize = 4;
-//        else if (scale >= 2)
-//            options.inSampleSize = 2;
-//        else
-//            options.inSampleSize = 1;
-//        options.inJustDecodeBounds = false;
-//
-//        return BitmapFactory.decodeFile(imgFilePath, options);
-//    }
 
 }

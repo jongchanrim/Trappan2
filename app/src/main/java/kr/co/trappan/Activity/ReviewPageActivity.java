@@ -14,6 +14,7 @@ import com.androidquery.AQuery;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -86,7 +87,6 @@ public class ReviewPageActivity extends AppCompatActivity {
         num_comment=(TextView)findViewById(R.id.num_comment);
         btn_like=(Button)findViewById(R.id.review_like_button);
         btn_comment=(Button)findViewById(R.id.review_comment_button);
-        review =new Review("a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a");
         final ReviewPagerAdapter adapter=new ReviewPagerAdapter(getLayoutInflater(),pager_image_list);
         viewPager.setAdapter(adapter);
         RequestParams params = new RequestParams();
@@ -157,6 +157,13 @@ public class ReviewPageActivity extends AppCompatActivity {
                     if(review.getImg_6()!=null)
                         pager_image_list.add(review.getImg_6());
 
+                    if(response.getInt("is_rlike") == 0){
+                        btn_like.setBackgroundResource(R.drawable.like);
+                    }else{
+                        btn_like.setBackgroundResource(R.drawable.like_s);
+                    }
+
+
 
                     adapter.notifyDataSetChanged();
 
@@ -188,13 +195,25 @@ public class ReviewPageActivity extends AppCompatActivity {
         btn_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RequestParams params = new RequestParams();
+                params.put("review_id", reviewid);
+                HttpClient.get("addreviewlike", params, new JsonHttpResponseHandler() {
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        super.onSuccess(statusCode, headers, response);
+                        btn_like.setBackgroundResource(R.drawable.like_s);
+                    }
+                });
 
             }
         });
         btn_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ReviewPageActivity.this, CommentActivity.class);
+                intent.putExtra("review_id", reviewid);
+                startActivity(intent);
             }
         });
     }

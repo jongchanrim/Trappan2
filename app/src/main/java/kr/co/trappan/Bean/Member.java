@@ -12,9 +12,16 @@ public class Member {
 	private String back_img;
 	private String pro_img;
 	private String intro;
+	private String isfollow;
 
 
+	public String getIsfollow() {
+		return isfollow;
+	}
 
+	public void setIsfollow(String isfollow) {
+		this.isfollow = isfollow;
+	}
 
 	public String getId() {
 		return id;

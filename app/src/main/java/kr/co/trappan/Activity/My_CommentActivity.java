@@ -10,10 +10,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Adapter.CommentListAdapter;
 import kr.co.trappan.Bean.Comment;
+import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.R;
 
 /**
@@ -26,12 +34,12 @@ public class My_CommentActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
-
+    ArrayList<Comment> items = new ArrayList<>();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_comment_page);
 
-        ArrayList<Comment> items = new ArrayList<>();
+
 
         context = getApplicationContext();
         recyclerView = (RecyclerView) findViewById(R.id.my_comment_list);
@@ -42,14 +50,42 @@ public class My_CommentActivity extends AppCompatActivity {
         Adapter = new CommentListAdapter(this, items, R.layout.activity_my_comment_page);
         recyclerView.setAdapter(Adapter);
 
-        //items.add(new Comment(comment_id,review_id,comment_count,"id","comment_content","c_date"));
-        items.add(new Comment(1, 2, 3, "아이디", "리뷰를 남겼다. 리뷰를 남겼다, 리뷰를 남겼다. 리뷰를 남겼다.", "2016-11-18"));
-        items.add(new Comment(1, 2, 3, "아이디", "리뷰를 남겼다. 리뷰를 남겼다, 리뷰를 남겼다. 리뷰를 남겼다.", "2016-11-18"));
-        items.add(new Comment(1, 2, 3, "아이디", "리뷰를 남겼다. 리뷰를 남겼다, 리뷰를 남겼다. 리뷰를 남겼다.", "2016-11-18"));
-        items.add(new Comment(1, 2, 3, "아이디", "리뷰를 남겼다. 리뷰를 남겼다, 리뷰를 남겼다. 리뷰를 남겼다.리뷰를 남겼다. 리뷰를 남겼다, 리뷰를 남겼다. 리뷰를 남겼다.", "2016-11-18"));
+        HttpClient.get("mcommentlist", null, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject obj = response.getJSONObject(i);
+                        Comment comment = new Comment();
+                        comment.setComment_id(obj.getInt("comment_id"));
+                        comment.setReview_id(obj.getInt("review_id"));
+                        comment.setComment_content(obj.getString("comment_content"));
+                        comment.setId(obj.getString("id"));
+                        comment.setC_date(obj.getString("c_date"));
+                        items.add(comment);
+                    }
+                    Adapter.notifyDataSetChanged();
+                    //pd.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray response) {
+                super.onFailure(statusCode, headers, throwable, response);
+
+            }
+        });
+
+
 
         //뒤로가기 버튼
-        ImageButton review_backbutton = (ImageButton)findViewById(R.id.my_comment_backbutton);
+        ImageButton review_backbutton = (ImageButton) findViewById(R.id.my_comment_backbutton);
         review_backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

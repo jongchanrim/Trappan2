@@ -35,9 +35,6 @@ public class TabFragment4 extends Fragment{
 
         ArrayList<List_item> items = new ArrayList<>();
 
-        items.add(new List_item(R.drawable.gangwon,"전효주","2016-11-09","전효주님이 좋아요를 눌렀습니다."));
-        items.add(new List_item(R.drawable.gangwon,"전효주","2016-11-09","전효주님이 좋아요를 눌렀습니다."));
-
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         Adapter = new ListViewAdapter(getActivity() ,items ,R.layout.tabfragment4);

@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Activity.DetailInformationActivity;
 import kr.co.trappan.Activity.MainActivity;
-import kr.co.trappan.Activity.MapsActivity;
 import kr.co.trappan.Activity.ReviewPageActivity;
 import kr.co.trappan.Adapter.Horizontal_Pager_Adapter;
 import kr.co.trappan.Bean.Tour;

@@ -10,7 +10,6 @@
         android:layout_weight="0.2"
         android:layout_marginTop="5dip"
         android:id="@+id/notice_image"
-        android:src = "@drawable/gangwon"
          />
 
     <LinearLayout

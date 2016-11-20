@@ -75,6 +75,8 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private ViewGroup review_layoutbutton;
     private Button review_completebutton;
 
+    int islike;
+
 
     private int imagenumber = 0; //업로드이미지 위치에 순서대로 보여주기 위한 변수
     private String contentid;
