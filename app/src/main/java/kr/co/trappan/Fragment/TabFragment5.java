@@ -3,9 +3,11 @@ package kr.co.trappan.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.nfc.Tag;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
@@ -33,11 +35,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
@@ -54,6 +62,7 @@ import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.Item.List_item;
 import kr.co.trappan.R;
 
+import static android.R.attr.data;
 import static android.app.Activity.RESULT_OK;
 
 
@@ -349,25 +358,6 @@ public class TabFragment5 extends Fragment{
                     mlmageCaptureUri_background = data.getData();
                     Log.d("PICK_FROM_ALBUM", mlmageCaptureUri_background.getPath().toString());
 
-                    RequestParams params = new RequestParams();
-                    try {
-                        InputStream fin = new FileInputStream(mlmageCaptureUri_background.getPath().toString());
-                        params.put("back_img", fin);
-
-                    } catch(FileNotFoundException e) {}
-
-                    HttpClient.get("updatebackimg", params, new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            aq.id(back_img).image(mlmageCaptureUri_background.getPath().toString());
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                        }
-                    });
-
                 }
                 else if(back_or_profile == 2){
                     mlmageCaptureUri_profile = data.getData();
@@ -393,7 +383,5 @@ public class TabFragment5 extends Fragment{
 
         }
     }
-
-
 
 }
