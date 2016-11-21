@@ -298,7 +298,7 @@ public class TabFragment5 extends Fragment{
                 startActivity(intent);
             }
         });
-       /* tlike.setOnClickListener(new View.OnClickListener() {
+       rlike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), LikeActivity.class);
@@ -306,6 +306,8 @@ public class TabFragment5 extends Fragment{
 
             }
         });
+
+        /*
         스템프 액티비티도 넣어야함
         */
 
