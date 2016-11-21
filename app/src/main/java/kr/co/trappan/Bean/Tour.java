@@ -12,7 +12,7 @@ public class Tour {
     private String addr2;
     private String areacode;
     private String cat2;
-    private String firstimage="\\";
+    private String firstimage;
     private String mlevel;
     private String overview;
     private float mapx;

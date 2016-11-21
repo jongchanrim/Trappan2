@@ -77,7 +77,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDPt_F0EgVvUkOARHhfSeW2vJ9sM_PDL58" />
+            android:value="AIzaSyATE-58z3RTMAkQeeF-ycxXq6PvH7ofQ3Q" />
 
         <activity
             android:name=".Activity.ReviewWriteActivity"

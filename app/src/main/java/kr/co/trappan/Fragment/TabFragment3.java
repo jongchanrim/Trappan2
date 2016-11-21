@@ -56,7 +56,7 @@ public class TabFragment3 extends Fragment {
         recyclerViewArea = (RecyclerView) view.findViewById(R.id.reco_area);
         recyclerViewArea.setHasFixedSize(true);
 
-        ArrayList<SearchFragmentItem> itemsb = new ArrayList<>();
+        final ArrayList<SearchFragmentItem> itemsb = new ArrayList<>();
 
         itemsb.add(new SearchFragmentItem(R.drawable.seoul_1_c));
         itemsb.add(new SearchFragmentItem(R.drawable.incheon_2_c));
@@ -214,6 +214,7 @@ public class TabFragment3 extends Fragment {
                                         temp.add(tour);
                                     }
                                     items = temp;
+                                    //Adapterc.setItem(items);
                                     Adapterc.notifyDataSetChanged();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
