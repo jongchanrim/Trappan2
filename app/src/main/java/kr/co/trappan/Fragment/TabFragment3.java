@@ -43,7 +43,7 @@ public class TabFragment3 extends Fragment {
 
     RecyclerView recyclerViewArea;
     private RecyclerView recyclerViewc;
-    private RecyclerView.Adapter Adapterc;
+    private SearchListAdapter Adapterc;
     private LinearLayoutManager layoutManagerc;
     ArrayList<Tour>
             items = new ArrayList<>();
@@ -56,7 +56,7 @@ public class TabFragment3 extends Fragment {
         recyclerViewArea = (RecyclerView) view.findViewById(R.id.reco_area);
         recyclerViewArea.setHasFixedSize(true);
 
-        final ArrayList<SearchFragmentItem> itemsb = new ArrayList<>();
+        ArrayList<SearchFragmentItem> itemsb = new ArrayList<>();
 
         itemsb.add(new SearchFragmentItem(R.drawable.seoul_1_c));
         itemsb.add(new SearchFragmentItem(R.drawable.incheon_2_c));
@@ -214,7 +214,7 @@ public class TabFragment3 extends Fragment {
                                         temp.add(tour);
                                     }
                                     items = temp;
-                                    //Adapterc.setItem(items);
+                                    Adapterc.setItems(items);
                                     Adapterc.notifyDataSetChanged();
                                 } catch (JSONException e) {
                                     e.printStackTrace();

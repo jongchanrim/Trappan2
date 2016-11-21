@@ -51,8 +51,11 @@ public class TabFragment2 extends Fragment {
         f2_btn_keyword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("case", "keyword");
                 intent.putExtra("keyword", f2_keyword.getText().toString());
+                v.getContext().startActivity(intent);
+
             }
         });
 
