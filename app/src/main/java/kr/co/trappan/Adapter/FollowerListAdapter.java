@@ -10,10 +10,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
+import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Bean.Member;
+import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.R;
 
 /**
@@ -67,12 +76,25 @@ public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapte
             @Override
             public void onClick(View v) {
 
-                if (button_click == 0) {
+                if(item.getIsfollow() == null){
+                    RequestParams params =  new RequestParams();
+                    params.put("followee", item.getId());
+                    HttpClient.get("addfollow", null, new JsonHttpResponseHandler(){
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            super.onSuccess(statusCode, headers, response);
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                            super.onFailure(statusCode, headers, throwable, errorResponse);
+                        }
+                    });
                     v.setBackgroundResource(R.drawable.following);
-                    button_click=1;
+
+
                 }else{
-                    v.setBackgroundResource(R.drawable.follow);
-                    button_click=0;
+
                 }
             }
         });
