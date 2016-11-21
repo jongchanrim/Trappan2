@@ -13,6 +13,8 @@
 
         <EditText
             android:hint="검색"
+            android:singleLine="true"
+            android:textColorHint="#000000"
             android:id="@+id/f2_keyword"
             android:layout_width="match_parent"
             android:layout_height="40dip"

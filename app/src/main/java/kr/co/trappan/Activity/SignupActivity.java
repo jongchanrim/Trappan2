@@ -66,7 +66,7 @@ public class SignupActivity extends AppCompatActivity {
                     RequestParams params = new RequestParams();
                     params.put("id", id.getText().toString().trim());
                     params.put("email", email.getText().toString().trim());
-                    params.put("passwd", passwd.getText().toString().trim());
+                    params.put("passwd",enpw);
                     params.put("name", name.getText().toString().trim());
                     HttpClient.post("signup", params, new AsyncHttpResponseHandler() {
                         @Override

@@ -73,6 +73,7 @@
         android:text="PASSWORD"/>
     <EditText
         android:id="@+id/login_pw_edittext"
+        android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"

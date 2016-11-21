@@ -43,7 +43,7 @@ public class TabFragment3 extends Fragment {
 
     RecyclerView recyclerViewArea;
     private RecyclerView recyclerViewc;
-    private RecyclerView.Adapter Adapterc;
+    private SearchListAdapter Adapterc;
     private LinearLayoutManager layoutManagerc;
     ArrayList<Tour>
             items = new ArrayList<>();
@@ -214,6 +214,7 @@ public class TabFragment3 extends Fragment {
                                         temp.add(tour);
                                     }
                                     items = temp;
+                                    Adapterc.setItems(items);
                                     Adapterc.notifyDataSetChanged();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
