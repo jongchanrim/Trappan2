@@ -52,7 +52,7 @@ public class FollowingActivity extends AppCompatActivity {
         Adapter = new FollowingListAdapter(this, items, R.layout.activity_following_page);
         recyclerView.setAdapter(Adapter);
 
-        HttpClient.get("follinglist", null, new JsonHttpResponseHandler() {
+        HttpClient.get("follwinglist", null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);

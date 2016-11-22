@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -357,13 +359,71 @@ public class TabFragment5 extends Fragment{
                 //실제코드에서는 좀더 합리적인 방법 선택
                 if(back_or_profile == 1) {
 
-                    mlmageCaptureUri_background = data.getData();
-                    Log.d("PICK_FROM_ALBUM", mlmageCaptureUri_background.getPath().toString());
+                    try {
+                        mlmageCaptureUri_background = data.getData();
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), mlmageCaptureUri_background);
+                        Log.d("PICK_FROM_ALBUM", mlmageCaptureUri_background.getPath().toString());
+                        String image = getStringImage(bitmap);
+                        RequestParams params = new RequestParams();
+                        params.put("back_img", image);
+
+                        HttpClient.get("updatebackimg", params, new JsonHttpResponseHandler(){
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                super.onSuccess(statusCode, headers, response);
+                                try {
+                                    if (response.getString("back_img") != null) {
+                                        aq.id(back_img).image(response.getString("back_img"));
+                                    }
+                                }catch (JSONException e){
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                super.onFailure(statusCode, headers, throwable, errorResponse);
+                            }
+                        });
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                 }
                 else if(back_or_profile == 2){
-                    mlmageCaptureUri_profile = data.getData();
+
                     Log.d("PICK_FROM_ALBUM", mlmageCaptureUri_profile.getPath().toString());
+                    try {
+                        mlmageCaptureUri_profile = data.getData();
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), mlmageCaptureUri_background);
+                        Log.d("PICK_FROM_ALBUM", mlmageCaptureUri_background.getPath().toString());
+                        String image = getStringImage(bitmap);
+                        RequestParams params = new RequestParams();
+                        params.put("pro_img", image);
+
+                        HttpClient.get("updateproimg", params, new JsonHttpResponseHandler(){
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                super.onSuccess(statusCode, headers, response);
+                                try {
+                                    if (response.getString("pro_img") != null) {
+                                        aq.id(back_img).image(response.getString("pro_img"));
+                                    }
+                                }catch (JSONException e){
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                super.onFailure(statusCode, headers, throwable, errorResponse);
+                            }
+                        });
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
             }
@@ -384,6 +444,15 @@ public class TabFragment5 extends Fragment{
 //            }
 
         }
+
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 
 }
