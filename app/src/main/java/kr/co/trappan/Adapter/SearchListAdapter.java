@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import kr.co.trappan.Bean.Tour;
@@ -30,10 +32,36 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     int item_layout;
     AQuery aq;
    //
-   private static int TYPE_HEADER = 0;
+    private static int TYPE_HEADER = 0;
     private static int TYPE_FOOTER = 3;
 
-
+    public void sortstar(){
+        Collections.sort(items, new Comparator<Tour>(){
+            public int compare(Tour obj1, Tour obj2)
+            {
+                // TODO Auto-generated method stub
+                return (obj1.getLike() > obj2.getLike()) ? -1: (obj1.getLike() > obj2.getLike()) ? 1:0 ;
+            }
+        });
+    }
+    public void sortstamp(){
+        Collections.sort(items, new Comparator<Tour>(){
+            public int compare(Tour obj1, Tour obj2)
+            {
+                // TODO Auto-generated method stub
+                return (obj1.getStamp() > obj2.getStamp()) ? -1: (obj1.getStamp() > obj2.getStamp()) ? 1:0 ;
+            }
+        });
+    }
+    public void sortrate(){
+        Collections.sort(items, new Comparator<Tour>(){
+            public int compare(Tour obj1, Tour obj2)
+            {
+                // TODO Auto-generated method stub
+                return (obj1.getRate() > obj2.getRate()) ? -1: (obj1.getRate() > obj2.getRate()) ? 1:0 ;
+            }
+        });
+    }
 
 
     public SearchListAdapter (Context context, List<Tour> items, int item_layout) {

@@ -47,6 +47,23 @@ public class Horizontal_Pager_Adapter extends PagerAdapter{
 
         ImageView img= (ImageView)view.findViewById(R.id.viewpager_image);
 
+        switch (position){
+            case 0:
+                img.setBackgroundResource(R.drawable.main_image1);
+                break;
+            case 1:
+                img.setBackgroundResource(R.drawable.main_image2);
+                break;
+            case 2:
+                img.setBackgroundResource(R.drawable.main_image3);
+                break;
+            case 3:
+                img.setBackgroundResource(R.drawable.main_image4);
+                break;
+            case 4:
+                img.setBackgroundResource(R.drawable.main_image5);
+                break;
+        }
         //aq.id(img).image(list.get(position));
 
 

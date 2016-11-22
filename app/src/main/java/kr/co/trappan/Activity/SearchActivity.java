@@ -5,12 +5,14 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
@@ -49,6 +51,11 @@ public class SearchActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     ArrayList<Tour> items = new ArrayList<>();
 
+    private LinearLayout btn_back;
+    private TextView btn_line_star;
+    private TextView btn_line_stamp;
+    private TextView btn_line_name;
+
     String searchcase;
     CustomProgressDialog pd;
     JSONArray jsonArray = new JSONArray();
@@ -61,6 +68,11 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
+
+        btn_back=(LinearLayout)findViewById(R.id.back_button);
+        btn_line_star=(TextView)findViewById(R.id.btn_line_star);
+        btn_line_stamp=(TextView)findViewById(R.id.btn_line_stamp);
+        btn_line_name=(TextView)findViewById(R.id.btn_line_name);
 
         pd = new CustomProgressDialog(SearchActivity.this);
         pd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -244,7 +256,43 @@ public class SearchActivity extends AppCompatActivity {
 
         ));
 
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
+        btn_line_star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_line_star.setBackgroundColor(Color.parseColor("#5d10ac"));
+                btn_line_stamp.setBackgroundColor(Color.parseColor("#c1c1c1"));
+                btn_line_name.setBackgroundColor(Color.parseColor("#c1c1c1"));
+                adapter.sortstar();
+                adapter.notifyDataSetChanged();
+            }
+        });
+        btn_line_stamp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_line_stamp.setBackgroundColor(Color.parseColor("#5d10ac"));
+                btn_line_name.setBackgroundColor(Color.parseColor("#c1c1c1"));
+                btn_line_star.setBackgroundColor(Color.parseColor("#c1c1c1"));
+                adapter.sortstamp();
+                adapter.notifyDataSetChanged();
+            }
+        });
+        btn_line_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_line_name.setBackgroundColor(Color.parseColor("#5d10ac"));
+                btn_line_stamp.setBackgroundColor(Color.parseColor("#c1c1c1"));
+                btn_line_star.setBackgroundColor(Color.parseColor("#c1c1c1"));
+                adapter.sortrate();
+                adapter.notifyDataSetChanged();
+            }
+        });
 //        Intent intent = getIntent();
 //        String region_name = intent.getStringExtra("region_name");
 //        String region_detail= intent.getStringExtra("region_detail");

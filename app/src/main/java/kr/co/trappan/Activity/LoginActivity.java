@@ -72,9 +72,9 @@ public class LoginActivity extends AppCompatActivity {
                 enpw = Encrypter.encrypt(password.getText().toString()); //비밀번호 암호화
                 RequestParams params = new RequestParams();
                 params.put("id", id.getText().toString().trim());
-                params.put("pw", enpw);
+                params.put("password", password.getText().toString());
 
-                HttpClient.post("login", params, new JsonHttpResponseHandler() {
+                HttpClient.post("test", params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);

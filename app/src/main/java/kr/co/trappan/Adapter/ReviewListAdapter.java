@@ -45,7 +45,12 @@ public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.Vi
 
         final Review item=items.get(position);
 
-        aq.id(holder.image).image(item.getImg_1());
+        if(item.getImg_1()==null){
+
+        }else{
+            aq.id(holder.image).image(item.getImg_1());
+        }
+
         holder.title.setText(item.getReview_title());
         holder.id.setText(item.getId());
         holder.content.setText(item.getReview_content());

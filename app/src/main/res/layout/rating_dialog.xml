@@ -8,17 +8,19 @@
         android:background="@android:color/white"
         android:orientation="vertical"
         android:layout_centerInParent="true"
-        android:layout_width="300dp"
-        android:layout_height="200dp">
+        android:layout_width="250dp"
+        android:layout_height="150dp">
 
         <TextView
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:id="@+id/rating_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_gravity="center"
-            android:text="별점 주기"/>
+            android:text="별점 주기"
+            android:gravity="center" />
         <RatingBar
 
             android:layout_width="wrap_content"
@@ -31,10 +33,11 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:layout_marginTop="10dp"
                 android:id="@+id/btn_check"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="평가하기"/>
+                android:text="평가하기" />
 
        </LinearLayout>
 

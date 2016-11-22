@@ -39,64 +39,56 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:paddingTop="10px"
-        android:paddingBottom="10px"
-        android:paddingRight="30dp"
-        android:paddingLeft="30dp"
         android:textColor="#5d10ac"
         android:textStyle="bold"
         android:text="ID"/>
     <EditText
+        android:singleLine="true"
         android:id="@+id/login_id_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:background="@drawable/login_edittext"
-        android:paddingTop="10px"
-        android:paddingBottom="10px"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:paddingRight="30dp"
         android:paddingLeft="30dp"
         android:textColorHint="#7f000000"
         android:gravity="left"
         android:textSize="14dip"
-        android:textColor="?android:attr/colorAccent" />
+        android:textColor="@color/colorAccent" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:paddingTop="10px"
-        android:paddingBottom="10px"
-        android:paddingRight="30dp"
-        android:paddingLeft="30dp"
+
         android:textColor="#5d10ac"
         android:textStyle="bold"
         android:text="PASSWORD"/>
     <EditText
+        android:inputType="textPassword"
         android:id="@+id/login_pw_edittext"
         android:singleLine="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:background="@drawable/login_edittext"
-        android:paddingTop="10px"
-        android:paddingBottom="10px"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:paddingRight="30dp"
         android:paddingLeft="30dp"
         android:hint="********"
         android:textColorHint="#7f000000"
         android:gravity="left"
         android:textSize="14dip"
-        android:textColorHighlight="?android:attr/colorAccent"
-        android:textColor="?android:attr/colorAccent" />
+        android:textColorHighlight="@color/colorAccent"
+        android:textColor="@color/colorAccent" />
     </LinearLayout>
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:padding="25px"
-        android:paddingRight="5px"
-        android:paddingLeft="5px"
         android:text="Login"
         android:textColor="#ffffff"
         android:background="@drawable/login_button"

@@ -12,7 +12,7 @@ public class Tour {
     private String addr2;
     private String areacode;
     private String cat2;
-    private String firstimage="\\";
+    private String firstimage;
     private String mlevel;
     private String overview;
     private float mapx;
@@ -25,6 +25,7 @@ public class Tour {
     private String sigunguName;
 
     public Tour() {
+
     }
 
     public Tour(String addr1, String addr2, String areacode, String cat2, String contentid, String contenttypeid, String firstimage, int like, String mapx, String mapy, String mlevel, String overview, double rate, String sigungucode, int stamp, String title) {
