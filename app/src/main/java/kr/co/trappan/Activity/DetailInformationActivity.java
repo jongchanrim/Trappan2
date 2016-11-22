@@ -1,52 +1,34 @@
 package kr.co.trappan.Activity;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.location.Location;
-import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationAvailability;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -63,11 +45,13 @@ import kr.co.trappan.Bean.Review;
 import kr.co.trappan.Bean.Tour;
 import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
-import kr.co.trappan.Item.SearchLists_item;
 import kr.co.trappan.R;
 
-public class DetailInformationActivity extends AppCompatActivity{
+public class DetailInformationActivity extends FragmentActivity implements OnMapReadyCallback{
 
+    private ScrollView mScrollView;
+    static final LatLng Seoul=new LatLng(37.56,126.97);
+    GoogleMap mMap;
 
     private ImageView main_image;
     private TextView title;
@@ -112,6 +96,38 @@ public class DetailInformationActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_information);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        final ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
+        ImageView transparent = (ImageView)findViewById(R.id.imagetrans);
+
+        transparent.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        scroll.requestDisallowInterceptTouchEvent(true);
+                        // Disable touch on transparent view
+                        return false;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        scroll.requestDisallowInterceptTouchEvent(false);
+                        return true;
+
+                    case MotionEvent.ACTION_MOVE:
+                        scroll.requestDisallowInterceptTouchEvent(true);
+                        return false;
+
+                    default:
+                        return true;
+                }
+            }
+        });
 
 
 
@@ -505,6 +521,48 @@ public class DetailInformationActivity extends AppCompatActivity{
         ));
 
 
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        mMap = map;
+        mMap.getUiSettings().setAllGesturesEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(false);
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    private float x, y;
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        final int action = event.getAction();
+        int pointerIndex;
+        switch(action & MotionEvent.ACTION_MASK) {
+            case MotionEvent.ACTION_DOWN:
+                // 처음 터치가 눌러졌을 때
+                break;
+            case MotionEvent.ACTION_MOVE:
+                // 터치가 눌린 상태에서 움직일 때
+                break;
+            case MotionEvent.ACTION_UP:
+                // 터치가 떼어졌을 때
+                break;
+            case MotionEvent.ACTION_POINTER_DOWN:
+                // 터치가 두 개 이상일 때 눌러졌을 때
+                pointerIndex = (action & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+                x = event.getX(pointerIndex);
+                y = event.getY(pointerIndex);
+                break;
+            case MotionEvent.ACTION_POINTER_UP:
+                // 터치가 두 개 이상일 때 떼어졌을 때
+                pointerIndex = (action & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+                break;
+            default :
+                break;
+        }
+        return true;
     }
 }
 

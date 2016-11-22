@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/scrollview_detail"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -288,15 +289,34 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
+                    android:id="@+id/parentmap"
+
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
 
-                    <fragment android:id="@+id/map"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imagetrans"
+                        android:layout_alignTop="@+id/mapfragment"
+                        android:layout_alignBottom="@+id/mapfragment"
+                        android:layout_alignEnd="@+id/mapfragment"
+                        android:layout_alignRight="@+id/mapfragment"
+                        android:layout_alignLeft="@+id/mapfragment"
+                        android:layout_alignStart="@+id/mapfragment"
+                        android:src="@android:color/transparent"/>
+
+                    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:map="http://schemas.android.com/apk/res-auto"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:id="@+id/map"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
-                        xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        tools:context="pi.com.ndtc.MapsActivity" />
+
 
                 </LinearLayout>
 

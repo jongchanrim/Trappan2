@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -34,6 +35,9 @@ public class My_CommentActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    ImageView review_backbutton;
+
     ArrayList<Comment> items = new ArrayList<>();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +89,7 @@ public class My_CommentActivity extends AppCompatActivity {
 
 
         //뒤로가기 버튼
-        ImageButton review_backbutton = (ImageButton) findViewById(R.id.my_comment_backbutton);
+        review_backbutton = (ImageView) findViewById(R.id.my_comment_backbutton);
         review_backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
