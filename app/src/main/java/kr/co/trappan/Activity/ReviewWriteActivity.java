@@ -41,7 +41,7 @@ import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.R;
 
-import static android.R.attr.bitmap;
+//import static android.R.attr.bitmap;
 
 public class ReviewWriteActivity extends AppCompatActivity {
 
