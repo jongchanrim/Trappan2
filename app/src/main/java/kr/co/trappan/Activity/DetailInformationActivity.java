@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.design.widget.FloatingActionButton;
@@ -44,6 +45,7 @@ import kr.co.trappan.Adapter.ReviewListAdapter;
 import kr.co.trappan.Bean.Review;
 import kr.co.trappan.Bean.Tour;
 import kr.co.trappan.Connector.HttpClient;
+import kr.co.trappan.Item.CustomProgressDialog;
 import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
@@ -83,6 +85,8 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
 
     String contentid;
     AQuery aq;
+    private CustomProgressDialog pd;
+
 
     Double myrate = 0.0;
     int myrateflag;
@@ -100,9 +104,12 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        pd = new CustomProgressDialog(DetailInformationActivity.this);
+        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
         final ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
         ImageView transparent = (ImageView)findViewById(R.id.imagetrans);
-
+        pd.show();
         transparent.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -292,6 +299,7 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
                             }
                         }
                     });
+                    pd.dismiss();
 
                 } catch (JSONException e) {
 
@@ -306,6 +314,7 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
                 super.onFailure(statusCode, headers, throwable, response);
+                pd.dismiss();
 
             }
         });

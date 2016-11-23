@@ -2,6 +2,7 @@ package kr.co.trappan.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ import kr.co.trappan.Bean.Comment;
 import kr.co.trappan.Bean.Member;
 import kr.co.trappan.Bean.Tour;
 import kr.co.trappan.Connector.HttpClient;
+import kr.co.trappan.Item.CustomProgressDialog;
 import kr.co.trappan.R;
 
 /**
@@ -36,10 +38,10 @@ import kr.co.trappan.R;
  */
 
 public class CommentActivity extends AppCompatActivity {
-
+    private CustomProgressDialog pd;
     Context context;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter Adapter;
+    private CommentListAdapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
     ArrayList<Comment> items = new ArrayList<>();
     EditText comment_write_content;
@@ -51,6 +53,10 @@ public class CommentActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         review_id = intent.getExtras().getInt("review_id");
+
+        pd = new CustomProgressDialog(CommentActivity.this);
+        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        pd.show();
 
 
         context = getApplicationContext();
@@ -82,7 +88,10 @@ public class CommentActivity extends AppCompatActivity {
                         comment.setId(obj.getString("id"));
                         comment.setC_date(obj.getString("c_date"));
                         items.add(comment);
+
                     }
+                    Adapter.setItems(items);
+                    pd.dismiss();
                     Adapter.notifyDataSetChanged();
                     //pd.dismiss();
                 } catch (JSONException e) {
@@ -94,6 +103,7 @@ public class CommentActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray response) {
                 super.onFailure(statusCode, headers, throwable, response);
+                pd.dismiss();
 
             }
         });
