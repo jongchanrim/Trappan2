@@ -36,6 +36,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         this.item_layout=item_layout;
     }
 
+    public void setItems(List<Comment> items) {
+        this.items = items;
+    }
+
     @Override
     public CommentListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comment,parent,false);

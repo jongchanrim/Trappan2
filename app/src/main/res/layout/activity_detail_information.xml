@@ -12,9 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/activity_detail_information"
+        android:splitMotionEvents="false"
         >
-
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/detail_information_list"
@@ -290,36 +289,11 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/parentmap"
-
+                <fragment
+                    android:id="@+id/map"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/imagetrans"
-                        android:layout_alignTop="@+id/mapfragment"
-                        android:layout_alignBottom="@+id/mapfragment"
-                        android:layout_alignEnd="@+id/mapfragment"
-                        android:layout_alignRight="@+id/mapfragment"
-                        android:layout_alignLeft="@+id/mapfragment"
-                        android:layout_alignStart="@+id/mapfragment"
-                        android:src="@android:color/transparent"/>
-
-                    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:map="http://schemas.android.com/apk/res-auto"
-                        xmlns:tools="http://schemas.android.com/tools"
-                        android:id="@+id/map"
-                        android:name="com.google.android.gms.maps.SupportMapFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        tools:context="pi.com.ndtc.MapsActivity" />
-
-
-                </LinearLayout>
-
+                    android:layout_height="200dp"
+                    class="com.google.android.gms.maps.MapFragment" />
 
 
             </LinearLayout>

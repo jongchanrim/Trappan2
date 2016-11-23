@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -19,15 +20,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.androidquery.AQuery;
+import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.pkmmte.view.CircularImageView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Adapter.ListViewAdapter;
+import kr.co.trappan.Adapter.ReviewListAdapter;
+import kr.co.trappan.Bean.Review;
+import kr.co.trappan.Connector.HttpClient;
+import kr.co.trappan.Item.CustomProgressDialog;
 import kr.co.trappan.Item.List_item;
 import kr.co.trappan.R;
 
@@ -37,186 +51,189 @@ public class MemberPageActivity extends AppCompatActivity {
 
     Context context;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter Adapter;
+    private ReviewListAdapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView resizeList;
+    ArrayList<Review> items = new ArrayList<>();
+    private ImageView back_img;
+    private CircularImageView pro_img;
 
-    private ImageView mybackimage;
-    private CircularImageView circularImageView;
+    private ImageButton f5_btn_backimg;
+    private ImageButton f5_btn_proimg;
 
-    private ImageButton mybackedit;
-    private ImageButton myprofileedit;
+    private TextView user_name;
+    private TextView user_profile;
+    private TextView follower;
+    private TextView following;
+    private TextView tlike;
+    private TextView stamp;
+    private TextView rlike;
+    private TextView comment;
 
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
-
-    private Uri mlmageCaptureUri;
+    private Uri mlmageCaptureUri_background;  //Uri 배경이미지 변수
+    private Uri mlmageCaptureUri_profile;   //Uri 프로필이미지 변수
     private ImageView iv_UserPhoto;
     private int id_view;
     private String absoultePath;
+    private CustomProgressDialog pd;
+    private int back_or_profile = 0;  //배경이미지와 프로필 이미지 선택 변수 (1로바뀌면 배경, 2로바뀌면 프로필)
+    AQuery aq;
 
-    private int back_or_profile = 0;  //배경이미지와 프로필 이미지 선택 변수
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent  = getIntent();
+        user_id  =intent.getExtras().getString("user_id");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_page);
-
-        resizeList = (RecyclerView) findViewById(R.id.mypage_scroll);
-
-        mybackimage = (ImageView) findViewById(R.id.mybackimage);
-        circularImageView = (CircularImageView) findViewById(R.id.CircularImageView);
-
-        CircularImageView circularImageView = (CircularImageView)findViewById(R.id.CircularImageView);
+        aq = new AQuery(this);
+        CircularImageView circularImageView = (CircularImageView)this.findViewById(R.id.f5_proimg);
         circularImageView.setBorderWidth(10);
         circularImageView.setSelectorStrokeWidth(10);
         circularImageView.addShadow();
+        back_img = (ImageView) this.findViewById(R.id.f5_backimg);
+        pro_img = (CircularImageView) this.findViewById(R.id.f5_proimg);
+        f5_btn_backimg = (ImageButton)this.findViewById(R.id.f5_btn_backimg);
+        f5_btn_proimg = (ImageButton)this.findViewById(R.id.f5_btn_proimg);
 
+        pd = new CustomProgressDialog(MemberPageActivity.this);
+        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        pd.show();
 
-        //context = getContext();
-        recyclerView = (RecyclerView) findViewById(R.id.mypage_scroll);
+        user_name=(TextView)this.findViewById(R.id.f5_username) ;
+        user_profile=(TextView)this.findViewById(R.id.f5_profile);
+        follower=(TextView)this.findViewById(R.id.f5_follower);
+        following=(TextView)this.findViewById(R.id.f5_following);
+        tlike=(TextView)this.findViewById(R.id.f5_tlike);
+        stamp=(TextView)this.findViewById(R.id.f5_stamp);
+        rlike=(TextView)this.findViewById(R.id.f5_rlike);
+        comment=(TextView)this.findViewById(R.id.f5_comment);
+
+        recyclerView = (RecyclerView) this.findViewById(R.id.mypage_scroll);
+        RecyclerViewHeader header = (RecyclerViewHeader) this.findViewById(R.id.header5);
         recyclerView.setHasFixedSize(true);
-
-        ArrayList<List_item> items = new ArrayList<>();
-
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        Adapter = new ListViewAdapter(this ,items ,R.layout.tabfragment5);
+        Adapter = new ReviewListAdapter(this,items);
         recyclerView.setAdapter(Adapter);
+        header.attachTo(recyclerView);
 
-        resizeCommentList(items.size());
-    }
+        HttpClient.get("detailmypage", null, new JsonHttpResponseHandler() { // Profile
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
 
-    private void resizeCommentList(int item_size){
-        ViewGroup.LayoutParams params = resizeList.getLayoutParams();
-        params.height = 350 * item_size;
-        resizeList.setLayoutParams(params);
-    }
+                    user_name.setText(response.getString("name"));
+                    user_profile.setText(response.getString("intro"));
+                    follower.setText(response.getString("count_following"));
+                    following.setText(response.getString("count_follower"));
+                    tlike.setText(response.getString("count_tlike"));
+                    stamp.setText(response.getString("count_stamp"));
+                    rlike.setText(response.getString("count_rlike"));
+                    comment.setText(response.getString("count_comment"));
 
-    public void doTakePhotoAction(){
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    try {
+                        aq.id(pro_img).image(response.getString("pro_img"));
+                        aq.id(back_img).image(response.getString("back_img"));
+                    }catch (Exception e){
 
-        //임시로 사용할 파일의 경로를 생성
-        String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
-        mlmageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, mlmageCaptureUri);
-        startActivityForResult(intent, PICK_FROM_CAMERA);
-    }
+                    }
 
-    //앨범에서 이미지 가져오기
-    public void doTakeAlbumAction(){
-        //앨범 호출
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-        startActivityForResult(intent, PICK_FROM_ALBUM);
-    }
+                }catch (Exception e){
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode != RESULT_OK)
-            return;
-
-        switch(requestCode){
-            case PICK_FROM_ALBUM:
-            {
-                //이후의 처리가 카메라와 같으므로 일단 break없이 진행
-                //실제코드에서는 좀더 합리적인 방법 선택
-                mlmageCaptureUri = data.getData();
-                Log.d("SmartWeel", mlmageCaptureUri.getPath().toString());
-            }
-            case PICK_FROM_CAMERA:
-            {
-                //이미지를 가져온 이후의 리사이즈할 이미지 크기 결정
-                //이후에 이미지 크롭 어플리케이션 호출
-                Intent intent = new Intent("com.android.camera.action.CROP");
-                intent.setDataAndType(mlmageCaptureUri, "image/");
-
-                //크롭할 이미지를 200*200으로 저장
-                intent.putExtra("outputX",200);
-                intent.putExtra("outputY",200);
-                intent.putExtra("aspectX",1);
-                intent.putExtra("aspectY",1);
-                intent.putExtra("scale",true);
-                intent.putExtra("return-data",false);
-                startActivityForResult(intent, CROP_FROM_IMAGE);
-
-                if(back_or_profile == 1) {
-                    mybackimage.setImageURI(mlmageCaptureUri);
-                    back_or_profile = 0;
                 }
-                else if(back_or_profile == 2){
-                    circularImageView.setImageURI(mlmageCaptureUri);
-                    back_or_profile = 0;
-                }
+                pd.dismiss();
 
-                break;
-            }
-            case CROP_FROM_IMAGE:
-            {
-                //크롭이 된 이후의 이미지 넘겨받기
-                //이미지 뷰에 이미지를 보여준다거나 부가적인 작업 이후에
-                //임시파일 삭제
-                if(resultCode != RESULT_OK){
-                    return;
-                }
-                final Bundle extras = data.getExtras();
-
-                //CROP된 이미지를 저장하기 위한 FILE경로
-                String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+
-                        "/SmartWheel/"+ System.currentTimeMillis()+".jpg";
-                if(extras != null){
-                    Bitmap photo = extras.getParcelable("data"); //CROP된 BITMAP
-                    iv_UserPhoto.setImageBitmap(photo); //레이아웃의 이미지칸에 CROP된 BITMAP을 보여줌
-
-                    storeCropImage(photo, filePath); //CROP된 이미지를 외부저장소, 앨범에 저장
-
-                    absoultePath = filePath;
-                    break;
-                }
-                //임시파일삭제
-                File f = new File(mlmageCaptureUri.getPath());
-                if(f.exists()){
-                    f.delete();
-                }
             }
 
-        }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
+                super.onFailure(statusCode, headers, throwable, response);
+                pd.dismiss();
+
+            }
+        });
+
+        HttpClient.get("reviewlist", null, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject obj = response.getJSONObject(i);
+                        Review item = new Review();
+                        item.setId(obj.getString("id"));
+                        item.setImg_1(obj.getString("img_1"));
+                        item.setReview_title(obj.getString("review_title"));
+                        item.setReview_content(obj.getString("review_content"));
+                        items.add(item);
+                    }
+
+                    Adapter.notifyDataSetChanged();
+                    //pd.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
+                super.onFailure(statusCode, headers, throwable, response);
+
+            }
+        });
+
+
+
+
+        follower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), FollowerActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
+        following.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (MemberPageActivity.this, FollowingActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (MemberPageActivity.this, My_CommentActivity.class);
+                startActivity(intent);
+            }
+        });
+        rlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (MemberPageActivity.this, LikeActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        /*
+        스템프 액티비티도 넣어야함
+        */
+
+
+
     }
 
-    private void storeCropImage(Bitmap bitmap, String filePath){
-        //SmartWheel 폴더를 생성하여 이미지를 저장하는 방식이다.
-        String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath()+ "/SmartWeel";
-        File directory_SmartWheel = new File(dirPath);
 
-        if(!directory_SmartWheel.exists())//SmartWheel 디렉토리에 폴더가없다면
-            directory_SmartWheel.mkdir();
-
-        File copyFile = new File(filePath);
-        BufferedOutputStream out = null;
-
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        // Calculate image's size by maintain the image's aspect ratio
-
-        try{
-            copyFile.createNewFile();
-            out = new BufferedOutputStream(new FileOutputStream(copyFile));
-            //bitmap = Bitmap.createScaledBitmap(bitmap, (width=5000), (height=height*1000/width), true);
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
-
-            //sendBroadcast를 통해 Crop된 사진을 앨범에 보이도록 갱신한다.
-            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(copyFile)));
-
-            out.flush();
-            out.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 }

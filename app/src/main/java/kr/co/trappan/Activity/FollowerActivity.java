@@ -1,10 +1,13 @@
 package kr.co.trappan.Activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -24,6 +27,8 @@ import kr.co.trappan.Adapter.FollowingListAdapter;
 import kr.co.trappan.Bean.Member;
 import kr.co.trappan.Bean.Review;
 import kr.co.trappan.Connector.HttpClient;
+import kr.co.trappan.Item.CustomProgressDialog;
+import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
 /**
@@ -34,14 +39,17 @@ public class FollowerActivity extends AppCompatActivity {
 
     Context context;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter Adapter;
+    private FollowerListAdapter Adapter;
     private RecyclerView.LayoutManager layoutManager;
     ArrayList<Member> items = new ArrayList<>();
+    private CustomProgressDialog pd;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_follower_page);
-
-
+        pd = new CustomProgressDialog(FollowerActivity.this);
+        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        pd.show();
 
         context = getApplicationContext();
         recyclerView = (RecyclerView) findViewById(R.id.follower_list);
@@ -67,8 +75,10 @@ public class FollowerActivity extends AppCompatActivity {
                         item.setIsfollow(obj.getString("isfollow"));
                         items.add(item);
                     }
-
+                    Adapter.setItems(items);
                     Adapter.notifyDataSetChanged();
+                    pd.dismiss();
+
                     //pd.dismiss();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -78,9 +88,30 @@ public class FollowerActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
                     super.onFailure(statusCode, headers, throwable, response);
+                    pd.dismiss();
 
                 }
             });
+
+        recyclerView.addOnItemTouchListener(new
+
+                RecyclerViewOnItemClickListener(FollowerActivity.this, recyclerView,
+                new RecyclerViewOnItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+
+                        Intent intent = new Intent(FollowerActivity.this, MemberPageActivity.class);
+                        intent.putExtra("user_id", items.get(position).getId());
+                        startActivity(intent); // 다음 화면으로 넘어간다.
+                    }
+
+                    @Override
+                    public void onItemLongClick(View v, int position) {
+
+                    }
+                }
+
+        ));
 
 
         //뒤로가기 버튼

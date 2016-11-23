@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
+import kr.co.trappan.Bean.Follow;
 import kr.co.trappan.Bean.Member;
 import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.R;
@@ -99,6 +100,9 @@ public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapte
             }
         });
 
+    }
+    public void setItems(List<Member> items) {
+        this.items = items;
     }
 
     @Override

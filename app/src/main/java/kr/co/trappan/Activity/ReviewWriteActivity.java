@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -39,9 +40,8 @@ import java.io.InputStream;
 
 import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Connector.HttpClient;
+import kr.co.trappan.Item.CustomProgressDialog;
 import kr.co.trappan.R;
-
-//import static android.R.attr.bitmap;
 
 public class ReviewWriteActivity extends AppCompatActivity {
 
@@ -81,6 +81,8 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private ViewGroup review_layoutbutton;
     private Button review_completebutton;
 
+    private CustomProgressDialog pd;
+
     int islike;
 
     Bitmap[] bitmaps;
@@ -90,10 +92,16 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private int imagenumber = 0; //업로드이미지 위치에 순서대로 보여주기 위한 변수
     private String contentid;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         bitmaps = new Bitmap[6];
 
+
+
+        pd = new CustomProgressDialog(ReviewWriteActivity.this);
+        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         Intent intent = getIntent();
         contentid = intent.getExtras().getString("contentid");
         super.onCreate(savedInstanceState);
@@ -196,6 +204,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
         review_completebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pd.show();
                 params.put("imagenumber", imagenumber);
                 params.put("review_title", review_title_edittext.getText());
                 params.put("review_content", review_content_edittext.getText());
@@ -205,6 +214,14 @@ public class ReviewWriteActivity extends AppCompatActivity {
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                 super.onSuccess(statusCode, headers, response);
                                 finish();
+                                pd.dismiss();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                super.onFailure(statusCode, headers, throwable, errorResponse);
+                                pd.dismiss();
+                                Toast.makeText(ReviewWriteActivity.this, "실패", Toast.LENGTH_LONG).show();
                             }
                         }
 

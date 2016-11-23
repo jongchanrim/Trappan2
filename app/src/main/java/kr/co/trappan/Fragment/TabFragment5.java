@@ -198,7 +198,6 @@ public class TabFragment5 extends Fragment{
 
 
             }
-
         @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
                 super.onFailure(statusCode, headers, throwable, response);
