@@ -1,6 +1,7 @@
 package kr.co.trappan.Activity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import kr.co.trappan.Bean.Review;
 import kr.co.trappan.Bean.ReviewLike;
 import kr.co.trappan.Bean.Tour;
 import kr.co.trappan.Connector.HttpClient;
+import kr.co.trappan.Item.CustomProgressDialog;
 import kr.co.trappan.R;
 
 public class ReviewPageActivity extends AppCompatActivity {
@@ -60,6 +62,8 @@ public class ReviewPageActivity extends AppCompatActivity {
     Follow follow;
     AQuery aq;
     String a=null;
+    private CustomProgressDialog pd;
+
     ArrayList<String> pager_image_list=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +72,9 @@ public class ReviewPageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         reviewid = intent.getExtras().getInt("review_id");
         id = intent.getExtras().getString("id");
-
-
+        pd = new CustomProgressDialog(ReviewPageActivity.this);
+        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        pd.show();
         aq=new AQuery(this);
 
         viewPager=(ViewPager)findViewById(R.id.review_viewpager);
@@ -162,6 +167,7 @@ public class ReviewPageActivity extends AppCompatActivity {
                     }else{
                         btn_like.setBackgroundResource(R.drawable.like_s);
                     }
+                    pd.dismiss();
 
 
 
@@ -180,7 +186,7 @@ public class ReviewPageActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
                 super.onFailure(statusCode, headers, throwable, response);
-
+                pd.dismiss();
             }
         });
 

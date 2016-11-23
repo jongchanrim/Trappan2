@@ -60,6 +60,9 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
 
     }
 
+    public void setItems(List<Member> items) {
+        this.items = items;
+    }
     @Override
     public int getItemCount() {
         return this.items.size();

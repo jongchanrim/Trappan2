@@ -47,6 +47,7 @@ dependencies {
     compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.google.android.gms:play-services:9.8.0'
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
 }
 
 android.packagingOptions {
