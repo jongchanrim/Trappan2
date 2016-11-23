@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
-            android:layout_marginTop = "15dip"
+            android:layout_marginTop = "3dip"
             android:text="date"
             android:textColor="#666666"
             android:textSize="10dip" />
@@ -40,6 +40,7 @@
             android:layout_width="361dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dip"
+            android:layout_marginTop ="10dip"
             android:text="comment"
             android:textColor="#666666"
             android:textSize="10dip"

@@ -111,6 +111,7 @@ public class CommentActivity extends AppCompatActivity {
 
         //뒤로가기 버튼
         ImageView review_backbutton = (ImageView) findViewById(R.id.comment_backbutton);
+
         review_backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

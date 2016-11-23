@@ -105,5 +105,23 @@ public class Review {
 		this.c_date = c_date;
 	}
 
+	public Review(String a, String s, String a1, String s1, String a2, String s2, String a3, String s3, String a4, String s4, String a5, String s5, String a6) {}
+	public Review (int review_id, String id, String contentid, String review_title, String review_content, String img_1, String img_2, String img_3, String img_4, String img_5, String img_6, String c_date ){
+
+		this.review_id = review_id;
+		this.id =id;
+		this.contentid = contentid;
+		this.review_title = review_title;
+		this.review_content = review_content;
+		this.img_1 = img_1;
+		this.img_2 = img_2;
+		this.img_3 = img_3;
+		this.img_4 = img_4;
+		this.img_5 = img_5;
+		this.img_6 = img_6;
+		this.c_date = c_date;
+
+	}
+
 
 }
