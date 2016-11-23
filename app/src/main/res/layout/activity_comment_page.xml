@@ -28,6 +28,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_below = "@+id/btn_back"
         android:id="@+id/comment_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,6 +55,7 @@
             android:layout_height="38dip"
             android:layout_gravity="right"
             android:id = "@+id/comment_send_button"
+            android:background="@drawable/send_button"
             android:layout_margin = "3dip"
             />
 
