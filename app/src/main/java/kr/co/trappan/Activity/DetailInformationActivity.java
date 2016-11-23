@@ -85,7 +85,6 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
 
     String contentid;
     AQuery aq;
-    private CustomProgressDialog pd;
 
 
     Double myrate = 0.0;
@@ -104,12 +103,10 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        pd = new CustomProgressDialog(DetailInformationActivity.this);
-        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         final ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
         ImageView transparent = (ImageView)findViewById(R.id.imagetrans);
-        pd.show();
+
         transparent.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -299,7 +296,7 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
                             }
                         }
                     });
-                    pd.dismiss();
+
 
                 } catch (JSONException e) {
 
@@ -314,7 +311,6 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
                 super.onFailure(statusCode, headers, throwable, response);
-                pd.dismiss();
 
             }
         });
