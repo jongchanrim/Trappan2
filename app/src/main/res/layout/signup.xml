@@ -136,6 +136,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/TextVIew_PwdProblem"
                 android:textStyle="bold"
+                android:textColor="#FF5D10AC"
                 android:gravity="center" />
         </LinearLayout>
 
