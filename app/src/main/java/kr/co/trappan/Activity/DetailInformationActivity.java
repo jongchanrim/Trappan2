@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,17 +20,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -49,11 +55,11 @@ import kr.co.trappan.Item.CustomProgressDialog;
 import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
-public class DetailInformationActivity extends FragmentActivity implements OnMapReadyCallback{
+public class DetailInformationActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private ScrollView mScrollView;
-    static final LatLng Seoul=new LatLng(37.56,126.97);
-    GoogleMap mMap;
+
+    private GoogleMap googleMap;
+
 
     private ImageView main_image;
     private TextView title;
@@ -85,6 +91,7 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
 
     String contentid;
     AQuery aq;
+    private CustomProgressDialog pd;
 
 
     Double myrate = 0.0;
@@ -100,39 +107,15 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_information);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
+        pd = new CustomProgressDialog(DetailInformationActivity.this);
+        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         final ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
-        ImageView transparent = (ImageView)findViewById(R.id.imagetrans);
 
-        transparent.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                        // Disallow ScrollView to intercept touch events.
-                        scroll.requestDisallowInterceptTouchEvent(true);
-                        // Disable touch on transparent view
-                        return false;
-
-                    case MotionEvent.ACTION_UP:
-                        // Allow ScrollView to intercept touch events.
-                        scroll.requestDisallowInterceptTouchEvent(false);
-                        return true;
-
-                    case MotionEvent.ACTION_MOVE:
-                        scroll.requestDisallowInterceptTouchEvent(true);
-                        return false;
-
-                    default:
-                        return true;
-                }
-            }
-        });
-
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
 
         Intent intent = getIntent();
@@ -274,8 +257,25 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
                             break;
                         }
                     }
+                    //////////////////////////////////map//////////////////////////////////////////////////////
 
+                    CameraUpdate update = CameraUpdateFactory.newLatLng(new LatLng(item.getMapy(),item.getMapx()));
+                    googleMap.moveCamera(update);
+                    CameraUpdate zoom = CameraUpdateFactory.zoomTo(14);
+                    googleMap.animateCamera(zoom);
 
+                    googleMap.getUiSettings().setZoomControlsEnabled(false);
+                    googleMap.getUiSettings().setZoomGesturesEnabled(false);
+                    googleMap.getUiSettings().setScrollGesturesEnabled(false);
+                    googleMap.getUiSettings().setAllGesturesEnabled(false);
+
+                    MarkerOptions markerOptions = new MarkerOptions()
+                            // 마커 위치
+                            .position(new LatLng(item.getMapy(),item.getMapx()))
+                            .title(item.getTitle());
+
+                    googleMap.addMarker(markerOptions).showInfoWindow();
+                    //////////////////////////////////map//////////////////////////////////////////////////////
 
                     //설명 세팅
                     if (item.getOverview().length() < 100) {
@@ -296,7 +296,7 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
                             }
                         }
                     });
-
+                    pd.dismiss();
 
                 } catch (JSONException e) {
 
@@ -311,6 +311,7 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
                 super.onFailure(statusCode, headers, throwable, response);
+                pd.dismiss();
 
             }
         });
@@ -324,6 +325,9 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.setNestedScrollingEnabled(false);
+
 
         Adapter = new ReviewListAdapter(this, items);
         recyclerView.setAdapter(Adapter);
@@ -524,52 +528,12 @@ public class DetailInformationActivity extends FragmentActivity implements OnMap
                 }
 
         ));
-
-
     }
 
     @Override
-    public void onMapReady(GoogleMap map) {
-        mMap = map;
-        mMap.getUiSettings().setAllGesturesEnabled(false);
-        mMap.getUiSettings().setZoomControlsEnabled(false);
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-    }
+    public void onMapReady(final GoogleMap map) {
+        googleMap = map;
 
-    private float x, y;
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        final int action = event.getAction();
-        int pointerIndex;
-        switch(action & MotionEvent.ACTION_MASK) {
-            case MotionEvent.ACTION_DOWN:
-                // 처음 터치가 눌러졌을 때
-                break;
-            case MotionEvent.ACTION_MOVE:
-                // 터치가 눌린 상태에서 움직일 때
-                break;
-            case MotionEvent.ACTION_UP:
-                // 터치가 떼어졌을 때
-                break;
-            case MotionEvent.ACTION_POINTER_DOWN:
-                // 터치가 두 개 이상일 때 눌러졌을 때
-                pointerIndex = (action & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-                x = event.getX(pointerIndex);
-                y = event.getY(pointerIndex);
-                break;
-            case MotionEvent.ACTION_POINTER_UP:
-                // 터치가 두 개 이상일 때 떼어졌을 때
-                pointerIndex = (action & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-                break;
-            default :
-                break;
-        }
-        return true;
     }
 }
-
-
 
