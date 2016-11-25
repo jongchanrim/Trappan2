@@ -38,12 +38,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dip"
-        android:layout_marginBottom="2dip"
+
         android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
         android:background="#999999">
 
         <EditText
-            android:layout_width="300dip"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="35dip"
             android:layout_marginLeft= "2dip"
             android:background="#FFFFFF"
@@ -52,12 +54,12 @@
             android:id = "@+id/comment_write_comment"/>
 
         <Button
-            android:layout_width="75dip"
-            android:layout_height="35dip"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id = "@+id/comment_send_button"
             android:background="@drawable/send_button"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft = "3dip"
             />
 
     </LinearLayout>

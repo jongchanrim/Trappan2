@@ -73,7 +73,7 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
                             try {
-                                if (responseBody.getString("success").equals("success")) {
+                                if (responseBody.getString("signup").equals("success")) {
                                     Intent intent;
                                     intent = new Intent(SignupActivity.this, LoginActivity.class);
                                     startActivity(intent);

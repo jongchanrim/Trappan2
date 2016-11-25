@@ -56,10 +56,8 @@ import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
 public class DetailInformationActivity extends AppCompatActivity implements OnMapReadyCallback {
-
-
+    
     private GoogleMap googleMap;
-
 
     private ImageView main_image;
     private TextView title;
@@ -91,7 +89,6 @@ public class DetailInformationActivity extends AppCompatActivity implements OnMa
 
     String contentid;
     AQuery aq;
-    private CustomProgressDialog pd;
 
 
     Double myrate = 0.0;
@@ -108,8 +105,6 @@ public class DetailInformationActivity extends AppCompatActivity implements OnMa
         setContentView(R.layout.activity_detail_information);
 
 
-        pd = new CustomProgressDialog(DetailInformationActivity.this);
-        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         final ScrollView scroll = (ScrollView) findViewById(R.id.scroll);
 
@@ -296,7 +291,6 @@ public class DetailInformationActivity extends AppCompatActivity implements OnMa
                             }
                         }
                     });
-                    pd.dismiss();
 
                 } catch (JSONException e) {
 
@@ -311,7 +305,6 @@ public class DetailInformationActivity extends AppCompatActivity implements OnMa
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
                 super.onFailure(statusCode, headers, throwable, response);
-                pd.dismiss();
 
             }
         });
