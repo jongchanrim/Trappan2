@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <!--FrameLayout 으로 해야함-->
+
         <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
             android:id="@+id/header"
             android:layout_width="match_parent"
@@ -289,11 +290,16 @@
 
                 </LinearLayout>
 
-                <fragment
-                    android:id="@+id/map"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    class="com.google.android.gms.maps.MapFragment" />
+                    android:layout_height="200dp">
+                    <fragment
+                        android:id="@+id/map"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        class="com.google.android.gms.maps.MapFragment" />
+                </LinearLayout>
+
 
 
             </LinearLayout>
@@ -315,6 +321,5 @@
             app:elevation="24dp" />
 
     </FrameLayout>
-
 
 </ScrollView>

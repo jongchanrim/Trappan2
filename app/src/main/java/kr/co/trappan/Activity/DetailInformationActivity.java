@@ -55,9 +55,11 @@ import kr.co.trappan.Item.CustomProgressDialog;
 import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
-public class DetailInformationActivity extends AppCompatActivity implements OnMapReadyCallback {
-    
+public class DetailInformationActivity extends AppCompatActivity implements  OnMapReadyCallback{
+
+
     private GoogleMap googleMap;
+
 
     private ImageView main_image;
     private TextView title;
