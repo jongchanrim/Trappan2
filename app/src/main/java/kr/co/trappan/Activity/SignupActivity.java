@@ -16,6 +16,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -66,24 +67,30 @@ public class SignupActivity extends AppCompatActivity {
                     RequestParams params = new RequestParams();
                     params.put("id", id.getText().toString().trim());
                     params.put("email", email.getText().toString().trim());
-                    params.put("password", passwd.getText().toString().trim());
+                    params.put("password", enpw);
                     params.put("name", name.getText().toString().trim());
-                    HttpClient.post("signup", params, new AsyncHttpResponseHandler() {
+                    HttpClient.post("signup", params, new JsonHttpResponseHandler() {
                         @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            if (responseBody.toString().equals("success")) {
-                                Intent intent;
-                                intent = new Intent(SignupActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                Toast.makeText(SignupActivity.this,"회원가입이 실패하였습니다",Toast.LENGTH_LONG).show();
-                                //아이디 중복 다이얼로그
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject responseBody) {
+                            try {
+                                if (responseBody.getString("signup").equals("success")) {
+                                    Intent intent;
+                                    intent = new Intent(SignupActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(SignupActivity.this,"회원가입이 실패하였습니다",Toast.LENGTH_LONG).show();
+                                    //아이디 중복 다이얼로그
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
                         }
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                            super.onFailure(statusCode, headers, throwable, errorResponse);
+                            Toast.makeText(SignupActivity.this,"회원가입이 실패하였습니다",Toast.LENGTH_LONG).show();
                         }
                     });
                 }
