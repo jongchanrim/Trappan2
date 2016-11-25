@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -77,26 +78,29 @@ public class StartActivity extends AppCompatActivity {
 
                             RequestParams params = new RequestParams();
                             params.put("id", id);
-                            params.put("pw", pw);
+                            params.put("password", pw);
 
-                            HttpClient.post("test", params, new JsonHttpResponseHandler() {
+                            HttpClient.post("login", params, new JsonHttpResponseHandler() {
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                     super.onSuccess(statusCode, headers, response);
 
-//                        try {
-//                            if(response.get("login").equals("success")) {
+                        try {
+                            if(response.get("login").equals("success")) {
 
                                     Intent intent = new Intent(StartActivity.this, MainActivity.class); // 다음 넘어갈 클래스 지정
                                     StartActivity.this.finish();
                                     startActivity(intent); // 다음 화면으로 넘어간다.
-//                            }
-//                            else{
-//                                //로그인 실패 다이얼로그
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
+                            }
+                            else{
+                                //로그인 실패 다이얼로그
+                                Intent intent = new Intent(StartActivity.this, LoginActivity.class); // 다음 넘어갈 클래스 지정
+                                StartActivity.this.finish();
+                                startActivity(intent); // 다음 화면으로 넘어간다.
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                                 }
 
                                 @Override
