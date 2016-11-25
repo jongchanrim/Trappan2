@@ -54,10 +54,6 @@ public class CommentActivity extends AppCompatActivity {
         Intent intent = getIntent();
         review_id = intent.getExtras().getInt("review_id");
 
-        pd = new CustomProgressDialog(CommentActivity.this);
-        pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        pd.show();
-
 
         context = getApplicationContext();
         recyclerView = (RecyclerView) findViewById(R.id.comment_list);
@@ -91,7 +87,6 @@ public class CommentActivity extends AppCompatActivity {
 
                     }
                     Adapter.setItems(items);
-                    pd.dismiss();
                     Adapter.notifyDataSetChanged();
                     //pd.dismiss();
                 } catch (JSONException e) {
