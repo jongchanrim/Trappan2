@@ -209,18 +209,13 @@ public class TabFragment5 extends Fragment{
         f5_btn_backimg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakePhotoAction();
-                    }
-                };
 
                 DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         back_or_profile = 1;
-                        doTakeAlbumAction();
+                        showFileChooser();
+                        //doTakeAlbumAction();
                     }
                 };
 
@@ -233,7 +228,6 @@ public class TabFragment5 extends Fragment{
 
                 new AlertDialog.Builder(getActivity())
                         .setTitle("업로드 이미지 선택")
-                        .setPositiveButton("카메라",cameraListener)
                         .setNeutralButton("갤러리",albumListener)
                         .setNegativeButton("취소",cancelListener)
                         .show();
@@ -243,20 +237,14 @@ public class TabFragment5 extends Fragment{
         f5_btn_proimg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener(){
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakePhotoAction();
-                    }
-                };
 
                 DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener(){
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         back_or_profile = 2;
-                        doTakeAlbumAction();
+                        showFileChooser();
+                        //doTakeAlbumAction();
                     }
                 };
 
@@ -270,7 +258,6 @@ public class TabFragment5 extends Fragment{
 
                 new AlertDialog.Builder(getActivity())
                         .setTitle("업로드 이미지 선택")
-                        .setPositiveButton("카메라",cameraListener)
                         .setNeutralButton("갤러리",albumListener)
                         .setNegativeButton("취소",cancelListener)
                         .show();
@@ -335,6 +322,13 @@ public class TabFragment5 extends Fragment{
         startActivityForResult(intent, PICK_FROM_CAMERA);
     }
 
+    private void showFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+    }
+
     //앨범에서 이미지 가져오기
     public void doTakeAlbumAction(){
         //앨범 호출
@@ -345,6 +339,70 @@ public class TabFragment5 extends Fragment{
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri filePath = data.getData();
+            try {
+                //Getting the Bitmap from Gallery
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
+                //Setting the Bitmap to ImageView
+                if (back_or_profile == 1) {
+                    mlmageCaptureUri_background = data.getData();
+                    String image = getStringImage(bitmap);
+                    RequestParams params = new RequestParams();
+                    params.put("back_img", image);
+
+                    HttpClient.get("updatebackimg", params, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            super.onSuccess(statusCode, headers, response);
+                            try {
+                                if (response.getString("back_img") != null) {
+                                    aq.id(back_img).image(response.getString("back_img"));
+                                }
+                            } catch (JSONException e) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                            super.onFailure(statusCode, headers, throwable, errorResponse);
+                        }
+                    });
+                } else if (back_or_profile == 2) {
+                    String image = getStringImage(bitmap);
+                    RequestParams params = new RequestParams();
+                    params.put("pro_img", image);
+
+                    HttpClient.get("updateproimg", params, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            super.onSuccess(statusCode, headers, response);
+                            try {
+                                if (response.getString("pro_img") != null) {
+                                    aq.id(back_img).image(response.getString("pro_img"));
+                                }
+                            } catch (JSONException e) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                            super.onFailure(statusCode, headers, throwable, errorResponse);
+                        }
+                    });
+                }
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
+ /*   @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult");
@@ -445,6 +503,8 @@ public class TabFragment5 extends Fragment{
         }
 
     }
+
+    */
 
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

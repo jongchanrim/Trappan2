@@ -183,7 +183,6 @@ public class ReviewWriteActivity extends AppCompatActivity {
 
                 new AlertDialog.Builder(ReviewWriteActivity.this)
                         .setTitle("업로드 이미지 선택")
-                        .setPositiveButton("카메라", cameraListener)
                         .setNeutralButton("갤러리", albumListener)
                         .setNegativeButton("취소", cancelListener)
                         .show();
@@ -265,15 +264,12 @@ public class ReviewWriteActivity extends AppCompatActivity {
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent, PICK_FROM_ALBUM);
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode != RESULT_OK)
             return;
-
-
 
         try {
             switch (requestCode) {
