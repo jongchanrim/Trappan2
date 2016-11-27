@@ -79,6 +79,8 @@ import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
 import static android.R.attr.data;
+import static android.R.attr.defaultWidth;
+import static android.R.attr.icon;
 import static android.app.Activity.RESULT_OK;
 
 
@@ -379,7 +381,7 @@ public class TabFragment5 extends Fragment{
         Log.d(TAG, "onActivityResult");
 
         if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri filePath = data.getData();
+            final Uri filePath = data.getData();
             Log.d(TAG, filePath.toString());
             try {
                 //Getting the Bitmap from Gallery
@@ -392,7 +394,7 @@ public class TabFragment5 extends Fragment{
                     RequestParams params = new RequestParams();
                     params.put("back_img", image);
                     Log.d(TAG, "back_or_profile");
-                    uploadImage();
+                    //uploadImage();
 
                     HttpClient.post("updatebackimg", params, new JsonHttpResponseHandler() {
                         @Override
@@ -402,7 +404,11 @@ public class TabFragment5 extends Fragment{
                                 String url = response.getString("back_img");
                                 Log.d(TAG, url);
                                 if (url != null) {
-                                    aq.id(back_img).image(response.getString("back_img"));
+                                    aq=null;
+                                    aq=new AQuery(getView());
+                                    //aq.id(back_img).dataChanged();
+                                    Log.d("dddd",""+response.getString("back_img"));
+                                    aq.id(back_img).image(response.getString("back_img"),false,false);
                                 }
                             } catch (JSONException e) {
 
@@ -428,7 +434,7 @@ public class TabFragment5 extends Fragment{
                             super.onSuccess(statusCode, headers, response);
                             try {
                                 if (response.getString("pro_img") != null) {
-                                    aq.id(back_img).image(response.getString("pro_img"));
+                                    aq.id(pro_img).image(response.getString("pro_img"));
                                 }
                             } catch (JSONException e) {
 
