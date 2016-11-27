@@ -203,7 +203,6 @@ public class ReviewWriteActivity extends AppCompatActivity {
         review_completebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pd.show();
                 params.put("imagenumber", imagenumber);
                 params.put("review_title", review_title_edittext.getText());
                 params.put("review_content", review_content_edittext.getText());
@@ -212,8 +211,8 @@ public class ReviewWriteActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                 super.onSuccess(statusCode, headers, response);
+                                Toast.makeText(ReviewWriteActivity.this, "완료", Toast.LENGTH_SHORT).show();
                                 finish();
-                                pd.dismiss();
                             }
 
                             @Override
@@ -225,9 +224,7 @@ public class ReviewWriteActivity extends AppCompatActivity {
                         }
 
                 );
-                review_title = review_title_edittext.getText().toString();
-                review_content = review_content_edittext.getText().toString();
-                Toast.makeText(ReviewWriteActivity.this, "완료", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -279,33 +276,39 @@ public class ReviewWriteActivity extends AppCompatActivity {
                     if (imagenumber == 1) {
                         mlmageCaptureUri_img1 = data.getData();
                         bitmaps[0] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img1);
-                        String review_img1 = getStringImage(bitmaps[0]);
-                        params.put("review_img1", review_img1);
+                        String review_img1s = getStringImage(bitmaps[0]);
+                        review_img1.setImageURI(mlmageCaptureUri_img1);
+                        params.put("review_img1", review_img1s);
                     } else if (imagenumber == 2) {
                         mlmageCaptureUri_img2 = data.getData();
                         bitmaps[1] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img2);
-                        String review_img2 = getStringImage(bitmaps[1]);
-                        params.put("review_img2", review_img2);
+                        String review_img2s = getStringImage(bitmaps[1]);
+                        params.put("review_img2", review_img2s);
+                        review_img2.setImageURI(mlmageCaptureUri_img2);
                     } else if (imagenumber == 3) {
                         mlmageCaptureUri_img3 = data.getData();
                         bitmaps[2] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img3);
-                        String review_img3 = getStringImage(bitmaps[2]);
-                        params.put("review_img3", review_img3);
+                        String review_img3s = getStringImage(bitmaps[2]);
+                        params.put("review_img3", review_img3s);
+                        review_img3.setImageURI(mlmageCaptureUri_img3);
                     } else if (imagenumber == 4) {
                         mlmageCaptureUri_img4 = data.getData();
                         bitmaps[3] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img4);
-                        String review_img4 = getStringImage(bitmaps[3]);
-                        params.put("review_img4", review_img4);
+                        String review_img4s = getStringImage(bitmaps[3]);
+                        params.put("review_img4", review_img4s);
+                        review_img4.setImageURI(mlmageCaptureUri_img4);
                     } else if (imagenumber == 5) {
                         mlmageCaptureUri_img5 = data.getData();
                         bitmaps[4] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img5);
-                        String review_img5 = getStringImage(bitmaps[4]);
-                        params.put("review_img5", review_img5);
+                        String review_img5s = getStringImage(bitmaps[4]);
+                        params.put("review_img5", review_img5s);
+                        review_img5.setImageURI(mlmageCaptureUri_img5);
                     } else if (imagenumber == 6) {
                         mlmageCaptureUri_img6 = data.getData();
                         bitmaps[5] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img6);
-                        String review_img6 = getStringImage(bitmaps[5]);
-                        params.put("review_img6", review_img6);
+                        String review_img6s = getStringImage(bitmaps[5]);
+                        params.put("review_img6", review_img6s);
+                        review_img6.setImageURI(mlmageCaptureUri_img6 );
                     }
                     break;
                 }
