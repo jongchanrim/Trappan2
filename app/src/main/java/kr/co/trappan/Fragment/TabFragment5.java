@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.nfc.Tag;
 import android.os.AsyncTask;
@@ -81,6 +80,8 @@ import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
 import static android.R.attr.data;
+import static android.R.attr.defaultWidth;
+import static android.R.attr.icon;
 import static android.app.Activity.RESULT_OK;
 
 
@@ -119,8 +120,9 @@ public class TabFragment5 extends Fragment{
     private String absoultePath;
     Bitmap proimg;
     Bitmap backimg;
-    BitmapFactory.Options options = new BitmapFactory.Options();
-    Bitmap src = BitmapFactory.decodeFile("/sdcard/image.jpg", options);
+    BitmapFactory.Options options;
+
+
 
     private int back_or_profile = 0;  //배경이미지와 프로필 이미지 선택 변수 (1로바뀌면 배경, 2로바뀌면 프로필)
     AQuery aq;
@@ -410,8 +412,11 @@ public class TabFragment5 extends Fragment{
                                 String url = response.getString("back_img");
                                 Log.d(TAG, url);
                                 if (url != null) {
-                                    aq.id(back_img).image(response.getString("back_img"));
-                                    loading.dismiss();
+                                    aq=null;
+                                    aq=new AQuery(getView());
+                                    //aq.id(back_img).dataChanged();
+                                    Log.d("dddd",""+response.getString("back_img"));
+                                    aq.id(back_img).image(response.getString("back_img"),false,false);
                                 }
                             } catch (JSONException e) {
                                 loading.dismiss();

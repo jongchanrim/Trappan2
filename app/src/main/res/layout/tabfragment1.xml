@@ -71,7 +71,7 @@
             <TextView
                 android:paddingLeft="10dp"
                 android:textColor="@android:color/black"
-                android:text="이 주의 HOT! 여행"
+                android:text=""
                 android:background="@drawable/textbackground"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -82,7 +82,7 @@
                 android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/week_review_img"
-                    android:background="@drawable/seoul"
+                    android:background="@drawable/main_default"
                     android:layout_width="match_parent"
                     android:layout_height="200dp" />
                 <LinearLayout
@@ -102,21 +102,21 @@
                             android:textSize="20sp"
                             android:layout_marginRight="10dp"
                             android:textColor="@android:color/white"
-                            android:text="가평군"
+                            android:text=""
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
                             android:id="@+id/week_review_main_title"
                             android:textSize="20sp"
                             android:textColor="@android:color/white"
-                            android:text="화악산"
+                            android:text=""
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                     <TextView
                         android:id="@+id/week_review_title"
                         android:textColor="@android:color/white"
-                        android:text="단풍놀이 꿀잼이당"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -135,7 +135,7 @@
             <TextView
                 android:paddingLeft="10dp"
                 android:textColor="@android:color/black"
-                android:text="이 주의 추천 여행지"
+                android:text=""
                 android:background="@drawable/textbackground"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -146,7 +146,7 @@
                 android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/week_tour_img"
-                    android:background="@drawable/seoul"
+                    android:background="@drawable/main_default"
                     android:layout_width="match_parent"
                     android:layout_height="150dp" />
                 <LinearLayout
@@ -159,14 +159,14 @@
                         android:layout_marginRight="10dp"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"
-                        android:text="가평군"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/week_tour_main_title"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"
-                        android:text="화악산"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -185,7 +185,7 @@
             <TextView
                 android:paddingLeft="10dp"
                 android:textColor="@android:color/black"
-                android:text="이 달의 HOT! 여행"
+                android:text=""
                 android:background="@drawable/textbackground"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -196,7 +196,7 @@
                 android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/month_review_img"
-                    android:background="@drawable/seoul"
+                    android:background="@drawable/main_default"
                     android:layout_width="match_parent"
                     android:layout_height="200dp" />
                 <LinearLayout
@@ -216,21 +216,21 @@
                             android:textSize="20sp"
                             android:textColor="@android:color/white"
                             android:layout_marginRight="10dp"
-                            android:text="가평군"
+                            android:text=""
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
                             android:id="@+id/month_review_main_title"
                             android:textSize="20sp"
                             android:textColor="@android:color/white"
-                            android:text="화악산"
+                            android:text=""
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                     <TextView
                         android:id="@+id/month_review_title"
                         android:textColor="@android:color/white"
-                        android:text="단풍놀이 꿀잼이당"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -249,7 +249,7 @@
             <TextView
                 android:paddingLeft="10dp"
                 android:textColor="@android:color/black"
-                android:text="이 달의 추천 여행지"
+                android:text=""
                 android:background="@drawable/textbackground"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -260,7 +260,7 @@
                 android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/month_tour_img"
-                    android:background="@drawable/seoul"
+                    android:background="@drawable/main_default"
                     android:layout_width="match_parent"
                     android:layout_height="150dp" />
                 <LinearLayout
@@ -273,14 +273,14 @@
                         android:textSize="20sp"
                         android:textColor="@android:color/white"
                         android:layout_marginRight="10dp"
-                        android:text="가평군"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/month_tour_main_title"
                         android:textSize="20sp"
                         android:textColor="@android:color/white"
-                        android:text="화악산"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
