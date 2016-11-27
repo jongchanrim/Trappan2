@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
@@ -92,13 +93,14 @@ public class ReviewWriteActivity extends AppCompatActivity {
     private int imagenumber = 0; //업로드이미지 위치에 순서대로 보여주기 위한 변수
     private String contentid;
 
-
+    BitmapFactory.Options options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         bitmaps = new Bitmap[6];
 
-
+        options = new BitmapFactory.Options();
+        options.inSampleSize = 4;
 
         pd = new CustomProgressDialog(ReviewWriteActivity.this);
         pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -275,40 +277,40 @@ public class ReviewWriteActivity extends AppCompatActivity {
                     //실제코드에서는 좀더 합리적인 방법 선택
                     if (imagenumber == 1) {
                         mlmageCaptureUri_img1 = data.getData();
-                        bitmaps[0] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img1);
+                        bitmaps[0] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
                         String review_img1s = getStringImage(bitmaps[0]);
-                        review_img1.setImageURI(mlmageCaptureUri_img1);
+                        review_img1.setImageBitmap(bitmaps[0]);
                         params.put("review_img1", review_img1s);
                     } else if (imagenumber == 2) {
                         mlmageCaptureUri_img2 = data.getData();
-                        bitmaps[1] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img2);
+                        bitmaps[1] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
                         String review_img2s = getStringImage(bitmaps[1]);
                         params.put("review_img2", review_img2s);
-                        review_img2.setImageURI(mlmageCaptureUri_img2);
+                        review_img2.setImageBitmap(bitmaps[1]);
                     } else if (imagenumber == 3) {
                         mlmageCaptureUri_img3 = data.getData();
-                        bitmaps[2] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img3);
+                        bitmaps[2] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
                         String review_img3s = getStringImage(bitmaps[2]);
                         params.put("review_img3", review_img3s);
-                        review_img3.setImageURI(mlmageCaptureUri_img3);
+                        review_img3.setImageBitmap(bitmaps[2]);
                     } else if (imagenumber == 4) {
                         mlmageCaptureUri_img4 = data.getData();
-                        bitmaps[3] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img4);
+                        bitmaps[3] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
                         String review_img4s = getStringImage(bitmaps[3]);
                         params.put("review_img4", review_img4s);
-                        review_img4.setImageURI(mlmageCaptureUri_img4);
+                        review_img4.setImageBitmap(bitmaps[3]);
                     } else if (imagenumber == 5) {
                         mlmageCaptureUri_img5 = data.getData();
-                        bitmaps[4] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img5);
+                        bitmaps[4] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
                         String review_img5s = getStringImage(bitmaps[4]);
                         params.put("review_img5", review_img5s);
-                        review_img5.setImageURI(mlmageCaptureUri_img5);
+                        review_img5.setImageBitmap(bitmaps[4]);
                     } else if (imagenumber == 6) {
                         mlmageCaptureUri_img6 = data.getData();
-                        bitmaps[5] = MediaStore.Images.Media.getBitmap(getContentResolver(), mlmageCaptureUri_img6);
+                        bitmaps[5] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
                         String review_img6s = getStringImage(bitmaps[5]);
                         params.put("review_img6", review_img6s);
-                        review_img6.setImageURI(mlmageCaptureUri_img6 );
+                        review_img6.setImageBitmap(bitmaps[5]);
                     }
                     break;
                 }

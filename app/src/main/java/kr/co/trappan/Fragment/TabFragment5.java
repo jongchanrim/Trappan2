@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.nfc.Tag;
 import android.os.AsyncTask;
@@ -119,6 +120,7 @@ public class TabFragment5 extends Fragment{
     private String absoultePath;
     Bitmap proimg;
     Bitmap backimg;
+    BitmapFactory.Options options;
 
 
 
@@ -129,6 +131,9 @@ public class TabFragment5 extends Fragment{
         View view = inflater.inflate(R.layout.tabfragment5, container, false);
         context = getContext();
         aq = new AQuery(view);
+        options = new BitmapFactory.Options();options = new BitmapFactory.Options();
+        options.inSampleSize = 4;
+
         CircularImageView circularImageView = (CircularImageView)view.findViewById(R.id.f5_proimg);
         circularImageView.setBorderWidth(10);
         circularImageView.setSelectorStrokeWidth(10);
@@ -385,7 +390,7 @@ public class TabFragment5 extends Fragment{
             Log.d(TAG, filePath.toString());
             try {
                 //Getting the Bitmap from Gallery
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
+                Bitmap bitmap = BitmapFactory.decodeFile(filePath.toString(), options);
                 //Setting the Bitmap to ImageView
                 if (back_or_profile == 1) {
                     backimg = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
@@ -453,110 +458,6 @@ public class TabFragment5 extends Fragment{
         }
     }
 
- /*   @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult");
-        if(resultCode != RESULT_OK)
-            return;
-
-        switch(requestCode){
-            case PICK_FROM_ALBUM:
-            {
-                //이후의 처리가 카메라와 같으므로 일단 break없이 진행
-                //실제코드에서는 좀더 합리적인 방법 선택
-                if(back_or_profile == 1) {
-
-                    try {
-                        mlmageCaptureUri_background = data.getData();
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), mlmageCaptureUri_background);
-                        Log.d("PICK_FROM_ALBUM", mlmageCaptureUri_background.getPath().toString());
-                        String image = getStringImage(bitmap);
-                        RequestParams params = new RequestParams();
-                        params.put("back_img", image);
-
-                        HttpClient.get("updatebackimg", params, new JsonHttpResponseHandler(){
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                super.onSuccess(statusCode, headers, response);
-                                try {
-                                    if (response.getString("back_img") != null) {
-                                        aq.id(back_img).image(response.getString("back_img"));
-                                    }
-                                }catch (JSONException e){
-
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                                super.onFailure(statusCode, headers, throwable, errorResponse);
-                            }
-                        });
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-                else if(back_or_profile == 2){
-
-                    Log.d("PICK_FROM_ALBUM", mlmageCaptureUri_profile.getPath().toString());
-                    try {
-                        mlmageCaptureUri_profile = data.getData();
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), mlmageCaptureUri_background);
-                        Log.d("PICK_FROM_ALBUM", mlmageCaptureUri_background.getPath().toString());
-                        String image = getStringImage(bitmap);
-                        RequestParams params = new RequestParams();
-                        params.put("pro_img", image);
-
-                        HttpClient.get("updateproimg", params, new JsonHttpResponseHandler(){
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                super.onSuccess(statusCode, headers, response);
-                                try {
-                                    if (response.getString("pro_img") != null) {
-                                        aq.id(back_img).image(response.getString("pro_img"));
-                                    }
-                                }catch (JSONException e){
-
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                                super.onFailure(statusCode, headers, throwable, errorResponse);
-                            }
-                        });
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                break;
-            }
-//            case PICK_FROM_CAMERA:
-//            {
-//
-//                if(back_or_profile == 1) {
-//                    Log.d("PICK_FROM_CAMERA", " back_img.setImageURI(mlmageCaptureUri_background);");
-//
-//                    back_or_profile = 0;
-//                }
-//                else if(back_or_profile == 2){
-//                    Log.d("PICK_FROM_CAMERA", "pro_img.setImageURI(mlmageCaptureUri_profile);");
-//                    pro_img.setImageURI(mlmageCaptureUri_profile);
-//                    back_or_profile = 0;
-//                }
-//                break;
-//            }
-
-        }
-
-    }
-
-    */
-
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -565,68 +466,5 @@ public class TabFragment5 extends Fragment{
         return encodedImage;
     }
 
-
-    private int PICK_IMAGE_REQUEST = 1;
-    private String UPLOAD_URL ="http://52.78.184.207:8080/TreppanServer/Trappan?cmd=updatebackimg";
-
-
-    private void uploadImage(){
-        //Showing the progress dialog
-        final ProgressDialog loading = ProgressDialog.show(getActivity(),"Uploading...","Please wait...",false,false);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        //Disimissing the progress dialog
-                        loading.dismiss();
-                        Log.d("sdf",  "ss");
-                        try {
-                            JSONObject obj = new JSONObject(s);
-                            if (obj.getString("back_img") != null) {
-                                aq.id(back_img).image(obj.getString("back_img"));
-                                Log.d("sdf",  obj.getString("back_img"));
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        //Showing toast message of the response
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        //Dismissing the progress dialog
-                        loading.dismiss();
-                        Log.d("sdf", "error");
-                        //Showing toast
-                    }
-                }){
-
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                //Converting Bitmap to String
-                String image = getStringImage(backimg);
-
-                //Getting Image Name
-
-                //Creating parameters
-                Map<String,String> params = new Hashtable<String, String>();
-
-                //Adding parameters
-                params.put("back_img", image);
-                Log.d("sdf",  image);
-
-                //returning parameters
-                return params;
-            }
-        };
-        //Creating a Request Queue
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-
-        //Adding request to the queue
-        requestQueue.add(stringRequest);
-    }
 
 }
