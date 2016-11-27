@@ -390,7 +390,7 @@ public class TabFragment5 extends Fragment{
             Log.d(TAG, filePath.toString());
             try {
                 //Getting the Bitmap from Gallery
-                Bitmap bitmap = BitmapFactory.decodeFile(filePath.toString(), options);
+                Bitmap bitmap = BitmapFactory.decodeFile(filePath.getPath(), options);
                 //Setting the Bitmap to ImageView
                 if (back_or_profile == 1) {
                     backimg = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
