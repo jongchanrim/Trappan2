@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -103,6 +104,8 @@ public class ReviewPageActivity extends AppCompatActivity {
                 super.onSuccess(statusCode, headers, response);
                 try {
 
+                    Log.d("review", "통신성공");
+
                     review.setC_date(response.getString("c_date"));
                     review.setReview_title(response.getString("review_title"));
                     review.setReview_content(response.getString("review_content"));
@@ -168,9 +171,7 @@ public class ReviewPageActivity extends AppCompatActivity {
                         btn_like.setBackgroundResource(R.drawable.like_s);
                     }
                     pd.dismiss();
-
-
-
+                    adapter.setList(pager_image_list);
                     adapter.notifyDataSetChanged();
 
                 }catch (JSONException e){

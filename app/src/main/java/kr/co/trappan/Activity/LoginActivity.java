@@ -72,41 +72,42 @@ public class LoginActivity extends AppCompatActivity {
                 enpw = Encrypter.encrypt(password.getText().toString()); //비밀번호 암호화
                 RequestParams params = new RequestParams();
                 params.put("id", id.getText().toString().trim());
-                params.put("password", password.getText().toString());
-
-                HttpClient.post("test", params, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        super.onSuccess(statusCode, headers, response);
-                        Log.d(TAG, "httpOK: " + response.toString());
-                        try {
-                            if(response.get("login").equals("success")) {
-                                //자동 로그인하기 위한 데이터 저장
-                                editor.putString("id", id.getText().toString());
-                                editor.putString("pw", enpw);
-                                editor.putBoolean("autologin", true);
-                                editor.commit();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("user_id", id.getText().toString());
-                                startActivity(intent); // 다음 화면으로 넘어간다.
+                params.put("password", enpw);
+                    HttpClient.post("login", params, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            super.onSuccess(statusCode, headers, response);
+                            try {
+                                String login = response.getString("login");
+                                if (login.equals("success")) {
+                                    //자동 로그인하기 위한 데이터 저장
+                                    editor.putString("id", id.getText().toString());
+                                    editor.putString("pw", enpw);
+                                    editor.putBoolean("autologin", true);
+                                    editor.commit();
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("user_id", id.getText().toString());
+                                    startActivity(intent); // 다음 화면으로 넘어간다.
+                                    pd.dismiss();
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_LONG).show();
+                                    pd.dismiss();
+                                    //로그인 실패 다이얼로그
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                                 pd.dismiss();
+
                             }
-                            else{
-                                Toast.makeText(LoginActivity.this,"로그인 실패",Toast.LENGTH_LONG).show();
-                                //로그인 실패 다이얼로그
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
-                        super.onFailure(statusCode, headers, throwable, response);
-                        pd.dismiss();
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
+                            super.onFailure(statusCode, headers, throwable, response);
+                            pd.dismiss();
 
-                    }
-                });
+                        }
+                    });
             }
         });
         // 회원가입 버튼 클릭 시

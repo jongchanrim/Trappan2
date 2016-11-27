@@ -106,7 +106,9 @@ public class StartActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
                                     super.onFailure(statusCode, headers, throwable, response);
-
+                                    Intent intent = new Intent(StartActivity.this, LoginActivity.class); // 다음 넘어갈 클래스 지정
+                                    StartActivity.this.finish();
+                                    startActivity(intent); // 다음 화면으로 넘어간다.
 
                                 }
                             });

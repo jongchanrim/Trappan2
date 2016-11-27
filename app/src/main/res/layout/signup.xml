@@ -62,7 +62,7 @@
             android:text="이메일"
             android:id="@+id/m_email"
             android:textColor="#FF5D10AC"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <EditText
             android:singleLine="true"
@@ -90,7 +90,7 @@
             android:textColor="#FF5D10AC"
             android:text="패스워드"
             android:id="@+id/m_password"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
 
         <EditText
@@ -114,7 +114,7 @@
             android:textColor="#FF5D10AC"
             android:text="패스워드 확인"
             android:id="@+id/m_confpasswd"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -153,7 +153,7 @@
                 android:text="이름"
                 android:textColor="#FF5D10AC"
                 android:id="@+id/m_name"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
 
             <EditText
@@ -164,7 +164,7 @@
                 android:textColor="#FF5D10AC"
                 android:backgroundTint="#9f9f9f"
                 android:id="@+id/input_name"
-                android:gravity="center" />
+                />
         </LinearLayout>
 
 

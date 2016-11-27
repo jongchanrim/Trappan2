@@ -342,6 +342,7 @@ public class DetailInformationActivity extends AppCompatActivity implements  OnM
                         item.setReview_title(obj.getString("review_title"));
                         item.setReview_content(obj.getString("review_content"));
                         items.add(item);
+                        Log.d("list", obj.getString("review_content"));
                     }
                     Adapter.setItems(items);
                     Adapter.notifyDataSetChanged();

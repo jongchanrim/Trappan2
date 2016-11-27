@@ -1,5 +1,6 @@
 package kr.co.trappan.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -205,22 +206,25 @@ public class ReviewWriteActivity extends AppCompatActivity {
         review_completebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final ProgressDialog loading = ProgressDialog.show(ReviewWriteActivity.this,"Uploading...","Please wait...",false,false);
+                loading.show();
                 params.put("imagenumber", imagenumber);
                 params.put("review_title", review_title_edittext.getText());
                 params.put("review_content", review_content_edittext.getText());
                 params.put("contentid", contentid);
-                HttpClient.get("addreview", params, new JsonHttpResponseHandler() {
+                HttpClient.post("addreview", params, new JsonHttpResponseHandler() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                 super.onSuccess(statusCode, headers, response);
                                 Toast.makeText(ReviewWriteActivity.this, "완료", Toast.LENGTH_SHORT).show();
+                                loading.dismiss();
                                 finish();
                             }
 
                             @Override
                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                                pd.dismiss();
+                                loading.dismiss();
                                 Toast.makeText(ReviewWriteActivity.this, "실패", Toast.LENGTH_LONG).show();
                             }
                         }
@@ -277,37 +281,43 @@ public class ReviewWriteActivity extends AppCompatActivity {
                     //실제코드에서는 좀더 합리적인 방법 선택
                     if (imagenumber == 1) {
                         mlmageCaptureUri_img1 = data.getData();
-                        bitmaps[0] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
+                        bitmaps[0] = MediaStore.Images.Media.getBitmap(ReviewWriteActivity.this.getContentResolver(), mlmageCaptureUri_img1);
+                        bitmaps[0] = Bitmap.createScaledBitmap(bitmaps[0], 400, 400, true);
                         String review_img1s = getStringImage(bitmaps[0]);
                         review_img1.setImageBitmap(bitmaps[0]);
                         params.put("review_img1", review_img1s);
                     } else if (imagenumber == 2) {
                         mlmageCaptureUri_img2 = data.getData();
-                        bitmaps[1] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
+                        bitmaps[1] = MediaStore.Images.Media.getBitmap(ReviewWriteActivity.this.getContentResolver(), mlmageCaptureUri_img2);
+                        bitmaps[1] = Bitmap.createScaledBitmap(bitmaps[1], 400, 400, true);
                         String review_img2s = getStringImage(bitmaps[1]);
                         params.put("review_img2", review_img2s);
                         review_img2.setImageBitmap(bitmaps[1]);
                     } else if (imagenumber == 3) {
                         mlmageCaptureUri_img3 = data.getData();
-                        bitmaps[2] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
+                        bitmaps[2] = MediaStore.Images.Media.getBitmap(ReviewWriteActivity.this.getContentResolver(), mlmageCaptureUri_img3);
+                        bitmaps[2] = Bitmap.createScaledBitmap(bitmaps[2], 400, 400, true);
                         String review_img3s = getStringImage(bitmaps[2]);
                         params.put("review_img3", review_img3s);
                         review_img3.setImageBitmap(bitmaps[2]);
                     } else if (imagenumber == 4) {
                         mlmageCaptureUri_img4 = data.getData();
-                        bitmaps[3] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
+                        bitmaps[3] = MediaStore.Images.Media.getBitmap(ReviewWriteActivity.this.getContentResolver(), mlmageCaptureUri_img4);
+                        bitmaps[3] = Bitmap.createScaledBitmap(bitmaps[3], 400, 400, true);
                         String review_img4s = getStringImage(bitmaps[3]);
                         params.put("review_img4", review_img4s);
                         review_img4.setImageBitmap(bitmaps[3]);
                     } else if (imagenumber == 5) {
                         mlmageCaptureUri_img5 = data.getData();
-                        bitmaps[4] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
+                        bitmaps[4] = MediaStore.Images.Media.getBitmap(ReviewWriteActivity.this.getContentResolver(), mlmageCaptureUri_img5);
+                        bitmaps[4] = Bitmap.createScaledBitmap(bitmaps[4], 400, 400, true);
                         String review_img5s = getStringImage(bitmaps[4]);
                         params.put("review_img5", review_img5s);
                         review_img5.setImageBitmap(bitmaps[4]);
                     } else if (imagenumber == 6) {
                         mlmageCaptureUri_img6 = data.getData();
-                        bitmaps[5] = BitmapFactory.decodeFile(mlmageCaptureUri_img1.toString(), options);
+                        bitmaps[5] = MediaStore.Images.Media.getBitmap(ReviewWriteActivity.this.getContentResolver(), mlmageCaptureUri_img6);
+                        bitmaps[5] = Bitmap.createScaledBitmap(bitmaps[5], 400, 400, true);
                         String review_img6s = getStringImage(bitmaps[5]);
                         params.put("review_img6", review_img6s);
                         review_img6.setImageBitmap(bitmaps[5]);
