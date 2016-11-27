@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import kr.co.trappan.Activity.DetailInformationActivity;
 import kr.co.trappan.Activity.SearchActivity;
 import kr.co.trappan.Adapter.ReviewListAdapter;
 import kr.co.trappan.Adapter.SearchFragmentAdapter;
@@ -235,6 +236,26 @@ public class TabFragment3 extends Fragment {
 
                     }
                 }));
+
+        recyclerViewc.addOnItemTouchListener(new
+
+                RecyclerViewOnItemClickListener(getActivity(), recyclerViewc,
+                new RecyclerViewOnItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+
+                        Intent intent = new Intent(getActivity(), DetailInformationActivity.class);
+                        intent.putExtra("contentid", items.get(position).getContentid());
+                        startActivity(intent); // 다음 화면으로 넘어간다.
+                    }
+
+                    @Override
+                    public void onItemLongClick(View v, int position) {
+
+                    }
+                }
+
+        ));
 
 
 

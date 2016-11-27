@@ -1,5 +1,6 @@
 package kr.co.trappan.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,7 +24,15 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.androidquery.AQuery;
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -49,19 +58,24 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 import kr.co.trappan.Activity.CommentActivity;
+import kr.co.trappan.Activity.DetailInformationActivity;
 import kr.co.trappan.Activity.FollowerActivity;
 import kr.co.trappan.Activity.FollowingActivity;
 import kr.co.trappan.Activity.LikeActivity;
 import kr.co.trappan.Activity.My_CommentActivity;
+import kr.co.trappan.Activity.ReviewPageActivity;
 import kr.co.trappan.Activity.SearchActivity;
 import kr.co.trappan.Adapter.ListViewAdapter;
 import kr.co.trappan.Adapter.ReviewListAdapter;
 import kr.co.trappan.Bean.Review;
 import kr.co.trappan.Connector.HttpClient;
 import kr.co.trappan.Item.List_item;
+import kr.co.trappan.Item.RecyclerViewOnItemClickListener;
 import kr.co.trappan.R;
 
 import static android.R.attr.data;
@@ -101,6 +115,8 @@ public class TabFragment5 extends Fragment{
     private ImageView iv_UserPhoto;
     private int id_view;
     private String absoultePath;
+    Bitmap proimg;
+    Bitmap backimg;
 
 
 
@@ -298,6 +314,25 @@ public class TabFragment5 extends Fragment{
         /*
         스템프 액티비티도 넣어야함
         */
+        recyclerView.addOnItemTouchListener(new
+
+                RecyclerViewOnItemClickListener(getActivity(), recyclerView,
+                new RecyclerViewOnItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+
+                        Intent intent = new Intent(getActivity(), ReviewPageActivity.class);
+                        intent.putExtra("review_id", items.get(position).getReview_id());
+                        intent.putExtra("id", items.get(position).getId());
+                        startActivity(intent); // 다음 화면으로 넘어간다.
+                    }
+
+                    @Override
+                    public void onItemLongClick(View v, int position) {
+                    }
+                }
+
+        ));
 
 
 
@@ -341,25 +376,32 @@ public class TabFragment5 extends Fragment{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult");
 
         if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri filePath = data.getData();
+            Log.d(TAG, filePath.toString());
             try {
                 //Getting the Bitmap from Gallery
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 //Setting the Bitmap to ImageView
                 if (back_or_profile == 1) {
-                    mlmageCaptureUri_background = data.getData();
+                    backimg = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                     String image = getStringImage(bitmap);
+
                     RequestParams params = new RequestParams();
                     params.put("back_img", image);
+                    Log.d(TAG, "back_or_profile");
+                    uploadImage();
 
-                    HttpClient.get("updatebackimg", params, new JsonHttpResponseHandler() {
+                    HttpClient.post("updatebackimg", params, new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             super.onSuccess(statusCode, headers, response);
                             try {
-                                if (response.getString("back_img") != null) {
+                                String url = response.getString("back_img");
+                                Log.d(TAG, url);
+                                if (url != null) {
                                     aq.id(back_img).image(response.getString("back_img"));
                                 }
                             } catch (JSONException e) {
@@ -370,14 +412,17 @@ public class TabFragment5 extends Fragment{
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                             super.onFailure(statusCode, headers, throwable, errorResponse);
+                            Log.d(TAG, "실패");
                         }
                     });
                 } else if (back_or_profile == 2) {
+                    proimg = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
+
                     String image = getStringImage(bitmap);
                     RequestParams params = new RequestParams();
                     params.put("pro_img", image);
 
-                    HttpClient.get("updateproimg", params, new JsonHttpResponseHandler() {
+                    HttpClient.post("updateproimg", params, new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             super.onSuccess(statusCode, headers, response);
@@ -512,6 +557,70 @@ public class TabFragment5 extends Fragment{
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
+    }
+
+
+    private int PICK_IMAGE_REQUEST = 1;
+    private String UPLOAD_URL ="http://52.78.184.207:8080/TreppanServer/Trappan?cmd=updatebackimg";
+
+
+    private void uploadImage(){
+        //Showing the progress dialog
+        final ProgressDialog loading = ProgressDialog.show(getActivity(),"Uploading...","Please wait...",false,false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        //Disimissing the progress dialog
+                        loading.dismiss();
+                        Log.d("sdf",  "ss");
+                        try {
+                            JSONObject obj = new JSONObject(s);
+                            if (obj.getString("back_img") != null) {
+                                aq.id(back_img).image(obj.getString("back_img"));
+                                Log.d("sdf",  obj.getString("back_img"));
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        //Showing toast message of the response
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        //Dismissing the progress dialog
+                        loading.dismiss();
+                        Log.d("sdf", "error");
+                        //Showing toast
+                    }
+                }){
+
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //Converting Bitmap to String
+                String image = getStringImage(backimg);
+
+                //Getting Image Name
+
+                //Creating parameters
+                Map<String,String> params = new Hashtable<String, String>();
+
+                //Adding parameters
+                params.put("back_img", image);
+                Log.d("sdf",  image);
+
+                //returning parameters
+                return params;
+            }
+        };
+        //Creating a Request Queue
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+        //Adding request to the queue
+        requestQueue.add(stringRequest);
     }
 
 }
