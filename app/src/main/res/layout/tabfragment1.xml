@@ -28,31 +28,36 @@
 
                 <ImageView
                     android:layout_marginRight="3dp"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentTop="true"
                     android:id="@+id/ball_1"
-                    android:background="@drawable/pager_02"
                     android:layout_width="10dp"
                     android:layout_height="10dp" />
                 <ImageView
                     android:layout_marginRight="3dp"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentTop="true"
                     android:id="@+id/ball_2"
-                    android:background="@drawable/pager_01"
                     android:layout_width="10dp"
                     android:layout_height="10dp" />
                 <ImageView
                     android:layout_marginRight="3dp"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentTop="true"
                     android:id="@+id/ball_3"
-                    android:background="@drawable/pager_01"
                     android:layout_width="10dp"
                     android:layout_height="10dp" />
                 <ImageView
                     android:layout_marginRight="3dp"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentTop="true"
                     android:id="@+id/ball_4"
-                    android:background="@drawable/pager_01"
                     android:layout_width="10dp"
                     android:layout_height="10dp" />
                 <ImageView
                     android:id="@+id/ball_5"
-                    android:background="@drawable/pager_01"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentTop="true"
                     android:layout_width="10dp"
                     android:layout_height="10dp" />
             </LinearLayout>
@@ -82,7 +87,8 @@
                 android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/week_review_img"
-                    android:background="@drawable/main_default"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentTop="true"
                     android:layout_width="match_parent"
                     android:layout_height="200dp" />
                 <LinearLayout
@@ -146,8 +152,9 @@
                 android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/week_tour_img"
-                    android:background="@drawable/main_default"
                     android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentTop="true"
                     android:layout_height="150dp" />
                 <LinearLayout
                     android:layout_gravity="center|center_vertical"
@@ -196,8 +203,9 @@
                 android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/month_review_img"
-                    android:background="@drawable/main_default"
                     android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentTop="true"
                     android:layout_height="200dp" />
                 <LinearLayout
                     android:padding="10dp"
@@ -250,7 +258,6 @@
                 android:paddingLeft="10dp"
                 android:textColor="@android:color/black"
                 android:text=""
-                android:background="@drawable/textbackground"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center_vertical" />
@@ -261,6 +268,8 @@
                 <ImageView
                     android:id="@+id/month_tour_img"
                     android:background="@drawable/main_default"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentTop="true"
                     android:layout_width="match_parent"
                     android:layout_height="150dp" />
                 <LinearLayout

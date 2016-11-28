@@ -179,7 +179,7 @@ public class TabFragment5 extends Fragment{
 
                     try {
                         if(response.getString("pro_img")!=null){
-                            aq.id(pro_img).image(response.getString("pro_img"));
+                        //    aq.id(pro_img).image(response.getString("pro_img"));
                         }
 
                         aq.id(back_img).image(response.getString("back_img"));

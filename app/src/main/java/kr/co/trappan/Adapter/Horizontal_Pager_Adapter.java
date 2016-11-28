@@ -1,5 +1,7 @@
 package kr.co.trappan.Adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -49,19 +51,29 @@ public class Horizontal_Pager_Adapter extends PagerAdapter{
 
         switch (position){
             case 0:
-                img.setBackgroundResource(R.drawable.slide01);
+                Bitmap bigPictureBitmap  = BitmapFactory.decodeResource(view.getResources(), R.drawable.slide01);
+                bigPictureBitmap = Bitmap.createScaledBitmap(bigPictureBitmap, 400, 300, true);
+                img.setImageBitmap(bigPictureBitmap);
                 break;
             case 1:
-                img.setBackgroundResource(R.drawable.slide02);
+                Bitmap bigPictureBitmap2  = BitmapFactory.decodeResource(view.getResources(), R.drawable.slide02);
+                bigPictureBitmap2 = Bitmap.createScaledBitmap(bigPictureBitmap2, 400, 300, true);
+                img.setImageBitmap(bigPictureBitmap2);
                 break;
             case 2:
-                img.setBackgroundResource(R.drawable.slide03);
+                Bitmap bigPictureBitmap3  = BitmapFactory.decodeResource(view.getResources(), R.drawable.slide01);
+                bigPictureBitmap3 = Bitmap.createScaledBitmap(bigPictureBitmap3, 400, 300, true);
+                img.setImageBitmap(bigPictureBitmap3);
                 break;
             case 3:
-                img.setBackgroundResource(R.drawable.slide04);
+                Bitmap bigPictureBitmap4  = BitmapFactory.decodeResource(view.getResources(), R.drawable.slide01);
+                bigPictureBitmap4 = Bitmap.createScaledBitmap(bigPictureBitmap4, 400, 300, true);
+                img.setImageBitmap(bigPictureBitmap4);
                 break;
             case 4:
-                img.setBackgroundResource(R.drawable.slide05);
+                Bitmap bigPictureBitmap5  = BitmapFactory.decodeResource(view.getResources(), R.drawable.slide01);
+                bigPictureBitmap5 = Bitmap.createScaledBitmap(bigPictureBitmap5, 400, 300, true);
+                img.setImageBitmap(bigPictureBitmap5);
                 break;
         }
         //aq.id(img).image(list.get(position));

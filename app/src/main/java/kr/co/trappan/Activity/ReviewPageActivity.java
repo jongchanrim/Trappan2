@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,6 +64,7 @@ public class ReviewPageActivity extends AppCompatActivity {
     Follow follow;
     AQuery aq;
     String a=null;
+    String review_id;
     private CustomProgressDialog pd;
 
     ArrayList<String> pager_image_list=new ArrayList<>();
@@ -71,13 +73,14 @@ public class ReviewPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_page);
         Intent intent = getIntent();
-        reviewid = intent.getExtras().getInt("review_id");
+        review_id = intent.getExtras().getString("review_id");
         id = intent.getExtras().getString("id");
         pd = new CustomProgressDialog(ReviewPageActivity.this);
         pd .getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         pd.show();
         aq=new AQuery(this);
-
+        review = new Review();
+        member=new Member();
         viewPager=(ViewPager)findViewById(R.id.review_viewpager);
 
         btn_back=(LinearLayout) findViewById(R.id.btn_back);
@@ -96,7 +99,7 @@ public class ReviewPageActivity extends AppCompatActivity {
         final ReviewPagerAdapter adapter=new ReviewPagerAdapter(getLayoutInflater(),pager_image_list);
         viewPager.setAdapter(adapter);
         RequestParams params = new RequestParams();
-        params.put("review_id", reviewid);
+        params.put("review_id", review_id);
         params.put("id", id);
         HttpClient.get("detailreview", params, new JsonHttpResponseHandler() {
             @Override
@@ -104,7 +107,7 @@ public class ReviewPageActivity extends AppCompatActivity {
                 super.onSuccess(statusCode, headers, response);
                 try {
 
-                    Log.d("review", "통신성공");
+                    Log.d("review", response.toString());
 
                     review.setC_date(response.getString("c_date"));
                     review.setReview_title(response.getString("review_title"));
@@ -116,7 +119,7 @@ public class ReviewPageActivity extends AppCompatActivity {
                     review.setImg_5(response.getString("img_5"));
                     review.setImg_6(response.getString("img_6"));
 
-                    member=new Member();
+
                     member.setPro_img(response.getString("id"));
                     member.setId(response.getString("pro_img"));
 
@@ -173,15 +176,17 @@ public class ReviewPageActivity extends AppCompatActivity {
                     pd.dismiss();
                     adapter.setList(pager_image_list);
                     adapter.notifyDataSetChanged();
+                    ViewGroup myViewGroup = (ViewGroup) findViewById(R.id.activity_review_page);
+                    myViewGroup.invalidate();
 
                 }catch (JSONException e){
-
+                    pd.dismiss();
                 }
 
 
 
 
-
+                pd.dismiss();
 
             }
             @Override

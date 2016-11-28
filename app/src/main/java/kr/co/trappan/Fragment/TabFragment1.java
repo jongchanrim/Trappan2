@@ -4,6 +4,8 @@ package kr.co.trappan.Fragment;
  * Created by thfad_000 on 2016-10-04.
  */
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -60,21 +62,30 @@ public class TabFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tabfragment1, container, false);
 
-        week_review_img=(ImageView)view.findViewById(R.id.week_review_img) ;
+        Bitmap bigPictureBitmap  = BitmapFactory.decodeResource(view.getResources(), R.drawable.main_default);
+        bigPictureBitmap = Bitmap.createScaledBitmap(bigPictureBitmap, 400, 300, true);
+
+        week_review_img=(ImageView)view.findViewById(R.id.week_review_img);
+        week_review_img.setImageBitmap(bigPictureBitmap);
         week_review_areaname=(TextView) view.findViewById(R.id.week_review_areaname);
         week_review_main_title=(TextView) view.findViewById(R.id.week_review_main_title);
         week_review_title=(TextView) view.findViewById(R.id.week_review_title);
 
         week_tour_img=(ImageView)view.findViewById(R.id.week_tour_img);
+        week_tour_img.setImageBitmap(bigPictureBitmap);
         week_tour_areaname=(TextView) view.findViewById(R.id.week_tour_areaname);
         week_tour_main_title=(TextView) view.findViewById(R.id.week_tour_main_title);
 
         month_review_img=(ImageView)view.findViewById(R.id.month_review_img);
+        month_review_img.setImageBitmap(bigPictureBitmap);
+
         month_review_areaname=(TextView) view.findViewById(R.id.month_review_areaname);
         month_review_main_title=(TextView) view.findViewById(R.id.month_review_main_title);
         month_review_title=(TextView) view.findViewById(R.id.month_review_title);
 
         month_tour_img=(ImageView)view.findViewById(R.id.month_tour_img);
+        month_tour_img.setImageBitmap(bigPictureBitmap);
+
         month_tour_areaname=(TextView) view.findViewById(R.id.month_tour_areaname);
         month_tour_main_title=(TextView) view.findViewById(R.id.month_tour_main_title);
 

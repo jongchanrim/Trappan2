@@ -339,6 +339,7 @@ public class DetailInformationActivity extends AppCompatActivity implements  OnM
                         Review item = new Review();
                         item.setId(obj.getString("id"));
                         item.setImg_1(obj.getString("img_1"));
+                        item.setReview_id(obj.getInt("review_id"));
                         item.setReview_title(obj.getString("review_title"));
                         item.setReview_content(obj.getString("review_content"));
                         items.add(item);
@@ -513,7 +514,8 @@ public class DetailInformationActivity extends AppCompatActivity implements  OnM
                     public void onItemClick(View v, int position) {
 
                         Intent intent = new Intent(DetailInformationActivity.this, ReviewPageActivity.class);
-                        intent.putExtra("review_id", items.get(position).getReview_id());
+                        intent.putExtra("review_id", Integer.toString(items.get(position).getReview_id()));
+                        Log.d("id", Integer.toString(items.get(position).getReview_id()));
                         intent.putExtra("id", items.get(position).getId());
                         startActivity(intent); // 다음 화면으로 넘어간다.
                     }
