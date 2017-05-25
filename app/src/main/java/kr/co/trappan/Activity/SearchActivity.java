@@ -124,7 +124,6 @@ public class SearchActivity extends AppCompatActivity {
                             tour.setStamp(obj.getInt("stamp"));
                             tour.setRate(obj.getDouble("rate"));
                             items.add(tour);
-                            Log.d(TAG, "httpOK: " + items.get(i).getFirstimage().toString());
                         }
                         adapter.setItems(items);
                         adapter.notifyDataSetChanged();
@@ -171,7 +170,6 @@ public class SearchActivity extends AppCompatActivity {
                             tour.setStamp(obj.getInt("stamp"));
                             tour.setRate(obj.getDouble("rate"));
                             items.add(tour);
-                            Log.d(TAG, "httpOK: " + items.get(i).getFirstimage().toString());
                         }
                         adapter.setItems(items);
                         adapter.notifyDataSetChanged();
@@ -215,7 +213,47 @@ public class SearchActivity extends AppCompatActivity {
                             tour.setStamp(obj.getInt("stamp"));
                             tour.setRate(obj.getDouble("rate"));
                             items.add(tour);
-                            Log.d(TAG, "httpOK: " + items.get(i).getFirstimage().toString());
+                        }
+                        adapter.setItems(items);
+                        adapter.notifyDataSetChanged();
+                        pd.dismiss();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray response) {
+                    super.onFailure(statusCode, headers, throwable, response);
+
+                }
+            });
+        }else if (searchcase.equals("tlike")) {
+            RequestParams params = new RequestParams();
+            search_name.setText("가고싶어요");
+
+            HttpClient.get("mtlikelist", params, new JsonHttpResponseHandler() {
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                    super.onSuccess(statusCode, headers, response);
+                    Log.d(TAG, "httpOK: " + response.length());
+                    try {
+
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject obj = response.getJSONObject(i);
+                            Tour tour = new Tour();
+                            tour.setContentid(obj.getString("contentid"));
+                            tour.setTitle(obj.getString("title"));
+                            tour.setAreacode(obj.getString("areacode"));
+                            tour.setCat2(obj.getString("cat2"));
+                            tour.setFirstimage(obj.getString("firstimage"));
+                            tour.setSigungucode(obj.getString("sigungucode"));
+                            tour.setLike(obj.getInt("tlike"));
+                            tour.setStamp(obj.getInt("stamp"));
+                            tour.setRate(obj.getDouble("rate"));
+                            items.add(tour);
                         }
                         adapter.setItems(items);
                         adapter.notifyDataSetChanged();
@@ -233,6 +271,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
             });
         }
+
 
 
         recyclerView.addOnItemTouchListener(new

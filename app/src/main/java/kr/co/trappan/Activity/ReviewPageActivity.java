@@ -66,6 +66,7 @@ public class ReviewPageActivity extends AppCompatActivity {
     String a=null;
     String review_id;
     private CustomProgressDialog pd;
+    ReviewPagerAdapter adapter;
 
     ArrayList<String> pager_image_list=new ArrayList<>();
     @Override
@@ -81,6 +82,8 @@ public class ReviewPageActivity extends AppCompatActivity {
         aq=new AQuery(this);
         review = new Review();
         member=new Member();
+        tour=new Tour();
+        comment=new Comment();
         viewPager=(ViewPager)findViewById(R.id.review_viewpager);
 
         btn_back=(LinearLayout) findViewById(R.id.btn_back);
@@ -96,7 +99,12 @@ public class ReviewPageActivity extends AppCompatActivity {
         num_comment=(TextView)findViewById(R.id.num_comment);
         btn_like=(Button)findViewById(R.id.review_like_button);
         btn_comment=(Button)findViewById(R.id.review_comment_button);
-        final ReviewPagerAdapter adapter=new ReviewPagerAdapter(getLayoutInflater(),pager_image_list);
+        adapter=new ReviewPagerAdapter(getLayoutInflater(),pager_image_list);
+
+        review_tour_title = (TextView)findViewById(R.id.review_tour_title);
+        review_area_name = (TextView)findViewById(R.id.review_area_name);
+
+
         viewPager.setAdapter(adapter);
         RequestParams params = new RequestParams();
         params.put("review_id", review_id);
@@ -106,8 +114,6 @@ public class ReviewPageActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-
-                    Log.d("review", response.toString());
 
                     review.setC_date(response.getString("c_date"));
                     review.setReview_title(response.getString("review_title"));
@@ -123,13 +129,13 @@ public class ReviewPageActivity extends AppCompatActivity {
                     member.setPro_img(response.getString("id"));
                     member.setId(response.getString("pro_img"));
 
-                    comment=new Comment();
+
                     comment.setComment_count(response.getInt("comment_count"));
 
                     reviewLike=new ReviewLike();
                     reviewLike.setLike_count(response.getInt("like_count"));
 
-                    tour=new Tour();
+
                     tour.setTitle(response.getString("title"));
                     tour.setAreaName(response.getString("areaName"));
 
@@ -149,8 +155,10 @@ public class ReviewPageActivity extends AppCompatActivity {
                     user_id.setText(member.getId());
 
                     num_comment.setText(comment.getComment_count());
-
                     num_like.setText(reviewLike.getLike_count());
+
+                    review_area_name.setText(tour.getAreaName());
+                    review_tour_title.setText(tour.getTitle());
 
                     review_title.setText(review.getReview_title());
                     review_content.setText(review.getReview_content());
@@ -176,6 +184,7 @@ public class ReviewPageActivity extends AppCompatActivity {
                     pd.dismiss();
                     adapter.setList(pager_image_list);
                     adapter.notifyDataSetChanged();
+
                     ViewGroup myViewGroup = (ViewGroup) findViewById(R.id.activity_review_page);
                     myViewGroup.invalidate();
 

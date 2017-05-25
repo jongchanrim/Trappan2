@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -101,6 +102,14 @@ public class TabFragment5 extends Fragment{
     private ImageButton f5_btn_backimg;
     private ImageButton f5_btn_proimg;
 
+    private LinearLayout f5_btn_follower;
+    private LinearLayout f5_btn_following;
+    private LinearLayout f5_btn_tlike;
+    private LinearLayout f5_btn_stamp;
+    private LinearLayout f5_btn_rlike;
+    private LinearLayout f5_btn_comment;
+
+
     private TextView user_name;
     private TextView user_profile;
     private TextView follower;
@@ -151,6 +160,13 @@ public class TabFragment5 extends Fragment{
         stamp=(TextView)view.findViewById(R.id.f5_stamp);
         rlike=(TextView)view.findViewById(R.id.f5_rlike);
         comment=(TextView)view.findViewById(R.id.f5_comment);
+
+        f5_btn_follower = (LinearLayout)view.findViewById(R.id.f5_btn_follower);
+          f5_btn_following = (LinearLayout)view.findViewById(R.id.f5_btn_following);
+          f5_btn_tlike = (LinearLayout)view.findViewById(R.id.f5_btn_tlike);
+          f5_btn_stamp = (LinearLayout)view.findViewById(R.id.f5_btn_stamp);
+          f5_btn_rlike= (LinearLayout)view.findViewById(R.id.f5_btn_rlike);
+          f5_btn_comment= (LinearLayout)view.findViewById(R.id.f5_btn_comment);;
 
         recyclerView = (RecyclerView) view.findViewById(R.id.mypage_scroll);
         RecyclerViewHeader header = (RecyclerViewHeader) view.findViewById(R.id.header5);
@@ -211,6 +227,7 @@ public class TabFragment5 extends Fragment{
                         Review item = new Review();
                         item.setId(obj.getString("id"));
                         item.setImg_1(obj.getString("img_1"));
+                        item.setReview_id(obj.getInt("review_id"));
                         item.setReview_title(obj.getString("review_title"));
                         item.setReview_content(obj.getString("review_content"));
                         items.add(item);
@@ -290,14 +307,14 @@ public class TabFragment5 extends Fragment{
             }
         });
 
-        follower.setOnClickListener(new View.OnClickListener() {
+        f5_btn_follower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FollowerActivity.class);
                 v.getContext().startActivity(intent);
             }
         });
-        following.setOnClickListener(new View.OnClickListener(){
+        f5_btn_following.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), FollowingActivity.class);
@@ -305,14 +322,14 @@ public class TabFragment5 extends Fragment{
             }
 
         });
-        comment.setOnClickListener(new View.OnClickListener() {
+        f5_btn_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), My_CommentActivity.class);
                 startActivity(intent);
             }
         });
-       rlike.setOnClickListener(new View.OnClickListener() {
+        f5_btn_rlike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (getContext(), LikeActivity.class);
@@ -321,9 +338,22 @@ public class TabFragment5 extends Fragment{
             }
         });
 
-        /*
-        스템프 액티비티도 넣어야함
-        */
+        f5_btn_stamp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        f5_btn_tlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (getContext(), SearchActivity.class);
+                startActivity(intent);
+                intent.putExtra("case","tlike");
+            }
+        });
+
+
         recyclerView.addOnItemTouchListener(new
 
                 RecyclerViewOnItemClickListener(getActivity(), recyclerView,
@@ -434,7 +464,7 @@ public class TabFragment5 extends Fragment{
                     String image = getStringImage(bitmap);
                     RequestParams params = new RequestParams();
                     params.put("pro_img", image);
-
+                    JSONArray arr = new JSONArray("{sdfsdf}");
                     HttpClient.post("updateproimg", params, new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

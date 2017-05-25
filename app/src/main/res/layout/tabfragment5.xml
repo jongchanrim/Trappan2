@@ -112,6 +112,7 @@
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/f5_btn_follower"
                         >
                         <TextView
                             android:layout_width="wrap_content"
@@ -132,6 +133,7 @@
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         >
                         <TextView
                             android:layout_width="wrap_content"
@@ -145,6 +147,7 @@
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/f5_btn_following"
                         >
 
                         <TextView
@@ -175,9 +178,10 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/f5_btn_tlike">
                         <TextView
-                            android:textColor="@android:color/black"
+                            android:textColor="#FF5D10AC"
                             android:text="0"
                             android:id="@+id/f5_tlike"
                             android:layout_width="wrap_content"
@@ -194,9 +198,12 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/f5_btn_stamp">
                         <TextView
-                            android:textColor="@android:color/black"
+                            android:textColor="#FF5D10AC"
                             android:text="0"
                             android:id="@+id/f5_stamp"
                             android:layout_width="wrap_content"
@@ -212,9 +219,12 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/f5_btn_rlike">
                         <TextView
-                            android:textColor="@android:color/black"
+                            android:textColor="#FF5D10AC"
                             android:text="0"
                             android:id="@+id/f5_rlike"
                             android:layout_width="wrap_content"
@@ -230,9 +240,11 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/f5_btn_comment">
                         <TextView
-                            android:textColor="@android:color/black"
+                            android:textColor="#FF5D10AC"
                             android:text="0"
                             android:id="@+id/f5_comment"
                             android:layout_width="wrap_content"
